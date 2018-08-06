@@ -1,0 +1,21 @@
+<html>
+<head>
+    @section('head')
+        @include('page.head')
+
+    @show
+    @section('custom_head')
+    @show
+</head>
+@section('body')
+    <body>
+    @section("body")
+        @include("page.left_panel")
+        @include("page.right_panel")
+    @show
+    @section('footer')
+        @include('page.footer_custom')
+    @show
+    </body>
+@show
+</html>
