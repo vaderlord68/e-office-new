@@ -26,8 +26,4 @@ class Helper extends \Illuminate\Database\Eloquent\Model
         }
         return self::prepareStructure($folderArray);
     }
-    public static function isAUserInSession()
-    {
-
-    }
 }
