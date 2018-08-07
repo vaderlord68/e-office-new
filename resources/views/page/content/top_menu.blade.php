@@ -10,15 +10,6 @@
                         <span>Tin tức nội bộ</span>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="notification">
-                        <a class="dropdown-item" href="#">
-                            <p>Option 1</p>
-                        </a>
-                        <a class="dropdown-item" href="#">
-                            <p>Option 2</p>
-                        </a>
-                        <a class="dropdown-item media" href="#">
-                            <p>Option 3</p>
-                        </a>
                     </div>
                 </div>
                 <div class="dropdown for-notification">
@@ -26,15 +17,6 @@
                         <span>Quản lý công việc</span>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="notification">
-                        <a class="dropdown-item" href="#">
-                            <p>Option 1</p>
-                        </a>
-                        <a class="dropdown-item" href="#">
-                            <p>Option 2</p>
-                        </a>
-                        <a class="dropdown-item media" href="#">
-                            <p>Option 3</p>
-                        </a>
                     </div>
                 </div>
                 <div class="dropdown for-notification">
@@ -42,31 +24,13 @@
                         <span>Lịch làm việc</span>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="notification">
-                        <a class="dropdown-item" href="#">
-                            <p>Option 1</p>
-                        </a>
-                        <a class="dropdown-item" href="#">
-                            <p>Option 2</p>
-                        </a>
-                        <a class="dropdown-item media" href="#">
-                            <p>Option 3</p>
-                        </a>
                     </div>
                 </div>
                 <div class="dropdown for-notification">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-secondary dropdown-toggle btn-module-link" href="/bi" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span>Tài liệu số</span>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="notification">
-                        <a class="dropdown-item" href="#">
-                            <p>Option 1</p>
-                        </a>
-                        <a class="dropdown-item" href="#">
-                            <p>Option 2</p>
-                        </a>
-                        <a class="dropdown-item media" href="#">
-                            <p>Option 3</p>
-                        </a>
                     </div>
                 </div>
                 <div class="dropdown for-notification">
@@ -109,3 +73,12 @@
     </div>
 
 </header>
+<script>
+    var $ = jQuery.noConflict();
+    $(document).ready(function () {
+        $(".btn-module-link").click(function () {
+            var linkTo = $(this).attr("href");
+            window.location.href = linkTo;
+        });
+    });
+</script>

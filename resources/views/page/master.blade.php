@@ -2,19 +2,19 @@
 <head>
     @section('head')
         @include('page.head')
-
-    @show
-    @section('custom_head')
     @show
 </head>
 @section('body')
     <body>
-    @section("body")
+    @section("left")
         @include("page.left_panel")
+    @show
+    @section("right")
         @include("page.right_panel")
     @show
+    @include('page.footer_custom')
+    @show
     @section('footer')
-        @include('page.footer_custom')
     @show
     </body>
 @show

@@ -13,7 +13,7 @@
     </div>
     <div class="content mt-3">
         @section("body_content")
-            @include("page.content.body_content")
+            @include("page.content.message_section")
         @show
     </div>
 </div>
