@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\User;
 
 use App\CoreHelpers;
+use App\Eoffice\Helper;
 use App\Http\Controllers\Controller;
 use App\Users;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class  AuthenticateController extends Controller
 {
@@ -19,7 +19,7 @@ class  AuthenticateController extends Controller
 
     public function index()
     {
-        if ($this->isAUserInSession()) {
+        if (Helper::isAUserInSession()) {
             return view('system/landing');
         } else {
             return view('user/login');
@@ -38,10 +38,10 @@ class  AuthenticateController extends Controller
             ];
             $success = $this->accountAuthenticate($userData);
             if ($success) {
-                $this->setSession('current_user',$userData['user_account']);
-                $this->setSession('successMessage',"Đăng nhập thành công");
+                Helper::setSession('current_user',$userData['user_account']);
+                Helper::setSession('successMessage',"Đăng nhập thành công");
             } else {
-                $this->setSession('errorMessage',"Thông tin đăng nhập không chính xác");
+                Helper::setSession('errorMessage',"Thông tin đăng nhập không chính xác");
             }
             return redirect('/');
         } catch (\Exception $e) {
@@ -58,36 +58,8 @@ class  AuthenticateController extends Controller
 
     public function logoutPost()
     {
-        $this->removeSessionByKey('current_user');
-        $this->setSession('successMessage',"Đăng xuất thành công");
+        Helper::removeSessionByKey('current_user');
+        Helper::setSession('successMessage',"Đăng xuất thành công");
         return redirect('/');
-    }
-
-    public function setSessionUser($user)
-    {
-        $this->setSession('current_user', $user);
-    }
-
-    public function setSession($key, $value)
-    {
-        session([$key => $value]);
-    }
-
-    public function removeSessionByKey($key)
-    {
-        session()->remove($key);
-    }
-
-    public function getSession($key)
-    {
-        return session($key);
-    }
-
-    public function isAUserInSession()
-    {
-        if ($this->getSession('current_user')) {
-            return true;
-        }
-        return false;
     }
 }
