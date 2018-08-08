@@ -28,12 +28,4 @@ class  ViewController extends Controller
         }
     }
 
-    public function getAllChildFolder($folderId)
-    {
-        $folderFactory = new Folder();
-        $allChildFolder = $folderFactory->getAllChildFolder($folderId);
-        return $allChildFolder;
-
-    }
-
 }
