@@ -1,10 +1,10 @@
 <div class="card">
     <div class="card-header">
         <div class="left-table-header">
-            <a class="action-on-header" href="#">Thêm mới</a>
-            <a class="action-on-header" href="#">Mở</a>
-            <a class="action-on-header" href="#">Sửa</a>
-            <a class="action-on-header" href="#">Xóa</a>
+            <a id="bi-createFolder" class="toolbar-btn action-on-header" href="/bi/folder/create">Thêm mới</a>
+            <a id="bi-openFolder" class="toolbar-btn action-on-header" href="/bi/folder/view">Mở</a>
+            <a id="bi-renameFolder" class="toolbar-btn action-on-header" href="/bi/folder/rename">Đổi tên</a>
+            <a id="bi-deleteFolder" class="toolbar-btn action-on-header" href="/bi/folder/delete">Xóa</a>
         </div>
         <div class="right-table-header">
             <input type="search" class="form-control form-control-sm searh-form" placeholder="Nhập từ khóa để tìm kiếm" aria-controls="bootstrap-data-table">

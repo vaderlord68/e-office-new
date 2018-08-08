@@ -53,8 +53,7 @@
                 <div class="card">
                     <div class="card-header">
                         <i class="custom-jtree-icon"></i>
-                        <strong class="card-title">Thuộc chuyên mục</strong>
-                        <a class="custom-plus-icon">+</a>
+                        <strong class="card-title">Quản lý thư mục</strong>
                     </div>
                     <div class="card-body">
                         <h5 class="">Cây thư mục</h5>
@@ -76,16 +75,8 @@
 
                             </ul>
                             <?php endforeach; ?>
+                                {{--{!!html_entity_decode($folderTree)!!}--}}
 
-                            {{--<ul>--}}
-                            {{--<li class="folderItem" folder_id='999999'>Folder root--}}
-                            {{--<ul>--}}
-                            {{--<li class="folderItem" folder_id='123456'>Folder child</li>--}}
-                            {{--<li class="folderItem" folder_id='111111'>Folder child</li>--}}
-                            {{--<li class="folderItem" folder_id='222222'>Folder child</li>--}}
-                            {{--</ul>--}}
-                            {{--</li>--}}
-                            {{--</ul>--}}
                         </div>
                     </div>
                 </div>

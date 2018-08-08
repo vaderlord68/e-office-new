@@ -11,9 +11,16 @@ class  IndexController extends Controller
     public function index()
     {
         if (Helper::isAUserInSession()) {
-            return view('system/module/bi');
+            return view('system/module/bi')->with("folderTree", $this->getFolderTree());
         } else {
             return view('user/login');
         }
+    }
+
+    public function getFolderTree()
+    {
+        $helper = new \App\Module\Bi\Helper();
+        $tree = $helper->viewTree();
+        return $tree;
     }
 }

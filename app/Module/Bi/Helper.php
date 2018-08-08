@@ -36,16 +36,17 @@ class Helper extends \Illuminate\Database\Eloquent\Model
         $folderCollection = $this->getFolderCollection();
         $this->folderCollectionToArray($folderCollection);
 
-        $output = "";
+        $output = "<ul>";
         for ($i = 0; $i < count($this->folders); $i++) {
             /** For level 0 parent folders */
-            if ($this->folders[$i]->FolderParentId == "")
+            if ($this->folders[$i]->FolderParentID == "")
             {
-                $output .= "<li>".$this->folders[$i]->FolderName."\n<ul>\n";
+                $output .= "<li>".$this->folders[$i]->FolderName."<ul>";
                 $output .= $this->getAllChildren($this->folders[$i]->ID);
-                $output .= "\n</ul>\n</li>";
+                $output .= "</ul></li>";
             }
         }
+        $output .= "</ul>";
         return $output;
     }
 
@@ -55,11 +56,11 @@ class Helper extends \Illuminate\Database\Eloquent\Model
         $output = "";
         for ($i = 0; $i < count($this->folders); $i++) {
             /** For others level 1+ folder */
-            if ($this->folders[$i]->FolderParentId == $folderParentId)
+            if ($this->folders[$i]->FolderParentID == $folderParentId)
             {
-                $output .= "<li>".$this->folders[$i]->FolderName."\n<ul>\n";
+                $output .= "<li>".$this->folders[$i]->FolderName."<ul>";
                 $output .= $this->getAllChildren($this->folders[$i]->ID);
-                $output .= "\n</ul>\n</li>";
+                $output .= "</ul></li>";
             }
         }
         return $output;
