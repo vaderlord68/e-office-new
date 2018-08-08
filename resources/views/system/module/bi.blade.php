@@ -12,27 +12,27 @@
                     <div class="card-body">
                         <h5 class="">Cây thư mục</h5>
                         <div id="folderTree">
-                            <ul>
-                                <li>Folder
-                                    <ul>
-                                        <li>Folder child</li>
-                                        <li>Folder child</li>
-                                        <li>Folder child</li>
-                                        <li>Folder child</li>
-                                        <li>Folder child</li>
-                                        <li>Folder child
-                                            <ul>
-                                                <li>Folder child 2</li>
-                                                <li>Folder child 2</li>
-                                                <li>Folder child 2</li>
-                                                <li>Folder child 2</li>
-                                                <li>Folder child 2</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            {{--{!!html_entity_decode($folderTree)!!}--}}
+                            {{--<ul>--}}
+                                {{--<li>Folder--}}
+                                    {{--<ul>--}}
+                                        {{--<li>Folder child</li>--}}
+                                        {{--<li>Folder child</li>--}}
+                                        {{--<li>Folder child</li>--}}
+                                        {{--<li>Folder child</li>--}}
+                                        {{--<li>Folder child</li>--}}
+                                        {{--<li>Folder child--}}
+                                            {{--<ul>--}}
+                                                {{--<li>Folder child 2</li>--}}
+                                                {{--<li>Folder child 2</li>--}}
+                                                {{--<li>Folder child 2</li>--}}
+                                                {{--<li>Folder child 2</li>--}}
+                                                {{--<li>Folder child 2</li>--}}
+                                            {{--</ul>--}}
+                                        {{--</li>--}}
+                                    {{--</ul>--}}
+                                {{--</li>--}}
+                            {{--</ul>--}}
+                            {!!html_entity_decode($folderTree)!!}
 
                         </div>
                     </div>
@@ -45,23 +45,6 @@
                 @show
             </div>
         </div>
-
-        <script>
-            $(document).ready(function () {
-                $('#folderTree').jstree({
-                    'core': {
-                        'multiple': false,
-                    }
-                });
-                $('#folderTree')
-                // listen for event
-                    .on('changed.jstree', function (e, data) {
-                        var selectedFolderId = data.node.li_attr.folder_id;
-                        console.log("Selected Folder Id: " + selectedFolderId);
-                    })
-                    .jstree();
-            });
-        </script>
         @stop
         <style>
             .module-bi.container {

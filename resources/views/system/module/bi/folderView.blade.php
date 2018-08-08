@@ -47,6 +47,9 @@
                         </tr>
                         </thead>
                         <tbody>
+                        <?php
+
+                        ?>
                         <tr role="row" class="odd">
                             <td class="sorting_1">Airi Satou</td>
                             <td>Accountant</td>
@@ -55,30 +58,9 @@
                             <td>Tokyo</td>
                             <td>$162,700</td>
                         </tr>
-                        <tr role="row" class="even">
-                            <td class="sorting_1">Angelica Ramos</td>
-                            <td>Chief Executive Officer (CEO)</td>
-                            <td>London</td>
-                            <td>$1,200,000</td>
-                            <td>Tokyo</td>
-                            <td>$162,700</td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td class="sorting_1">Ashton Cox</td>
-                            <td>Junior Technical Author</td>
-                            <td>San Francisco</td>
-                            <td>$86,000</td>
-                            <td>Tokyo</td>
-                            <td>$162,700</td>
-                        </tr>
-                        <tr role="row" class="even">
-                            <td class="sorting_1">Bradley Greer</td>
-                            <td>Software Engineer</td>
-                            <td>London</td>
-                            <td>$132,000</td>
-                            <td>Tokyo</td>
-                            <td>$162,700</td>
-                        </tr>
+                        <?php
+
+                        ?>
                         </tbody>
                     </table>
                 </div>

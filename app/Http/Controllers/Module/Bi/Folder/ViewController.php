@@ -12,17 +12,12 @@ class  ViewController extends Controller
 
     public function index(Request $request)
     {
-        $helper = new \App\Module\Bi\Helper();
-        $tree = $helper->viewTree();
-        var_dump($tree);
-        die;
-
         if (Helper::isAUserInSession()) {
             $dataPost = $request->input();
             $folderId = $dataPost["FolderID"];
-            $allChildFolder = $this->getAllChildFolder($folderId);
-            $viewHtml = view('system/module/bi/folderView')->render();
-            return response()->json(array('success' => true, 'viewHtml' => $viewHtml, "allChildFolder" => $allChildFolder));
+            $viewHtml =
+                view('system/module/bi/folderView')->with("requestFolderCollection")->render();
+            return response()->json(array('success' => true, 'viewHtml' => $viewHtml));
         } else {
             return view('user/login');
         }

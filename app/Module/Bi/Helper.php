@@ -41,7 +41,7 @@ class Helper extends \Illuminate\Database\Eloquent\Model
             /** For level 0 parent folders */
             if ($this->folders[$i]->FolderParentID == "")
             {
-                $output .= "<li>".$this->folders[$i]->FolderName."<ul>";
+                $output .= "<li folder_id=\"" .$this->folders[$i]->ID ."\">".$this->folders[$i]->FolderName."<ul>";
                 $output .= $this->getAllChildren($this->folders[$i]->ID);
                 $output .= "</ul></li>";
             }
@@ -58,7 +58,7 @@ class Helper extends \Illuminate\Database\Eloquent\Model
             /** For others level 1+ folder */
             if ($this->folders[$i]->FolderParentID == $folderParentId)
             {
-                $output .= "<li>".$this->folders[$i]->FolderName."<ul>";
+                $output .= "<li folder_id=\"" .$this->folders[$i]->ID ."\">".$this->folders[$i]->FolderName."<ul>";
                 $output .= $this->getAllChildren($this->folders[$i]->ID);
                 $output .= "</ul></li>";
             }
