@@ -10,8 +10,12 @@ class  IndexController extends Controller
 {
     public function index()
     {
+        if (Helper::getSession("previousRequest")) {
+            return view('system/module/bi')
+                ->with("previousUrl",Helper::getSession("previousUrl"))
+                ->with("folderTree", $this->getFolderTree());
+        }
         if (Helper::isAUserInSession()) {
-//            return view('system/module/bi');
             return view('system/module/bi')->with("folderTree", $this->getFolderTree());
         } else {
             return view('user/login');

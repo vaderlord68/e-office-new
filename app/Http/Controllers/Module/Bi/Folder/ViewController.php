@@ -12,15 +12,30 @@ class  ViewController extends Controller
 
     public function index(Request $request)
     {
-        if (Helper::isAUserInSession()) {
-            $dataPost = $request->input();
-            $folderId = $dataPost["FolderID"];
-            $viewHtml =
-                view('system/module/bi/folderView')->with("requestFolderCollection")->render();
-            return response()->json(array('success' => true, 'viewHtml' => $viewHtml));
+        $dataPost = $request->input();
+        Helper::setSession("previousRequest",1);
+        Helper::setSession("previousUrl","/bi/folder/view?FolderId=".$dataPost['FolderId']);
+        if (isset($dataPost['secret'])) {
+            if (Helper::isAUserInSession()) {
+                $folderId = $dataPost["FolderId"];
+                $childFolders = $this->getChildFolders($folderId);
+                $viewHtml =
+                    view('system/module/bi/folderView')->with("childFolders",$childFolders)->render();
+                return response()->json(array('success' => true, 'viewHtml' => $viewHtml));
+            } else {
+                return view('user/login');
+            }
         } else {
-            return view('user/login');
+            return redirect('/bi');
         }
+
+    }
+
+    public function getChildFolders($folderId)
+    {
+        $folderFactory = new Folder();
+        $childFolders = $folderFactory->getAllChildFolder($folderId);
+        return $childFolders;
     }
 
 }

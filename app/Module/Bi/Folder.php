@@ -24,6 +24,11 @@ class Folder extends Model
         parent::__construct($attributes);
     }
 
+    public function getFolderId()
+    {
+        return $this->ID;
+    }
+
     public function getCollection()
     {
         $collection = DB::table($this->table)

@@ -30,15 +30,15 @@ class  AuthenticateController extends Controller
     {
         $dataPost = $request->input();
         try {
-            $username = $dataPost['user_account'];
-            $password = $this->coreHelper->encrypt_userpass($dataPost['user_password']);
+            $username = $dataPost['UserName'];
+            $password = $this->coreHelper->encrypt_userpass($dataPost['UserPassword']);
             $userData = [
-                'user_account' => $username,
-                'user_password' => $password
+                'UserName' => $username,
+                'UserPassword' => $password
             ];
             $success = $this->accountAuthenticate($userData);
             if ($success) {
-                Helper::setSession('current_user',$userData['user_account']);
+                Helper::setSession('current_user',$userData['UserName']);
                 Helper::setSession('successMessage',"Đăng nhập thành công");
             } else {
                 Helper::setSession('errorMessage',"Thông tin đăng nhập không chính xác");

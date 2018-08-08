@@ -1,6 +1,18 @@
 @extends('page.master')
 @section('body_content')
     @parent
+   <?php
+        if (session("previousUrl")) {
+            $previousUrl = session("previousUrl");
+            echo "
+<script>
+var previousUrl = '$previousUrl';
+</script>
+";
+            session()->remove("previousRequest");
+            session()->remove("previousUrl");
+        }
+   ?>
     <div class="module-bi">
         <div class="row">
             <div class="folder-sidebar col-sm-3">
@@ -41,13 +53,13 @@
             </div>
             <div class="folder-content col-sm-9">
                 @section("folderView")
-                    @include("system.module.bi.folderView")
+                    {{--@include("system.module.bi.folderView")--}}
                 @show
             </div>
         </div>
         @stop
         <style>
-            .module-bi.container {
+            .module-bi {
                 height: 100%;
             }
 

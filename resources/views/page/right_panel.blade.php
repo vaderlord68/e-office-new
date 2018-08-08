@@ -11,9 +11,12 @@
             </div>
         </div>
     </div>
+        @section("message_section")
+            @include("page.content.message")
+        @show
     <div class="content mt-3">
         @section("body_content")
-            @include("page.content.message_section")
+
         @show
     </div>
 </div>

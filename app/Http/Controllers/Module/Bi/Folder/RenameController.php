@@ -10,10 +10,18 @@ use Illuminate\Http\Request;
 class  RenameController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
         if (Helper::isAUserInSession()) {
-            $viewHtml = view('system/module/bi/folderRename')->render();
+            $dataPost = $request->input();
+            $selectedFolderId = $dataPost["SelectedFolderId"];
+            $currentFolder = Folder::find($selectedFolderId);
+            $currentFolderName = $currentFolder->FolderName;
+
+            $viewHtml = view('system/module/bi/folderRename')
+                ->with("oldFolderName", $currentFolderName)
+                ->with("currentFolderId", $selectedFolderId)
+                ->render();
             return response()->json(array('success' => true, 'viewHtml' => $viewHtml));
         } else {
             return view('user/login');
@@ -29,9 +37,10 @@ class  RenameController extends Controller
             $folderFactory = Folder::find($folderId);
             $folderFactory->FolderName = $newFolderName;
             $folderFactory->save();
-            return response()->json(array('success' => true));
+            Helper::setSession('successMessage',"Đổi tên thư mục thành công");
+            return redirect('/bi');
         } catch (\Exception $exception) {
-            return response()->json(array('success' => false, 'errorMessage' => $exception->getMessage()));
+            return redirect('/bi');
         }
     }
 }

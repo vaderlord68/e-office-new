@@ -35,8 +35,8 @@
             <div class="form-title">HỆ THỐNG VĂN PHÒNG ĐIỆN TỬ</div>
             <div class="region"></div>
             <form class="login-form" method="post" action="/login/post">
-                <input type="text" name="user_account" placeholder="User account"/>
-                <input type="password" name="user_password" placeholder="Password"/>
+                <input type="text" name="UserName" placeholder="User account"/>
+                <input type="password" name="UserPassword" placeholder="Password"/>
                 <div class="button-form">
                     <p class="message"><a href="#">Chọn doanh nghiệp</a></p>
                     <button type="submit">Đăng nhập</button>
