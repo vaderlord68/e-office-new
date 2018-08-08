@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Module\Bi;
 
+use App\Eoffice\Helper;
 use App\Http\Controllers\Controller;
-use App\Module\Bi\Helper;
+
 
 class  IndexController extends Controller
 {
