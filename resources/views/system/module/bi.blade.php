@@ -12,8 +12,27 @@
                     <div class="card-body">
                         <h5 class="">Cây thư mục</h5>
                         <div id="folderTree">
-
-                                {!!html_entity_decode($folderTree)!!}
+                            <ul>
+                                <li>Folder
+                                <ul>
+                                    <li>Folder child</li>
+                                    <li>Folder child</li>
+                                    <li>Folder child</li>
+                                    <li>Folder child</li>
+                                    <li>Folder child</li>
+                                    <li>Folder child
+                                        <ul>
+                                            <li>Folder child 2</li>
+                                            <li>Folder child 2</li>
+                                            <li>Folder child 2</li>
+                                            <li>Folder child 2</li>
+                                            <li>Folder child 2</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                </li>
+                            </ul>
+                                {{--{!!html_entity_decode($folderTree)!!}--}}
 
                         </div>
                     </div>
