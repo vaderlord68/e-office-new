@@ -1,52 +1,6 @@
 @extends('page.master')
 @section('body_content')
     @parent
-    <?php
-    $folders = [
-        [
-            "folderId" => "1",
-            "folderName" => "Folder 1",
-            "folderParent" => "",
-        ],
-        [
-            "folderId" => "2",
-            "folderName" => "Folder 2",
-            "folderParent" => "1",
-        ],
-        [
-            "folderId" => "3",
-            "folderName" => "Folder 3",
-            "folderParent" => "",
-        ],
-        [
-            "folderId" => "4",
-            "folderName" => "Folder 4",
-            "folderParent" => "3",
-        ],
-        [
-            "folderId" => "5",
-            "folderName" => "Folder 5",
-            "folderParent" => "4",
-        ],
-
-
-    ];
-
-    function prepareFolderStructure($folders)
-    {
-        $folderStructure = [];
-        foreach ($folders as $folder) {
-            if ($folder['folderParent'] == "") {
-                $folderStructure['parents'][] = $folder;
-            } else {
-                $folderStructure['children'][] = $folder;
-            }
-        }
-        return $folderStructure;
-    }
-
-    //    function
-    ?>
     <div class="module-bi">
         <div class="row">
             <div class="folder-sidebar col-sm-3">
@@ -58,24 +12,8 @@
                     <div class="card-body">
                         <h5 class="">Cây thư mục</h5>
                         <div id="folderTree">
-                            <?php
-                            $folderStructure = prepareFolderStructure($folders);
-                            ?>
-                            <?php foreach ($folderStructure['parents'] as $parent): ?>
-                            <ul>
-                                <li><?php echo $parent['folderName'] ?>
-                                    <?php foreach ($folderStructure['children'] as $child): ?>
-                                    <?php if ($child['folderParent'] == $parent['folderId']) : ?>
-                                    <ul>
-                                        <li><?php echo $child['folderName']?></li>
-                                    </ul>
-                                    <?php endif; ?>
-                                    <?php endforeach;?>
-                                </li>
 
-                            </ul>
-                            <?php endforeach; ?>
-                                {{--{!!html_entity_decode($folderTree)!!}--}}
+                                {!!html_entity_decode($folderTree)!!}
 
                         </div>
                     </div>
