@@ -14,25 +14,25 @@
                         <div id="folderTree">
                             <ul>
                                 <li>Folder
-                                <ul>
-                                    <li>Folder child</li>
-                                    <li>Folder child</li>
-                                    <li>Folder child</li>
-                                    <li>Folder child</li>
-                                    <li>Folder child</li>
-                                    <li>Folder child
-                                        <ul>
-                                            <li>Folder child 2</li>
-                                            <li>Folder child 2</li>
-                                            <li>Folder child 2</li>
-                                            <li>Folder child 2</li>
-                                            <li>Folder child 2</li>
-                                        </ul>
-                                    </li>
-                                </ul>
+                                    <ul>
+                                        <li>Folder child</li>
+                                        <li>Folder child</li>
+                                        <li>Folder child</li>
+                                        <li>Folder child</li>
+                                        <li>Folder child</li>
+                                        <li>Folder child
+                                            <ul>
+                                                <li>Folder child 2</li>
+                                                <li>Folder child 2</li>
+                                                <li>Folder child 2</li>
+                                                <li>Folder child 2</li>
+                                                <li>Folder child 2</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
-                                {{--{!!html_entity_decode($folderTree)!!}--}}
+                            {{--{!!html_entity_decode($folderTree)!!}--}}
 
                         </div>
                     </div>
@@ -42,7 +42,7 @@
             <div class="folder-content col-sm-9">
                 @section("folderView")
                     @include("system.module.bi.folderView")
-                    @show
+                @show
             </div>
         </div>
 
@@ -79,6 +79,7 @@
             .module-bi .folder-content {
                 height: 100%;
             }
+
             .custom-jtree-icon, .custom-plus-icon {
                 display: inline-block;
                 vertical-align: middle;
@@ -86,12 +87,14 @@
                 height: 23px;
                 line-height: 22px;
             }
+
             .custom-jtree-icon {
                 margin-right: 5px;
                 margin-top: -5px;
                 background-position: -260px -4px;
                 background-image: url('http://www.eoffice.local/jstree/dist/themes/default/32px.png');
             }
+
             .custom-plus-icon {
                 float: right;
                 border-radius: 50%;
@@ -102,30 +105,37 @@
                 font-weight: 900;
                 box-shadow: 0 0 2px greenyellow;
             }
-            .table-documentary .table-bordered thead th{
+
+            .table-documentary .table-bordered thead th {
                 text-align: center;
                 background-color: #a8abad;
                 vertical-align: middle;
             }
+
             .left-table-header .action-on-header {
                 display: inline-block;
                 padding: 0 10px;
             }
+
             .right-table-header input.searh-form {
                 box-sizing: border-box;
             }
+
             .right-table-header {
                 float: right;
             }
+
             .left-table-header {
                 float: left;
             }
+
             @media screen and (max-width: 1220px) {
                 .module-bi .folder-sidebar, .module-bi .folder-content {
                     height: auto;
                     flex: 0 0 100%;
                     max-width: 100%;
                 }
+
                 .folder-sidebar .card .card-header strong {
                     display: inline-block !important;
                 }
@@ -138,12 +148,15 @@
                     font-size: 0.6em;
                     line-height: 1;
                 }
+
                 .left-table-header a {
                     padding: 0 0.3em !important;
                     font-size: 0.65em;
                 }
+
                 .right-table-header input.searh-form {
                     max-width: 70px;
                 }
             }
         </style>
+    </div>
