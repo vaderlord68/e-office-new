@@ -1,3 +1,4 @@
+var $ = jQuery.noConflict();
 $(document).ready(function () {
     /** Create new folder button click **/
     $("#createNewFolder").click(function () {

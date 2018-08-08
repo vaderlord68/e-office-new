@@ -40,6 +40,7 @@
 <!-- JS Context -->
 <link rel="stylesheet" href="{{ asset('contextjs/context.standalone.css') }}" />
 <script src="{{ asset('contextjs/context.js') }}"></script>
+<script src="{{ asset('js/module/bi/folder-manage.js') }}"></script>
 
 <script>
     jQuery(document).ready(function () {
