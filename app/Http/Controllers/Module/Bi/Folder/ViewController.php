@@ -2,23 +2,38 @@
 
 namespace App\Http\Controllers\Module\Bi\Folder;
 
-use App\CoreHelpers;
 use App\Eoffice\Helper;
 use App\Http\Controllers\Controller;
-use App\Users;
+use App\Module\Bi\Folder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class  ViewController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
+        $helper = new \App\Module\Bi\Helper();
+        $tree = $helper->viewTree();
+        var_dump($tree);
+        die;
+
         if (Helper::isAUserInSession()) {
+            $dataPost = $request->input();
+            $folderId = $dataPost["FolderID"];
+            $allChildFolder = $this->getAllChildFolder($folderId);
             $viewHtml = view('system/module/bi/folderView')->render();
-            return response()->json(array('success' => true, 'viewHtml' => $viewHtml));
+            return response()->json(array('success' => true, 'viewHtml' => $viewHtml, "allChildFolder" => $allChildFolder));
         } else {
             return view('user/login');
         }
     }
+
+    public function getAllChildFolder($folderId)
+    {
+        $folderFactory = new Folder();
+        $allChildFolder = $folderFactory->getAllChildFolder($folderId);
+        return $allChildFolder;
+
+    }
+
 }

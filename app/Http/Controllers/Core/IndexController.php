@@ -13,7 +13,6 @@ class  IndexController extends Controller
 
     public function index()
     {
-//        Helper::test();
         if (Helper::isAUserInSession()) {
             return view('system/landing');
         } else {

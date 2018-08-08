@@ -16,3 +16,4 @@ Route::get('/login', 'User\AuthenticateController@index');
 Route::post('/login/post', 'User\AuthenticateController@loginPost');
 Route::get('/logout/post', 'User\AuthenticateController@logoutPost');
 Route::get('/bi', 'Module\Bi\IndexController@index');
+Route::get('/bi/view', 'Module\Bi\Folder\ViewController@index');

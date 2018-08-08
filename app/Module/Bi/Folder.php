@@ -31,4 +31,12 @@ class Folder extends Model
         return $collection;
     }
 
+    public function getAllChildFolder($folderParentId)
+    {
+        $collection = DB::table($this->table)
+            ->where("FolderParentId","=", $folderParentId)
+            ->get();
+        return $collection;
+    }
+
 }
