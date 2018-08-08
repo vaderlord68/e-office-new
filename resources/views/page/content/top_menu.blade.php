@@ -4,7 +4,14 @@
 
         <div class="col-sm-10">
             <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa-angle-left"></i></a>
-            <div class="header-left">
+            <div class="header-left right-menu collapse navbar-collapse" id="right-menu">
+                <style>
+                    @media screen and (min-width: 576px) {
+                        .right-panel header.header div.header-left {
+                            display: block;
+                        }
+                    }
+                </style>
                 <div class="dropdown for-notification">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span>Tin tức nội bộ</span>
