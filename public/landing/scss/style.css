@@ -2187,7 +2187,8 @@ header .form-inline {
       padding: 5px 10px 1px 5px; }
       .right-panel header.header div[class*="col"] {
         padding: 0;
-        width: initial; }
+        width: initial;
+        display: none;}
       .right-panel header.header .col-sm-7 {
         float: left; }
       .right-panel header.header .col-sm-5 {
