@@ -60,11 +60,15 @@
                         <?php
                         foreach ($childFolders as $folder) :
                         ?>
+                        <?php
+                        $createUser = \App\Users::find($folder->CreateUserID);
+                        $lastModifiedUser = App\Users::find($folder->LastModifyUserID);
+                        ?>
                         <tr role="row" class="odd bi-table-item" folder_id="<?php  echo $folder->ID?>">
                             <td><span class="folder-icon"><img src="{{ asset("/media/default_folder_icon.png") }}" alt=""></span><?php echo $folder->FolderName?></td>
-                            <td><?php echo $folder->CreateUserID?></td>
+                            <td><?php echo $createUser->UserName?></td>
                             <td><?php echo $folder->CreateDate?></td>
-                            <td><?php echo $folder->LastModifyUserID?></td>
+                            <td><?php echo $lastModifiedUser->UserName?></td>
                             <td><?php echo $folder->LastModifyDate?></td>
                         </tr>
                         <?php
