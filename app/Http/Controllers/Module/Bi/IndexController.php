@@ -8,10 +8,25 @@ use App\Http\Controllers\Controller;
 
 class  IndexController extends Controller
 {
+    protected $dashboardMenus = [
+        [
+            "title" => "Quản lý chuyên mục",
+            "url"   => "#",
+        ],
+        [
+            "title" => "Quản lý quyền truy cập",
+            "url"   => "#",
+        ],
+        [
+            "title" => "Quản lý tài liệu",
+            "url"   => "#",
+        ]
+    ];
     public function index()
     {
         if (Helper::getSession("previousRequest")) {
             return view('system/module/bi')
+                ->with("dashboardMenus",$this->dashboardMenus)
                 ->with("previousUrl",Helper::getSession("previousUrl"))
                 ->with("folderTree", $this->getFolderTree());
         }

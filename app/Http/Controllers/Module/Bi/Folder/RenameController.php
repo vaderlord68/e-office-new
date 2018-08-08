@@ -12,19 +12,26 @@ class  RenameController extends Controller
 
     public function index(Request $request)
     {
-        if (Helper::isAUserInSession()) {
-            $dataPost = $request->input();
-            $selectedFolderId = $dataPost["SelectedFolderId"];
-            $currentFolder = Folder::find($selectedFolderId);
-            $currentFolderName = $currentFolder->FolderName;
+        $dataPost = $request->input();
+        Helper::setSession("previousRequest",1);
+        Helper::setSession("previousUrl","/bi/folder/view?FolderId=".$dataPost['SelectedFolderId']);
+        if (isset($dataPost['secret'])) {
+            if (Helper::isAUserInSession()) {
 
-            $viewHtml = view('system/module/bi/folderRename')
-                ->with("oldFolderName", $currentFolderName)
-                ->with("currentFolderId", $selectedFolderId)
-                ->render();
-            return response()->json(array('success' => true, 'viewHtml' => $viewHtml));
+                $selectedFolderId = $dataPost["SelectedFolderId"];
+                $currentFolder = Folder::find($selectedFolderId);
+                $currentFolderName = $currentFolder->FolderName;
+
+                $viewHtml = view('system/module/bi/folderRename')
+                    ->with("oldFolderName", $currentFolderName)
+                    ->with("currentFolderId", $selectedFolderId)
+                    ->render();
+                return response()->json(array('success' => true, 'viewHtml' => $viewHtml));
+            } else {
+                return view('user/login');
+            }
         } else {
-            return view('user/login');
+            return redirect('/bi');
         }
     }
 

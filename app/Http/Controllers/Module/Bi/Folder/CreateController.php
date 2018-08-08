@@ -13,14 +13,20 @@ class  CreateController extends Controller
     public function index(Request $request)
     {
         $dataPost = $request->input();
-        if (Helper::isAUserInSession()) {
-            $viewHtml = view('system/module/bi/folderCreate')
-                ->with("CreateUserID",Helper::getSession("current_user"))
-                ->with("FolderParentID",$dataPost["FolderParentID"])
-                ->render();
-            return response()->json(array('success' => true, 'viewHtml' => $viewHtml));
+        Helper::setSession("previousRequest",1);
+        Helper::setSession("previousUrl","/bi/folder/view?FolderId=".$dataPost['FolderParentID']);
+        if (isset($dataPost['secret'])) {
+            if (Helper::isAUserInSession()) {
+                $viewHtml = view('system/module/bi/folderCreate')
+                    ->with("CreateUserID", Helper::getSession("current_user"))
+                    ->with("FolderParentID", $dataPost["FolderParentID"])
+                    ->render();
+                return response()->json(array('success' => true, 'viewHtml' => $viewHtml));
+            } else {
+                return view('user/login');
+            }
         } else {
-            return view('user/login');
+            return redirect('/bi');
         }
     }
 
