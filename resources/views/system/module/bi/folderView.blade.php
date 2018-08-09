@@ -1,10 +1,14 @@
 <div class="card">
     <div class="card-header">
         <div class="left-table-header">
-            <a id="bi-createFolder" class="toolbar-btn action-on-header" href="#">Thêm mới</a>
-            <a id="bi-openFolder" class="toolbar-btn action-on-header" href="#">Mở</a>
-            <a id="bi-renameFolder" class="toolbar-btn action-on-header" href="#">Đổi tên</a>
-            <a id="bi-deleteFolder" class="toolbar-btn action-on-header" href="#">Xóa</a>
+            <a id="bi-createFolder" class="toolbar-btn action-on-header" href="#">
+                <i class="fa fa-plus-circle"></i> Thêm mới</a>
+            <a id="bi-openFolder" class="toolbar-btn action-on-header" href="#">
+                <i class="fa fa-folder-open"></i> Mở</a>
+            <a id="bi-renameFolder" class="toolbar-btn action-on-header" href="#">
+                <i class="fa fa-pencil-square-o"></i> Đổi tên</a>
+            <a id="bi-deleteFolder" class="toolbar-btn action-on-header" href="#">
+                <i class="fa fa-times-circle"></i> Xóa</a>
         </div>
         <div class="right-table-header">
             <input type="search" class="form-control form-control-sm searh-form" placeholder="Nhập từ khóa để tìm kiếm" aria-controls="bootstrap-data-table">
@@ -16,7 +20,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <table id="bootstrap-data-table"
-                           class="table table-striped table-bordered dataTable no-footer" role="grid"
+                           class="table table-striped table-bordered dataTable no-footer table-hover" role="grid"
                            aria-describedby="bootstrap-data-table_info">
                         <thead>
                         <tr role="row">

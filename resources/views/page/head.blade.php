@@ -15,7 +15,6 @@
 <link href="{{ asset('css/custom.css') }}" media="all" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('bootstrap/css/bootstrap.css') }}" media="all" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="{!! asset('js/jquery-3.3.1.min.js') !!}"></script>
-<script type="text/javascript" src="{!! asset('js/custom.js') !!}"></script>
 <script type="text/javascript" src="{!! asset('bootstrap/js/bootstrap.js') !!}"></script>
 
 <script src="{{ asset('js/popper.js') }}"></script>
@@ -41,7 +40,7 @@
 <link rel="stylesheet" href="{{ asset('contextjs/context.standalone.css') }}" />
 <script src="{{ asset('contextjs/context.js') }}"></script>
 <script src="{{ asset('js/module/bi/folder-manage.js') }}"></script>
-
+<script type="text/javascript" src="{!! asset('js/custom.js') !!}"></script>
 <script>
     jQuery(document).ready(function () {
         context.init({
