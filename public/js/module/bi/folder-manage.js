@@ -8,13 +8,29 @@ $(document).ready(function () {
         changeHistoryState(previousUrl);
     }
 
+    $(document).on("dblclick", ".bi-table-item", function (e) {
+        var _this = $(this);
+        var stateUrl = "/bi/folder/view?FolderId=" + _this.attr("folder_id");
+        var secretUrl = stateUrl + "&secret=1";
+        localStorage.setItem("currentSelectedFolderId", _this.attr("folder_id"));
+        var treeSelector = "li[folder_id='"+ _this.attr("folder_id") + "']";
+        var treeElement = $('li[folder_id="'+ _this.attr("folder_id") + '"]');
+        console.log(treeSelector);
+        $("#folderTree").jstree("open_all");
+        $("#folderTree").jstree("deselect_all",true);
+        $('#folderTree').jstree('select_node', treeElement.attr("id"));
+        viewFolderAjax(secretUrl);
+        changeHistoryState(stateUrl);
+    });
+
     /** Create new folder button click **/
     $(document).on("click", "#bi-createFolder", function (e) {
         e.preventDefault();
         var selectedFolderId = localStorage.getItem("currentSelectedFolderId");
-        var url = '/bi/folder/create/index' + '?FolderParentID=' + selectedFolderId;
+        var stateUrl = '/bi/folder/create/index' + '?FolderParentID=' + selectedFolderId;
+        var secretUrl = stateUrl + "&secret=1";
         $.ajax({
-            url: url,
+            url: secretUrl,
             type: "get",
             dataType: "text",
             success: function (result) {
@@ -22,15 +38,16 @@ $(document).ready(function () {
                 ajaxContent.html(resultData.viewHtml);
             }
         });
-        changeHistoryState(url);
+        changeHistoryState(stateUrl);
     });
     /** Rename folder **/
     $(document).on("click", "#bi-renameFolder", function (e) {
         e.preventDefault();
         var selectedFolderId = localStorage.getItem("currentSelectedFolderId");
-        var url = '/bi/folder/rename/index?SelectedFolderId=' + selectedFolderId;
+        var stateUrl = '/bi/folder/rename/index?SelectedFolderId=' + selectedFolderId;
+        var secretUrl = stateUrl + "&secret=1";
         $.ajax({
-            url: url,
+            url: secretUrl,
             type: "get",
             dataType: "text",
             success: function (result) {
@@ -38,7 +55,7 @@ $(document).ready(function () {
                 ajaxContent.html(resultData.viewHtml);
             }
         });
-        changeHistoryState(url);
+        changeHistoryState(stateUrl);
     });
     /** Delete folder **/
     $(document).on("click", "#bi-deleteFolder", function (e) {
@@ -66,7 +83,8 @@ $(document).ready(function () {
             'multiple': false,
         }
     });
-
+    /** Expand all on load **/
+    $("#folderTree").jstree("open_all");
 
     /** Detect folder selected event on Folder Tree **/
     $('#folderTree')
@@ -113,15 +131,17 @@ $(document).ready(function () {
         filter: function ($obj) {
         },
         above: 'auto',
-        preventDoubleContext: true,
+        // preventDoubleContext: true,
         compress: false,
+        relatedTarget: this
     });
     var subMenus = [
         {
             text: "Open",
             // href: "/",
             action: function (event) {
-                alert('Open folder by context menu is coming soon')
+                console.log(event);
+                // alert('Open folder by context menu is coming soon')
             }
         },
         {
@@ -160,6 +180,7 @@ $(document).ready(function () {
         }
     ]
     // context.attach(".jstree-anchor",subMenus);
+    // context.attach(".module-bi .bi-table-item",subMenus);
     // context.attach(".content .module-bi",fileManagerContextMenus);
 
 });
