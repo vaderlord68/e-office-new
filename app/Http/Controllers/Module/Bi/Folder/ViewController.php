@@ -15,10 +15,14 @@ class  ViewController extends Controller
         $dataPost = $request->input();
         Helper::setSession("previousRequest",1);
         Helper::setSession("previousUrl","/bi/folder/view?FolderId=".$dataPost['FolderId']);
+        $thisPost = Folder::find($dataPost['FolderId']);
+        Helper::setSession("parentFolderId",$thisPost->FolderParentID);
         if (isset($dataPost['secret'])) {
             if (Helper::isAUserInSession()) {
                 $folderId = $dataPost["FolderId"];
+
                 $childFolders = $this->getChildFolders($folderId);
+//                var_dump($childFolders);die;
                 $viewHtml =
                     view('system/module/bi/folderView')->with("childFolders",$childFolders)->render();
                 return response()->json(array('success' => true, 'viewHtml' => $viewHtml));

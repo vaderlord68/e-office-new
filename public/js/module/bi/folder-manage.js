@@ -1,26 +1,47 @@
 var $ = jQuery.noConflict();
+
+
 $(document).ready(function () {
+
     var ajaxContent = $(".folder-content");
 
     if (typeof previousUrl !== "undefined") {
         var secretUrl = previousUrl + "&secret=1";
         viewFolderAjax(secretUrl);
-        changeHistoryState(previousUrl);
+        //changeHistoryState(previousUrl);
     }
 
+    /** Back button on toolbar **/
+    $(document).on("click", "#bi-backFolder", function (e) {
+        e.preventDefault();
+        if (typeof parentFolderId !== "undefined") {
+            var stateUrl = "/bi/folder/view?FolderId=" + parentFolderId;
+            var secretUrl = stateUrl + "&secret=1";
+            localStorage.setItem("currentSelectedFolderId", parentFolderId);
+            var treeElement = $('li[folder_id="'+ parentFolderId + '"]');
+            localStorage.setItem("previousUrl",window.location.href);
+            $("#folderTree").jstree("open_all");
+            $("#folderTree").jstree("deselect_all",true);
+            $('#folderTree').jstree('select_node', treeElement.attr("id"));
+            viewFolderAjax(secretUrl);
+            //changeHistoryState(stateUrl);
+        }
+
+    });
+
+    /** Double click to open folder on grid **/
     $(document).on("dblclick", ".bi-table-item", function (e) {
         var _this = $(this);
         var stateUrl = "/bi/folder/view?FolderId=" + _this.attr("folder_id");
         var secretUrl = stateUrl + "&secret=1";
         localStorage.setItem("currentSelectedFolderId", _this.attr("folder_id"));
-        var treeSelector = "li[folder_id='"+ _this.attr("folder_id") + "']";
         var treeElement = $('li[folder_id="'+ _this.attr("folder_id") + '"]');
-        console.log(treeSelector);
         $("#folderTree").jstree("open_all");
         $("#folderTree").jstree("deselect_all",true);
         $('#folderTree').jstree('select_node', treeElement.attr("id"));
+        localStorage.setItem("previousUrl",window.location.href);
         viewFolderAjax(secretUrl);
-        changeHistoryState(stateUrl);
+        //changeHistoryState(stateUrl);
     });
 
     /** Create new folder button click **/
@@ -38,7 +59,8 @@ $(document).ready(function () {
                 ajaxContent.html(resultData.viewHtml);
             }
         });
-        changeHistoryState(stateUrl);
+        localStorage.setItem("previousUrl",window.location.href);
+        //changeHistoryState(stateUrl);
     });
     /** Rename folder **/
     $(document).on("click", "#bi-renameFolder", function (e) {
@@ -55,7 +77,8 @@ $(document).ready(function () {
                 ajaxContent.html(resultData.viewHtml);
             }
         });
-        changeHistoryState(stateUrl);
+        localStorage.setItem("previousUrl",window.location.href);
+        //changeHistoryState(stateUrl);
     });
     /** Delete folder **/
     $(document).on("click", "#bi-deleteFolder", function (e) {
@@ -63,17 +86,15 @@ $(document).ready(function () {
         var selectedFolderId = localStorage.getItem("currentSelectedFolderId");
         var url = '/bi/folder/delete/execute?SelectedFolderId=' + selectedFolderId;
 
-        if (confirm('Do you want to delete this folder?')) {
-            $.ajax({
-                url: url,
-                type: "get",
-                dataType: "text",
-                success: function (result) {
-                    $(location).attr('href', '/bi')
-                }
-            });
-        }
-
+        $.ajax({
+            url: url,
+            type: "get",
+            dataType: "text",
+            success: function (result) {
+                $(location).attr('href', '/bi')
+            }
+        });
+        localStorage.setItem("previousUrl",window.location.href);
 
     });
 
@@ -94,8 +115,9 @@ $(document).ready(function () {
             localStorage.setItem("currentSelectedFolderId", selectedFolderId);
             var stateUrl = "/bi/folder/view?FolderId=" + selectedFolderId;
             var secretUrl = stateUrl + "&secret=1";
+            localStorage.setItem("previousUrl",window.location.href);
             viewFolderAjax(secretUrl);
-            changeHistoryState(stateUrl);
+            //changeHistoryState(stateUrl);
         })
         .jstree();
     /** Detect state changed **/
@@ -104,7 +126,7 @@ $(document).ready(function () {
         var stateUrl = window.location.href.toString().split(window.location.host)[1];
         var secretUrl = stateUrl + "&secret=1";
         viewFolderAjax(secretUrl);
-        changeHistoryState(stateUrl);
+        //changeHistoryState(stateUrl);
     }
 
     /** Function to call viewFolder action by Ajax **/

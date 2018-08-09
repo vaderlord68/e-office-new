@@ -1,7 +1,11 @@
 <form id="#createFolderForm" action="/bi/folder/create/execute" method="post">
     <div class="form-group">
         <label for="usr">Tên thư mục</label>
-        <input type="text" name="FolderName" class="form-control" id="folderName">
+        <input required type="text" name="FolderName" class="form-control" id="folderName">
+    </div>
+    <div class="form-group">
+        <label for="usr">Mô tả thư mục</label>
+        <textarea required type="text" name="FolderDescription" class="form-control " id="folderDescription"></textarea>
     </div>
     <div class="form-group">
         <button class="btn-primary btn">Tạo thư mục</button>

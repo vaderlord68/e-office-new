@@ -14,8 +14,8 @@ class  IndexController extends Controller
     public function index()
     {
         if (Helper::isAUserInSession()) {
-            return redirect("/bi");
-//            return view('system/landing');
+//            return redirect("/bi");
+            return view('system/landing');
         } else {
             return view('user/login');
         }

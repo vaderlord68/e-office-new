@@ -468,8 +468,35 @@ ul.account-menu-list li a:hover {
 aside.left-panel {
     background: #1f1e39 !important;
 }
+#bi-createFolder i {
+    color: green;
+}
+.login-page .alert {
+    margin: 10px 0 10px 0 !important;
+    top: -185px;
+}
+#bi-openFolder i {
+    color: #e5c947;
+}
+#bi-renameFolder i {
+    color: #355b80;
+}
+#deleteFolder i {
+    color: #ba2518;
+}
+.header-left .dropdown .dropdown-menu {
+    margin-top: 10px;
+}
+#header .user-area .user-menu  {
+    position: absolute;
+    right: -29px !important;
+    top: 36px !important;
+}
 .navbar {
     background-color: unset !important;
+}
+.header-left .dropdown .dropdown-menu a.dropdown-item {
+    background-color: #212549;
 }
 @media (max-width: 1230px) {
     .landing-nav.top-nav .level-0 {

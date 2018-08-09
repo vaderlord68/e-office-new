@@ -38,15 +38,15 @@ class  CreateController extends Controller
             $folder->setAttribute('FolderName', $dataPost['FolderName']);
             $folder->setAttribute('ID', str_replace(" ","-",strtolower($dataPost['FolderName'])));
             $folder->setAttribute('FolderParentID', $dataPost['FolderParentID']);
+            $folder->setAttribute('FolderDescription', $dataPost['FolderDescription']);
             $folder->setAttribute('CreateUserID', $dataPost['CreateUserID']);
             $folder->setAttribute('LastModifyUserID', $dataPost['CreateUserID']);
-//            var_dump($folder);die;
             $folder->save();
             Helper::setSession('successMessage',"Tạo folder mới thành công");
             return redirect('/bi');
 //            return response()->json(array('success' => true));
         } catch (\Exception $exception) {
-//            var_dump($exception->getMessage());die;
+            var_dump($exception->getMessage());die;
             return redirect('/bi');
 //            return response()->json(array('success' => false, 'errorMessage' => $exception->getMessage()));
         }

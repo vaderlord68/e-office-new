@@ -1,18 +1,18 @@
 @extends('page.master')
 @section('body_content')
     @parent
-   <?php
-        if (session("previousUrl")) {
-            $previousUrl = session("previousUrl");
-            echo "
+    <?php
+    if (session("previousUrl")) {
+        $previousUrl = session("previousUrl");
+        echo "
 <script>
 var previousUrl = '$previousUrl';
 </script>
 ";
-            session()->remove("previousRequest");
-            session()->remove("previousUrl");
-        }
-   ?>
+        session()->remove("previousRequest");
+        session()->remove("previousUrl");
+    }
+    ?>
     <div class="module-bi">
         <div class="row">
             <div class="folder-sidebar col-sm-3">
@@ -22,27 +22,27 @@ var previousUrl = '$previousUrl';
                         <strong class="card-title">Quản lý thư mục</strong>
                     </div>
                     <div class="card-body">
-                        <h5 class="">Cây thư mục</h5>
+                        <h5 class="">Tài liệu ưa thích</h5>
                         <div id="folderTree">
                             {{--<ul>--}}
-                                {{--<li>Folder--}}
-                                    {{--<ul>--}}
-                                        {{--<li>Folder child</li>--}}
-                                        {{--<li>Folder child</li>--}}
-                                        {{--<li>Folder child</li>--}}
-                                        {{--<li>Folder child</li>--}}
-                                        {{--<li>Folder child</li>--}}
-                                        {{--<li>Folder child--}}
-                                            {{--<ul>--}}
-                                                {{--<li>Folder child 2</li>--}}
-                                                {{--<li>Folder child 2</li>--}}
-                                                {{--<li>Folder child 2</li>--}}
-                                                {{--<li>Folder child 2</li>--}}
-                                                {{--<li>Folder child 2</li>--}}
-                                            {{--</ul>--}}
-                                        {{--</li>--}}
-                                    {{--</ul>--}}
-                                {{--</li>--}}
+                            {{--<li>Folder--}}
+                            {{--<ul>--}}
+                            {{--<li>Folder child</li>--}}
+                            {{--<li>Folder child</li>--}}
+                            {{--<li>Folder child</li>--}}
+                            {{--<li>Folder child</li>--}}
+                            {{--<li>Folder child</li>--}}
+                            {{--<li>Folder child--}}
+                            {{--<ul>--}}
+                            {{--<li>Folder child 2</li>--}}
+                            {{--<li>Folder child 2</li>--}}
+                            {{--<li>Folder child 2</li>--}}
+                            {{--<li>Folder child 2</li>--}}
+                            {{--<li>Folder child 2</li>--}}
+                            {{--</ul>--}}
+                            {{--</li>--}}
+                            {{--</ul>--}}
+                            {{--</li>--}}
                             {{--</ul>--}}
                             {!!html_entity_decode($folderTree)!!}
 
@@ -62,7 +62,15 @@ var previousUrl = '$previousUrl';
             .module-bi {
                 height: 100%;
             }
-
+            .module-bi .folder-content thead th {
+                font-size: 12px;
+            }
+            .module-bi .folder-content .bi-table-item:hover {
+                cursor: pointer;
+            }
+            .module-bi .folder-content .bi-table-item td {
+                font-size: 12px;
+            }
             .module-bi .row {
                 height: auto;
             }
@@ -70,7 +78,14 @@ var previousUrl = '$previousUrl';
             .module-bi .folder-sidebar {
                 height: 100%;
             }
-
+            .module-bi .folder-sidebar .card {
+                border-radius: 5px;
+                height: 600px;
+            }
+            .module-bi .folder-content .card {
+                border-radius: 5px;
+                height: 600px;
+            }
             .module-bi .folder-content {
                 height: 100%;
             }
@@ -103,7 +118,7 @@ var previousUrl = '$previousUrl';
 
             .table-documentary .table-bordered thead th {
                 text-align: center;
-                background-color: #a8abad;
+                background-color: #68a4c8 !important;
                 vertical-align: middle;
             }
 
@@ -129,14 +144,16 @@ var previousUrl = '$previousUrl';
                     display: inline-block !important;
                 }
             }
+
             @media screen and (max-width: 1100px) {
                 .module-bi .folder-sidebar, .module-bi .folder-content {
                     height: auto;
                     flex: 0 0 100%;
                     max-width: 100%;
                 }
+
                 .module-bi .folder-sidebar {
-                    order: 2;
+                    order: 0;
                 }
             }
 
@@ -163,6 +180,7 @@ var previousUrl = '$previousUrl';
                     height: 80%;
                     overflow: scroll;
                 }
+
                 .folder-content .card-body {
                     height: 80%;
                 }

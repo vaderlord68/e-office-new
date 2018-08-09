@@ -22,11 +22,15 @@ class  IndexController extends Controller
             "url"   => "#",
         ]
     ];
+    public function __construct()
+    {
+        Helper::setSession("dashboardMenus",$this->dashboardMenus);
+    }
+
     public function index()
     {
         if (Helper::getSession("previousRequest")) {
             return view('system/module/bi')
-                ->with("dashboardMenus",$this->dashboardMenus)
                 ->with("previousUrl",Helper::getSession("previousUrl"))
                 ->with("folderTree", $this->getFolderTree());
         }
