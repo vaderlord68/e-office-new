@@ -98,12 +98,15 @@ $(document).ready(function () {
 
     });
 
+
     /** Init Folder Tree **/
     $('#folderTree').jstree({
         'core': {
             'multiple': false,
         }
     });
+
+
     /** Expand all on load **/
     $("#folderTree").jstree("open_all");
 

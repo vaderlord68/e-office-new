@@ -20,7 +20,7 @@ var parentFolderId = '$parentFolderId';
                 <i class="fa fa-folder-open"></i> Mở</a>
             <a id="bi-renameFolder" class="toolbar-btn action-on-header" href="#">
                 <i class="fa fa-pencil-square-o"></i> Đổi tên</a>
-            <a id="deleteFolder" class="toolbar-btn action-on-header" href="#" type="button" data-toggle="modal" data-target="#exampleModal">
+            <a id="deleteFolder" class="toolbar-btn action-on-header" href="#"  data-toggle="modal" data-target="#exampleModal">
                 <i class="fa fa-times-circle"></i> Xóa</a>
         </div>
         <div class="right-table-header">
