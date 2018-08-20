@@ -8,23 +8,23 @@ use App\Http\Controllers\Controller;
 
 class  IndexController extends Controller
 {
-    protected $dashboardMenus = [
-        [
-            "title" => "Quản lý chuyên mục",
-            "url"   => "#",
-        ],
-        [
-            "title" => "Quản lý quyền truy cập",
-            "url"   => "#",
-        ],
-        [
-            "title" => "Quản lý tài liệu",
-            "url"   => "#",
-        ]
+    const dashboardMenus = [
+//        [
+//            "title" => "Quản lý chuyên mục",
+//            "url"   => "#",
+//        ],
+//        [
+//            "title" => "Quản lý quyền truy cập",
+//            "url"   => "#",
+//        ],
+//        [
+//            "title" => "Quản lý tài liệu",
+//            "url"   => "#",
+//        ]
     ];
     public function __construct()
     {
-        Helper::setSession("dashboardMenus",$this->dashboardMenus);
+        Helper::setSession("dashboardMenus",self::dashboardMenus);
     }
 
     public function index()
