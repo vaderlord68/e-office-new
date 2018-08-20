@@ -1,7 +1,7 @@
 @extends('page.master')
 @section('body_content')
     @parent
-    <div class="card">
+    <div class="card slider slide-in">
         <div class="card-header">
             <div class="left-table-header">
                 <a class="saveBtn-right-toolbar" href="#" id="submitCreateNews">Lưu</a>

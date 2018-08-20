@@ -9,7 +9,7 @@
         }
 
     ?>
-    <div class="module-news card">
+    <div class="module-news card slider slide-in">
         <div class="card-header">
             <div class="left-table-header">
                 <a id="news-createNews" class="toolbar-btn action-on-header" href="/news/create">
