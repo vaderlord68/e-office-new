@@ -4,20 +4,13 @@ namespace App\Http\Controllers\Core;
 
 use App\Eoffice\Helper;
 use App\Http\Controllers\Controller;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class  IndexController extends Controller
 {
-    public function __construct()
-    {
-    }
-
     public function index()
     {
-        if (Helper::isAUserInSession()) {
-//            return redirect("/bi");
-            return view('system/landing');
-        } else {
-            return view('user/login');
-        }
+        return view('system/landing');
     }
 }

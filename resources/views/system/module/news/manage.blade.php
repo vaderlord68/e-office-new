@@ -70,12 +70,8 @@
                             <thead>
                             <tr role="row">
                                 <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table"
-                                    rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending"
-                                    style="width: 5%">Hình ảnh
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table"
                                     rowspan="1" colspan="1"
-                                    style="width: 20%;">Tiêu đề
+                                    style="width: 15%;">Tiêu đề
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table"
                                     rowspan="1" colspan="1"
@@ -115,16 +111,15 @@
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table"
                                     rowspan="1" colspan="1"
-                                    style="width: 5%;">Thao tác
+                                    style="width: 10%;">Thao tác
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php foreach ($newsCollection as $news): ?>
                             <tr role="row" class="odd type-news <?php echo $news->NewsID == $lastNewsModified ? "lastNewsModified": ""?>" news_id="<?php  echo $news->NewsID?>">
-                                <td><img src="<?php echo "/storage/users-upload/news/".$news->ImageTitle?>" alt=""></td>
                                 <td><?php echo $news->Title?></td>
-                                <td><?php echo $news->Describe?></td>
+                                <td><?php echo $news->Remark?></td>
                                 <td><?php echo $news->IsHotNews ? "Tin nóng" : "Tin thường"?></td>
                                 <td><?php echo $news->StatusID ? "Đã phát hành" : "Chưa phát hành"?></td>
                                 <td><?php echo $news->ReleaseDate?></td>
@@ -134,10 +129,10 @@
                                 <td><?php echo isset($news->LastModifyUserID) ? $news->LastModifyUserID : ""?></td>
                                 <td><?php echo $news->LastModifyDate?></td>
                                 <td>
-                                    <a id="news-edit" class="toolbar-btn action-on-header" href="#">
+                                    <a id="news-edit" class="toolbar-btn action-on-header" href="/news/edit/{{ $news->NewsID or '' }}">
                                         <i class="fa fa-pencil-square-o"></i> Sửa</a>
-                                    <a id="news-delete" class="toolbar-btn action-on-header" href="#">
-                                        <i class="fa fa-times-circle"></i> Xóa</a>
+                                    <a id="news-delete" class="toolbar-btn action-on-header" href="" data-toggle="modal" data-target="#deleteNews">
+                                        <i class="fa fa-times-circle"></i> Xóa</a>l
                                 </td>
                             </tr>
                             <?php endforeach;?>
@@ -149,3 +144,6 @@
         </div>
     </div>
 @stop
+@section("deletePopup")
+    @include("system.module.news.delete")
+@show
