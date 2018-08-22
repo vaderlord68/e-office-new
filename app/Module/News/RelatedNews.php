@@ -5,7 +5,7 @@ namespace App\Module\News;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class News extends Model
+class RelatedNews extends Model
 {
     /**
      * Table name = D76T2141

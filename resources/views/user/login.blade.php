@@ -38,7 +38,6 @@
                 <input type="text" name="UserName" placeholder="User account"/>
                 <input type="password" name="UserPassword" placeholder="Password"/>
                 <div class="button-form">
-                    <p class="message"><a href="#">Chọn doanh nghiệp</a></p>
                     <button type="submit">Đăng nhập</button>
                 </div>
                 <input type="hidden" name="_token" value="{{csrf_token()}}">

@@ -20,7 +20,6 @@ $dashboardMenus = \App\Eoffice\Helper::getSession("dashboardMenus");
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <h3 class="menu-title">Quản lý tài liệu</h3>
-
                 <?php foreach ($dashboardMenus as $menu): ?>
                 <li class="menu-item-has-children dropdown">
                     <a href="<?php echo $menu['url']?>" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i><?php echo $menu['title']?></a>

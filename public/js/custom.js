@@ -4,7 +4,6 @@ $(document).ready(function () {
             $( "body" ).removeClass( "open" );
         }
     });
-
     $( ".user-area" ).hover(
         function() {
             $( this ).find('.user-menu').css( "display", "block" );
