@@ -1,9 +1,12 @@
+<?php
+$locale = Helpers::getLocale();
+?>
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>
 <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>
-<html class="no-js lt-ie9" lang=""> <![endif]-->
+<html class="no-js lt-ie9" lang="{{$locale}}"> <![endif]-->
 <!--[if gt IE 8]>
 <html class="no-js" lang=""> <!--<![endif]-->
 <meta charset="utf-8">
@@ -12,10 +15,6 @@
 <meta name="description" content="HỆ THỐNG VĂN PHÒNG ĐIỆN TỬ">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" href="{{asset("favicon.ico")}}"/>
-<?php
-$locale = Helpers::getLocale();
-\Debugbar::info(session()->all());
-?>
 
 <!-- jQuery -->
 <script type="text/javascript" src="{!! asset('js/jquery-3.3.1.min.js') !!}"></script>
@@ -40,9 +39,11 @@ $locale = Helpers::getLocale();
 <script type="text/javascript" src="{{asset("plugins/select2-4.0.5/dist/js/select2.js") }}"></script>
 <script type="text/javascript" src="{{asset("plugins/select2-4.0.5/dist/js/i18n/$locale.js") }}"></script>
 
-
 <!-- Inputmask -->
 <script type="text/javascript" src="{!! asset('plugins/input-mask/jquery.inputmask.bundle.js') !!}"></script>
+
+<!-- Bootbox support confirmation dialog -->
+<script type="text/javascript" src="{!! asset('plugins/bootstrap-bootbox/bootbox.js') !!}"></script>
 
 <!-- Paramquery -->
 <link href="{{ asset('plugins/paramquery-3.3.4/pqgrid.dev.css') }}" media="all" rel="stylesheet" type="text/css"/>
@@ -97,6 +98,10 @@ $locale = Helpers::getLocale();
 
 
 <script>
+    //store resources for using of javascript
+    var langText = JSON.parse('{!! json_encode(Lang::get('message')) !!}');
+    var lang = "{{Helpers::getLang()}}";
+
     jQuery(document).ready(function () {
         context.init({
             fadeSpeed: 100,
@@ -113,4 +118,5 @@ $locale = Helpers::getLocale();
             },
         ]
     });
+
 </script>

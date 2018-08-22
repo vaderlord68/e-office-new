@@ -15,7 +15,7 @@
         <option>A</option>
         <option>B</option>
     </select>
-    {{Helpers::getRS('Don_vi')}}
+    <button id="btnBootbox" type="button" class="btn btn-link">Bootbox</button>
 
     <script>
         $('.input-group').datepicker({
@@ -41,5 +41,12 @@
         });
 
         $("#cboTest").select2();
+
+        $("#btnBootbox").click(function(){
+            //save_ok();
+            ask_save(function(){
+                alert("Yes")
+            },null,null, function(){}, null);
+        });
     </script>
 @stop
