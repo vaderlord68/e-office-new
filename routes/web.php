@@ -34,7 +34,7 @@ Route::get('/news/manage', 'Module\News\ManageNewsController@index');
 Route::get('/news/manage/filter', 'Module\News\ManageNewsController@filter');
 Route::get('/news/create', 'Module\News\CreateNewsController@index');
 Route::post('/news/create/save', 'Module\News\CreateNewsController@execute');
-Route::get('/news/edit', 'Module\News\EditNewsController@index');
+Route::get('/news/edit/{newsid}', 'Module\News\EditNewsController@index');
 Route::post('/news/edit/save', 'Module\News\EditNewsController@execute');
 Route::get('/news/delete', 'Module\News\DeleteNewsController@execute');
 Route::get('/news/search/title', 'Module\News\SearchNewsController@searchTitle');
