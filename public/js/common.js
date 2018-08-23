@@ -262,17 +262,6 @@ window.addEventListener('popstate', function (event) {
     //history.pushState(null, null, '');
 });
 
-//return number, dùng hàm này trước khi gửi dữ liệu đi lưu
-function formatNumber(n, dec) {
-    if (n == "" || n == null) {
-        return 0;
-    } else {
-        var d = Number(dec);
-        return parseFloat(Number(n).toFixed(d));
-    }
-
-}
-
 //return ra chuỗi
 function format2(n, currency, dec) {
     var decimal = "";
@@ -293,10 +282,6 @@ function formatNum(num, dec, bZero) {
         return "";
     var result = format2(num, "", dec);
     return result;
-}
-
-function correctNum(n, dec) {
-    return parseFloat(Number(n).toFixed(dec));
 }
 
 function locdau(str) {
@@ -445,22 +430,6 @@ function correctNumber(v) {
 
 function destroyClickedElement(event) {
     document.body.removeChild(event.target);
-}
-
-//Hàm dùng filter danh mục KSD
-function filterDisabled(id, val) {
-    //console.log(val);
-    if (val  == ""){
-        $("#" + id).pqGrid( "reset", {  filter: true } );
-    }else{
-        $("#" + id).pqGrid("filter", {
-            oper: 'replace',
-            data: [
-                {dataIndx: 'Disabled', condition: 'contain', value:  val}
-            ]
-        }).pqGrid("refreshDataAndView");
-    }
-
 }
 
 //Hàm dùng resize pqGrid
@@ -660,10 +629,6 @@ var setEmailValues = function (div, from, to, title, body, cc, bcc, isshow) {
     if (isshow != 0)
         $(div).find("#mPopUpSendMail").modal('show');
 };
-
-function showEmail(div) {
-    $(div).find("#mPopUpSendMail").modal('show');
-}
 
 //sumfooter cho tất cả cột số trên dưới dộng
 function sumArray(arr, field) {
@@ -876,13 +841,6 @@ function twoDigit(number) {
     var twodigit = number >= 10 ? number : "0" + number.toString();
     return twodigit;
 }
-
-/*
-function parseDate(str) {
-    var mdy = str.split('/');
-    return new Date(mdy[2], mdy[1] - 1, mdy[0]);
-}
-*/
 
 function daydiff(first, second) {
     return Math.round((second - first) / (1000 * 60 * 60 * 24));
