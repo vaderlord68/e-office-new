@@ -44,5 +44,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/news/edit/save', 'Module\News\EditNewsController@execute');
     Route::get('/news/delete', 'Module\News\DeleteNewsController@execute');
     Route::get('/news/search/title', 'Module\News\SearchNewsController@searchTitle');
+
+    //Category
+    Route::get('/w76f1555/{task?}', 'Module\W76\W76F1555\W76F1555Controller@index');
 });
 
