@@ -1,45 +1,38 @@
 @extends('page.master')
 @section('body_content')
     @parent
-    News module will displayhere
-    <div class="input-group date" data-provide="datepicker">
-        <input type="text" class="form-control">
-        <div class="input-group-addon">
-            <span class="fa fa-calendar"></span>
-        </div>
-    </div>
-    <input class="form-control" type="text" id="txtFileSizeW09F4011" name="txtFileSizeW09F4011" value="" placeholder="">
-    <input class="form-control" type="text" id="txtFileSizeW09F40112" name="txtFileSizeW09F4011" value="" placeholder="">
-    <select class="form-control" id="cboTest">
-        <option>--</option>
-        <option>A</option>
-        <option>B</option>
-    </select>
-    {{Helpers::getRS('Don_vi')}}
+
+    <section>
+        <form id="frmW76F2140" name="frmW76F2140" method="post">
+            <div>
+                <div style="width: 40%; height: 100%; background-color: #0a6aa1; float: left; margin-right: 30px;">
+                    {{--<div style="width: 20%; height: 200px; background-color: red; margin-right: 30px">--}}
+
+                    {{--</div>--}}
+
+                    {{--<div>--}}
+
+                    {{--</div>--}}
+                </div>
+
+                <div  style="width: 40%; height: 100%; background-color: #00a67c; float: left; margin-right: 30px;">
+                </div>
+
+                <div style="width: 20%; height: 100%; background-color: yellow; float: left ">
+                </div>
+
+            </div>
+
+
+        </form>
+    </section>
+
+
+
 
     <script>
-        $('.input-group').datepicker({
-            todayHighlight: true,
-            autoclose: true,
-            format: "dd/mm/yyyy",
-            language: '{{Helpers::getLocale()}}'
-        });
-        $('#txtFileSizeW09F4011').inputmask("numeric", {
-            radixPoint: ".",
-            groupSeparator: ",",
-            digits: 2,
-            autoGroup: true,
-            //prefix: '$', //No Space, this will truncate the first character
-            rightAlign: true
 
-        });
 
-        $("#txtFileSizeW09F40112").inputmask({
-            alias: "datetime",
-            mask: "h:s",
-            placeholder: "__:__"
-        });
 
-        $("#cboTest").select2();
     </script>
 @stop

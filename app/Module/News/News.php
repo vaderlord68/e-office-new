@@ -1,11 +1,8 @@
 <?php
 
-namespace App\Module\News;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
-class News extends Model
+class News extends Eloquent
 {
     /**
      * Table name = D76T2140
@@ -15,12 +12,18 @@ class News extends Model
     protected $primaryKey = 'NewsID';
     protected $connection = 'sqlsrv';
     public $timestamps = false;
+    public $incrementing = false;
+
     public function getCollection()
     {
-        $collection = DB::table($this->table)
+        $collection = DB::table($this->table)->where('Deleted', 0)->orderByDesc('LastModifyDate')
             ->get();
         return $collection;
     }
+
+//    public function find($newsID){
+//        return self::find($newsID);
+//    }
 
     public function getNewsByRelativeTitle($title)
     {

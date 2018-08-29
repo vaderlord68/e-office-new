@@ -18,6 +18,7 @@ if (typeof jQuery === "undefined") {
 }
 
 function showFormDialogPost(url, id, data ,callbackAfterShowModal,param, callbackAfterCloseModal) {
+    var responseData = null;
     var cb = typeof callbackAfterShowModal !== 'undefined' ? callbackAfterShowModal : null;
     var pr = typeof param !== 'undefined' ? param : null;
     var eventClose = typeof callbackAfterCloseModal !== 'undefined' ? callbackAfterCloseModal : null;
@@ -62,13 +63,10 @@ function showFormDialogPost(url, id, data ,callbackAfterShowModal,param, callbac
         data: data,
         success: function (data) {
             $("#" + divParent).html(data);
-
-
             $('#' + id).on('hidden.bs.modal', function () {
                 //console.log("hidden");
-                $(".no-menu-alert").load(url_alert);
                 if (eventClose != null){
-                    eventClose.call(null, null);
+                    eventClose.call(null, window);
                 }
 
                 var ob = $("#" + divParent).find("div.modal:visible");
@@ -80,7 +78,7 @@ function showFormDialogPost(url, id, data ,callbackAfterShowModal,param, callbac
                     $("#" + divParent).remove();
 
                 }
-                if ($(document).find("div.modal").size() > 1)
+                if ($(document).find("div.modal").length > 1)
                     $("div.modal-backdrop.fade.in").last().remove();
 
             });
@@ -262,17 +260,6 @@ window.addEventListener('popstate', function (event) {
     //history.pushState(null, null, '');
 });
 
-//return number, dùng hàm này trước khi gửi dữ liệu đi lưu
-function formatNumber(n, dec) {
-    if (n == "" || n == null) {
-        return 0;
-    } else {
-        var d = Number(dec);
-        return parseFloat(Number(n).toFixed(d));
-    }
-
-}
-
 //return ra chuỗi
 function format2(n, currency, dec) {
     var decimal = "";
@@ -293,10 +280,6 @@ function formatNum(num, dec, bZero) {
         return "";
     var result = format2(num, "", dec);
     return result;
-}
-
-function correctNum(n, dec) {
-    return parseFloat(Number(n).toFixed(dec));
 }
 
 function locdau(str) {
@@ -447,22 +430,6 @@ function destroyClickedElement(event) {
     document.body.removeChild(event.target);
 }
 
-//Hàm dùng filter danh mục KSD
-function filterDisabled(id, val) {
-    //console.log(val);
-    if (val  == ""){
-        $("#" + id).pqGrid( "reset", {  filter: true } );
-    }else{
-        $("#" + id).pqGrid("filter", {
-            oper: 'replace',
-            data: [
-                {dataIndx: 'Disabled', condition: 'contain', value:  val}
-            ]
-        }).pqGrid("refreshDataAndView");
-    }
-
-}
-
 //Hàm dùng resize pqGrid
 function resizePqGrid() {
     $(".pq-grid").each(function () {
@@ -595,12 +562,10 @@ function pad(str, max) {
 //Kiem tra bat buoc nhap tren chrome, boi vi DOMSubtreeModified chi chay trên firefox
 function validationElements($form, callback) {
     var elements = $form.find("input:required, textarea:required");
-    console.log(elements);
-    var obj_lang = JSON.parse(lang_text);
     for (var i = 0; i < elements.length; i++) {
         if ($(elements[i]).prop('required') && $(elements[i]).val() == "") {
             //alert("sdfsdf");
-            $(elements[i]).get(0).setCustomValidity(obj_lang.languages[6].msg);
+            $(elements[i]).get(0).setCustomValidity(langText.Ban_phai_nhap_du_lieu);
         }
         else {
             $(elements[i]).get(0).setCustomValidity("");
@@ -609,12 +574,9 @@ function validationElements($form, callback) {
     }
 
     var elements = $form.find("select:required");
-    console.log(elements);
-    var obj_lang = JSON.parse(lang_text);
     for (var i = 0; i < elements.length; i++) {
         if ($(elements[i]).prop('required') && $(elements[i]).val() == "") {
-            //alert("sdfsdf");
-            $(elements[i]).get(0).setCustomValidity(obj_lang.languages[7].msg);
+            $(elements[i]).get(0).setCustomValidity(langText.Ban_chua_chon_du_lieu);
         }
         else {
             $(elements[i]).get(0).setCustomValidity("");
@@ -660,10 +622,6 @@ var setEmailValues = function (div, from, to, title, body, cc, bcc, isshow) {
     if (isshow != 0)
         $(div).find("#mPopUpSendMail").modal('show');
 };
-
-function showEmail(div) {
-    $(div).find("#mPopUpSendMail").modal('show');
-}
 
 //sumfooter cho tất cả cột số trên dưới dộng
 function sumArray(arr, field) {
@@ -877,13 +835,6 @@ function twoDigit(number) {
     return twodigit;
 }
 
-/*
-function parseDate(str) {
-    var mdy = str.split('/');
-    return new Date(mdy[2], mdy[1] - 1, mdy[0]);
-}
-*/
-
 function daydiff(first, second) {
     return Math.round((second - first) / (1000 * 60 * 60 * 24));
 }
@@ -925,57 +876,6 @@ function getDecimal(format){
 
 }
 
-//check require
-function validationForm($id, callback, msgTextbox, msgSelectBox){
-    var langObj = JSON.parse(lang_text);
-    var messageText = typeof msgTextbox !== 'undefined' && msgTextbox != '' ? msgTextbox : langObj.languages[6].msg;
-    var messageCheckBox = typeof msgSelectBox !== 'undefined' && msgSelectBox != '' ? msgSelectBox : langObj.languages[7].msg;
-    var cb = typeof callback !== 'undefined' ? callback : null;
-    var elements = $id.find("input:required, textarea:required");
-    for (var i = 0; i < elements.length; i++) {
-        //console.log(elements[i]);
-        if ($(elements[i]).prop("required")){
-            elements[i].oninvalid = function (e) {
-                /*if (!e.target.validity.valid) {
-                    e.target.setCustomValidity(messageText);
-                }else{
-                    e.target.setCustomValidity("");
-                }*/
-                if ($(e.target).val() == "") {
-                    e.target.setCustomValidity(messageText);
-                }else{
-                    e.target.setCustomValidity("");
-                }
-            };
-            elements[i].oninput = function (e) {
-                e.target.setCustomValidity("");
-            };
-            elements[i].onfocus = function (e) {
-                //e.target.setCustomValidity("");
-            };
-        }
-
-    }
-
-    var elements_demo = $id.find("select:required");
-    for (var j = 0; j < elements_demo.length; j++) {
-        if ($(elements_demo[j]).prop("required")){
-            elements_demo[j].oninvalid = function (e) {
-                if ($(e.target).val() == "" || $(e.target).val() == null) {
-                    e.target.setCustomValidity(messageCheckBox);
-                }else{
-                    e.target.setCustomValidity("");
-                }
-            };
-            elements_demo[j].onchange = function (e) {
-                e.target.setCustomValidity("");
-            };
-        }
-    }
-    var params = [messageText, messageCheckBox];
-    if (cb!=null)cb.call(null,params);
-}
-
 Date.prototype.getWeekNumber = function(){
     var onejan = new Date(this.getFullYear(),0,1);
     var millisecsInDay = 86400000;
@@ -994,10 +894,8 @@ function checkID($el) {
     console.log("sdfsfd");
     var str = $el.val();
     var regex = /[^\w]/gi;
-    var obj_lang = JSON.parse(lang_text);
-
     if (regex.test(str) == true) {
-        $el.get(0).setCustomValidity(obj_lang.languages[8].msg);
+        $el.get(0).setCustomValidity(langText.Ma_co_ky_tu_khong_hop_le);
         return false;
     }else{
         $el.get(0).setCustomValidity("");
@@ -1021,6 +919,54 @@ function checkFileType(filename, extListJson) {
     return true;
 }
 
+function alertError($str){
+    $(".alert-message").removeClass('hide');
+    //hide success
+    $("#divSuccessMessage").addClass('hide');
+    //show error
+    $("#divErrorMessage").removeClass("hide");
+    //set the value of error message
+    $("#divErrorMessage").find("#msgErrorMessage").html($str);
+
+}
+
+function alertSuccess($str){
+    //hide error
+    $("#divErrorMessage").addClass('hide');
+    //show success
+    $("#divSuccessMessage").removeClass("hide");
+    //set the value of error message
+    $("#divSuccessMessage").find("#msgSuccessMessage").html($str);
+    $(".alert-message").removeClass('hide');
+
+}
+
+function hideAlert(){
+    $("#divSuccessMessage").addClass('hide');
+    $("#divErrorMessage").addClass('hide');
+    $("#divSuccessMessage").val('');
+    $("#divErrorMessage").val('');
+}
+
+function check_file_type(filename) {
+    var extension = filename.substr(filename.lastIndexOf('.') + 1).toLowerCase();
+    var allowedExtensions = ['jpg', 'png', 'jpeg'];
+    if (extension.length > 0) {
+        if (allowedExtensions.indexOf(extension) !== -1) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function blob_to_data_URL(blob, callback) {
+    var a = new FileReader();
+    a.onload = function (e) {
+        callback(e.target.result);
+    }
+    a.readAsDataURL(blob);
+}
 
 
 
