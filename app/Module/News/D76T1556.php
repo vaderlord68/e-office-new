@@ -5,7 +5,7 @@ namespace App\Module\News;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class D76T1556 extends Model
+class D76T1556 extends \Eloquent
 {
     /**
      * Table name = D76T2140
@@ -21,4 +21,5 @@ class D76T1556 extends Model
             ->get();
         return $result;
     }
+
 }

@@ -18,4 +18,5 @@
     @show
     </body>
 @show
+<div id="divModalContainer"></div>
 </html>

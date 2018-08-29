@@ -1,3 +1,101 @@
+:root {
+    --blue: #007bff;
+    --indigo: #6610f2;
+    --purple: #6f42c1;
+    --pink: #e83e8c;
+    --red: #dc3545;
+    --orange: #fd7e14;
+    --yellow: #ffc107;
+    --green: #28a745;
+    --teal: #20c997;
+    --cyan: #17a2b8;
+    --white: #fff;
+    --gray: #6c757d;
+    --gray-dark: #343a40;
+    --primary: #007bff;
+    --secondary: #6c757d;
+    --success: #28a745;
+    --info: #17a2b8;
+    --warning: #ffc107;
+    --danger: #dc3545;
+    --light: #f8f9fa;
+    --dark: #343a40;
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+/*for text*/
+.text-yellow{
+    color: #ffc107;
+}
+.text-primary{
+    color:#007bff;
+}
+.text-warning{
+    color:#ffc107;
+}
+.text-success{
+    color: #28a745;
+}
+.text-info{
+    color: #17a2b8;
+}
+.text-danger{
+    color: #dc3545;
+}
+.text-red{
+    color: #dc3545;
+}
+/*for background*/
+.bg-yellow{
+    color: #ffc107;
+}
+.bg-primary{
+    color:#007bff;
+}
+.bg-warning{
+    color:#ffc107;
+}
+.bg-success{
+    color: #28a745;
+}
+.bg-info{
+    color: #17a2b8;
+}
+.bg-danger{
+    color: #dc3545;
+}
+
+body,textarea{
+    font-family: Source Serif Pro, PT Sans, Trebuchet MS, Helvetica, Arial !important;
+    font-size: 12px !important;
+}
+input.form-control, select.form-control, table{
+    line-height: 28px !important;
+    font-family: Source Serif Pro, PT Sans, Trebuchet MS, Helvetica, Arial !important;
+    height: 28px !important;
+    font-size: 12px !important;
+}
+.btn{
+    line-height: 28px !important;
+    height: 28px !important;
+    padding: 0px 10px !important;
+    font-family: Source Serif Pro, PT Sans, Trebuchet MS, Helvetica, Arial !important;
+    font-size: 12px !important;
+
+}
+input[type='file']{
+    height: 100px !important;
+}
+
+.form-check-input {
+    margin-top: 2px;
+}
+
 /*start common css*/
 .pd5{
      padding: 5px;
@@ -30,35 +128,50 @@
 .pdb10{
     padding-bottom: 10px;
 }
-.md5{
+.mg0{
+    margin: 0px;
+}
+.mgl0{
+    margin-left: 0px;
+}
+.mgr0{
+    margin-right: 0px;
+}
+.mgt0{
+    margin-bottom: 0px;
+}
+.mgb0{
+    margin-bottom: 0px;
+}
+.mg5{
     margin: 5px;
 }
-.mdl5{
+.mgl5{
     margin-left: 5px;
 }
-.mdr5{
+.mgr5{
     margin-right: 5px;
 }
-.mdt5{
+.mgt5{
     margin-bottom: 5px;
 }
-.mdb5{
+.mgb5{
     margin-bottom: 5px;
 }
 
-.md10{
+.mg10{
     margin: 10px;
 }
-.mdl10{
+.mgl10{
     margin-left: 10px;
 }
-.mdr10{
+.mgr10{
     margin-right: 10px;
 }
-.mdt10{
+.mgt10{
     margin-bottom: 10px;
 }
-.mdb10{
+.mgb10{
     margin-bottom: 10px;
 }
 /*end common css*/
@@ -75,3 +188,139 @@
     text-align: center;
     vertical-align: middle;
 }
+
+input:required, select:required, textarea:required{
+    background-color: beige !important;
+}
+
+input:read-only, select:read-only, textarea:read-only{
+    background-color: #EEEEEE;
+}
+
+.input-group.date .dropdown-menu{
+    display: block;
+    height: 150px;
+}
+.hide{
+    display: none;
+}
+.alert-message{
+    padding: 20px 40px 0px 40px;
+}
+.alert-message-session{
+    padding: 20px 40px 0px 40px;
+}
+.lbl-normal{
+     padding-top: 8px;
+ }
+.lbl-normal-value{
+    padding-top: 8px;
+    font-weight: bold;
+}
+.form-check{
+    padding-top: 8px;
+}
+.btn{
+    border-radius: 3px;
+}
+.pq-grid-title-row{
+    vertical-align: middle;
+    font-weight: bold;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f9efa4+2,e8e1bb+54,eadd93+100 */
+    background: #f9efa4; /* Old browsers */
+    background: -moz-linear-gradient(top, #f9efa4 2%, #e8e1bb 54%, #eadd93 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #f9efa4 2%,#e8e1bb 54%,#eadd93 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #f9efa4 2%,#e8e1bb 54%,#eadd93 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9efa4', endColorstr='#eadd93',GradientType=0 ); /* IE6-9 */
+}
+
+.toolbar-menu {
+    display: inline-flex;
+    border: 1px solid #e6e0cc;
+    padding: 5px;
+    width: 100%;
+    border-radius: 5px;
+    background-color: #F2F5F7;
+}
+
+.ui-widget.ui-widget-content {
+    border: 1px solid #e6e0cc;
+}
+.pq-state-select.ui-state-highlight {
+    background: #efefce;
+}
+tr.pq-grid-oddRow > td.pq-state-select, tr.pq-grid-oddRow.pq-state-select, tr.pq-grid-oddRow > .pq-grid-cell-hover, tr.pq-grid-oddRow.pq-grid-row-hover {
+    background: #efefce;
+}
+
+.card-title{
+    margin-bottom: 0px;
+    color: #333;
+}
+.cursor-pointer{
+    cursor: pointer;
+}
+#divConfirm .modal-header {
+    border-radius: 10px 10px 0px 0px !important;
+}
+#divConfirm .modal-footer {
+    border-radius: 0px 0px 10px 10px !important;
+}
+
+#divConfirm .modal-header .panel-heading .modal-title {
+    font-size: 14px;
+}
+#divConfirm .modal-dialog {
+    min-width: 200px;
+    width: auto;
+    max-width: 600px;
+    pointer-events: auto;
+}
+
+/*begin css for popup modal*/
+#divModalContainer .modal-content{
+    border-radius: 10px;
+}
+#divModalContainer .modal-header{
+    background-color: #EAC151;
+    border-radius: 10px 10px 0px 0px !important;
+    padding: 5px 10px 5px 15px;
+    height: 38px;
+    line-height: 38px;
+}
+#divModalContainer .modal-footer {
+    background-color: #ffffff;
+    border-radius: 0px 0px 10px 10px !important;
+    padding: 5px 10px 5px 15px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#divModalContainer .modal-header .modal-title {
+    line-height: 28px;
+}
+#divModalContainer .modal-header .close {
+    line-height: 28px;
+}
+#divModalContainer .modal-header  h4{
+    color: white;
+    font-size: 14px;
+}
+/*end css for popup modal*/
+.checkbox-grid-selection {
+    margin-top: 2px !important;
+    visibility: inherit !important;
+}
+.modal-body{
+    padding: 10px;
+}
+.form-group{
+    margin-bottom: 10px;
+}
+img{
+    border: 1px solid #ededed;
+    border-radius: 8px;
+}
+

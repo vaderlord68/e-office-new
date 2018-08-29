@@ -1190,14 +1190,14 @@ function ask_delete(callback,param,msg) {
         buttons: {
             success: {
                 label: label_ok(),
-                className: "btn-default",
+                className: " btn-primary",
                 callback: function () {
                     callbackClose(cb,pr);
                 }
             },
             danger: {
                 label: label_cancel(),
-                className: "btn-default"
+                className: " btn-default"
             }
         }
     });

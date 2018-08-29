@@ -24,9 +24,16 @@ $locale = Helpers::getLocale();
 <link href="{{ asset('plugins/jQueryUI/jquery-ui.theme.min.css') }}" media="all" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="{!! asset('plugins/jQueryUI/jquery-ui.js') !!}"></script>
 
+<!-- popper supports tooltip -->
+<script src="{{ asset('js/popper.js') }}"></script>
+
 <!-- Bootstrap -->
 <link href="{{ asset('plugins/bootstrap/css/bootstrap.css') }}" media="all" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="{!! asset('plugins/bootstrap/js/bootstrap.js') !!}"></script>
+
+
+<!-- Moment -->
+<script type="text/javascript" src="{!! asset('plugins/moment/moment.js') !!}"></script>
 
 <!-- DatePicker -->
 <link href="{{ asset('plugins/datepicker/datepicker3.css') }}" rel="stylesheet" type="text/css"/>
@@ -42,17 +49,14 @@ $locale = Helpers::getLocale();
 <!-- Inputmask -->
 <script type="text/javascript" src="{!! asset('plugins/input-mask/jquery.inputmask.bundle.js') !!}"></script>
 
-<!-- Bootbox support confirmation dialog -->
-<script type="text/javascript" src="{!! asset('plugins/bootstrap-bootbox/bootbox.js') !!}"></script>
 
 <!-- Paramquery -->
 <link href="{{ asset('plugins/paramquery-3.3.4/pqgrid.dev.css') }}" media="all" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('plugins/paramquery-3.3.4/pqgrid.bootstrap.min.css') }}" media="all" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('plugins/paramquery-3.3.4/themes/bootstrap/pqgrid.css') }}" media="all" rel="stylesheet" type="text/css"/>
-<link href="{{ asset('plugins/paramquery-3.3.4/themes/bootstrap/pqgrid.css') }}" media="all" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('plugins/paramquery-3.3.4/pqgrid.ui.min.css') }}" media="all" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('plugins/paramquery-3.3.4/themes/office/pqgrid.css') }}" media="all" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="{!! asset('plugins/paramquery-3.3.4/pqgrid.dev.js') !!}"></script>
+<script type="text/javascript" src="{!! asset('plugins/paramquery-3.3.4/pqgrid.min.js') !!}"></script>
 <script type="text/javascript" src="{!! asset('plugins/paramquery-3.3.4/touch-punch/touch-punch.min.js') !!}"></script>
 <script src="{{asset("plugins/paramquery-3.3.4/localize/pq-localize-$locale.js")}}" type="text/javascript"></script>
 
@@ -65,9 +69,12 @@ $locale = Helpers::getLocale();
 <!-- TinyMCE for editor -->
 <script src="{{ asset('plugins/tinymce/tinymce.js') }}"></script>
 <!-- CKeditor for editor -->
-<script src="{{ asset('plugins/ckeditor5-build-classic/ckeditor.js') }}"></script>
-<!-- popper supports tooltip -->
-<script src="{{ asset('js/popper.js') }}"></script>
+<script src="{{ asset('plugins/ckeditor/ckeditor.js') }}"></script>
+
+
+<!-- Bootbox support confirmation dialog -->
+<script type="text/javascript" src="{!! asset('plugins/bootstrap-bootbox/bootbox.js') !!}"></script>
+
 <!--start Theme -->
 <link rel="stylesheet" href="{{ asset('css/dashboard/normalize.css') }}">
 <link rel="stylesheet" href="{{ asset('css/dashboard/bootstrap.min.css') }}">
@@ -80,7 +87,14 @@ $locale = Helpers::getLocale();
 <link rel="stylesheet" href="{{ asset('css/dashboard/dashboard.css') }}">
 <script src="{{ asset('js/dashboard/plugins.js') }}"></script>
 <script src="{{ asset('js/dashboard/main.js') }}"></script>
+
+<!--Lightbox -->
+<link rel="stylesheet" href="{{ asset('plugins/lightbox/ekko-lightbox.css') }}">
+<script src="{{ asset('plugins/lightbox/ekko-lightbox.js') }}"></script>
+
 <!-- end Theme -->
+<!--Image Tool supports image resizeing -->
+<script src="{{ asset('plugins/jssor-slider/ImageTools.js') }}"></script>
 
 <script src="{{ asset('js/module/bi/folder-manage.js') }}"></script>
 <link href="{{ asset('css/custom.css') }}" media="all" rel="stylesheet" type="text/css"/>
@@ -91,6 +105,10 @@ $locale = Helpers::getLocale();
 <link rel="stylesheet" href="{{ asset('plugins/digi-contextmenu/digi-contextmenu.css') }}">
 <script src="{{asset("plugins/digi-menu/digi-menu.js")}}"></script>
 <script src="{{asset("plugins/digi-contextmenu/digi-contextmenu.js")}}"></script>
+
+
+
+
 
 <!-- Diginet common -->
 <link rel="stylesheet" href="{{ asset('css/common.css') }}">

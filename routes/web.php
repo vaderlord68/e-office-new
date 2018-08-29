@@ -40,9 +40,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/news/manage/filter', 'Module\News\ManageNewsController@filter');
     Route::get('/news/create', 'Module\News\CreateNewsController@index');
     Route::post('/news/create/save', 'Module\News\CreateNewsController@execute');
-    Route::get('/news/edit', 'Module\News\EditNewsController@index');
+    Route::get('/news/edit/{newsid}', 'Module\News\EditNewsController@index');
     Route::post('/news/edit/save', 'Module\News\EditNewsController@execute');
     Route::get('/news/delete', 'Module\News\DeleteNewsController@execute');
     Route::get('/news/search/title', 'Module\News\SearchNewsController@searchTitle');
+});
+
+Route::group(['namespace' => 'Module\W76', 'middleware' => 'auth'], function () {
+    Route::any('/w76f2140/{task?}', 'W76F2140Controller@index');
+    Route::any('/w76f2141/{task?}', 'W76F2141Controller@index');
 });
 
