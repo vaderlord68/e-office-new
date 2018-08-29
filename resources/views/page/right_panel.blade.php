@@ -4,6 +4,7 @@
     @show
         @section("message_section")
             @include("page.content.message")
+            @include("page.content.alert-dismissible")
         @show
     <div class="content mt-3">
         @section("body_content")

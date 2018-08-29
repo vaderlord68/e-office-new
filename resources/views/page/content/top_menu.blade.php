@@ -54,7 +54,7 @@
                         <a class="dropdown-item media" href="#">
                             <p>Manager Self Service</p>
                         </a>
-                        <a class="dropdown-item media" href="/news/manage">
+                        <a class="dropdown-item media" href="/w76f2140">
                             <p>Quản lý bản tin</p>
                         </a>
                     </div>

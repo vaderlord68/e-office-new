@@ -2,6 +2,9 @@
 //namespace App\Classes;
 
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 
 
@@ -20,7 +23,7 @@ class Helpers
     //ghi log
     public static function log($str)
     {
-        $path = base_path() . "/report/logfile/err.txt";
+        $path = storage_path() . "/logs/error.txt";
         File::prepend($path, date('d-m-Y H:i:s') . PHP_EOL . "Debug location: " . Request::path() . PHP_EOL . $str . PHP_EOL . " " . PHP_EOL);
     }
 
@@ -633,6 +636,12 @@ class Helpers
         if ($dateInput == "")
             return ($isReturnNull == true ? "null" : "''");
         return "'" . DateTime::createFromFormat('d/m/Y', $dateInput)->format('m/d/Y') . "'";
+    }
+
+    public static function createDateTime($stringDateDMY){
+        if ($stringDateDMY == "")
+            return DB::raw('null');
+        return DateTime::createFromFormat('d/m/Y', $stringDateDMY);
     }
 
     public static function changeDate($date)
@@ -2395,5 +2404,40 @@ class Helpers
                 break;
         }
         return 1;
+    }
+
+    public static function setSessionUser($user)
+    {
+        self::setSession('current_user', $user);
+    }
+
+    public static function setSession($key, $value)
+    {
+        session([$key => $value]);
+    }
+
+    public static function removeSessionByKey($key)
+    {
+        session()->remove($key);
+    }
+
+    public static function getSession($key)
+    {
+        return session($key);
+    }
+
+    public static function isAUserInSession()
+    {
+        if (self::getSession('current_user')) {
+            return true;
+        }
+        return false;
+    }
+
+    public static function getUserID(){
+        return Auth::user()->UserID;
+    }
+    public static function createNEWID(){
+        DB::selectOne('select NEWID() as NewsID')->NewsID;
     }
 }

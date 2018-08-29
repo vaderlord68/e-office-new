@@ -1,0 +1,2 @@
+--Chứa danh sách các template cần dùng chung cho các màn hình.
+--Mọi người chỉ cần copy ra và dùng, cho nó thống nhất thế thôi.
