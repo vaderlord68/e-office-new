@@ -59,6 +59,17 @@
                         </a>
                     </div>
                 </div>
+                <div class="dropdown for-notification">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span>Hệ thống</span>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="notification">
+                        <a class="dropdown-item" href="w76f1555">
+                            <p>Danh mục dùng chung</p>
+                        </a>
+
+                    </div>
+                </div>
             </div>
         </div>
 
