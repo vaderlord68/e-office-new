@@ -5,8 +5,13 @@ namespace App\Http\Controllers\User;
 use App\CoreHelpers;
 use App\Eoffice\Helper;
 use App\Http\Controllers\Controller;
+use App\User;
 use App\Users;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class  AuthenticateController extends Controller
 {
@@ -19,11 +24,8 @@ class  AuthenticateController extends Controller
 
     public function index()
     {
-        if (Helper::isAUserInSession()) {
-            return view('system/landing');
-        } else {
-            return view('user/login');
-        }
+        if (Auth::check() || Auth::viaRemember()) return Redirect::to("/");
+        return view('user/login');
     }
 
     public function loginPost(Request $request)
@@ -32,9 +34,11 @@ class  AuthenticateController extends Controller
         try {
             $username = $dataPost['UserName'];
             $password = $this->coreHelper->encrypt_userpass($dataPost['UserPassword']);
+            $remember = Input::get("remember") == 'on' ? true : false;
             $userData = [
                 'UserName' => $username,
-                'UserPassword' => $password
+                'UserPassword' => $password,
+                'remember'=>$remember
             ];
             $success = $this->accountAuthenticate($userData);
             if ($success) {
@@ -43,7 +47,7 @@ class  AuthenticateController extends Controller
             } else {
                 Helper::setSession('errorMessage',"Thông tin đăng nhập không chính xác");
             }
-            return redirect('/');
+            return redirect()->intended();
         } catch (\Exception $e) {
             die($e->getMessage());
         }
@@ -51,7 +55,7 @@ class  AuthenticateController extends Controller
 
     public function accountAuthenticate($data)
     {
-        $user = new Users();
+        $user = new User();
         $isAuthenticated = $user->authenticate($data);
         return $isAuthenticated;
     }
@@ -60,6 +64,8 @@ class  AuthenticateController extends Controller
     {
         Helper::removeSessionByKey('current_user');
         Helper::setSession('successMessage',"Đăng xuất thành công");
+        Auth::logout();
+        Session::flush();
         return redirect('/');
     }
 }

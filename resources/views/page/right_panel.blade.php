@@ -7,7 +7,6 @@
         @show
     <div class="content mt-3">
         @section("body_content")
-
         @show
     </div>
 </div>
