@@ -1,9 +1,16 @@
 @extends('page.master')
 @section('body_content')
-    @parent
-
-
-
+@parent
+<div class="card slider slide-in">
+    <div class="col-sm-12" id="message-error" style="display: none;">
+        <div class="alert  alert-danger alert-dismissible fade show" role="alert">
+            <span class="badge badge-pill badge-danger">Error</span><span id="content-message"></span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+    </div>
     <div class="card">
         <div class="card-header">
             <h4 class="card-title">{{Helpers::getRS('Them_moi_ban_tin')}}</h4>
@@ -312,4 +319,4 @@
             }, null);
         });
     </script>
-@stop
+    @stop

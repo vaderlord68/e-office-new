@@ -34,7 +34,13 @@ class Helper extends \Illuminate\Database\Eloquent\Model
             {
                 $output .= "<li folder_id=\"" .$this->folders[$i]->ID ."\">".$this->folders[$i]->FolderName."<ul>";
                 $output .= $this->getAllChildren($this->folders[$i]->ID);
+                $documentsCollection = $this->getAllChildDocument($this->folders[$i]->ID);
+                foreach ($documentsCollection as $document) {
+                    $output .= "<li class='node-type-document' type='document' document_id='$document->ID'>". $document->Name ."</li>";
+                }
                 $output .= "</ul></li>";
+
+
             }
         }
         $output .= "</ul>";
@@ -49,14 +55,25 @@ class Helper extends \Illuminate\Database\Eloquent\Model
             /** For others level 1+ folder */
             if ($this->folders[$i]->FolderParentID == $folderParentId)
             {
-                $output .= "<li folder_id=\"" .$this->folders[$i]->ID ."\">".$this->folders[$i]->FolderName."<ul>";
+                $output .= "<li class='tree-node-folder' folder_id=\"" .$this->folders[$i]->ID ."\">".$this->folders[$i]->FolderName."<ul>";
                 $output .= $this->getAllChildren($this->folders[$i]->ID);
+                $documentsCollection = $this->getAllChildDocument($this->folders[$i]->ID);
+                foreach ($documentsCollection as $document) {
+                    $output .= "<li class='node-type-document' type='document' document_id='$document->ID'>". $document->Name ."</li>";
+                }
                 $output .= "</ul></li>";
+
             }
         }
         return $output;
     }
 
+    public function getAllChildDocument($folderID)
+    {
+        $documentFactory = new Document();
+        $collection = $documentFactory->getDocumentsWithFolderId($folderID);
+        return $collection;
+    }
 
     public function getFullPath($folderId)
     {
