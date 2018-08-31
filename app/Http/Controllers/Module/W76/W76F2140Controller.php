@@ -23,13 +23,13 @@ class  W76F2140Controller extends Controller
                 $newsCollection = $this->getList();
 
                 \Debugbar::info($newsCollection);
-                return view("system/module/W76/W76F2140")->with("newsCollection", json_encode($newsCollection));
+                return view("system/module/W76/W76F2140/W76F2140")->with("newsCollection", json_encode($newsCollection));
                 break;
             case 'filter':
                 $dataPost = $request->input();
                 $title = $dataPost["searchTitle"];
                 $newsCollection = $this->getFilterList($title);
-                return view("system/module/W76/W76F2140")->with("newsCollection", $newsCollection);
+                return view("system/module/W76/W76F2140/W76F2140")->with("newsCollection", $newsCollection);
                 break;
             case "delete":
                 try {

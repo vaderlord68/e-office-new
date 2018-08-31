@@ -13,7 +13,7 @@
                     }
                 </style>
                 <div class="dropdown for-notification">
-                    <button class="btn btn-secondary dropdown-toggle btn-module-link" href="/news" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-secondary dropdown-toggle btn-module-link" href="/w76f2142" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span>Tin tức nội bộ</span>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="notification">

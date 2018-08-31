@@ -38,7 +38,7 @@ class  W76F2141Controller extends Controller
                 $rowData = json_encode(array());
                 $rowDataDetail = json_encode(array());
 
-                return view("system/module/W76/W76F2141", compact('rowData','rowDataDetail', 'channelIDList', 'CreateUserID', 'task'));
+                return view("system/module/W76/W76F2141/W76F2141", compact('rowData','rowDataDetail', 'channelIDList', 'CreateUserID', 'task'));
                 break;
             case 'edit':
                 $newsID = $request->input('newsID', '');
@@ -49,7 +49,7 @@ class  W76F2141Controller extends Controller
                 $rowData = json_encode($rowData);
                 $rowDataDetail = json_encode($rowDataDetail);
 
-                return view("system/module/W76/W76F2141", compact('rowData', 'rowDataDetail', 'task', 'channelIDList'));
+                return view("system/module/W76/W76F2141/W76F2141", compact('rowData', 'rowDataDetail', 'task', 'channelIDList'));
                 break;
             case 'abc':
                 $channelIDList = $this->d76T5556->where('ListTypeID', '=', 'NEW_CATEGORIES')->get();
@@ -96,7 +96,6 @@ class  W76F2141Controller extends Controller
                         $byteArray = ("0x" . bin2hex(file_get_contents($file->getRealPath())));
                         $image = DB::raw("CONVERT(varbinary(MAX), " . $byteArray . ")");
                     }
-
 
                     //save master
                     $data = [
