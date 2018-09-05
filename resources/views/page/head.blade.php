@@ -18,7 +18,6 @@ $locale = Helpers::getLocale();
 
 <!-- jQuery -->
 <script type="text/javascript" src="{!! asset('js/jquery-3.3.1.min.js') !!}"></script>
-
 <!-- jQuery-UI -->
 <link href="{{ asset('plugins/jQueryUI/jquery-ui.css') }}" media="all" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('plugins/jQueryUI/jquery-ui.theme.min.css') }}" media="all" rel="stylesheet" type="text/css"/>
@@ -30,7 +29,7 @@ $locale = Helpers::getLocale();
 <!-- Bootstrap -->
 <link href="{{ asset('plugins/bootstrap/css/bootstrap.css') }}" media="all" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="{!! asset('plugins/bootstrap/js/bootstrap.js') !!}"></script>
-
+<script type="text/javascript" src="{!! asset('plugins/bootstrap-confirm/bootstrap-confirmation.js') !!}"></script>
 
 <!-- Moment -->
 <script type="text/javascript" src="{!! asset('plugins/moment/moment.js') !!}"></script>
