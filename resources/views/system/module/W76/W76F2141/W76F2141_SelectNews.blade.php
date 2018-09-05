@@ -47,7 +47,7 @@
         });
         $("#cboChannelIDSelectNews").change(function(){
             console.log('test');
-            postMethod('{{url("/w76f2141/xy")}}', function(data){
+            postMethod('{{url("/w76f2141/filter-selectnews")}}', function(data){
                 console.log('sdfds');
                 $("#grdW76F2140_SelectNews").pqGrid('option','dataModel.data', JSON.parse(data) );
                 $("#grdW76F2140_SelectNews").pqGrid('refreshDataAndView');
@@ -109,7 +109,7 @@
             }
         ],
         dataModel: {
-            data: {!! $newsCollectizon !!},
+            data: {!! $newsCollection !!},
         },
         pageModel: {type: 'local', rPP: 20, rPPOptions: [20, 30, 40, 50]}
     };

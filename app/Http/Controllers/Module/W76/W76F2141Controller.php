@@ -54,16 +54,16 @@ class  W76F2141Controller extends Controller
 
                 return view("system/module/W76/W76F2141/W76F2141", compact('rowData', 'rowDataDetail', 'task', 'channelIDList'));
                 break;
-            case 'abc':
+            case 'load-selectnews':
                 $channelIDList = $this->d76T5556->where('ListTypeID', '=', 'NEW_CATEGORIES')->get();
                 $newsCollection = json_encode([]);
                 return view("system/module/W76/W76F2141/W76F2141_SelectNews", compact('task', 'newsCollection', 'channelIDList'));
                 break;
-            case 'xy':
+            case 'filter-selectnews':
                 $cboChannelIDSelectNews = $request->input('cboChannelIDSelectNews', '');
                 $cboChannelIDSelectNews = ($cboChannelIDSelectNews == null ? '' : $cboChannelIDSelectNews);
-                $channelIDList = $this->getNewsFilter($cboChannelIDSelectNews);
-                return json_encode($channelIDList);
+                $newsCollection = $this->getNewsFilter($cboChannelIDSelectNews);
+                return json_encode($newsCollection);
                 break;
             case 'save':
                 try {
@@ -222,10 +222,8 @@ class  W76F2141Controller extends Controller
 
                     \Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'));
                     \Helpers::setSession('lastNewsModified', $newsID);
-                    //\Debugbar::info(redirect()->intended());
-                    //return redirect()->intended('http://eoffice.test/w76f2141');
-                    return Redirect::intended()->getTargetUrl();
-                    return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'), 'redirectTo'=>URL::previous()]);
+
+                    return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'), 'redirectTo'=>$_SERVER["HTTP_REFERER"]]);
                 } catch (\Exception $ex) {
                     \Helpers::log($ex->getMessage());
                     return json_encode(['status' => 'ERROR', 'message' => $ex->getMessage()]);
@@ -252,8 +250,9 @@ class  W76F2141Controller extends Controller
     private function getNewsFilter($cboChannelIDSelectNews){
         $result = $this->d76T2140->where('ChannelID', '=', $cboChannelIDSelectNews)->get();
         foreach ($result as &$item) {
-            //unset($item->Image);
-            $item->Image = htmlentities($item->Image);
+            if (!empty($item->Image)){
+                $item->Image = base64_encode($item->Image);
+            }
         }
         return $result;
     }

@@ -28,6 +28,13 @@
     --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
+
+body,textarea{
+    font-family: Source Serif Pro, Arial , PT Sans, Trebuchet MS, Helvetica !important;
+    /*font-size: 13px !important;*/
+    background-color: #ffffff;
+}
+
 /*for text*/
 .text-yellow{
     color: #ffc107;
@@ -70,32 +77,12 @@
     background-color: #dc3545;
 }
 
-body,textarea{
-    font-family: Source Serif Pro, PT Sans, Trebuchet MS, Helvetica, Arial !important;
-    font-size: 12px !important;
-}
-input.form-control, select.form-control, table{
-    line-height: 28px !important;
-    font-family: Source Serif Pro, PT Sans, Trebuchet MS, Helvetica, Arial !important;
-    height: 28px !important;
-    font-size: 12px !important;
-}
-.btn{
-    line-height: 28px !important;
-    height: 28px !important;
-    padding: 0px 10px !important;
-    font-family: Source Serif Pro, PT Sans, Trebuchet MS, Helvetica, Arial !important;
-    font-size: 12px !important;
-
-}
-input[type='file']{
-    height: 100px !important;
-}
-
 .form-check-input {
     margin-top: 2px;
 }
-
+.form-check{
+    padding-top: 8px;
+}
 /*start common css*/
 .pd5{
      padding: 5px;
@@ -182,17 +169,17 @@ input[type='file']{
 }
 /*end common css*/
 /*======================================================*/
-/*css for confirmation bootbox*/
 #divConfirm .modal-header {
     background-color: #EAC151;
 }
-#divConfirm .modal-header .panel-heading .modal-title{
-    color: white;
-}
 
-#divConfirm .modal-footer{
-    text-align: center;
-    vertical-align: middle;
+.header-left .dropdown .dropdown-menu p {
+    font-size: 13px;
+    margin: 0;
+    padding: 5px 15px;
+}
+.header-left .dropdown .dropdown-menu {
+    margin-top: 0px;
 }
 
 input:required, select:required, textarea:required{
@@ -202,7 +189,6 @@ input:required, select:required, textarea:required{
 input:read-only, select:read-only, textarea:read-only{
     background-color: #EEEEEE;
 }
-
 .input-group.date .dropdown-menu{
     display: block;
     height: 150px;
@@ -223,42 +209,14 @@ input:read-only, select:read-only, textarea:read-only{
     padding-top: 8px;
     font-weight: bold;
 }
-.form-check{
-    padding-top: 8px;
-}
+
 .btn{
     border-radius: 3px;
-}
-.pq-grid-title-row{
-    vertical-align: middle;
-    font-weight: bold;
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f9efa4+2,e8e1bb+54,eadd93+100 */
-    background: #f9efa4; /* Old browsers */
-    background: -moz-linear-gradient(top, #f9efa4 2%, #e8e1bb 54%, #eadd93 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, #f9efa4 2%,#e8e1bb 54%,#eadd93 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, #f9efa4 2%,#e8e1bb 54%,#eadd93 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9efa4', endColorstr='#eadd93',GradientType=0 ); /* IE6-9 */
-}
-
-.toolbar-menu {
-    display: inline-flex;
-    border: 1px solid #e6e0cc;
-    padding: 5px;
-    width: 100%;
-    border-radius: 5px;
-    background-color: #F2F5F7;
 }
 
 .ui-widget.ui-widget-content {
     border: 1px solid #e6e0cc;
 }
-.pq-state-select.ui-state-highlight {
-    background: #efefce;
-}
-tr.pq-grid-oddRow > td.pq-state-select, tr.pq-grid-oddRow.pq-state-select, tr.pq-grid-oddRow > .pq-grid-cell-hover, tr.pq-grid-oddRow.pq-grid-row-hover {
-    background: #efefce;
-}
-
 .card-title{
     margin-bottom: 0px;
     color: #333;
@@ -266,62 +224,19 @@ tr.pq-grid-oddRow > td.pq-state-select, tr.pq-grid-oddRow.pq-state-select, tr.pq
 .cursor-pointer{
     cursor: pointer;
 }
-#divConfirm .modal-header {
-    border-radius: 10px 10px 0px 0px !important;
-}
-#divConfirm .modal-footer {
-    border-radius: 0px 0px 10px 10px !important;
-}
 
-#divConfirm .modal-header .panel-heading .modal-title {
-    font-size: 14px;
-}
-#divConfirm .modal-dialog {
-    min-width: 200px;
-    width: auto;
-    max-width: 600px;
-    pointer-events: auto;
-}
 
-/*begin css for popup modal*/
-#divModalContainer .modal-content{
-    border-radius: 10px;
-}
-#divModalContainer .modal-header{
-    background-color: #EAC151;
-    border-radius: 10px 10px 0px 0px !important;
-    padding: 5px 10px 5px 15px;
-    height: 38px;
-    line-height: 38px;
-}
-#divModalContainer .modal-footer {
-    background-color: #ffffff;
-    border-radius: 0px 0px 10px 10px !important;
-    padding: 5px 10px 5px 15px;
-    height: 38px;
-    line-height: 38px;
-    text-align: center;
-    vertical-align: middle;
-}
 
-#divModalContainer .modal-header .modal-title {
-    line-height: 28px;
-}
-#divModalContainer .modal-header .close {
-    line-height: 28px;
-}
-#divModalContainer .modal-header  h4{
-    color: white;
-    font-size: 14px;
-}
-/*end css for popup modal*/
+/*visible checkbox header grid*/
 .checkbox-grid-selection {
     margin-top: 2px !important;
     visibility: inherit !important;
 }
+
 .modal-body{
     padding: 10px;
 }
+
 .form-group{
     margin-bottom: 10px;
 }
@@ -330,8 +245,6 @@ img{
     border-radius: 8px;
 }
 .well {
-    /*text-align: center;*/
-    /*text-align: center !important;*/
     min-height: 8px;
     padding: 19px;
     margin-bottom: 20px;
@@ -359,7 +272,6 @@ img{
 .panel-default {
     border-color: #ddd;
 }
-
 .panel {
     margin-bottom: 20px;
     background-color: #fff;
@@ -385,7 +297,6 @@ a {
     color: #007bff;
     text-decoration: none;
     background-color: transparent;
-    /*-webkit-text-decoration-skip: objects;*/
 }
 a:hover {
     color: #0056b3;
@@ -397,40 +308,41 @@ a:hover {
 .nav{
     text-align: left !important;
 }
-.font {
-    font-size: 18px !important;
-    font-family: Source Serif Pro, PT Sans, Trebuchet MS, Helvetica, Arial !important;
-    font-weight: bold !important;
-    line-height: 24px !important;
-    color: #0056b3 !important;
-}
-.labelb{
-    font-size: 15px !important;
-    font-family: Source Serif Pro, PT Sans, Trebuchet MS, Helvetica, Arial !important;
-}
-.icon{
-    font-size: 18px !important;
-}
-.labell{
-    font-size: 14px !important;
-    font-family: Source Serif Pro, PT Sans, Trebuchet MS, Helvetica, Arial !important;
-    font-weight: bold !important;
-    color: #878787;
-}
-.bld{
-    font-size: 14px !important;
-    font-weight: bold !important;
-}
-.pd{
-    margin-top: -11px !important;
-}
-p {
-    /* font-size: 16px; */
-    font-family: 'Open Sans sans-serif' ;
-    font-weight: 400;
-    line-height: 24px;
-    color: #878787;
-}
+/*.font {*/
+    /*font-size: 18px !important;*/
+    /*font-family: Source Serif Pro, PT Sans, Trebuchet MS, Helvetica, Arial !important;*/
+    /*font-weight: bold !important;*/
+    /*line-height: 24px !important;*/
+    /*color: #0056b3 !important;*/
+/*}*/
+
+/*.labelb{*/
+    /*font-size: 15px !important;*/
+    /*font-family: Source Serif Pro, PT Sans, Trebuchet MS, Helvetica, Arial !important;*/
+/*}*/
+
+/*.icon{*/
+    /*font-size: 18px !important;*/
+/*}*/
+/*.labell{*/
+    /*font-size: 14px !important;*/
+    /*font-family: Source Serif Pro, PT Sans, Trebuchet MS, Helvetica, Arial !important;*/
+    /*font-weight: bold !important;*/
+    /*color: #878787;*/
+/*}*/
+
+/*.bld{*/
+    /*font-size: 14px !important;*/
+    /*font-weight: bold !important;*/
+/*}*/
+/*.pd{*/
+    /*margin-top: -11px !important;*/
+/*}*/
+/*p {*/
+    /*font-weight: 400;*/
+    /*line-height: 24px;*/
+    /*color: #878787;*/
+/*}*/
 /*End THANHTRAM - General */
 
 /* THANHTRAM - news views */
@@ -500,7 +412,7 @@ p {
     white-space: normal !important;
 }
 .cut-detail {
-    word-break: break-word;
+    word-break: break-all;
     line-height: 30px !important;
 }
 /*End THANHTRAM - new views */

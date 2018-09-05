@@ -107,10 +107,8 @@ $locale = Helpers::getLocale();
 <script src="{{asset("plugins/digi-contextmenu/digi-contextmenu.js")}}"></script>
 
 
-
-
-
 <!-- Diginet common -->
+<link rel="stylesheet" href="{{ asset('css/custom-controls.css') }}">
 <link rel="stylesheet" href="{{ asset('css/common.css') }}">
 <script src="{{asset("js/common.js")}}"></script>
 
