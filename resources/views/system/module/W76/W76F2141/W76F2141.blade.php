@@ -462,6 +462,7 @@
                             break;
                         case 'SUCC':
                             window.location.href = '{{url('/w76f2140')}}';
+                           // window.location.href = result.redirectTo;
                             break;
                     }
                 }

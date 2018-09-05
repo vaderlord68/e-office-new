@@ -56,16 +56,25 @@ class  W76F2142Controller extends Controller
                     case 'detail':
                         $newsID = $request->input('newsID', '');
                         $this->updateCount($newsID);
-                        $newsRow = $this->d76T2140->where('NewsID', '=', $newsID)->first();
+                        $newsRow = $this->d76T2140
+                            ->leftJoin("D76T1556",'D76T1556.CodeID', '=', 'D76T2140.ChannelID')
+                            //->select("CodeName","D76T2140.NewsID","D76T2140.ChannelID")
+                            ->where('NewsID', '=', $newsID)->first();
 
                         $newsID = $request->input('newsID', '');
+
+//                        $channelName = $this->d76T2140
+//                            ->leftJoin("D76T1556",'D76T1556.CodeID', '=', 'D76T2140.ChannelID')
+//                            ->select("CodeName","D76T2140.NewsID","D76T2140.ChannelID")
+//                            ->where("D76T2140.NewsID", '=', $newsID)
+//                            ->first();
 
                         $newRowDetail =$this->d76T2141
                             ->leftJoin("D76T2140",'D76T2140.NewsID', '=', 'D76T2141.RelatedNewsID')
                             ->select("D76T2140.Title", "D76T2141.NewsID", "D76T2141.RelatedNewsID")
                             ->where("D76T2141.NewsID", "=", $newsID)
                             ->get();
-                        return view("system/module/W76/W76F2142/W76F2142_NewsDetail", compact('newRowDetail','task', 'component', 'lastestNewsList', 'channelIDList', 'newsRow'));
+                        return view("system/module/W76/W76F2142/W76F2142_NewsDetail", compact('channelName','newRowDetail','task', 'component', 'lastestNewsList', 'channelIDList', 'newsRow'));
                         break;
                 }
 

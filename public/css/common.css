@@ -488,15 +488,19 @@ p {
 .cut-title {
     text-overflow: ellipsis !important;
     overflow: hidden !important;
-    width: 400px !important;
+    width: 500px !important;
     height: 40px !important;
-    white-space: nowrap !important;
+    white-space: normal !important;
 }
 .cut-latest {
     text-overflow: ellipsis !important;
     overflow: hidden !important;
-    width: 30px !important;
+    width: 180px !important;
     height: 30px !important;
-    white-space: nowrap !important;
+    white-space: normal !important;
+}
+.cut-detail {
+    word-break: break-word;
+    line-height: 30px !important;
 }
 /*End THANHTRAM - new views */

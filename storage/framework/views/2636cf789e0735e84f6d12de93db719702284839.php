@@ -464,7 +464,8 @@
                             alertError(result.message);
                             break;
                         case 'SUCC':
-                            window.location.href = '<?php echo e(url('/w76f2140')); ?>';
+                           // window.location.href = '<?php echo e(url('/w76f2140')); ?>';
+                            window.location.href = result.redirectTo;
                             break;
                     }
                 }

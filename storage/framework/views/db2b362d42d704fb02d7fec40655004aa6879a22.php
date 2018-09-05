@@ -18,8 +18,8 @@
                     <div class="col-sm-4">
                         <a href="<?php echo e($detailURL); ?>"><img src="<?php echo e(isset($row->Image) ? $row->Image : ''); ?>"/></a>
                     </div>
-                    <div class="col-sm-8 cut-latest">
-                        <a href="<?php echo e($detailURL); ?>" class="nav-link">
+                    <div class="col-sm-8 t">
+                        <a href="<?php echo e($detailURL); ?>" class="nav-link cut-latest">
                             <?php echo e(isset($row->Title) ? $row->Title : ''); ?>
 
                         </a>

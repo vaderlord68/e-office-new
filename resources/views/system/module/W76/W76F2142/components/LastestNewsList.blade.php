@@ -17,8 +17,8 @@
                     <div class="col-sm-4">
                         <a href="{{$detailURL}}"><img src="{{$row->Image or ''}}"/></a>
                     </div>
-                    <div class="col-sm-8 cut-latest">
-                        <a href="{{$detailURL}}" class="nav-link">
+                    <div class="col-sm-8 t">
+                        <a href="{{$detailURL}}" class="nav-link cut-latest">
                             {{$row->Title or ''}}
                         </a>
                     </div>

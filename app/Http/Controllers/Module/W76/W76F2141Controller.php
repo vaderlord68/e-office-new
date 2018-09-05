@@ -11,6 +11,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\URL;
 
 class  W76F2141Controller extends Controller
 {
@@ -138,6 +140,7 @@ class  W76F2141Controller extends Controller
 
                     \Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'));
                     \Helpers::setSession('lastNewsModified', $newsID);
+                    //\Debugbar::info();
                     return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong')]);
                 } catch (\Exception $ex) {
                     \Helpers::log($ex->getMessage());
@@ -219,7 +222,10 @@ class  W76F2141Controller extends Controller
 
                     \Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'));
                     \Helpers::setSession('lastNewsModified', $newsID);
-                    return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong')]);
+                    //\Debugbar::info(redirect()->intended());
+                    //return redirect()->intended('http://eoffice.test/w76f2141');
+                    return Redirect::intended()->getTargetUrl();
+                    return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'), 'redirectTo'=>URL::previous()]);
                 } catch (\Exception $ex) {
                     \Helpers::log($ex->getMessage());
                     return json_encode(['status' => 'ERROR', 'message' => $ex->getMessage()]);

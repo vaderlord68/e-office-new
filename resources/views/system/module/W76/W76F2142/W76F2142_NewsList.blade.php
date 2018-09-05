@@ -13,8 +13,8 @@
                 </div>
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 pdl10">
                     <div class="row font">
-                        <div class="col-xs-12 cut-title">
-                            <a href="{{$detailURL}}" class="nav-link">
+                        <div class="col-xs-12">
+                            <a href="{{$detailURL}}" class="nav-link cut-title">
                                 {{$newsRow->Title or ''}}
                             </a>
                         </div>

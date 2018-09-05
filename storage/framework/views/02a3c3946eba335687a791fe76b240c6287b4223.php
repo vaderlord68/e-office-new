@@ -1,16 +1,16 @@
 <?php $__env->startSection('news-wrapper'); ?>
     <label class="labelb"><?php echo e(Helpers::getRS("Tin_tuc_noi_bo")); ?></label>
-    <div class="well">
-        <label class="label font"><?php echo e($newsRow->Title); ?></label>
+    <div class="well ">
+        <label class="label font cut-detail"><?php echo e($newsRow->Title); ?></label>
         <span class="pull-right">
-            <a href="<?php echo e(url('/w76f2141/edit')); ?>" title="<?php echo e(Helpers::getRS("Sua")); ?>"><i
+            <a href="<?php echo e(url('/w76f2141/edit?newsID='.$newsRow->NewsID)); ?>" title="<?php echo e(Helpers::getRS("Sua")); ?>"><i
                         class="fa fa-edit mgr10 text-yellow cursor-pointer icon"></i></a>
         </span>
 
         <div class="row">
             <div class="col-xs-2 pd10">
                 <a><i class="fa fa-folder left"></i>
-                    <?php echo e(isset($channelIDList->CodeName) ? $channelIDList->CodeName : ''); ?>
+                    <?php echo e(isset($newsRow->CodeName) ? $newsRow->CodeName : ''); ?>
 
                 </a>
             </div>
