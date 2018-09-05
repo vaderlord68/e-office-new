@@ -5,7 +5,7 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">{{Helpers::getRS('Chon_ban_tin_lien_quan')}}</h4>
+                <h4 class="modal-title"><?php echo e(Helpers::getRS('Chon_ban_tin_lien_quan')); ?></h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <!-- Modal body -->
@@ -13,10 +13,10 @@
                 <div class="row mgb5">
                     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                         <select class="form-control" id="cboChannelIDSelectNews" name="cboChannelIDSelectNews">
-                            <option value="">-- {{\Helpers::getRS('Chuyen_muc')}} --</option>
-                            @foreach($channelIDList as  $channelIDItem)
-                                <option value="{{$channelIDItem->CodeID}}">{{$channelIDItem->CodeName}}</option>
-                            @endforeach
+                            <option value="">-- <?php echo e(\Helpers::getRS('Chuyen_muc')); ?> --</option>
+                            <?php $__currentLoopData = $channelIDList; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $channelIDItem): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($channelIDItem->CodeID); ?>"><?php echo e($channelIDItem->CodeName); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                     </div>
 
@@ -29,7 +29,7 @@
             </div>
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button id="btnSelectNewsClose" type="button" class="btn btn-danger" data-dismiss="modal">{{Helpers::getRS('Chon')}}</button>
+                <button id="btnSelectNewsClose" type="button" class="btn btn-danger" data-dismiss="modal"><?php echo e(Helpers::getRS('Chon')); ?></button>
             </div>
         </div>
     </div>
@@ -47,11 +47,11 @@
         });
         $("#cboChannelIDSelectNews").change(function(){
             console.log('test');
-            postMethod('{{url("/w76f2141/xy")}}', function(data){
+            postMethod('<?php echo e(url("/w76f2141/xy")); ?>', function(data){
                 console.log('sdfds');
                 $("#grdW76F2140_SelectNews").pqGrid('option','dataModel.data', JSON.parse(data) );
                 $("#grdW76F2140_SelectNews").pqGrid('refreshDataAndView');
-            }, {cboChannelIDSelectNews: $("#cboChannelIDSelectNews").val(), _token: '{{csrf_token()}}'});
+            }, {cboChannelIDSelectNews: $("#cboChannelIDSelectNews").val(), _token: '<?php echo e(csrf_token()); ?>'});
         });
     });
     var obj = {
@@ -99,7 +99,7 @@
                 hidden: true
             }
             , {
-                title: "{{Helpers::getRS('Tieu_de')}}",
+                title: "<?php echo e(Helpers::getRS('Tieu_de')); ?>",
                 minWidth: 140,
                 align: "center",
                 dataIndx: "Title",
@@ -109,13 +109,13 @@
             }
         ],
         dataModel: {
-            data: {!! $newsCollection !!},
+            data: <?php echo $newsCollectizon; ?>,
         },
         pageModel: {type: 'local', rPP: 20, rPPOptions: [20, 30, 40, 50]}
     };
     $("#grdW76F2140_SelectNews").pqGrid(obj);
-    $("#grdW76F2140_SelectNews").pqGrid("option", $.paramquery.pqGrid.regional['{{Session::get("locate")}}']);
-    $("#grdW76F2140_SelectNews").find(".pq-pager").pqPager("option", $.paramquery.pqPager.regional['{{Session::get("locate")}}']);
+    $("#grdW76F2140_SelectNews").pqGrid("option", $.paramquery.pqGrid.regional['<?php echo e(Session::get("locate")); ?>']);
+    $("#grdW76F2140_SelectNews").find(".pq-pager").pqPager("option", $.paramquery.pqPager.regional['<?php echo e(Session::get("locate")); ?>']);
     $("#grdW76F2140_SelectNews").pqGrid("refreshDataAndView");
     setTimeout(function(){
         resizePqGrid();

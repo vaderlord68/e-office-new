@@ -52,22 +52,22 @@
 }
 /*for background*/
 .bg-yellow{
-    color: #ffc107;
+    background-color: #ffc107;
 }
 .bg-primary{
-    color:#007bff;
+    background-color:#007bff;
 }
 .bg-warning{
-    color:#ffc107;
+    background-color:#ffc107;
 }
 .bg-success{
-    color: #28a745;
+    background-color: #28a745;
 }
 .bg-info{
-    color: #17a2b8;
+    background-color: #17a2b8;
 }
 .bg-danger{
-    color: #dc3545;
+    background-color: #dc3545;
 }
 
 body,textarea{
@@ -107,7 +107,7 @@ input[type='file']{
     padding-right: 5px;
 }
 .pdt5{
-    padding-bottom: 5px;
+    padding-top: 5px;
 }
 .pdb5{
     padding-bottom: 5px;
@@ -123,7 +123,7 @@ input[type='file']{
     padding-right: 10px;
 }
 .pdt10{
-    padding-bottom: 10px;
+    padding-top: 10px;
 }
 .pdb10{
     padding-bottom: 10px;
@@ -168,8 +168,14 @@ input[type='file']{
 .mgr10{
     margin-right: 10px;
 }
+.mgr15{
+    margin-right: 15px;
+}
 .mgt10{
-    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.mgt15{
+    margin-top: 15px;
 }
 .mgb10{
     margin-bottom: 10px;
@@ -323,4 +329,178 @@ img{
     border: 1px solid #ededed;
     border-radius: 8px;
 }
+.well {
+    /*text-align: center;*/
+    /*text-align: center !important;*/
+    min-height: 8px;
+    padding: 19px;
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+}
+.well-right {
+    text-align: left !important;
+    min-height: 10px;
+    padding: 2px;
+    height: 220px;
+    margin-bottom: 5px;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+}
+.panel-default {
+    border-color: #ddd;
+}
+.panel-default {
+    border-color: #ddd;
+}
 
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+
+/* THANHTRAM - General */
+.news-box {
+    padding: 0 5px;
+}
+.content {
+    float: left;
+    margin: 20px;
+    width: calc(100% - 40px );
+     height: 80vh;
+    padding: 15px;
+    box-sizing: border-box;
+}
+a {
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+    /*-webkit-text-decoration-skip: objects;*/
+}
+a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+.nav-link:hover {
+    text-decoration: none;
+}
+.nav{
+    text-align: left !important;
+}
+.font {
+    font-size: 18px !important;
+    font-family: Source Serif Pro, PT Sans, Trebuchet MS, Helvetica, Arial !important;
+    font-weight: bold !important;
+    line-height: 24px !important;
+    color: #0056b3 !important;
+}
+.labelb{
+    font-size: 15px !important;
+    font-family: Source Serif Pro, PT Sans, Trebuchet MS, Helvetica, Arial !important;
+}
+.icon{
+    font-size: 18px !important;
+}
+.labell{
+    font-size: 14px !important;
+    font-family: Source Serif Pro, PT Sans, Trebuchet MS, Helvetica, Arial !important;
+    font-weight: bold !important;
+    color: #878787;
+}
+.bld{
+    font-size: 14px !important;
+    font-weight: bold !important;
+}
+.pd{
+    margin-top: -11px !important;
+}
+p {
+    /* font-size: 16px; */
+    font-family: 'Open Sans sans-serif' ;
+    font-weight: 400;
+    line-height: 24px;
+    color: #878787;
+}
+/*End THANHTRAM - General */
+
+/* THANHTRAM - news views */
+.news-view .well-right {
+    height: 270px;
+    background-color: #bfd9f2;
+}
+.news-view .title-category {
+    color: #fff;
+    background-color: #007bff;
+    border-radius: 4px;
+}
+.news-view .list-category {
+    height: 90%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.news-view .list-category ul {
+    padding: 10px;
+}
+.list-group {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.news .list-group-item a {
+    width: 100%;
+    color: #333 !important;
+}
+
+.news .list-group-item a:hover {
+    color: #EAD43B !important;
+}
+
+.news .card {
+    margin-bottom: -3px;
+    border-radius: 0;
+}
+.news .list-group-item{
+    padding: 4px 20px;
+}
+
+.cut-text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 120px;
+    height: 120px !important;
+    color: black;
+    /*white-space: pre-wrap;*/
+}
+.cut-title {
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+    width: 500px !important;
+    height: 40px !important;
+    white-space: normal !important;
+}
+.cut-latest {
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+    width: 180px !important;
+    height: 30px !important;
+    white-space: normal !important;
+}
+.cut-detail {
+    word-break: break-word;
+    line-height: 30px !important;
+}
+/*End THANHTRAM - new views */

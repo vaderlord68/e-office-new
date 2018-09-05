@@ -11,10 +11,13 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\URL;
 
 class  W76F2141Controller extends Controller
 {
     protected $newsHelper;
+    private $d76T5556;
 
 
     public function __construct(D76T2140 $d76T2140, D76T2141 $d76T2141, D76T1556 $d76T5556)
@@ -38,7 +41,7 @@ class  W76F2141Controller extends Controller
                 $rowData = json_encode(array());
                 $rowDataDetail = json_encode(array());
 
-                return view("system/module/W76/W76F2141", compact('rowData','rowDataDetail', 'channelIDList', 'CreateUserID', 'task'));
+                return view("system/module/W76/W76F2141/W76F2141", compact('rowData','rowDataDetail', 'channelIDList', 'CreateUserID', 'task'));
                 break;
             case 'edit':
                 $newsID = $request->input('newsID', '');
@@ -49,12 +52,12 @@ class  W76F2141Controller extends Controller
                 $rowData = json_encode($rowData);
                 $rowDataDetail = json_encode($rowDataDetail);
 
-                return view("system/module/W76/W76F2141", compact('rowData', 'rowDataDetail', 'task', 'channelIDList'));
+                return view("system/module/W76/W76F2141/W76F2141", compact('rowData', 'rowDataDetail', 'task', 'channelIDList'));
                 break;
             case 'abc':
                 $channelIDList = $this->d76T5556->where('ListTypeID', '=', 'NEW_CATEGORIES')->get();
                 $newsCollection = json_encode([]);
-                return view("system/module/W76/W76F2141_SelectNews", compact('task', 'newsCollection', 'channelIDList'));
+                return view("system/module/W76/W76F2141/W76F2141_SelectNews", compact('task', 'newsCollection', 'channelIDList'));
                 break;
             case 'xy':
                 $cboChannelIDSelectNews = $request->input('cboChannelIDSelectNews', '');
@@ -97,7 +100,6 @@ class  W76F2141Controller extends Controller
                         $image = DB::raw("CONVERT(varbinary(MAX), " . $byteArray . ")");
                     }
 
-
                     //save master
                     $data = [
                         "NewsID" => $newsID,
@@ -138,6 +140,7 @@ class  W76F2141Controller extends Controller
 
                     \Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'));
                     \Helpers::setSession('lastNewsModified', $newsID);
+                    //\Debugbar::info();
                     return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong')]);
                 } catch (\Exception $ex) {
                     \Helpers::log($ex->getMessage());
@@ -219,7 +222,10 @@ class  W76F2141Controller extends Controller
 
                     \Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'));
                     \Helpers::setSession('lastNewsModified', $newsID);
-                    return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong')]);
+                    //\Debugbar::info(redirect()->intended());
+                    //return redirect()->intended('http://eoffice.test/w76f2141');
+                    return Redirect::intended()->getTargetUrl();
+                    return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'), 'redirectTo'=>URL::previous()]);
                 } catch (\Exception $ex) {
                     \Helpers::log($ex->getMessage());
                     return json_encode(['status' => 'ERROR', 'message' => $ex->getMessage()]);

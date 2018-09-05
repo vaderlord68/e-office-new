@@ -252,8 +252,6 @@
 
             $("#addNewsW76F2141").click(function () {
                 showFormDialogPost('{{url('/w76f2141/abc')}}', 'popW76F2141SelectNews', {_token: '{{csrf_token()}}'}, null, null, function (res) {
-                    console.log(res)
-                    console.log(window.selectedNews);
                     //merge
                     var selectedData = window.selectedNews;
                     var data = $("#gridW76F2141").pqGrid('option','dataModel.data');
@@ -464,6 +462,7 @@
                             break;
                         case 'SUCC':
                             window.location.href = '{{url('/w76f2140')}}';
+                           // window.location.href = result.redirectTo;
                             break;
                     }
                 }
