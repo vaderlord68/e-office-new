@@ -1,6 +1,6 @@
 @extends('system.module.W76.W76F2142.components.layout')
 @section('news-wrapper')
-    <label class="labelb">{{Helpers::getRS("Tin_tuc_noi_bo")}}</label>
+    <label class="lbl-normal-value">{{Helpers::getRS("Tin_tuc_noi_bo")}}</label>
     <div class="well ">
         <label class="label font cut-detail">{{$newsRow->Title}}</label>
         <span class="pull-right">
@@ -40,7 +40,7 @@
         </div>
     </div>
     <div class="well pd">
-        <label class="labell">{{Helpers::getRS("Tin_lien_quan")}}</label>
+        <label class="lbl-normal-value">{{Helpers::getRS("Tin_lien_quan")}}</label>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 @foreach($newRowDetail as $newDetail)

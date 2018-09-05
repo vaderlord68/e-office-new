@@ -32,58 +32,6 @@
         </div>
     </section>
 
-    {{--<div class="module-news card">--}}
-    {{--<div class="card-header">--}}
-    {{--<div class="left-table-header">--}}
-    {{--<a id="news-createNews" class="toolbar-btn action-on-header" href="/news/create">--}}
-    {{--<i class="fa fa-plus-circle"></i> Thêm bài viết</a>--}}
-    {{--</div>--}}
-    {{--<div class="container filterBox">--}}
-    {{--<div class="row">--}}
-    {{--<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">--}}
-    {{--<label for="searchRelativeTitle">Tiêu đề</label>--}}
-    {{--<input type="search"--}}
-    {{--id=""--}}
-    {{--class="form-control form-control-sm search-form search-toolbar search-auto-complete"--}}
-    {{--placeholder="Nhập tiêu đề bài viết để tìm kiếm"--}}
-    {{--aria-controls="bootstrap-data-table">--}}
-    {{--<div class="search-toolbar search-suggestion-list">--}}
-    {{--<ul>--}}
-    {{--</ul>--}}
-    {{--</div>--}}
-    {{--</div>--}}
-
-    {{--<script>--}}
-    {{--$(document).ready(function () {--}}
-    {{--$('#searchRelativeTitle').keyup(function () {--}}
-    {{--var searchTitle = $(this).val();--}}
-    {{--var suggestionList = $(".search-suggestion-list ul");--}}
-    {{--suggestionList.find("li").remove();--}}
-    {{--if (!searchTitle == "") {--}}
-    {{--var url = '/news/search/title?searchTitle=' + searchTitle;--}}
-    {{--setTimeout(function () {--}}
-    {{--$.ajax({--}}
-    {{--url: url,--}}
-    {{--type: "get",--}}
-    {{--dataType: "text",--}}
-    {{--success: function (result) {--}}
-    {{--suggestionList.find("li").remove();--}}
-    {{--var resultData = $.parseJSON(result);--}}
-    {{--for (var i = 0; i < resultData.length; i++) {--}}
-    {{--suggestionList.append("<li><a href='/news/manage/filter?searchTitle=" + resultData[i].Title + "'>" + resultData[i].Title + " - Người tạo:" + resultData[i].CreateUserID + " - Tác giả: " + resultData[i].Author + "</a></li>");--}}
-    {{--}--}}
-    {{--}--}}
-    {{--});--}}
-    {{--}, 300);--}}
-    {{--}--}}
-    {{--});--}}
-    {{--});--}}
-    {{--</script>--}}
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--</div>--}}
-
     <script>
         $(document).ready(function () {
             $("#toolbarW76F2140").digiMenu({
@@ -113,7 +61,7 @@
             );
             var obj = {
                 width: '100%',
-                height: 450,
+                height: 350,
                 freezeCols: 1,
                 numberCell: {show: false},
                 selectionModel: {type: 'row', mode: 'single'},
@@ -189,7 +137,7 @@
                     }
                     , {
                         title: "{{Helpers::getRS('Tieu_de')}}",
-                        width: 150,
+                        width: 170,
                         align: "center",
                         dataIndx: "Title",
                         dataType: "string",
@@ -198,7 +146,7 @@
                     },
                     {
                         title: "{{Helpers::getRS('Chuyen_muc')}}",
-                        width: 110,
+                        width: 170,
                         dataType: "string",
                         editor: false,
                         hidden: false,
@@ -208,7 +156,7 @@
                     },
                     {
                         title: "{{Helpers::getRS('Trang_thai')}}",
-                        width: 100,
+                        width: 80,
                         align: "center",
                         dataType: "string",
                         editor: false,
@@ -230,7 +178,8 @@
                     },
                     {
                         title: "{{Helpers::getRS('Ngay_soan_thao')}}",
-                        width: 150,
+                        width: 180,
+                        align: "center",
                         dataType: "date",
                         editor: false,
                         dataIndx: "CreateDate",
@@ -238,7 +187,8 @@
                     },
                     {
                         title: "{{Helpers::getRS('Ngay_dang_tin')}}",
-                        width: 150,
+                        width: 180,
+                        align: "center",
                         dataType: "date",
                         editor: false,
                         dataIndx: "ReleaseDate",
@@ -246,7 +196,7 @@
                     },
                     {
                         title: "{{Helpers::getRS('Nguoi_dang_tin')}}",
-                        width: 110,
+                        width: 170,
                         dataType: "string",
                         editor: false,
                         dataIndx: "CreateUserID",
@@ -254,7 +204,7 @@
                     },
                     {
                         title: "{{Helpers::getRS('Tin_noi_bat')}}",
-                        width: 100,
+                        width: 90,
                         align: "center",
                         dataType: "string",
                         editor: false,
@@ -267,7 +217,7 @@
                     },
                     {
                         title: "{{Helpers::getRS('Tac_gia')}}",
-                        width: 140,
+                        width: 170,
                         align: "center",
                         dataType: "string",
                         editor: false,
