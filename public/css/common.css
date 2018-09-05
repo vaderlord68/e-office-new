@@ -397,6 +397,40 @@ a:hover {
 .nav{
     text-align: left !important;
 }
+.font {
+    font-size: 18px !important;
+    font-family: Source Serif Pro, PT Sans, Trebuchet MS, Helvetica, Arial !important;
+    font-weight: bold !important;
+    line-height: 24px !important;
+    color: #0056b3 !important;
+}
+.labelb{
+    font-size: 15px !important;
+    font-family: Source Serif Pro, PT Sans, Trebuchet MS, Helvetica, Arial !important;
+}
+.icon{
+    font-size: 18px !important;
+}
+.labell{
+    font-size: 14px !important;
+    font-family: Source Serif Pro, PT Sans, Trebuchet MS, Helvetica, Arial !important;
+    font-weight: bold !important;
+    color: #878787;
+}
+.bld{
+    font-size: 14px !important;
+    font-weight: bold !important;
+}
+.pd{
+    margin-top: -11px !important;
+}
+p {
+    /* font-size: 16px; */
+    font-family: 'Open Sans sans-serif' ;
+    font-weight: 400;
+    line-height: 24px;
+    color: #878787;
+}
 /*End THANHTRAM - General */
 
 /* THANHTRAM - news views */
@@ -426,7 +460,6 @@ a:hover {
     margin-bottom: 0;
 }
 
-
 .news .list-group-item a {
     width: 100%;
     color: #333 !important;
@@ -442,5 +475,28 @@ a:hover {
 }
 .news .list-group-item{
     padding: 4px 20px;
+}
+
+.cut-text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 120px;
+    height: 120px !important;
+    color: black;
+    /*white-space: pre-wrap;*/
+}
+.cut-title {
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+    width: 400px !important;
+    height: 40px !important;
+    white-space: nowrap !important;
+}
+.cut-latest {
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+    width: 30px !important;
+    height: 30px !important;
+    white-space: nowrap !important;
 }
 /*End THANHTRAM - new views */

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 class  W76F2141Controller extends Controller
 {
     protected $newsHelper;
+    private $d76T5556;
 
 
     public function __construct(D76T2140 $d76T2140, D76T2141 $d76T2141, D76T1556 $d76T5556)
@@ -54,7 +55,7 @@ class  W76F2141Controller extends Controller
             case 'abc':
                 $channelIDList = $this->d76T5556->where('ListTypeID', '=', 'NEW_CATEGORIES')->get();
                 $newsCollection = json_encode([]);
-                return view("system/module/W76/W76F2141_SelectNews", compact('task', 'newsCollection', 'channelIDList'));
+                return view("system/module/W76/W76F2141/W76F2141_SelectNews", compact('task', 'newsCollection', 'channelIDList'));
                 break;
             case 'xy':
                 $cboChannelIDSelectNews = $request->input('cboChannelIDSelectNews', '');
