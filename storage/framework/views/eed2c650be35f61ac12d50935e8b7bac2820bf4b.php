@@ -1,6 +1,5 @@
-@extends('page.master')
-@section('body_content')
-    @parent
+<?php $__env->startSection('body_content'); ?>
+    ##parent-placeholder-5a4526adfe28f01223dccf37a363ace9165900d0##
     <?php
     //Helpers::setLang('vi');
     $lang = Helpers::getLang();
@@ -11,9 +10,9 @@
             <div class="col-md-4 ">
                 <select class="form-control pull-left"
                         id="cboBlockIDW09F2022" name="cboBlockIDW09F2022">
-                    @foreach($listTypeID as $item)
-                        <option value="{{$item->ListTypeID}}">{{$item->$ListTypeName}}</option>
-                    @endforeach
+                    <?php $__currentLoopData = $listTypeID; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <option value="<?php echo e($item->ListTypeID); ?>"><?php echo e($item->$ListTypeName); ?></option>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </select>
             </div>
             <div class="col-md-6">
@@ -22,7 +21,7 @@
             <div class="col-md-2">
                 <button id="btnSearch" class="btn btn-default smallbtn" style="padding-top: 4px"><span
                             class="digi digi-filter text-yellow"></span>
-                    &nbsp;{{Helpers::getRS("Tim_kiem")}}</button>
+                    &nbsp;<?php echo e(Helpers::getRS("Tim_kiem")); ?></button>
             </div>
         </div>
         <div class="row form-group">
@@ -35,12 +34,14 @@
             <div class="col-md-5 checkbox pull-left ">
                 <div class="form-check">
                     <label class="form-check-label">
-                        <input type="checkbox" id="chkAllW76F1555" name="chkAllW76F1555" class="form-check-input" checked="" value="0">{{Helpers::getRS('Hien_thi_danh_muc_khong_su_dung')}}
+                        <input type="checkbox" id="chkAllW76F1555" name="chkAllW76F1555" class="form-check-input" checked="" value="0"><?php echo e(Helpers::getRS('Hien_thi_danh_muc_khong_su_dung')); ?>
+
                     </label>
                 </div>
             </div>
             <div class=" col-md-7 pull-right alert alert-danger alert-dismissable hide">
-                <i class="icon fa fa-ban"></i> <span id="err">{{Helpers::getRS("Co_loi_xay_ra_trong_qua_trinh_gui_du_lieu")}}
+                <i class="icon fa fa-ban"></i> <span id="err"><?php echo e(Helpers::getRS("Co_loi_xay_ra_trong_qua_trinh_gui_du_lieu")); ?>
+
                     !</span>
             </div>
         </div>
@@ -117,13 +118,13 @@
                 ask_delete(function () {
                     var ProductID = grid.getRecId({rowIndx: rowIndx});
                     var ID = $("#cboBlockIDW09F2022 option:selected").val();
-                    postMethod('{{url('w76f1555/delete')}}', function (res) {
+                    postMethod('<?php echo e(url('w76f1555/delete')); ?>', function (res) {
                         //gan du lieu cho luoi
                         //setter
                         $("#gridW76F1555").pqGrid("option", "dataModel.data", res);
                         $("#gridW76F1555").pqGrid("refreshDataAndView");
 
-                    }, {codeID: ProductID, listTypeID: ID, _token: '{{ csrf_token() }}'})
+                    }, {codeID: ProductID, listTypeID: ID, _token: '<?php echo e(csrf_token()); ?>'})
                 });
 
             }
@@ -180,7 +181,7 @@
                         editRow(rowIndx, grid, true);
                         grid.refreshRow({rowIndx: rowIndx});
                         grid.editFirstCellInRow({rowIndx: rowIndx});
-                        validationCell(rowIndx, "CodeID", $grid, "{{Helpers::getRS( 'Ban_chua_nhap')}}" + " " + "{{Helpers::getRS( 'Ma')}}");
+                        validationCell(rowIndx, "CodeID", $grid, "<?php echo e(Helpers::getRS( 'Ban_chua_nhap')); ?>" + " " + "<?php echo e(Helpers::getRS( 'Ma')); ?>");
                         return false;
                     }
 
@@ -188,12 +189,12 @@
                         editRow(rowIndx, grid, true);
                         grid.refreshRow({rowIndx: rowIndx});
                         grid.editFirstCellInRow({rowIndx: rowIndx});
-                        validationCell(rowIndx, "CodeName", $grid, "{{Helpers::getRS( 'Ban_chua_nhap')}}" + " " + "{{Helpers::getRS( 'Ten')}}");
+                        validationCell(rowIndx, "CodeName", $grid, "<?php echo e(Helpers::getRS( 'Ban_chua_nhap')); ?>" + " " + "<?php echo e(Helpers::getRS( 'Ten')); ?>");
                         return false;
                     }
 
                     var ID = $("#cboBlockIDW09F2022 option:selected").val();
-                    postMethod('{{url('w76f1555/update')}}', function (res) {
+                    postMethod('<?php echo e(url('w76f1555/update')); ?>', function (res) {
                         //setter
                         if (res != -1) {
                             $("#sectionW76F1555").find(".alert-danger").addClass('hide');
@@ -202,7 +203,7 @@
                             grid.refreshRow({rowIndx: rowIndx});
                         }
                         else {
-                            $("#sectionW76F1555").find("#err").html('{{Helpers::getRS('Ma_nay_da_ton_tai')}}');
+                            $("#sectionW76F1555").find("#err").html('<?php echo e(Helpers::getRS('Ma_nay_da_ton_tai')); ?>');
                             $("#sectionW76F1555").find(".alert-danger").removeClass('hide');
                             editRow(rowIndx, grid, true);
                             grid.refreshRow({rowIndx: rowIndx});
@@ -210,7 +211,7 @@
 
                         }
 
-                    }, {RowData: rowData, listTypeID: ID, _token: '{{ csrf_token() }}'})
+                    }, {RowData: rowData, listTypeID: ID, _token: '<?php echo e(csrf_token()); ?>'})
 
 
                 }
@@ -264,7 +265,7 @@
                             type: 'button',
                             cls: 'btn btn-success',
                             icon: 'ui-icon-plus',
-                            label: "<i class='fa fa-plus mgr5'></i>{{Helpers::getRS("Them_moi1")}}",
+                            label: "<i class='fa fa-plus mgr5'></i><?php echo e(Helpers::getRS("Them_moi1")); ?>",
                             listener: function () {
                                 addRow(this);
                             }
@@ -294,7 +295,7 @@
                     }
 
                     , {
-                        title: "{{Helpers::getRS('Ma')}}",
+                        title: "<?php echo e(Helpers::getRS('Ma')); ?>",
                         minWidth: 150,
                         width: 170,
                         dataType: "string",
@@ -313,7 +314,7 @@
                         },
                     }
                     , {
-                        title: "{{Helpers::getRS('Ten')}}",
+                        title: "<?php echo e(Helpers::getRS('Ten')); ?>",
                         minWidth: 200,
                         width: 270,
                         dataType: "string",
@@ -321,7 +322,7 @@
                         align: "left",
                     }
                     , {
-                        title: "{{Helpers::getRS('Ghi_chu')}}",
+                        title: "<?php echo e(Helpers::getRS('Ghi_chu')); ?>",
                         minWidth: 1,
                         width: 340,
                         dataType: "string",
@@ -329,7 +330,7 @@
                         align: "left"
                     }
                     , {
-                        title: "{{Helpers::getRS('STT')}}",
+                        title: "<?php echo e(Helpers::getRS('STT')); ?>",
                         minWidth: 80,
                         width: 80,
                         dataType: "integer",
@@ -337,7 +338,7 @@
                         align: "center"
                     }
                     , {
-                        title: "{{Helpers::getRS('Mac_dinh')}}",
+                        title: "<?php echo e(Helpers::getRS('Mac_dinh')); ?>",
                         minWidth: 100,
                         width: 100,
                         dataType: "bool",
@@ -354,7 +355,7 @@
                         }
                     }
                     , {
-                        title: "{{Helpers::getRS('KSD')}}",
+                        title: "<?php echo e(Helpers::getRS('KSD')); ?>",
                         minWidth: 80,
                         width: 80,
                         dataType: "bool",
@@ -425,32 +426,32 @@
                     switch (ui.dataIndx) {
                         case "CodeID":
                             if ((newVal.length == 0 && oldVal.length == 0 ) || newVal.length == 0) {
-                                validationCell(ui.rowIndx, ui.dataIndx, $grid, "{{Helpers::getRS('Ban_chua_nhap')}}" + " " + "{{Helpers::getRS( 'Ma')}}");
+                                validationCell(ui.rowIndx, ui.dataIndx, $grid, "<?php echo e(Helpers::getRS('Ban_chua_nhap')); ?>" + " " + "<?php echo e(Helpers::getRS( 'Ma')); ?>");
                                 return false;
                             }
                             var regex = /[^\w]/gi;
                             if (regex.test(ui.newVal) == true) {
-                                validationCell(ui.rowIndx, ui.dataIndx, $grid, "{{Helpers::getRS( 'Ma_co_ky_tu_khong_hop_le')}}");
+                                validationCell(ui.rowIndx, ui.dataIndx, $grid, "<?php echo e(Helpers::getRS( 'Ma_co_ky_tu_khong_hop_le')); ?>");
                                 return false;
                             }
                             if (newVal.length > 50) {
-                                validationCell(ui.rowIndx, ui.dataIndx, $grid, "{{Helpers::getRS( 'Gia_tri_vuot_qua_chieu_dai_cho_phep')}}");
+                                validationCell(ui.rowIndx, ui.dataIndx, $grid, "<?php echo e(Helpers::getRS( 'Gia_tri_vuot_qua_chieu_dai_cho_phep')); ?>");
                                 return false;
                             }
                             break;
                         case "CodeName":
                             if ((newVal.length == 0 && oldVal.length == 0 ) || newVal.length == 0) {
-                                validationCell(ui.rowIndx, ui.dataIndx, $grid, "{{Helpers::getRS( 'Ban_chua_nhap')}}" + " " + "{{Helpers::getRS( 'Ten')}}");
+                                validationCell(ui.rowIndx, ui.dataIndx, $grid, "<?php echo e(Helpers::getRS( 'Ban_chua_nhap')); ?>" + " " + "<?php echo e(Helpers::getRS( 'Ten')); ?>");
                                 return false;
                             }
                             if (newVal.length > 250) {
-                                validationCell(ui.rowIndx, ui.dataIndx, $grid, "{{Helpers::getRS('Gia_tri_vuot_qua_chieu_dai_cho_phep')}}");
+                                validationCell(ui.rowIndx, ui.dataIndx, $grid, "<?php echo e(Helpers::getRS('Gia_tri_vuot_qua_chieu_dai_cho_phep')); ?>");
                                 return false;
                             }
                             break;
                         case "Remark":
                             if (newVal.length > 500) {
-                                validationCell(ui.rowIndx, ui.dataIndx, $grid, "{{Helpers::getRS('Gia_tri_vuot_qua_chieu_dai_cho_phep')}}");
+                                validationCell(ui.rowIndx, ui.dataIndx, $grid, "<?php echo e(Helpers::getRS('Gia_tri_vuot_qua_chieu_dai_cho_phep')); ?>");
                                 return false;
                             }
                             break;
@@ -469,8 +470,8 @@
             };
             var grid = $("#gridW76F1555").pqGrid(option);
             //check the changes in grid before navigating to another page or refresh data.
-            grid.pqGrid("option", $.paramquery.pqGrid.regional['{{Helpers::getLocale()}}']);
-            grid.find(".pq-pager").pqPager("option", $.paramquery.pqPager.regional['{{Helpers::getLocale()}}']);
+            grid.pqGrid("option", $.paramquery.pqGrid.regional['<?php echo e(Helpers::getLocale()); ?>']);
+            grid.find(".pq-pager").pqPager("option", $.paramquery.pqPager.regional['<?php echo e(Helpers::getLocale()); ?>']);
             grid.pqGrid("refreshDataAndView");
 
             $("#btnSearch").on("click", function (e) {
@@ -501,10 +502,10 @@
 
             $("#cboBlockIDW09F2022").change(function () {
                 var type = $(this).val();
-                postMethod('{{url('w76f1555/load')}}', function (res) {
+                postMethod('<?php echo e(url('w76f1555/load')); ?>', function (res) {
                     $("#gridW76F1555").pqGrid("option", "dataModel.data", res);
                     $("#gridW76F1555").pqGrid("refreshDataAndView");
-                }, {listTypeID: type, _token: '{{ csrf_token() }}'})
+                }, {listTypeID: type, _token: '<?php echo e(csrf_token()); ?>'})
             });
             $("#cboBlockIDW09F2022").trigger("change");
 
@@ -512,4 +513,5 @@
 
 
     </script>
-@stop
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('page.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

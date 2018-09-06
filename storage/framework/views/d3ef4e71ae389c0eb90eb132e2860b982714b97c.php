@@ -6,7 +6,7 @@
             <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa-angle-left"></i></a>
             <div class="header-left right-menu collapse navbar-collapse" id="right-menu">
                 <style>
-                    @media screen and (min-width: 576px) {
+                    @media  screen and (min-width: 576px) {
                         .right-panel header.header div.header-left {
                             display: block;
                         }
@@ -64,7 +64,7 @@
                         <span>Hệ thống</span>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="notification">
-                        <a class="dropdown-item" href="{{url('/w76f1555')}}">
+                        <a class="dropdown-item" href="<?php echo e(url('/w76f1555')); ?>">
                             <p>Danh mục dùng chung</p>
                         </a>
 
@@ -76,7 +76,7 @@
         <div class="col-sm-2">
             <div class="user-area dropdown float-right">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="user-avatar rounded-circle" src="{{ asset('media/default_user_icon.png') }}" alt="User Avatar">
+                    <img class="user-avatar rounded-circle" src="<?php echo e(asset('media/default_user_icon.png')); ?>" alt="User Avatar">
                 </a>
 
                 <div class="user-menu dropdown-menu">

@@ -46,7 +46,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/news/search/title', 'Module\News\SearchNewsController@searchTitle');
 
     //Category
-    Route::get('/w76f1555/{task?}', 'Module\W76\W76F1555\W76F1555Controller@index');
+    Route::any('/w76f1555/{task?}', 'Module\W76\W76F1555\W76F1555Controller@index');
 });
 
 Route::group(['namespace' => 'Module\W76', 'middleware' => 'auth'], function () {

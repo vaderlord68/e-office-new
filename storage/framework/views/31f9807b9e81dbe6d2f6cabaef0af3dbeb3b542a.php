@@ -1,49 +1,49 @@
-@extends('page.master')
-@section('body_content')
-    @parent
-    <?php
-    //Helpers::setLang('vi');
-    $lang = Helpers::getLang();
-    $ListTypeName = "ListTypeName".$lang;
-    ?>
+<?php $__env->startSection('body_content'); ?>
+    ##parent-placeholder-5a4526adfe28f01223dccf37a363ace9165900d0##
     <section id="sectionW76F1555">
-        <div class="row form-group">
+          <div class="row form-group" >
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="col-md-4 ">
                 <select class="form-control pull-left"
                         id="cboBlockIDW09F2022" name="cboBlockIDW09F2022">
-                    @foreach($listTypeID as $item)
-                        <option value="{{$item->ListTypeID}}">{{$item->$ListTypeName}}</option>
-                    @endforeach
+                    <?php $__currentLoopData = $listTypeID; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <option value="<?php echo e($item->ListTypeID); ?>"><?php echo e($item->ListTypeName84); ?></option>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </select>
             </div>
             <div class="col-md-6">
-                <input type="text" class="form-control" id="txtSearchValue" name="txtSearchValue">
+                <input type="text" class="form-control" id="txtSearchValue" name="txtSearchValue"  >
             </div>
             <div class="col-md-2">
                 <button id="btnSearch" class="btn btn-default smallbtn" style="padding-top: 4px"><span
                             class="digi digi-filter text-yellow"></span>
-                    &nbsp;{{Helpers::getRS("Tim_kiem")}}</button>
+                    &nbsp;<?php echo e(Helpers::getRS("Tim_kiem")); ?></button>
             </div>
         </div>
-        <div class="row form-group">
+    </div>
+            <div class="row form-group">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div id="gridW76F1555"></div>
             </div>
         </div>
 
-        <div class="row form-group">
+    <div class="row form-group">
+        <div class="col-md-12 ">
             <div class="col-md-5 checkbox pull-left ">
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input type="checkbox" id="chkAllW76F1555" name="chkAllW76F1555" class="form-check-input" checked="" value="0">{{Helpers::getRS('Hien_thi_danh_muc_khong_su_dung')}}
-                    </label>
-                </div>
+                <label>
+                    <input style="float: left;align-content: center;"  type="checkbox" id="chkAllW76F1555"
+                           name="chkAllW76F1555" value="0">
+                    <label class="mgl10" style="float: top;" >   <?php echo e(Helpers::getRS('Hien_thi_danh_muc_khong_su_dung')); ?>     </label>
+                    
+                </label>
             </div>
             <div class=" col-md-7 pull-right alert alert-danger alert-dismissable hide">
-                <i class="icon fa fa-ban"></i> <span id="err">{{Helpers::getRS("Co_loi_xay_ra_trong_qua_trinh_gui_du_lieu")}}
+                <i class="icon fa fa-ban"></i> <span id="err"><?php echo e(Helpers::getRS("Co_loi_xay_ra_trong_qua_trinh_gui_du_lieu")); ?>
+
                     !</span>
             </div>
         </div>
+    </div>
 
     </section>
     <script type="text/javascript">
@@ -83,14 +83,14 @@
                 var rows = grid.getRowsByClass({cls: 'pq-row-edit'});
                 if (rows.length > 0) {//already a row currently being edited.
                     var rowIndx = rows[0].rowIndx;
-                    //focus on editor if any
+                   //focus on editor if any
                     grid.editFirstCellInRow({rowIndx: rowIndx});
                 }
                 else {
                     //append empty row in the first row.
                     var rowData = {
                         ListTypeID: "",
-                        ID: "",
+                        ID : "",
                         CodeID: "",
                         CodeName: "",
                         Remark: "",
@@ -102,9 +102,9 @@
                         LastModifyUserID: "",
                         LastModifyDate: ""
                     }; //empty row template
-                    var rowIndx = grid.addRow({rowIndxPage: 0, rowData: rowData, checkEditable: false});
-                    if (rowIndx < 0)
-                        rowIndx = 0;
+                   var rowIndx = grid.addRow({rowIndxPage: 0, rowData: rowData, checkEditable: false});
+                   if (rowIndx<0)
+                        rowIndx=0;
                     //start editing the new row.
                     editRow(rowIndx, grid, true);
                 }
@@ -114,16 +114,16 @@
             function deleteRow(rowIndx, grid) {
                 grid.addClass({rowIndx: rowIndx, cls: 'pq-row-delete'});
 
-                ask_delete(function () {
+                ask_delete(function(){
                     var ProductID = grid.getRecId({rowIndx: rowIndx});
                     var ID = $("#cboBlockIDW09F2022 option:selected").val();
-                    postMethod('{{url('w76f1555/delete')}}', function (res) {
+                    postMethod('<?php echo e(url('w76f1555/delete')); ?>', function (res) {
                         //gan du lieu cho luoi
                         //setter
                         $("#gridW76F1555").pqGrid("option", "dataModel.data", res);
                         $("#gridW76F1555").pqGrid("refreshDataAndView");
 
-                    }, {codeID: ProductID, listTypeID: ID, _token: '{{ csrf_token() }}'})
+                    }, {codeID: ProductID, listTypeID: ID, _token: '<?php echo e(csrf_token()); ?>'})
                 });
 
             }
@@ -137,20 +137,20 @@
                 var $tr = grid.getRow({rowIndx: rowIndx}),
                     $btn = $tr.find("a.edit_btn"),
                     $clsEdit = $btn.find('i').attr('class');
-                $btn.find('i').attr('class', 'fa fa-save text-primary').css('font-size', '14px');
+                $btn.find('i').attr('class','fa fa-save text-primary').css('font-size', '14px');
                 $btn.unbind("click")
                     .click(function (evt) {
                         //evt.preventDefault();
-                        $(this).attr('class', $clsEdit);
+                        $(this).attr('class',$clsEdit);
                         grid.refreshRow({rowIndx: rowIndx});
                         return update(rowIndx, grid);
                     });
-                var $btnD = $tr.find("a.delete_btn"),
+                var  $btnD = $tr.find("a.delete_btn"),
                     $clsD = $btnD.find('i').attr('class');
-                $btnD.find('i').attr('class', 'fa fa-ban text-red').css('font-size', '14px');
+                $btnD.find('i').attr('class','fa fa-save text-red').css('font-size', '14px');
                 $btnD.unbind("click")
                     .click(function (evt) {
-                        $(this).attr('class', $clsD);
+                        $(this).attr('class',$clsD);
                         grid.quitEditMode();
                         grid.removeClass({rowIndx: rowIndx, cls: 'pq-row-edit'})
                         $("#sectionW76F1555").find(".alert-danger").addClass('hide');
@@ -172,28 +172,28 @@
                     return false;
                 }
                 if (grid.isDirty()) {
-                    var rowD = grid.getRowData({rowIndx: rowIndx});
-                    var rowData = JSON.stringify(rowD);
+                    var rowD =grid.getRowData({rowIndx: rowIndx});
+                    var  rowData = JSON.stringify(rowD);
                     grid.removeClass({rowIndx: rowIndx, cls: 'pq-row-edit'});
 
-                    if (rowD["CodeID"] == "") {
+                    if (rowD["CodeID"]=="" ) {
                         editRow(rowIndx, grid, true);
                         grid.refreshRow({rowIndx: rowIndx});
                         grid.editFirstCellInRow({rowIndx: rowIndx});
-                        validationCell(rowIndx, "CodeID", $grid, "{{Helpers::getRS( 'Ban_chua_nhap')}}" + " " + "{{Helpers::getRS( 'Ma')}}");
+                        validationCell(rowIndx,"CodeID",$grid,"<?php echo e(Helpers::getRS( 'Ban_chua_nhap')); ?>" + " " + "<?php echo e(Helpers::getRS( 'Ma')); ?>");
                         return false;
                     }
 
-                    if (rowD["CodeName"] == "") {
+                    if ( rowD["CodeName"]=="") {
                         editRow(rowIndx, grid, true);
                         grid.refreshRow({rowIndx: rowIndx});
                         grid.editFirstCellInRow({rowIndx: rowIndx});
-                        validationCell(rowIndx, "CodeName", $grid, "{{Helpers::getRS( 'Ban_chua_nhap')}}" + " " + "{{Helpers::getRS( 'Ten')}}");
+                        validationCell(rowIndx,"CodeName",$grid,"<?php echo e(Helpers::getRS( 'Ban_chua_nhap')); ?>" + " " + "<?php echo e(Helpers::getRS( 'Ten')); ?>");
                         return false;
                     }
 
                     var ID = $("#cboBlockIDW09F2022 option:selected").val();
-                    postMethod('{{url('w76f1555/update')}}', function (res) {
+                    postMethod('<?php echo e(url('w76f1555/update')); ?>', function (res) {
                         //setter
                         if (res != -1) {
                             $("#sectionW76F1555").find(".alert-danger").addClass('hide');
@@ -202,7 +202,7 @@
                             grid.refreshRow({rowIndx: rowIndx});
                         }
                         else {
-                            $("#sectionW76F1555").find("#err").html('{{Helpers::getRS('Ma_nay_da_ton_tai')}}');
+                            $("#sectionW76F1555").find("#err").html('<?php echo e(Helpers::getRS('Ma_nay_da_ton_tai')); ?>');
                             $("#sectionW76F1555").find(".alert-danger").removeClass('hide');
                             editRow(rowIndx, grid, true);
                             grid.refreshRow({rowIndx: rowIndx});
@@ -210,7 +210,7 @@
 
                         }
 
-                    }, {RowData: rowData, listTypeID: ID, _token: '{{ csrf_token() }}'})
+                    }, { RowData: rowData, listTypeID: ID, _token: '<?php echo e(csrf_token()); ?>'})
 
 
                 }
@@ -220,11 +220,10 @@
                     grid.refreshRow({rowIndx: rowIndx});
                 }
             }
-
-            function validationCell(rowIndx, colIndx, grid, msg) {
-                //    grid = $("#gridW76F1555");
-                //         grid.pqGrid("quitEditMode");
-                //       grid.pqGrid("editCell", {rowIndx:rowIndx, dataIndx: colIndx});
+            function validationCell(rowIndx,colIndx,grid,msg) {
+           //    grid = $("#gridW76F1555");
+     //         grid.pqGrid("quitEditMode");
+      //       grid.pqGrid("editCell", {rowIndx:rowIndx, dataIndx: colIndx});
                 //  grid.pqGrid("editCell", {rowIndx: ui.rowIndx, dataIndx: ui.dataIndx});
                 var obj = grid.pqGrid("getEditCell");
                 var $editor = obj.$editor;
@@ -232,11 +231,11 @@
                 $($editor).confirmation({
                     btnOkLabel: "",
                     btnCancelLabel: "",
-                    rootSelector: $(".popover"),
+                    rootSelector:  $(".popover"),
                     placement: "right",
                     popout: true,
                     singleton: true,
-                    animation: true,
+                    animation:true,
                     template:
                     '<div class="popover"  style="width: 220px;display: inline-block;"><div class="arrow"></div>'
                     + '<div class="popover-content" style="text-align: center;padding:10px;width: auto"><span class="notify-grid"><i class="fa fa-exclamation-triangle text-danger " style="float:left"></i><label class="confirmContent">'
@@ -244,12 +243,12 @@
                     + '</label></span></div>'
                     + '</div>'
                 });
-                $($editor).confirmation('show');
+              $($editor).confirmation('show');
             }
 
             var option = {
                 width: '100%',
-                height: 350,
+                height: 450,
                 wrap: false,
                 hwrap: false,
                 //  resizable: true,
@@ -264,7 +263,7 @@
                             type: 'button',
                             cls: 'btn btn-success',
                             icon: 'ui-icon-plus',
-                            label: "<i class='fa fa-plus mgr5'></i>{{Helpers::getRS("Them_moi1")}}",
+                            label: "<?php echo e(Helpers::getRS("Them_moi1")); ?>",
                             listener: function () {
                                 addRow(this);
                             }
@@ -294,7 +293,7 @@
                     }
 
                     , {
-                        title: "{{Helpers::getRS('Ma')}}",
+                        title: "<?php echo e(Helpers::getRS('Ma')); ?>",
                         minWidth: 150,
                         width: 170,
                         dataType: "string",
@@ -313,7 +312,7 @@
                         },
                     }
                     , {
-                        title: "{{Helpers::getRS('Ten')}}",
+                        title: "<?php echo e(Helpers::getRS('Ten')); ?>",
                         minWidth: 200,
                         width: 270,
                         dataType: "string",
@@ -321,7 +320,7 @@
                         align: "left",
                     }
                     , {
-                        title: "{{Helpers::getRS('Ghi_chu')}}",
+                        title: "<?php echo e(Helpers::getRS('Ghi_chu')); ?>",
                         minWidth: 1,
                         width: 340,
                         dataType: "string",
@@ -329,7 +328,7 @@
                         align: "left"
                     }
                     , {
-                        title: "{{Helpers::getRS('STT')}}",
+                        title: "<?php echo e(Helpers::getRS('STT')); ?>",
                         minWidth: 80,
                         width: 80,
                         dataType: "integer",
@@ -337,14 +336,14 @@
                         align: "center"
                     }
                     , {
-                        title: "{{Helpers::getRS('Mac_dinh')}}",
+                        title: "<?php echo e(Helpers::getRS('Mac_dinh')); ?>",
                         minWidth: 100,
                         width: 100,
                         dataType: "bool",
                         align: "center",
                         dataIndx: "IsDefault",
                         sortable: false,
-                        editor: false,
+                        editor:false,
                         type: 'checkbox',
                         render: function (ui) {
                             var rowData = ui.rowData;
@@ -354,14 +353,14 @@
                         }
                     }
                     , {
-                        title: "{{Helpers::getRS('KSD')}}",
+                        title: "<?php echo e(Helpers::getRS('KSD')); ?>",
                         minWidth: 80,
                         width: 80,
                         dataType: "bool",
                         align: "center",
                         dataIndx: "Inactive",
                         sortable: false,
-                        editor: false,
+                        editor:false,
                         type: 'checkbox',
                         render: function (ui) {
                             var rowData = ui.rowData;
@@ -371,12 +370,7 @@
                         }
                     }
                     , {
-                        title: "",
-                        editable: false,
-                        minWidth: 80,
-                        align: "center",
-                        sortable: false,
-                        render: function (ui) {
+                        title: "", editable: false, minWidth: 80, align: "center", sortable: false, render: function (ui) {
                             return "<a  class='edit_btn'><i class='fa fa-edit text-yellow' style='padding-right: 10px'></i></a>\
                             <a  class='delete_btn'><i class='fa fa-trash text-danger'></i></a>";
                         },
@@ -409,7 +403,7 @@
                 dataModel: {
                     recIndx: "CodeID"
                 },
-                pageModel: {type: 'local', rPP: 20, rPPOptions: [20, 30, 40, 50]},
+                pageModel : {type: 'local', rPP: 20, rPPOptions: [20, 30, 40, 50]},
                 //make rows editable based upon the class.
                 editable: function (ui) {
                     return this.hasClass({rowIndx: ui.rowIndx, cls: 'pq-row-edit'});
@@ -424,38 +418,38 @@
                     var oldVal = ui.oldVal;
                     switch (ui.dataIndx) {
                         case "CodeID":
-                            if ((newVal.length == 0 && oldVal.length == 0 ) || newVal.length == 0) {
-                                validationCell(ui.rowIndx, ui.dataIndx, $grid, "{{Helpers::getRS('Ban_chua_nhap')}}" + " " + "{{Helpers::getRS( 'Ma')}}");
+                            if ((newVal.length == 0 && oldVal.length ==0 ) ||  newVal.length == 0    )              {
+                                validationCell(ui.rowIndx,ui.dataIndx,$grid,"<?php echo e(Helpers::getRS('Ban_chua_nhap')); ?>" + " " + "<?php echo e(Helpers::getRS( 'Ma')); ?>");
                                 return false;
                             }
                             var regex = /[^\w]/gi;
                             if (regex.test(ui.newVal) == true) {
-                                validationCell(ui.rowIndx, ui.dataIndx, $grid, "{{Helpers::getRS( 'Ma_co_ky_tu_khong_hop_le')}}");
+                                validationCell(ui.rowIndx,ui.dataIndx,$grid,"<?php echo e(Helpers::getRS( 'Ma_co_ky_tu_khong_hop_le')); ?>");
                                 return false;
                             }
-                            if (newVal.length > 50) {
-                                validationCell(ui.rowIndx, ui.dataIndx, $grid, "{{Helpers::getRS( 'Gia_tri_vuot_qua_chieu_dai_cho_phep')}}");
+                            if (newVal.length > 50)                        {
+                                validationCell(ui.rowIndx,ui.dataIndx,$grid,"<?php echo e(Helpers::getRS( 'Gia_tri_vuot_qua_chieu_dai_cho_phep')); ?>");
                                 return false;
                             }
                             break;
                         case "CodeName":
-                            if ((newVal.length == 0 && oldVal.length == 0 ) || newVal.length == 0) {
-                                validationCell(ui.rowIndx, ui.dataIndx, $grid, "{{Helpers::getRS( 'Ban_chua_nhap')}}" + " " + "{{Helpers::getRS( 'Ten')}}");
+                            if ((newVal.length == 0 && oldVal.length ==0 ) ||  newVal.length == 0    )              {
+                                validationCell(ui.rowIndx,ui.dataIndx,$grid,"<?php echo e(Helpers::getRS( 'Ban_chua_nhap')); ?>" + " " + "<?php echo e(Helpers::getRS( 'Ten')); ?>");
                                 return false;
                             }
-                            if (newVal.length > 250) {
-                                validationCell(ui.rowIndx, ui.dataIndx, $grid, "{{Helpers::getRS('Gia_tri_vuot_qua_chieu_dai_cho_phep')}}");
+                            if (newVal.length > 250)                        {
+                                validationCell(ui.rowIndx,ui.dataIndx,$grid,"<?php echo e(Helpers::getRS('Gia_tri_vuot_qua_chieu_dai_cho_phep')); ?>");
                                 return false;
                             }
                             break;
                         case "Remark":
-                            if (newVal.length > 500) {
-                                validationCell(ui.rowIndx, ui.dataIndx, $grid, "{{Helpers::getRS('Gia_tri_vuot_qua_chieu_dai_cho_phep')}}");
+                            if (newVal.length > 500)                        {
+                                validationCell(ui.rowIndx,ui.dataIndx,$grid,"<?php echo e(Helpers::getRS('Gia_tri_vuot_qua_chieu_dai_cho_phep')); ?>");
                                 return false;
                             }
                             break;
                     }
-                    $(".popover").remove();
+                  $(".popover").remove();
                     return true;
 
                 },
@@ -469,8 +463,8 @@
             };
             var grid = $("#gridW76F1555").pqGrid(option);
             //check the changes in grid before navigating to another page or refresh data.
-            grid.pqGrid("option", $.paramquery.pqGrid.regional['{{Helpers::getLocale()}}']);
-            grid.find(".pq-pager").pqPager("option", $.paramquery.pqPager.regional['{{Helpers::getLocale()}}']);
+            grid.pqGrid("option", $.paramquery.pqGrid.regional['<?php echo e(Session::get("locate")); ?>']);
+            grid.find(".pq-pager").pqPager("option", $.paramquery.pqPager.regional['<?php echo e(Session::get("locate")); ?>']);
             grid.pqGrid("refreshDataAndView");
 
             $("#btnSearch").on("click", function (e) {
@@ -487,24 +481,20 @@
                 $("#gridW76F1555").pqGrid("filter", {
                     oper: 'replace',
                     data: [
-                        {
-                            dataIndx: 'Inactive',
-                            condition: 'contain',
-                            value: $("#chkAllW76F1555").is(":checked") ? "" : 0
-                        },
-                        {dataIndx: 'CodeID', condition: 'contain', value: $("#txtSearchValue").val()},
-                        {dataIndx: 'CodeName', condition: 'contain', value: $("#txtSearchValue").val()},
-                        {dataIndx: 'Remark', condition: 'contain', value: $("#txtSearchValue").val()}
+                        {dataIndx: 'Inactive', condition: 'contain', value: $("#chkAllW76F1555").is(":checked") ? "" : 0},
+                        {dataIndx: 'CodeID', condition: 'contain', value:    $("#txtSearchValue").val()},
+                        {dataIndx: 'CodeName', condition: 'contain', value:    $("#txtSearchValue").val()},
+                        {dataIndx: 'Remark', condition: 'contain', value:    $("#txtSearchValue").val()}
                     ]
                 }).pqGrid("refreshDataAndView");
             }
 
             $("#cboBlockIDW09F2022").change(function () {
                 var type = $(this).val();
-                postMethod('{{url('w76f1555/load')}}', function (res) {
+                postMethod('<?php echo e(url('w76f1555/load')); ?>', function (res) {
                     $("#gridW76F1555").pqGrid("option", "dataModel.data", res);
                     $("#gridW76F1555").pqGrid("refreshDataAndView");
-                }, {listTypeID: type, _token: '{{ csrf_token() }}'})
+                }, {listTypeID: type, _token: '<?php echo e(csrf_token()); ?>'})
             });
             $("#cboBlockIDW09F2022").trigger("change");
 
@@ -512,4 +502,5 @@
 
 
     </script>
-@stop
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('page.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

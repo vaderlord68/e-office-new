@@ -26,7 +26,7 @@ class  W76F1555Controller extends Controller
             case '':
                 $d76T1555 = new D76T1555();
                 $listTypeID = $d76T1555->getList();
-                 return View("system.module.w76.w76f1555", compact( 'listTypeID','lang'));
+                 return View("system.module.w76.W76f1555.W76f1555", compact( 'listTypeID','lang'));
                 break;
             case 'load':
                 $type = Input::get('listTypeID', '');
