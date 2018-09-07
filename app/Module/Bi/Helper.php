@@ -36,7 +36,7 @@ class Helper extends \Illuminate\Database\Eloquent\Model
                 $output .= $this->getAllChildren($this->folders[$i]->ID);
                 $documentsCollection = $this->getAllChildDocument($this->folders[$i]->ID);
                 foreach ($documentsCollection as $document) {
-                    $output .= "<li class='node-type-document' type='document' document_id='$document->ID'>". $document->Name ."</li>";
+                    $output .= "<li class='node-type-document' type='document' document_id='$document->ID'>". $document->FileName ."</li>";
                 }
                 $output .= "</ul></li>";
 
@@ -59,7 +59,7 @@ class Helper extends \Illuminate\Database\Eloquent\Model
                 $output .= $this->getAllChildren($this->folders[$i]->ID);
                 $documentsCollection = $this->getAllChildDocument($this->folders[$i]->ID);
                 foreach ($documentsCollection as $document) {
-                    $output .= "<li class='node-type-document' type='document' document_id='$document->ID'>". $document->Name ."</li>";
+                    $output .= "<li class='node-type-document' type='document' document_id='$document->ID'>". $document->FileName ."</li>";
                 }
                 $output .= "</ul></li>";
 
@@ -103,8 +103,14 @@ class Helper extends \Illuminate\Database\Eloquent\Model
         $fileExtension = \File::extension($file->getClientOriginalName());
         $fileName = "user_$userId" . "_" . "$timestamp". "_" .$fileOrderNumber. "." .$fileExtension;
         $filePath = 'public/users-upload/'.$userId;
-        $file->storeAs($filePath, $fileName);
-        return $filePath."/".$fileName;
+        try{
+            $file->storeAs($filePath, $fileName);
+            return $filePath."/".$fileName;
+        }catch (\Exception $ex){
+            \Debugbar::info($ex->getMessage());
+        }
+
+
     }
 
 }
