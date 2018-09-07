@@ -17,7 +17,7 @@
                                     <?php foreach ($AllDocuments as $document):?>
                                     <div class="form-group">
                                         <input type="checkbox"  name="relatedDocumentId[]" class="" value="<?php echo $document->ID?>">
-                                        <label class="required control-label" for="relatedDocumentId"><?php echo $document->Name?></label>
+                                        <label class="required control-label" for="relatedDocumentId"><?php echo $document->FileName?></label>
                                     </div>
                                     <?php endforeach;?>
                                 </div>
