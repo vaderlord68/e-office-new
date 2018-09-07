@@ -338,8 +338,7 @@
                             },
                             postRender: function (ui) {
                                 ui.$btn.click(function () {
-                                    console.log('{{URL::previous()}}');
-                                    window.location.href = '{{URL::previous()}}';
+                                    window.location.href = document.referrer.toString();
                                 });
                             }
                         }

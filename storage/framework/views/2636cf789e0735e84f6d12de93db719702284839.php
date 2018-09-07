@@ -341,8 +341,7 @@
                             },
                             postRender: function (ui) {
                                 ui.$btn.click(function () {
-                                    console.log('<?php echo e(URL::previous()); ?>');
-                                    window.location.href = '<?php echo e(URL::previous()); ?>';
+                                    window.location.href = document.referrer.toString();
                                 });
                             }
                         }

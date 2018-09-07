@@ -1,12 +1,10 @@
 <?php $__env->startSection('news-wrapper'); ?>
     <label class="lbl-normal-value"><?php echo e(Helpers::getRS("Tin_tuc_noi_bo")); ?></label>
+    <span class="pull-right">
+            <a href="<?php echo e(url('/w76f2141/edit?newsID='.$newsRow->NewsID)); ?>" title="<?php echo e(Helpers::getRS("Sua")); ?>"><i class="fa fa-edit mgr10 text-yellow cursor-pointer fs20 mgt5"></i></a>
+        </span>
     <div class="well ">
         <label class="label font cut-detail"><?php echo e($newsRow->Title); ?></label>
-        <span class="pull-right">
-            <a href="<?php echo e(url('/w76f2141/edit?newsID='.$newsRow->NewsID)); ?>" title="<?php echo e(Helpers::getRS("Sua")); ?>"><i
-                        class="fa fa-edit mgr10 text-yellow cursor-pointer icon"></i></a>
-        </span>
-
         <div class="row">
             <div class="col-xs-2 pd10">
                 <a><i class="fa fa-folder left"></i>
@@ -45,13 +43,13 @@
         </div>
     </div>
     <div class="well pd">
-        
-       
+
+
         <label class="lbl-normal-value"><?php echo e(Helpers::getRS("Tin_lien_quan")); ?></label>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <?php $__currentLoopData = $newRowDetail; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $newDetail): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <li><a><?php echo e(isset($newDetail-> Title) ? $newDetail-> Title : ''); ?></a></li>
+                    <li><a><?php echo e(isset($newDetail-> Title) ? $newDetail-> Title : '    '); ?></a></li>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
         </div>

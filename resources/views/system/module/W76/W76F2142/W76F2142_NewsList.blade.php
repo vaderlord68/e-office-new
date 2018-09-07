@@ -8,14 +8,14 @@
             $detailURL = url('/w76f2142/channel/?task=detail') . '&newsID=' . $newsID;
             ?>
             <div class="row pd5">
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                     <div class="row mgb5">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <a href="{{$detailURL}}"><img src="{{$newsRow->Image or ''}}"/></a>
+                            <a href="{{$detailURL}}"><img src="{{$newsRow->Image or ''}}" class="container-img"/></a>
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 pdl10">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 pdl10">
                     <div class="row font">
                         <div class="col-xs-12">
                             <a href="{{$detailURL}}" class="nav-link cut-title">
