@@ -171,7 +171,7 @@
                         </div>
                     </div>
 
-                    <div class="row mgb5">
+                    <div class="row mgb10">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <textarea type="text" id="contentW76F2141" name="contentW76F2141" required
                                       class="form-control"
@@ -461,7 +461,10 @@
                             alertError(result.message);
                             break;
                         case 'SUCC':
+                            {{--var url = '{{\App\Eoffice\Helper::getSession('prevUrlNews', '') == null?url('/w76f2140'):\App\Eoffice\Helper::getSession('prevUrlNews')}}';--}}
                             window.location.href = '{{url('/w76f2140')}}';
+//                                console.log($('<div/>').html(url).text()[0]);
+//                            window.location.href = $('<div/>').html(url).text();
                            // window.location.href = result.redirectTo;
                             break;
                     }

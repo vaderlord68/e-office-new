@@ -63,6 +63,10 @@ class  W76F2142Controller extends Controller
 
                         $newsID = $request->input('newsID', '');
 
+//                        //get route current...
+//                        $currentUrl = url()->full();
+//                        Helper::setSession('prevUrlNews', $currentUrl);
+
 //                        $channelName = $this->d76T2140
 //                            ->leftJoin("D76T1556",'D76T1556.CodeID', '=', 'D76T2140.ChannelID')
 //                            ->select("CodeName","D76T2140.NewsID","D76T2140.ChannelID")
@@ -96,7 +100,7 @@ class  W76F2142Controller extends Controller
             $this->d76T2140->where('NewsID', $id)->increment('ViewCount');
             Helper::setSession('ViewCount', $id);
         }
-    }
+    }   
     function getChannelList()
     {
         return $this->d76T5556->where('ListTypeID', 'NEW_CATEGORIES')->get();

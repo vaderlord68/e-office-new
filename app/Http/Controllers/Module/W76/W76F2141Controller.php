@@ -224,7 +224,7 @@ class  W76F2141Controller extends Controller
                     \Helpers::setSession('lastNewsModified', $newsID);
                     //\Debugbar::info(redirect()->intended());
                     //return redirect()->intended('http://eoffice.test/w76f2141');
-                    return Redirect::intended()->getTargetUrl();
+//                    return Redirect::intended()->getTargetUrl();
                     return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'), 'redirectTo'=>URL::previous()]);
                 } catch (\Exception $ex) {
                     \Helpers::log($ex->getMessage());

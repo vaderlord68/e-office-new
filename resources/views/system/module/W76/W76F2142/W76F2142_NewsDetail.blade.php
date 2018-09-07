@@ -1,12 +1,12 @@
 @extends('system.module.W76.W76F2142.components.layout')
 @section('news-wrapper')
     <label class="labelb">{{Helpers::getRS("Tin_tuc_noi_bo")}}</label>
+    <span class="pull-right">
+            <a href="{{url('/w76f2141/edit?newsID='.$newsRow->NewsID)}}" title="{{Helpers::getRS("Sua")}}">
+                <i class="fa fa-edit mgr10 text-orangered cursor-pointer icon"></i></a>
+        </span>
     <div class="well ">
         <label class="label font cut-detail">{{$newsRow->Title}}</label>
-        <span class="pull-right">
-            <a href="{{url('/w76f2141/edit?newsID='.$newsRow->NewsID)}}" title="{{Helpers::getRS("Sua")}}"><i
-                        class="fa fa-edit mgr10 text-yellow cursor-pointer icon"></i></a>
-        </span>
 
         <div class="row">
             <div class="col-xs-2 pd10">
@@ -40,11 +40,11 @@
         </div>
     </div>
     <div class="well pd">
-        <label class="labell">{{Helpers::getRS("Tin_lien_quan")}}</label>
+        <label class="labell cut-detail">{{Helpers::getRS("Tin_lien_quan")}}</label>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 @foreach($newRowDetail as $newDetail)
-                <li><a>{{$newDetail-> Title or ''}}</a></li>
+                    <li><a class="text-li">{{$newDetail-> Title or ''}}</a></li>
                 @endforeach
             </div>
         </div>

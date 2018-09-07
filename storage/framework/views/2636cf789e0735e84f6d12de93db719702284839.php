@@ -174,7 +174,7 @@
                         </div>
                     </div>
 
-                    <div class="row mgb5">
+                    <div class="row mgb10">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <textarea type="text" id="contentW76F2141" name="contentW76F2141" required
                                       class="form-control"
@@ -464,8 +464,11 @@
                             alertError(result.message);
                             break;
                         case 'SUCC':
-                           // window.location.href = '<?php echo e(url('/w76f2140')); ?>';
-                            window.location.href = result.redirectTo;
+                            
+                            window.location.href = '<?php echo e(url('/w76f2140')); ?>';
+//                                console.log($('<div/>').html(url).text()[0]);
+//                            window.location.href = $('<div/>').html(url).text();
+                           // window.location.href = result.redirectTo;
                             break;
                     }
                 }
