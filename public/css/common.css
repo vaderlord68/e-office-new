@@ -31,8 +31,11 @@
 
 body,textarea{
     font-family: Source Serif Pro, Arial , PT Sans, Trebuchet MS, Helvetica !important;
-    /*font-size: 13px !important;*/
+    font-size: 13px !important;
     background-color: #ffffff;
+}
+.form-control{
+    font-size: 13px !important;
 }
 
 /*for text*/
