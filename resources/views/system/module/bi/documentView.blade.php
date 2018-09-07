@@ -10,7 +10,7 @@
                  class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer table-documentary">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h1><?php echo $document->Name?></h1>
+                        <h1><?php echo $document->FileName?></h1>
                         <div>
                             <strong>Ngày tạo: </strong><span><?php echo $document->CreateDate?></span>
                             <strong>Ngày sửa cuối: </strong><span><?php echo $document->LastModifyDate?></span>
@@ -28,7 +28,8 @@
                                 <label class="control-label" for="DocumentContent">Những file đã đính kèm</label>
                                 <ul>
                                 <?php
-                                    $attachedFiles = json_decode($document->AttachedFiles);
+                                        \Debugbar::info($document);
+                                    $attachedFiles = json_decode($document->FilePath);
                                     foreach ($attachedFiles as $attachedFile) :
                                 ?>
                                     <li>

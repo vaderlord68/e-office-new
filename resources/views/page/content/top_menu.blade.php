@@ -1,89 +1,99 @@
 <header id="header" class="header">
-
     <div class="header-menu">
-
-        <div class="col-sm-10">
-            <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa-angle-left"></i></a>
-            <div class="header-left right-menu collapse navbar-collapse" id="right-menu">
-                <style>
-                    @media screen and (min-width: 576px) {
-                        .right-panel header.header div.header-left {
-                            display: block;
+        <div class="col-sm-10 pdl5 pdr5">
+            <div class="inline">
+                <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa-angle-left"></i></a>
+                <a href="{{url('/')}}"><img class="logo" src="{{asset('media/logo-eOffice.png')}}" alt=""></a>
+                <div class="header-left right-menu collapse navbar-collapse" id="right-menu">
+                    <style>
+                        @media screen and (min-width: 576px) {
+                            .right-panel header.header div.header-left {
+                                display: block;
+                            }
                         }
-                    }
-                </style>
-                <div class="dropdown for-notification">
-                    <button class="btn btn-secondary dropdown-toggle btn-module-link" href="/w76f2142" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span>Tin tức nội bộ</span>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="notification">
+                    </style>
+                    <div class="dropdown for-notification">
+                        <button class="btn btn-secondary dropdown-toggle btn-module-link" href="/w76f2142" type="button"
+                                id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span>Tin tức nội bộ</span>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="notification">
+                        </div>
                     </div>
-                </div>
-                <div class="dropdown for-notification">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span>Quản lý công việc</span>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="notification">
+                    <div class="dropdown for-notification">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="notification"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span>Quản lý công việc</span>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="notification">
+                        </div>
                     </div>
-                </div>
-                <div class="dropdown for-notification">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span>Lịch làm việc</span>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="notification">
+                    <div class="dropdown for-notification">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="notification"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span>Lịch làm việc</span>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="notification">
+                        </div>
                     </div>
-                </div>
-                <div class="dropdown for-notification">
-                    <button class="btn btn-secondary dropdown-toggle btn-module-link" href="/W76f2150" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span>Hồ sơ - tài liệu</span>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="notification">
+                    <div class="dropdown for-notification">
+                        <button class="btn btn-secondary dropdown-toggle btn-module-link" href="/W76f2150" type="button"
+                                id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span>Hồ sơ - tài liệu</span>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="notification">
+                        </div>
                     </div>
-                </div>
-                <div class="dropdown for-notification">
-                    <button class="btn btn-secondary dropdown-toggle btn-module-link" href="/bi" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span>Tài liệu số</span>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="notification">
+                    <div class="dropdown for-notification">
+                        <button class="btn btn-secondary dropdown-toggle btn-module-link" href="/bi" type="button"
+                                id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span>Tài liệu số</span>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="notification">
+                        </div>
                     </div>
-                </div>
-                <div class="dropdown for-notification">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span>Ứng dụng tiện ích</span>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="notification">
-                        <a class="dropdown-item" href="#">
-                            <p>Business Intelligent</p>
-                        </a>
-                        <a class="dropdown-item" href="#">
-                            <p>Employee Self Service</p>
-                        </a>
-                        <a class="dropdown-item media" href="#">
-                            <p>Manager Self Service</p>
-                        </a>
-                        <a class="dropdown-item media" href="/w76f2140">
-                            <p>Quản lý bản tin</p>
-                        </a>
+                    <div class="dropdown for-notification">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="notification"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span>Ứng dụng tiện ích</span>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="notification">
+                            <a class="dropdown-item" href="#">
+                                <p>Business Intelligent</p>
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <p>Employee Self Service</p>
+                            </a>
+                            <a class="dropdown-item media" href="#">
+                                <p>Manager Self Service</p>
+                            </a>
+                            <a class="dropdown-item media" href="/w76f2140">
+                                <p>Quản lý bản tin</p>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="dropdown for-notification">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span>Hệ thống</span>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="notification">
-                        <a class="dropdown-item" href="{{url('/w76f1555')}}">
-                            <p>Danh mục dùng chung</p>
-                        </a>
+                    <div class="dropdown for-notification">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="notification"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span>Hệ thống</span>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="notification">
+                            <a class="dropdown-item" href="{{url('/w76f1555')}}">
+                                <p>Danh mục dùng chung</p>
+                            </a>
 
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
 
         <div class="col-sm-2">
             <div class="user-area dropdown float-right">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="user-avatar rounded-circle" src="{{ asset('media/default_user_icon.png') }}" alt="User Avatar">
+                    <img class="user-avatar rounded-circle" src="{{ asset('media/default_user_icon.png') }}"
+                         alt="User Avatar">
                 </a>
 
                 <div class="user-menu dropdown-menu">
