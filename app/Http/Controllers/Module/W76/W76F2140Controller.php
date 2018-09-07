@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Module\W76;
 
+use App\Eoffice\Helper;
 use App\Http\Controllers\Controller;
 use App\Module\News\D76T2140;
 use App\Module\News\D76T2141;
@@ -21,6 +22,10 @@ class  W76F2140Controller extends Controller
         switch ($task) {
             case '':
                 $newsCollection = $this->getList();
+
+//                //get route current...
+//                $currentUrl = $request->url();
+//                Helper::setSession('prevUrlNews', $currentUrl);
 
                 \Debugbar::info($newsCollection);
                 return view("system/module/W76/W76F2140/W76F2140")->with("newsCollection", json_encode($newsCollection));

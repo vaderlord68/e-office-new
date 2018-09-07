@@ -222,6 +222,8 @@ class  W76F2141Controller extends Controller
 
                     \Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'));
                     \Helpers::setSession('lastNewsModified', $newsID);
+                    //return Redirect::intended()->getTargetUrl();
+                    //return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'), 'redirectTo'=>URL::previous()]);
 
                     return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'), 'redirectTo'=>$_SERVER["HTTP_REFERER"]]);
                 } catch (\Exception $ex) {

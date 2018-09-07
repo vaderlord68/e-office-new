@@ -36,6 +36,9 @@ body,textarea{
 }
 
 /*for text*/
+.text-orangered{
+    color: #FF4500;
+}
 .text-yellow{
     color: #ffc107;
 }
@@ -401,18 +404,22 @@ a:hover {
     text-overflow: ellipsis !important;
     overflow: hidden !important;
     width: 500px !important;
-    height: 40px !important;
-    white-space: normal !important;
+    height: 38px !important;
+    white-space: nowrap !important;
 }
 .cut-latest {
     text-overflow: ellipsis !important;
     overflow: hidden !important;
-    width: 180px !important;
+    width: 150px !important;
     height: 30px !important;
-    white-space: normal !important;
+    white-space: nowrap !important;
 }
 .cut-detail {
     word-break: break-all;
     line-height: 30px !important;
+}
+.text-li{
+    color: #007bff !important;
+    font-weight: bold !important;
 }
 /*End THANHTRAM - new views */
