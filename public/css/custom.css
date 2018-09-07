@@ -578,7 +578,9 @@ aside.left-panel {
     background-position: -260px -4px;
     background-image: url('http://www.eoffice.local/jstree/dist/themes/default/32px.png');
 }
-
+li.node-type-document .jstree-themeicon {
+    background-position: -100px -67px;
+}
 .custom-plus-icon {
     float: right;
     border-radius: 50%;
@@ -685,6 +687,43 @@ aside.left-panel {
     border-bottom-right-radius: 6px;
     width: 257px;
     box-shadow: 0 0 5px grey;
+}
+.news-table thead th {
+    font-size: 12px;
+}
+.news-table td {
+    font-size: 12px;
+}
+.slider {
+    transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+}
+.slide-in {
+    animation: slide-in 0.5s forwards;
+    -webkit-animation: slide-in 0.5s forwards;
+}
+
+.slide-out {
+    animation: slide-out 0.5s forwards;
+    -webkit-animation: slide-out 0.5s forwards;
+}
+
+@keyframes slide-in {
+    100% { transform: translateX(0%); }
+}
+
+@-webkit-keyframes slide-in {
+    100% { -webkit-transform: translateX(0%); }
+}
+
+@keyframes slide-out {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-100%); }
+}
+
+@-webkit-keyframes slide-out {
+    0% { -webkit-transform: translateX(0%); }
+    100% { -webkit-transform: translateX(-100%); }
 }
 @media screen and (max-width: 1220px) {
     .folder-sidebar .card .card-header strong {

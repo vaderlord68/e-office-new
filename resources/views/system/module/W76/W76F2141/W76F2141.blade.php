@@ -180,7 +180,7 @@
                     </div>
                     <div class="row mgb5">
                         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                            <label class="lbl-normal">{{Helpers::getRS("Bai_viet_lien_quan")}}</label>
+                            <h4 class="lbl-normal-value">{{Helpers::getRS("Bai_viet_lien_quan")}}</h4>
                         </div>
                         <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
                             <button type="button" class="btn btn-info" name="addNewsW76F2141" id="addNewsW76F2141">
@@ -251,7 +251,7 @@
             });
 
             $("#addNewsW76F2141").click(function () {
-                showFormDialogPost('{{url('/w76f2141/abc')}}', 'popW76F2141SelectNews', {_token: '{{csrf_token()}}'}, null, null, function (res) {
+                showFormDialogPost('{{url('/w76f2141/load-selectnews')}}', 'popW76F2141SelectNews', {_token: '{{csrf_token()}}'}, null, null, function (res) {
                     //merge
                     var selectedData = window.selectedNews;
                     var data = $("#gridW76F2141").pqGrid('option','dataModel.data');
@@ -292,23 +292,23 @@
                     cls: '',
                     style: 'border: none;float:right',
                     buttonList: [
-                        {
-                            ID: "btnSaveCloseW76F2141",
-                            icon: "fa fa-save",
-                            title: '{{Helpers::getRS("Luu_va_dongU")}}',
-                            enable: true,
-                            hidden: false,
-                            type: "button",
-                            cls: "btn btn-info pull-right",
-                            render: function (ui) {
-                            },
-                            postRender: function (ui) {
-                                ui.$btn.click(function () {
-                                    frmW76F2141Save();
-                                });
-                            }
-                        }
-                        , {
+                        {{--{--}}
+                            {{--ID: "btnSaveCloseW76F2141",--}}
+                            {{--icon: "fa fa-save",--}}
+                            {{--title: '{{Helpers::getRS("Luu_va_dongU")}}',--}}
+                            {{--enable: true,--}}
+                            {{--hidden: false,--}}
+                            {{--type: "button",--}}
+                            {{--cls: "btn btn-info pull-right",--}}
+                            {{--render: function (ui) {--}}
+                            {{--},--}}
+                            {{--postRender: function (ui) {--}}
+                                {{--ui.$btn.click(function () {--}}
+                                    {{--frmW76F2141Save();--}}
+                                {{--});--}}
+                            {{--}--}}
+                        {{--}--}}
+                         {
                             ID: "btnSaveW76F2141",
                             icon: "fa fa-save",
                             title: "{{Helpers::getRS('Luu')}}",
@@ -323,7 +323,6 @@
                             postRender: function (ui) {
                                 ui.$btn.click(function () {
                                     frmW76F2141Save();
-                                    Window.location.href = '{{'/w76f2141'}}';
                                 });
                             }
                         }
@@ -339,7 +338,8 @@
                             },
                             postRender: function (ui) {
                                 ui.$btn.click(function () {
-                                    window.location.href = '{{url('/w76f2140')}}';
+                                    console.log('{{URL::previous()}}');
+                                    window.location.href = '{{URL::previous()}}';
                                 });
                             }
                         }
@@ -363,8 +363,8 @@
                 showHeader: false,
                 showTop: false,
                 dataType: "JSON",
-                wrap: false,
-                hwrap: false,
+                wrap: true,
+                hwrap: true,
                 collapsible: false,
                 postRenderInterval: -1,
                 dataModel: {
@@ -461,10 +461,12 @@
                             alertError(result.message);
                             break;
                         case 'SUCC':
-                            {{--var url = '{{\App\Eoffice\Helper::getSession('prevUrlNews', '') == null?url('/w76f2140'):\App\Eoffice\Helper::getSession('prevUrlNews')}}';--}}
-                            window.location.href = '{{url('/w76f2140')}}';
-//                                console.log($('<div/>').html(url).text()[0]);
-//                            window.location.href = $('<div/>').html(url).text();
+                            //window.location.href = '{{url('/w76f2140')}}';
+                            //alert();
+                            //window.history.back();
+                            //console.log(document.referrer);
+                            window.location.href = document.referrer.toString();
+//                         //   window.location.href = $('<div/>').html(url).text();
                            // window.location.href = result.redirectTo;
                             break;
                     }

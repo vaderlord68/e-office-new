@@ -34,6 +34,13 @@
                     </div>
                 </div>
                 <div class="dropdown for-notification">
+                    <button class="btn btn-secondary dropdown-toggle btn-module-link" href="/W76f2150" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span>Hồ sơ - tài liệu</span>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="notification">
+                    </div>
+                </div>
+                <div class="dropdown for-notification">
                     <button class="btn btn-secondary dropdown-toggle btn-module-link" href="/bi" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span>Tài liệu số</span>
                     </button>
@@ -57,6 +64,17 @@
                         <a class="dropdown-item media" href="/w76f2140">
                             <p>Quản lý bản tin</p>
                         </a>
+                    </div>
+                </div>
+                <div class="dropdown for-notification">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span>Hệ thống</span>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="notification">
+                        <a class="dropdown-item" href="{{url('/w76f1555')}}">
+                            <p>Danh mục dùng chung</p>
+                        </a>
+
                     </div>
                 </div>
             </div>

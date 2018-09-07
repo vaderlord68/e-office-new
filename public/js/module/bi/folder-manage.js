@@ -124,10 +124,15 @@ $(document).ready(function () {
     // listen for event
         .on('changed.jstree', function (e, data) {
             var selectedFolderId = data.node.li_attr.folder_id;
-            localStorage.setItem("currentSelectedFolderId", selectedFolderId);
-            var url = "/bi/folder/view?FolderId=" + selectedFolderId;
-            window.location.href = url;
-            // viewFolderAjax(secretUrl);
+            if (typeof selectedFolderId != 'undefined') {
+                localStorage.setItem("currentSelectedFolderId", selectedFolderId);
+                var url = "/bi/folder/view?FolderId=" + selectedFolderId;
+                window.location.href = url;
+            } else {
+                var selectedDocumentId = data.node.li_attr.document_id;
+                var url = "/bi/document/view?DocumentId=" + selectedDocumentId;
+                window.location.href = url;
+            }
         })
         .jstree();
 });

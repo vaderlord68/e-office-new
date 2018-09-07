@@ -44,11 +44,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/news/edit/save', 'Module\News\EditNewsController@execute');
     Route::get('/news/delete', 'Module\News\DeleteNewsController@execute');
     Route::get('/news/search/title', 'Module\News\SearchNewsController@searchTitle');
+
+    //Category
+    Route::any('/w76f1555/{task?}', 'Module\W76\W76F1555\W76F1555Controller@index');
 });
 
 Route::group(['namespace' => 'Module\W76', 'middleware' => 'auth'], function () {
-    Route::any('/w76f2140/{task?}', 'W76F2140Controller@index');
-    Route::any('/w76f2141/{task?}', 'W76F2141Controller@index');
-    Route::any('/w76f2142/{component?}', 'W76F2142Controller@index');
+    Route::any('/w76f2140/{task?}', 'W76F2140Controller@index'); //news management
+    Route::any('/w76f2141/{task?}', 'W76F2141Controller@index');//news management
+    Route::any('/w76f2142/{component?}', 'W76F2142Controller@index');//display news
+    Route::any('/W76f2150/{type?}', 'W76F2150Controller@index');//document
 });
 
