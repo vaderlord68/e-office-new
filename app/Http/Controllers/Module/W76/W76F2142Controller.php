@@ -136,8 +136,6 @@ class  W76F2142Controller extends Controller
             }else{
                 $item->Image = 'data:image/jpeg;base64, ' . base64_encode($item->Image);
             }
-
-
         }
         return $lastestNewsList;
     }
@@ -151,7 +149,6 @@ class  W76F2142Controller extends Controller
             }else{
                 $item->Image = 'data:image/jpeg;base64, ' . base64_encode($item->Image);
             }
-
         }
         return $newsList;
     }
