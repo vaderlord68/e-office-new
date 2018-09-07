@@ -48,7 +48,6 @@ $locale = Helpers::getLocale();
 <!-- Inputmask -->
 <script type="text/javascript" src="{!! asset('plugins/input-mask/jquery.inputmask.bundle.js') !!}"></script>
 
-
 <!-- Paramquery -->
 <link href="{{ asset('plugins/paramquery-3.3.4/pqgrid.dev.css') }}" media="all" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('plugins/paramquery-3.3.4/pqgrid.bootstrap.min.css') }}" media="all" rel="stylesheet" type="text/css"/>
@@ -77,7 +76,7 @@ $locale = Helpers::getLocale();
 <!--start Theme -->
 <link rel="stylesheet" href="{{ asset('css/dashboard/normalize.css') }}">
 <link rel="stylesheet" href="{{ asset('css/dashboard/bootstrap.min.css') }}">
-<link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+<link rel="stylesheet" href="{{ asset('plugins/fontawesome-pro-5.0.13/web-fonts-with-css/css/fontawesome-all.css') }}">
 <link rel="stylesheet" href="{{ asset('css/dashboard/themify-icons.css') }}">
 <link rel="stylesheet" href="{{ asset('css/dashboard/flag-icon.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/dashboard/cs-skin-elastic.css') }}">
@@ -107,7 +106,7 @@ $locale = Helpers::getLocale();
 
 
 <!-- Diginet common -->
-<link rel="stylesheet" href="{{ asset('css/custom-controls.css') }}">
+{{--<link rel="stylesheet" href="{{ asset('css/custom-controls.css') }}">--}}
 <link rel="stylesheet" href="{{ asset('css/common.css') }}">
 <script src="{{asset("js/common.js")}}"></script>
 
