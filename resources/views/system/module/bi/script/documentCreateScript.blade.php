@@ -2,9 +2,17 @@
     var createDocumentForm = $("#createDocument");
 
     $(document).ready(function () {
-        tinymce.init({
-            selector:'#documentContent',
-        });
+        ClassicEditor
+            .create( document.querySelector('#documentContent' ))
+            .then( editor => {
+                console.log( editor );
+            } )
+            .catch( error => {
+                console.error( error );
+            } );
+        // tinymce.init({
+        //     selector:'#documentContent',
+        // });
 
         $("#submitCreateDocumentForm").click(function () {
             // alert('xxxx');
@@ -12,13 +20,6 @@
         });
 
     })
-    // ClassicEditor
-    //     .create( document.querySelector( '#documentContent' ) )
-    //     .then( editor => {
-    //         console.log( editor );
-    //     } )
-    //     .catch( error => {
-    //         console.error( error );
-    //     } );
+
 
 </script>

@@ -69,7 +69,7 @@ $locale = Helpers::getLocale();
 <!-- TinyMCE for editor -->
 <script src="{{ asset('plugins/tinymce/tinymce.js') }}"></script>
 <!-- CKeditor for editor -->
-<script src="{{ asset('plugins/ckeditor/ckeditor.js') }}"></script>
+<script src="{{ asset('plugins/ckeditor5-build-classic/ckeditor.js') }}"></script>
 
 
 <!-- Bootbox support confirmation dialog -->

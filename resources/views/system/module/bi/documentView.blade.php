@@ -16,28 +16,54 @@
                             <strong>Ngày sửa cuối: </strong><span><?php echo $document->LastModifyDate?></span>
                         </div>
                         <div>
-                            <strong>Người tạo: </strong><span><?php echo $document->CreateUserID?></span><strong>Người sửa cuối: </strong><span><?php echo $document->LastModifyUserID?></span>
+                            <strong>Người tạo: </strong><span><?php echo $document->CreateUserID?></span><strong>Người
+                                sửa cuối: </strong><span><?php echo $document->LastModifyUserID?></span>
                         </div>
                         <p>
                             <?php
                             echo $document->Content;
                             ?>
                         </p>
+                        <?php
+                        $attachedFiles = json_decode($document->AttachedFiles);
+                        if (is_array($attachedFiles) && count($attachedFiles) > 0):
+                        ?>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="control-label" for="DocumentContent">Những file đã đính kèm</label>
-                                <ul>
-                                <?php
-                                    $attachedFiles = json_decode($document->AttachedFiles);
+                                <ul class="document-list list-attached-file">
+                                    <?php
+
                                     foreach ($attachedFiles as $attachedFile) :
-                                ?>
+                                    ?>
                                     <li>
-                                        <a href="/storage/<?php echo $attachedFile?>"><?php echo $attachedFile?></a>
+                                        <a href="/storage/users-upload/<?php echo $attachedFile?>"><?php echo $attachedFile?></a>
                                     </li>
-                                <?php endforeach;?>
+                                    <?php endforeach;?>
                                 </ul>
                             </div>
                         </div>
+                        <?php endif;?>
+                        <?php
+                        if (isset($relatedDocuments) && is_a($relatedDocuments,"Illuminate\Support\Collection") && count($relatedDocuments) > 0) :
+                            ?>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="DocumentContent" class="control-label">Các tài liệu liên quan</label>
+                                <ul class="document-list">
+                                    <?php
+                                    foreach ($relatedDocuments as $relatedDocument) :
+                                    ?>
+                                    <li>
+                                        <a href="/bi/document/view?DocumentId=<?php echo $relatedDocument->ID?>"><?php echo $relatedDocument->Name?></a>
+                                    </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                        </div>
+                        <?php
+                        endif;
+                        ?>
                     </div>
                 </div>
             </div>

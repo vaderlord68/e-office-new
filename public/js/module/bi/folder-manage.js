@@ -96,14 +96,14 @@ $(document).ready(function () {
     $(document).on("click", "#bi-selectRelatedDocument", function (e) {
         e.preventDefault();
         var allInputs = $(".relatedDocumentIds input:checked");
-        var createDocumentForm = $("#processDocument");
+        var processDocumentForm = $("#processDocument");
 
         $(".hidden-relatedDocumentId").each(function () {
             $(this).remove();
         });
 
         allInputs.each(function () {
-            createDocumentForm.append("<input class='hidden-relatedDocumentId' name='relatedDocumentIds[]' type='hidden' value='"+ $(this).val() +"'>");
+            processDocumentForm.append("<input class='hidden-relatedDocumentId' name='relatedDocumentIds[]' type='hidden' value='"+ $(this).val() +"'>");
         });
     });
 
