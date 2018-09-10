@@ -8,10 +8,11 @@
 </div>
 
 <script>
-    console.log(JSON.parse('{!! $json !!}'));
+    console.log(JSON.parse('<?php echo $json; ?>'));
     $('#treeView').jstree({
         'core' : {
-            'data' : {!! $json !!}
+            'data' : <?php echo $json; ?>
+
         },
         "themes" : {
             "variant" : "large"

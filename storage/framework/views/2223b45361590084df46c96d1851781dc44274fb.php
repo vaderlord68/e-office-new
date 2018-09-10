@@ -1,5 +1,4 @@
-@extends('system.module.W76.W76F2150.components.layout')
-@section('document-list')
+<?php $__env->startSection('document-list'); ?>
    <div id="bootstrap-data-table_wrapper"
         class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer table-documentary" style="padding-left: 0px; padding-right: 0px;">
       <div class="row">
@@ -62,4 +61,5 @@
          </div>
       </div>
    </div>
-@stop
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('system.module.W76.W76F2150.components.layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
