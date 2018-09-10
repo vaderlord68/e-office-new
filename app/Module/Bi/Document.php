@@ -37,4 +37,12 @@ class Document extends Model
         return $collection;
     }
 
+    public function getDocumentById($documentId)
+    {
+        $collect = DB::table($this->table)
+            ->where("ID", $documentId)
+            ->first();
+        return $collect;
+    }
+
 }

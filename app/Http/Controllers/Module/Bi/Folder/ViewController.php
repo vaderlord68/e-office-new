@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Module\Bi\Document;
 use App\Module\Bi\Folder;
 use Illuminate\Http\Request;
+use PhpParser\Comment\Doc;
 
 class  ViewController extends Controller
 {
@@ -28,6 +29,18 @@ class  ViewController extends Controller
             ->with("childDocuments",$childDocuments)
             ->with("childFolders",$childFolders);
 
+    }
+
+    public function share(Request $request) {
+        $dataPost = $request->input();
+
+        $item_id = $dataPost['item_id'];
+        $documentFactory = new Document();
+        $doc = $documentFactory->getDocumentById($item_id);
+        var_dump($doc);die();
+
+        return view("system/module/bi/shareDocument")
+            ->with("document", $doc);
     }
 
     public function getChildFolders($folderId)
