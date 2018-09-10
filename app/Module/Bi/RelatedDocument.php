@@ -21,5 +21,19 @@ class RelatedDocument extends Model
             ->get();
         return $collection;
     }
+    public function getRelatedDocWithDocId($DocID)
+    {
+        $collection = DB::table($this->table)
+            ->where("DocID","=",$DocID)
+            ->get();
+        return $collection;
+    }
+
+    public function deleteRelationByDocumentID($DocID)
+    {
+        DB::table($this->table)
+            ->where("DocID","=",$DocID)
+            ->delete();
+    }
 
 }

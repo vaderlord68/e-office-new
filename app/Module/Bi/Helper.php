@@ -102,15 +102,13 @@ class Helper extends \Illuminate\Database\Eloquent\Model
         $timestamp = time();
         $fileExtension = \File::extension($file->getClientOriginalName());
         $fileName = "user_$userId" . "_" . "$timestamp". "_" .$fileOrderNumber. "." .$fileExtension;
-        $filePath = 'public/users-upload/'.$userId;
+        $filePath = 'public/users-upload/';
         try{
             $file->storeAs($filePath, $fileName);
-            return $filePath."/".$fileName;
+            return $fileName;
         }catch (\Exception $ex){
             \Debugbar::info($ex->getMessage());
         }
-
-
     }
 
 }
