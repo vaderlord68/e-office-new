@@ -37,7 +37,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/bi/document/edit/execute', 'Module\Bi\Document\EditController@execute');
     Route::get('/bi/document/deleteAttachment/{documentID}/{fileName}', 'Module\Bi\Document\DeleteAttachmentController@index');
 
-    Route::get('/news', 'Module\News\NewsController@index');
+    Route::get('/news/{task?}', 'Module\News\NewsController@index');
     Route::get('/news/manage', 'Module\News\ManageNewsController@index');
     Route::get('/news/manage/filter', 'Module\News\ManageNewsController@filter');
     Route::get('/news/create', 'Module\News\CreateNewsController@index');
@@ -48,11 +48,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/news/search/title', 'Module\News\SearchNewsController@searchTitle');
 
     //Category
-    Route::get('/w76f1555/{task?}', 'Module\W76\W76F1555\W76F1555Controller@index');
+    Route::any('/w76f1555/{task?}', 'Module\W76\W76F1555\W76F1555Controller@index');
 });
 
 Route::group(['namespace' => 'Module\W76', 'middleware' => 'auth'], function () {
-    Route::any('/w76f2140/{task?}', 'W76F2140Controller@index');
-    Route::any('/w76f2141/{task?}', 'W76F2141Controller@index');
+    Route::any('/w76f2140/{task?}', 'W76F2140Controller@index'); //news management
+    Route::any('/w76f2141/{task?}', 'W76F2141Controller@index');//news management
+    Route::any('/w76f2142/{component?}', 'W76F2142Controller@index');//display news
+    Route::any('/W76f2150/{type?}', 'W76F2150Controller@index');//document
 });
 

@@ -18,7 +18,6 @@ $locale = Helpers::getLocale();
 
 <!-- jQuery -->
 <script type="text/javascript" src="{!! asset('js/jquery-3.3.1.min.js') !!}"></script>
-
 <!-- jQuery-UI -->
 <link href="{{ asset('plugins/jQueryUI/jquery-ui.css') }}" media="all" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('plugins/jQueryUI/jquery-ui.theme.min.css') }}" media="all" rel="stylesheet" type="text/css"/>
@@ -30,7 +29,7 @@ $locale = Helpers::getLocale();
 <!-- Bootstrap -->
 <link href="{{ asset('plugins/bootstrap/css/bootstrap.css') }}" media="all" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="{!! asset('plugins/bootstrap/js/bootstrap.js') !!}"></script>
-
+<script type="text/javascript" src="{!! asset('plugins/bootstrap-confirm/bootstrap-confirmation.js') !!}"></script>
 
 <!-- Moment -->
 <script type="text/javascript" src="{!! asset('plugins/moment/moment.js') !!}"></script>
@@ -48,7 +47,6 @@ $locale = Helpers::getLocale();
 
 <!-- Inputmask -->
 <script type="text/javascript" src="{!! asset('plugins/input-mask/jquery.inputmask.bundle.js') !!}"></script>
-
 
 <!-- Paramquery -->
 <link href="{{ asset('plugins/paramquery-3.3.4/pqgrid.dev.css') }}" media="all" rel="stylesheet" type="text/css"/>
@@ -78,7 +76,7 @@ $locale = Helpers::getLocale();
 <!--start Theme -->
 <link rel="stylesheet" href="{{ asset('css/dashboard/normalize.css') }}">
 <link rel="stylesheet" href="{{ asset('css/dashboard/bootstrap.min.css') }}">
-<link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+<link rel="stylesheet" href="{{ asset('plugins/fontawesome-pro-5.0.13/web-fonts-with-css/css/fontawesome-all.css') }}">
 <link rel="stylesheet" href="{{ asset('css/dashboard/themify-icons.css') }}">
 <link rel="stylesheet" href="{{ asset('css/dashboard/flag-icon.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/dashboard/cs-skin-elastic.css') }}">
@@ -107,10 +105,8 @@ $locale = Helpers::getLocale();
 <script src="{{asset("plugins/digi-contextmenu/digi-contextmenu.js")}}"></script>
 
 
-
-
-
 <!-- Diginet common -->
+{{--<link rel="stylesheet" href="{{ asset('css/custom-controls.css') }}">--}}
 <link rel="stylesheet" href="{{ asset('css/common.css') }}">
 <script src="{{asset("js/common.js")}}"></script>
 
