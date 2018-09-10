@@ -1,6 +1,5 @@
-@extends('page.master')
-@section('body_content')
-    @parent
+<?php $__env->startSection('body_content'); ?>
+    ##parent-placeholder-5a4526adfe28f01223dccf37a363ace9165900d0##
     <?php
     $lastNewsModified = "";
     if (session("lastNewsModified")) {
@@ -12,7 +11,7 @@
         <form id="frmW76F2140" name="frmW76F2140" method="post">
             <div class="row form-group">
                 <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1">
-                    <label class="lbl-normal">{{Helpers::getRS("Tim_kiem")}}</label>
+                    <label class="lbl-normal"><?php echo e(Helpers::getRS("Tim_kiem")); ?></label>
                 </div>
                 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                     <input type="text" class="form-control" id="txtDocNo" name="txtDocNo" autocomplete="off">
@@ -40,7 +39,7 @@
                         {
                             ID: "btnAddW76F2140",
                             icon: "fa fa-plus",
-                            title: "{{Helpers::getRS('Them_moi1')}}",
+                            title: "<?php echo e(Helpers::getRS('Them_moi1')); ?>",
                             cls: "btn btn-info",
                             enable: true,
                             hidden: function () {
@@ -52,7 +51,7 @@
                             postRender: function (ui) {
                                 console.log(ui);
                                 ui.$btn.click(function () {
-                                    window.location.href = "{{url('/w76f2141/add')}}";
+                                    window.location.href = "<?php echo e(url('/w76f2141/add')); ?>";
                                 });
                             }
                         }
@@ -76,15 +75,15 @@
                 postRenderInterval: -1,
                 colModel: [
                     {
-                        title: "{{Helpers::getRS('Xu_ly')}}",
+                        title: "<?php echo e(Helpers::getRS('Xu_ly')); ?>",
                         width: 61,
                         align: "center",
                         dataIndx: "View",
                         isExport: false,
                         editor: false,
                         render: function (ui) {
-                            var str = '<a id="btnEditW76F2140" title="{{Helpers::getRS("Sua")}}"><i class="fa fa-edit mgr10 text-yellow cursor-pointer"></i></a>';
-                                str += '<a id="btnDeleteW76F2140" title="{{Helpers::getRS("Xoa")}}"><i class="fa fa-trash text-danger cursor-pointer"></i></a>';
+                            var str = '<a id="btnEditW76F2140" title="<?php echo e(Helpers::getRS("Sua")); ?>"><i class="fa fa-edit mgr10 text-yellow cursor-pointer"></i></a>';
+                                str += '<a id="btnDeleteW76F2140" title="<?php echo e(Helpers::getRS("Xoa")); ?>"><i class="fa fa-trash text-danger cursor-pointer"></i></a>';
                             return str;
                         },
                         postRender: function (ui) {
@@ -97,14 +96,14 @@
                                     newsID: rowData.NewsID,
                                     channelID: rowData.ChannelID
                                 }
-                                window.location.href = "{{url('/w76f2141/edit')}}" + "?" + $.param(data);
+                                window.location.href = "<?php echo e(url('/w76f2141/edit')); ?>" + "?" + $.param(data);
                             });
                             $cell.find("#btnDeleteW76F2140").bind("click", function (evt) {
                                 ask_delete(function () {
                                     $.ajax({
                                         method: "POST",
-                                        url: '{{url('/w76f2140/delete')}}',
-                                        data: {newsID: rowData.NewsID, _token: '{{ csrf_token() }}'},
+                                        url: '<?php echo e(url('/w76f2140/delete')); ?>',
+                                        data: {newsID: rowData.NewsID, _token: '<?php echo e(csrf_token()); ?>'},
                                         success: function (res) {
                                             var data = JSON.parse(res);
                                             switch (data.status) {
@@ -136,7 +135,7 @@
                         hidden: true
                     }
                     , {
-                        title: "{{Helpers::getRS('Tieu_de')}}",
+                        title: "<?php echo e(Helpers::getRS('Tieu_de')); ?>",
                         width: 220,
                         align: "center",
                         dataIndx: "Title",
@@ -145,7 +144,7 @@
                         filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']},
                     },
                     {
-                        title: "{{Helpers::getRS('Chuyen_muc')}}",
+                        title: "<?php echo e(Helpers::getRS('Chuyen_muc')); ?>",
                         width: 170,
                         dataType: "string",
                         editor: false,
@@ -155,7 +154,7 @@
                         filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']},
                     },
                     {
-                        title: "{{Helpers::getRS('Trang_thai')}}",
+                        title: "<?php echo e(Helpers::getRS('Trang_thai')); ?>",
                         width: 90,
                         align: "center",
                         dataType: "string",
@@ -168,7 +167,7 @@
                         }
                     },
                     {
-                        title: "{{Helpers::getRS('So_luot_xem')}}",
+                        title: "<?php echo e(Helpers::getRS('So_luot_xem')); ?>",
                         width: 110,
                         dataType: "string",
                         editor: false,
@@ -177,7 +176,7 @@
                         filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']}
                     },
                     {
-                        title: "{{Helpers::getRS('Ngay_soan_thao')}}",
+                        title: "<?php echo e(Helpers::getRS('Ngay_soan_thao')); ?>",
                         width: 180,
                         align: "center",
                         dataType: "date",
@@ -186,7 +185,7 @@
                         filter: {type: "textbox", condition: "equal", init: pqDatePicker, listeners: ['change']}
                     },
                     {
-                        title: "{{Helpers::getRS('Ngay_dang_tin')}}",
+                        title: "<?php echo e(Helpers::getRS('Ngay_dang_tin')); ?>",
                         width: 180,
                         align: "center",
                         dataType: "date",
@@ -195,7 +194,7 @@
                         filter: {type: "textbox", condition: "equal", init: pqDatePicker, listeners: ['change']}
                     },
                     {
-                        title: "{{Helpers::getRS('Nguoi_dang_tin')}}",
+                        title: "<?php echo e(Helpers::getRS('Nguoi_dang_tin')); ?>",
                         width: 170,
                         dataType: "string",
                         editor: false,
@@ -203,7 +202,7 @@
                         filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']}
                     },
                     {
-                        title: "{{Helpers::getRS('Tin_noi_bat')}}",
+                        title: "<?php echo e(Helpers::getRS('Tin_noi_bat')); ?>",
                         width: 90,
                         align: "center",
                         dataType: "string",
@@ -216,7 +215,7 @@
                         }
                     },
                     {
-                        title: "{{Helpers::getRS('Tac_gia')}}",
+                        title: "<?php echo e(Helpers::getRS('Tac_gia')); ?>",
                         width: 170,
                         align: "center",
                         dataType: "string",
@@ -226,7 +225,7 @@
                     }
                 ],
                 dataModel: {
-                    data: {!! ($newsCollection) !!},
+                    data: <?php echo ($newsCollection); ?>,
                 },
                 pageModel: {type: 'local', rPP: 20, rPPOptions: [20, 30, 40, 50]},
                 complete: function (event, ui) {
@@ -238,13 +237,14 @@
             };
 
             $("#gridW76F2140").pqGrid(obj);
-            $("#gridW76F2140").pqGrid("option", $.paramquery.pqGrid.regional['{{Session::get("locate")}}']);
-            $("#gridW76F2140").find(".pq-pager").pqPager("option", $.paramquery.pqPager.regional['{{Session::get("locate")}}']);
+            $("#gridW76F2140").pqGrid("option", $.paramquery.pqGrid.regional['<?php echo e(Session::get("locate")); ?>']);
+            $("#gridW76F2140").find(".pq-pager").pqPager("option", $.paramquery.pqPager.regional['<?php echo e(Session::get("locate")); ?>']);
             $("#gridW76F2140").pqGrid("refreshDataAndView");
 
         });
     </script>
-@stop
-{{--@section("deletePopup")--}}
-    {{--@include("system.module.news.delete")--}}
-{{--@show--}}
+<?php $__env->stopSection(); ?>
+
+    
+
+<?php echo $__env->make('page.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
