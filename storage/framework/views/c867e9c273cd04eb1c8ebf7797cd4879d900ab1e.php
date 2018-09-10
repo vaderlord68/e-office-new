@@ -1,1 +1,0 @@
-<?php echo $__env->yieldContent('news-wrapper'); ?>
