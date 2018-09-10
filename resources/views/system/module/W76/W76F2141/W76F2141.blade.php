@@ -328,7 +328,7 @@
                         }
                         , {
                             ID: "btnBack",
-                            icon: "fa fa-arrow-left text-red",
+                            icon: "fa fa-arrow-left",
                             title: '{{Helpers::getRS("Quay_lai")}}',
                             enable: true,
                             hidden: false,
