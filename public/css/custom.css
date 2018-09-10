@@ -127,7 +127,6 @@
 .container {
     position: relative;
     z-index: 1;
-    max-width: 300px;
     margin: 0 auto;
 }
 
@@ -219,7 +218,37 @@ body {
     text-decoration: underline;
     font-style: italic;
 }
+/** Ck editor min height **/
+.ck-editor__editable {
+    min-height: 200px;
+}
+/** Upload file to document **/
+#processDocument input[type="file"] {
 
+    height: 26px !important;
+
+    overflow: hidden !important;
+
+    padding: 0px !important;
+
+    font-size: 11px !important;
+
+}
+#processDocument .delete-file-link {
+    color: red;
+}
+.document-list {
+    list-style: none;
+}
+.document-list li {
+    width: 100%;
+    background-color: #f1f1f1;
+    border-radius: 2px;
+    margin: 5px 0 5px 0;
+}
+.document-list li a {
+    padding: 5px 0 5px 5px;
+}
 @media screen and (max-width: 767px) {
     .login-page {
         width: 80%;

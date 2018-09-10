@@ -37,12 +37,24 @@ class Document extends Model
         return $collection;
     }
 
-    public function getDocumentById($documentId)
+    public function getSearchResultByKeyword($keyword)
     {
-        $collect = DB::table($this->table)
-            ->where("ID", $documentId)
-            ->first();
-        return $collect;
+        $collection = DB::table($this->table)
+            ->where("Name","LIKE", "%$keyword%")
+            ->orWhere("Content","LIKE", "%$keyword%")
+            ->orWhere("ID","LIKE", "%$keyword%")
+            ->orWhere("CreateUserID","LIKE", "%$keyword%")
+            ->orWhere("LastModifyUserID","LIKE", "%$keyword%")
+            ->get();
+        return $collection;
+    }
+
+    public function getDocumentsWhereIdIn($ids)
+    {
+        $collection = DB::table($this->table)
+            ->whereIn("ID",$ids)
+            ->get();
+        return $collection;
     }
 
 }
