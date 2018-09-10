@@ -4,6 +4,6 @@
         <button type="button" title="Tạo thư mục" class="btn btn-default  pull-right mgr5"><i class="fa fa-folder text-warning mgr5"></i>Tạo thư mục</button>
     </div>
     <div class="card-body" style="padding: 5px !important;">
-        @yield('document-list')
+        <?php echo $__env->yieldContent('document-list'); ?>
     </div>
 </div>
