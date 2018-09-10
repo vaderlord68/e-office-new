@@ -1,10 +1,4 @@
 <?php
-/**
- * TODO: Viết giao diện sửa tài liệu ở đây
- * Có thể sử dụng lại template documentCreate để làm mẫu
- * Vui lòng đọc vê laravel layout trước khi làm
- */
-
 ?>
 @extends('system.module.bi')
 @section("folderView")
@@ -18,7 +12,6 @@
                  class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer table-documentary">
                 <div class="row">
                     <div class="col-sm-12">
-                        Open me at <strong>resources/views/system/module/bi/documentEdit.blade.php</strong>
                         <form id="processDocument" action="/bi/document/edit/execute" method="post"
                               enctype="multipart/form-data">
                             <div class="container">
@@ -26,6 +19,8 @@
                                     <div class="col-md-12">
                                         <div class="well-block">
                                             <!-- Form start -->
+                                            <input type="hidden" value="<?php echo (string)$currentDocumentID?>"
+                                                   name="ID">
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
@@ -40,7 +35,9 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label class="control-label" for="StatusID">Phát hành</label>
-                                                        <input <?php echo $currentDocument->StatusID ?  "checked" :  ""?> type="checkbox" id="StatusID" name="StatusID" class="">
+                                                        <input
+                                                            <?php echo $currentDocument->StatusID ? "checked" : ""?> type="checkbox"
+                                                            id="StatusID" name="StatusID" class="">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
@@ -54,6 +51,69 @@
                                                         </textarea>
                                                     </div>
                                                 </div>
+                                                <?php
+                                                $attachedFiles = json_decode($currentDocument->AttachedFiles);
+                                                if (isset($attachedFiles) && count($attachedFiles) > 0):
+                                                ?>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+
+                                                        <label class="control-label" for="DocumentContent">Những file đã
+                                                            đính kèm</label>
+                                                        <ul class="document-list list-attached-file">
+                                                            <?php
+                                                            foreach ($attachedFiles as $attachedFile) :
+                                                            ?>
+                                                            <li>
+                                                                <a href="/storage/users-upload/<?php echo $attachedFile?>"><?php echo $attachedFile?></a>
+                                                                <a class="delete-file-link"
+                                                                   href="/bi/document/deleteAttachment/<?php echo $currentDocumentID?>/<?php echo $attachedFile?>">
+                                                                    Xóa
+                                                                </a>
+                                                            </li>
+                                                            <?php endforeach;
+                                                            ?>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <?php
+                                                endif;
+                                                ?>
+                                                <div class="col-md-12">
+                                                    <div class="form-group attachedFiles">
+                                                        <label class="control-label" for="DocumentContent">Chọn file đính kèm</label>
+                                                        <a id="bi-addFile" class="toolbar-btn action-on-header" href="">
+                                                            <i class="fa fa-plus-circle"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="control-label" for="DocumentContent">Tài liệu liên
+                                                            quan</label>
+                                                        <?php
+                                                        if (isset($relatedDocuments) && is_a($relatedDocuments,"Illuminate\Support\Collection") && count($relatedDocuments) > 0) :
+                                                        ?>
+                                                        <ul class="document-list related-document-list">
+                                                            <?php
+                                                            foreach ($relatedDocuments as $relatedDocument) :
+                                                            ?>
+                                                            <li>
+                                                                <a href="/bi/document/view?DocumentId=<?php echo $relatedDocument->ID?>"><?php echo $relatedDocument->Name?></a>
+                                                            </li>
+                                                            <?php endforeach; ?>
+                                                        </ul>
+                                                        <?php
+                                                        endif;
+                                                        ?>
+                                                        <button class="form-control input-md" data-toggle="modal"
+                                                                data-target="#relatedDocumentModal" type="button"
+                                                                id="documentRelated" name="DocumentRelated"
+                                                                class="btn btn-info form-control input-md"
+                                                                style="width: 100px;">Sửa
+                                                        </button>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                             <!-- form end -->
                                         </div>
@@ -67,6 +127,7 @@
                 </div>
             </div>
         </div>
+        @include("system.module.bi.relatedDocumentPopup", ["AllDocuments" => $AllDocuments, "AllRelatedDocuments" => $AllRelatedDocuments])
         @include("system.module.bi.script.documentCreateScript")
     </div>
 @stop

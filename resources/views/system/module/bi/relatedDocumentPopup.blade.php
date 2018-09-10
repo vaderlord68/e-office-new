@@ -15,9 +15,20 @@
                             <form action="">
                                 <div class="col-md-12 relatedDocumentIds">
                                     <?php foreach ($AllDocuments as $document):?>
+                                    <?php
+                                        $isChecked = false;
+                                    if (isset($AllRelatedDocuments)) {
+                                        foreach ($AllRelatedDocuments as $relatedDocument) {
+
+                                            if ($relatedDocument->RefDocID == $document->ID) {
+                                                $isChecked = true;
+                                            }
+                                        }
+                                    }
+                                    ?>
                                     <div class="form-group">
-                                        <input type="checkbox"  name="relatedDocumentId[]" class="" value="<?php echo $document->ID?>">
-                                        <label class="required control-label" for="relatedDocumentId"><?php echo $document->FileName?></label>
+                                        <input type="checkbox"  name="relatedDocumentId[]" class="" value="<?php echo $document->ID?>" <?php echo $isChecked ? "checked" : ""?>>
+                                        <label class="required control-label" for="relatedDocumentId"><?php echo $document->Name?></label>
                                     </div>
                                     <?php endforeach;?>
                                 </div>

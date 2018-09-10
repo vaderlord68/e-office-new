@@ -44,4 +44,21 @@ class Folder extends Model
         return $collection;
     }
 
+    public function addNameCondition($collection,$val)
+    {
+        $collection->where("FolderName","LIKE","%$val%");
+        return $collection;
+    }
+
+    public function getSearchResultByKeyword($keyword)
+    {
+        $collection = DB::table($this->table)
+        ->where("FolderName", "LIKE", "%$keyword%")
+        ->orWhere("FolderDescription", "LIKE", "%$keyword%")
+        ->orWhere("ID", "LIKE", "%$keyword%")
+        ->orWhere("CreateUserID", "LIKE", "%$keyword%")
+        ->orWhere("LastModifyUserID", "LIKE", "%$keyword%")
+        ->get();
+        return $collection;
+    }
 }
