@@ -28,12 +28,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/bi/folder/rename/index', 'Module\Bi\Folder\RenameController@index');
     Route::post('/bi/folder/rename/execute', 'Module\Bi\Folder\RenameController@execute');
     Route::get('/bi/folder/delete/execute', 'Module\Bi\Folder\DeleteController@execute');
+    Route::post('/bi/folder/search/', 'Module\Bi\Folder\SearchController@execute');
 
     Route::get('/bi/document/create/index', 'Module\Bi\Document\CreateController@index');
     Route::post('/bi/document/create/execute', 'Module\Bi\Document\CreateController@execute');
     Route::get('/bi/document/view', 'Module\Bi\Document\ViewController@index');
     Route::get('/bi/document/edit', 'Module\Bi\Document\EditController@index');
     Route::post('/bi/document/edit/execute', 'Module\Bi\Document\EditController@execute');
+    Route::get('/bi/document/deleteAttachment/{documentID}/{fileName}', 'Module\Bi\Document\DeleteAttachmentController@index');
 
     Route::get('/news/{task?}', 'Module\News\NewsController@index');
     Route::get('/news/manage', 'Module\News\ManageNewsController@index');
