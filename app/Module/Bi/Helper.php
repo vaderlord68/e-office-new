@@ -36,7 +36,7 @@ class Helper extends \Illuminate\Database\Eloquent\Model
                 $output .= $this->getAllChildren($this->folders[$i]->ID);
                 $documentsCollection = $this->getAllChildDocument($this->folders[$i]->ID);
                 foreach ($documentsCollection as $document) {
-                    $output .= "<li class='node-type-document' type='document' document_id='$document->ID'>". $document->FileName ."</li>";
+                    $output .= "<li class='node-type-document' type='document' document_id='$document->ID'>". $document->Name ."</li>";
                 }
                 $output .= "</ul></li>";
 
@@ -59,7 +59,7 @@ class Helper extends \Illuminate\Database\Eloquent\Model
                 $output .= $this->getAllChildren($this->folders[$i]->ID);
                 $documentsCollection = $this->getAllChildDocument($this->folders[$i]->ID);
                 foreach ($documentsCollection as $document) {
-                    $output .= "<li class='node-type-document' type='document' document_id='$document->ID'>". $document->FileName ."</li>";
+                    $output .= "<li class='node-type-document' type='document' document_id='$document->ID'>". $document->Name ."</li>";
                 }
                 $output .= "</ul></li>";
 

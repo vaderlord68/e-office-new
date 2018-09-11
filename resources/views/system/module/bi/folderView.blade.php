@@ -61,9 +61,9 @@
                                 </td>
                                 <td><?php echo isset($folder->FolderDescription) ? $folder->FolderDescription : ""?></td>
                                 <td><?php echo $folder->CreateUserID ? $folder->CreateUserID : ""?></td>
-                                <td><?php echo $folder->CreateDate?></td>
+                                <td><?php echo date("Y-m-d",strtotime($folder->CreateDate))?></td>
                                 <td><?php echo isset($folder->LastModifyUserID) ? $folder->LastModifyUserID : ""?></td>
-                                <td><?php echo $folder->LastModifyDate?></td>
+                                <td><?php echo date("Y-m-d",strtotime($folder->LastModifyDate))?></td>
                             </tr>
                             <?php
                             endforeach;
@@ -81,13 +81,13 @@
                             ?>
                             <tr role="row" class="odd bi-table-item type-document" document_id="<?php  echo $document->ID?>">
                                 <td><span class="folder-icon"><img src="{{ asset("/media/default_document_icon.png") }}"
-                                                                   alt=""></span><?php echo isset($document->ID) ? $document->FileName : ""?>
+                                                                   alt=""></span><?php echo isset($document->Name) ? $document->Name : ""?>
                                 </td>
                                 <td><?php ?></td>
                                 <td><?php echo $document->CreateUserID ? $document->CreateUserID : ""?></td>
-                                <td><?php echo $document->CreateDate?></td>
+                                <td><?php echo date("Y-m-d",strtotime($document->CreateDate))?></td>
                                 <td><?php echo isset($document->LastModifyUserID) ? $document->LastModifyUserID : ""?></td>
-                                <td><?php echo $document->LastModifyDate?></td>
+                                <td><?php echo date("Y-m-d",strtotime($document->LastModifyDate))?></td>
                             </tr>
                             <?php
                             endforeach;
