@@ -235,10 +235,12 @@ body, textarea {
 
 input:required, select:required, textarea:required {
     background-color: beige !important;
+    border: 1px solid #EAC151;
 }
 
 input:read-only, select:read-only, textarea:read-only {
     background-color: #EEEEEE;
+
 }
 
 .input-group.date .dropdown-menu {
@@ -251,7 +253,7 @@ input:read-only, select:read-only, textarea:read-only {
 }
 
 .alert-message {
-    padding: 20px 40px 0px 40px;
+    /*padding: 20px 40px 0px 40px;*/
 }
 
 .alert-message-session {
@@ -544,6 +546,12 @@ a:hover {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
+}
+.text-center{
+    text-align: center;
+}
+.verticle-align-middle td{
+    vertical-align: middle;
 }
 
 /*End THANHTRAM - new views */

@@ -18,5 +18,6 @@
     <?php echo $__env->yieldSection(); ?>
     </body>
 <?php echo $__env->yieldSection(); ?>
+
 <div id="divModalContainer"></div>
 </html>
