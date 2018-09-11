@@ -28,7 +28,7 @@
                                     ?>
                                     <div class="form-group">
                                         <input type="checkbox"  name="relatedDocumentId[]" class="" value="<?php echo $document->ID?>" <?php echo $isChecked ? "checked" : ""?>>
-                                        <label class="required control-label" for="relatedDocumentId"><?php echo $document->Name?></label>
+                                        <label class="required control-label" for="relatedDocumentId"><?php echo isset($document->Name) ? $document->Name : ""?></label>
                                     </div>
                                     <?php endforeach;?>
                                 </div>

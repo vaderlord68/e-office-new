@@ -29,7 +29,7 @@
                                                         <input class="form-control input-md" type="text"
                                                                id="DocumentName" name="DocumentName"
                                                                placeholder="Tên tài liệu"
-                                                               value="<?php echo $currentDocument->Name?>">
+                                                               value="<?php echo isset($currentDocument->Name) ? $currentDocument->Name : ""?>">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
@@ -98,7 +98,7 @@
                                                             foreach ($relatedDocuments as $relatedDocument) :
                                                             ?>
                                                             <li>
-                                                                <a href="/bi/document/view?DocumentId=<?php echo $relatedDocument->ID?>"><?php echo $relatedDocument->Name?></a>
+                                                                <a href="/bi/document/view?DocumentId=<?php echo $relatedDocument->ID?>"><?php echo isset($relatedDocument->Name) ? $relatedDocument->Name : ""?></a>
                                                             </li>
                                                             <?php endforeach; ?>
                                                         </ul>
