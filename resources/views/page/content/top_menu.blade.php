@@ -68,7 +68,10 @@
                                 <p>Manager Self Service</p>
                             </a>
                             <a class="dropdown-item media" href="/w76f2140">
-                                <p>Quản lý bản tin</p>
+                                <p>{{Helpers::getRS('Quan_ly_ban_tin')}}</p>
+                            </a>
+                            <a class="dropdown-item media" href="/w76f2200">
+                                <p>{{Helpers::getRS('Danh_sach_phong_hop')}}</p>
                             </a>
                         </div>
                     </div>

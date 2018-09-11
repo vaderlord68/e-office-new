@@ -61,7 +61,7 @@
             );
             var obj = {
                 width: '100%',
-                height: 350,
+                height: 600,
                 freezeCols: 1,
                 numberCell: {show: false},
                 selectionModel: {type: 'row', mode: 'single'},
@@ -137,7 +137,7 @@
                     }
                     , {
                         title: "{{Helpers::getRS('Tieu_de')}}",
-                        width: 170,
+                        width: 220,
                         align: "center",
                         dataIndx: "Title",
                         dataType: "string",
@@ -156,7 +156,7 @@
                     },
                     {
                         title: "{{Helpers::getRS('Trang_thai')}}",
-                        width: 80,
+                        width: 90,
                         align: "center",
                         dataType: "string",
                         editor: false,
