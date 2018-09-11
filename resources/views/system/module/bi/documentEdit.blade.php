@@ -105,7 +105,7 @@
                                                         <?php
                                                         endif;
                                                         ?>
-                                                        <button class="form-control input-md" data-toggle="modal"
+                                                        <button class="form-control input-md saveBtn-right-toolbar" data-toggle="modal"
                                                                 data-target="#relatedDocumentModal" type="button"
                                                                 id="documentRelated" name="DocumentRelated"
                                                                 class="btn btn-info form-control input-md"

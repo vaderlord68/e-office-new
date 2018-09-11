@@ -12,8 +12,8 @@
                     <div class="col-sm-12">
                         <h1><?php echo isset($document->Name) ? $document->Name : ""?></h1>
                         <div>
-                            <strong>Ngày tạo: </strong><span><?php echo $document->CreateDate?></span>
-                            <strong>Ngày sửa cuối: </strong><span><?php echo $document->LastModifyDate?></span>
+                            <strong>Ngày tạo: </strong><span><?php echo date("Y-m-d",strtotime($document->CreateDate))?></span>
+                            <strong>Ngày sửa cuối: </strong><span><?php echo  date("Y-m-d",strtotime($document->LastModifyDate))?></span>
                         </div>
                         <div>
                             <strong>Người tạo: </strong><span><?php echo $document->CreateUserID?></span><strong>Người

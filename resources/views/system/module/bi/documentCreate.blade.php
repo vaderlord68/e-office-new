@@ -45,7 +45,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label class="control-label" for="DocumentContent">Tài liệu liên quan</label>
-                                                        <button class="form-control input-md" data-toggle="modal" data-target="#relatedDocumentModal"  type="button" id="documentRelated" name="DocumentRelated"  class="btn btn-info form-control input-md" style="width: 100px;">Thêm</button>
+                                                        <button class="form-control input-md saveBtn-right-toolbar" data-toggle="modal" data-target="#relatedDocumentModal"  type="button" id="documentRelated" name="DocumentRelated"  class="btn btn-info form-control input-md" style="width: 100px;">Thêm</button>
                                                     </div>
                                                 </div>
                                             </div>
