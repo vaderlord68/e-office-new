@@ -328,7 +328,7 @@
                         }
                         , {
                             ID: "btnBack",
-                            icon: "fa fa-arrow-left text-red",
+                            icon: "fa fa-arrow-left",
                             title: '{{Helpers::getRS("Quay_lai")}}',
                             enable: true,
                             hidden: false,
@@ -453,7 +453,6 @@
                 processData: false,
                 contentType: false,
                 success: function (res) {
-//                    console.log(res);
                     var result = JSON.parse(res);
                     switch (result.status) {
                         case 'ERROR':

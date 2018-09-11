@@ -1,8 +1,8 @@
-<div class="container" id="main">
-    <div class="row">
-        <div class="col-md-12">
-            HELLO
-            @yield('document-list')
-        </div>
+<div class="card document-content">
+    <div class="card-header">
+        @yield('document-header')
+    </div>
+    <div class="card-body" style="padding: 5px !important;">
+        @yield('document-body')
     </div>
 </div>

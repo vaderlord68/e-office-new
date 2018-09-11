@@ -37,7 +37,7 @@
                         </div>
                     </div>
                     <div class="dropdown for-notification">
-                        <button class="btn btn-secondary dropdown-toggle btn-module-link" href="/W76f2150" type="button"
+                        <button class="btn btn-secondary dropdown-toggle btn-module-link" href="/W76F2150" type="button"
                                 id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span>Hồ sơ - tài liệu</span>
                         </button>
@@ -68,7 +68,10 @@
                                 <p>Manager Self Service</p>
                             </a>
                             <a class="dropdown-item media" href="/w76f2140">
-                                <p>Quản lý bản tin</p>
+                                <p>{{Helpers::getRS('Quan_ly_ban_tin')}}</p>
+                            </a>
+                            <a class="dropdown-item media" href="/w76f2200">
+                                <p>{{Helpers::getRS('Danh_sach_phong_hop')}}</p>
                             </a>
                         </div>
                     </div>
