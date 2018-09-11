@@ -109,7 +109,7 @@ $locale = Helpers::getLocale();
 {{--<link rel="stylesheet" href="{{ asset('css/custom-controls.css') }}">--}}
 <link rel="stylesheet" href="{{ asset('css/common.css') }}">
 <script src="{{asset("js/common.js")}}"></script>
-
+@yield('script')
 
 <script>
     //store resources for using of javascript

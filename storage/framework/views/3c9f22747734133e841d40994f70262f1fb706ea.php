@@ -14,9 +14,6 @@
     <div class="card-body">
         <h5 class="">Tài liệu ưa thích</h5>
         <div id="folderTree">
-            <?php
-            //\Debugbar::info($folderTree);
-            ?>
             <?php echo html_entity_decode($folderTree); ?>
 
         </div>

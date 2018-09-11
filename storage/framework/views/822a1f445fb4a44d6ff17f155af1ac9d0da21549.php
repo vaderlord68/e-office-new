@@ -67,7 +67,7 @@ $locale = Helpers::getLocale();
 <!-- TinyMCE for editor -->
 <script src="<?php echo e(asset('plugins/tinymce/tinymce.js')); ?>"></script>
 <!-- CKeditor for editor -->
-<script src="<?php echo e(asset('plugins/ckeditor/ckeditor.js')); ?>"></script>
+<script src="<?php echo e(asset('plugins/ckeditor5-build-classic/ckeditor.js')); ?>"></script>
 
 
 <!-- Bootbox support confirmation dialog -->
@@ -109,7 +109,7 @@ $locale = Helpers::getLocale();
 
 <link rel="stylesheet" href="<?php echo e(asset('css/common.css')); ?>">
 <script src="<?php echo e(asset("js/common.js")); ?>"></script>
-
+<?php echo $__env->yieldContent('script'); ?>
 
 <script>
     //store resources for using of javascript

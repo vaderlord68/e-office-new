@@ -13,12 +13,12 @@
     </div>
 <?php $__env->stopSection(); ?>
 <style>
-    .document .document-sidebar{
-        height: calc(100%);
-    }
-    .document .document-content{
-        height: calc(100%);
-    }
+    /*.document .document-sidebar{*/
+        /*height: calc(100%);*/
+    /*}*/
+    /*.document .document-content{*/
+        /*height: calc(100%);*/
+    /*}*/
 </style>
 
 

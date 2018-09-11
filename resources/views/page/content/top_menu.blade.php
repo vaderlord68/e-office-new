@@ -37,7 +37,7 @@
                         </div>
                     </div>
                     <div class="dropdown for-notification">
-                        <button class="btn btn-secondary dropdown-toggle btn-module-link" href="/W76f2150" type="button"
+                        <button class="btn btn-secondary dropdown-toggle btn-module-link" href="/W76F2150" type="button"
                                 id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span>Hồ sơ - tài liệu</span>
                         </button>

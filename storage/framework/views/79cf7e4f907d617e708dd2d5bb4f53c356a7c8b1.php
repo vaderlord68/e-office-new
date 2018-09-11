@@ -3,28 +3,45 @@
         Quản lý thư mục tài liệu
     </div>
     <div class="card-body">
-        <div id="treeView"></div>
+        <div id="jstree"></div>
     </div>
 </div>
 
-<script>
-    console.log(JSON.parse('<?php echo $json; ?>'));
-    $('#treeView').jstree({
-        'core' : {
-            'data' : <?php echo $json; ?>
 
+<script>
+    $(document).ready(function(){
+
+    });
+
+    $('#jstree').jstree({
+        'core' : {
+            'data' : <?php echo $treeViewData; ?>,
+            "multiple" : false,
+            "animation" : 0
         },
+
         "themes" : {
             "variant" : "large"
         }
     });
-
+    var instance = $('#jstree').jstree(true);
     //event change
-    $('#treeView').on('changed.jstree', function (e, data) {
-        var i, j, r = [];
-        for(i = 0, j = data.selected.length; i < j; i++) {
-            r.push(data.instance.get_node(data.selected[i]).text);
-        }
-        console.log('Selected: ' + r.join(', '));
+    $('#jstree').on('changed.jstree', function (e, data) {
+        console.log(data);
+        
+        
+            
+            
+        
+        
+            
+        
+        
+            //window.location.href = '<?php echo e(url("/W76F2150/?currentFolderID=")); ?>' + data.selected;
+    })
+    $('#jstree').on('click.jstree', function (e, data) {
+        var instance = $('#jstree').jstree(true);
+        var selectedNode =  instance.get_selected();
+        window.location.href = '<?php echo e(url("/W76F2150")); ?>' + "/?currentFolderID=" + selectedNode[0];
     })
 </script>
