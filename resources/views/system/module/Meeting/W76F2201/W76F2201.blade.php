@@ -7,10 +7,10 @@
             <div class="card-header">
                 <h4 class="card-title">{{Helpers::getRS('Cap_nhat_phong_hop')}}</h4>
             </div>
-            <div class="card-body" id="modalW76F2141">
+            <div class="card-body" id="modalW76F2201">
                 <div id="bootstrap-data-table_wrapper"
                      class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer table-documentary">
-                    <form id="createMeetingW76F2201" method="POST" enctype="multipart/form-data">
+                    <form id="formW76F2201" method="POST" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-sm-8">
                                 <div class="row mgb5">
@@ -198,7 +198,8 @@
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                             <div class="checkbox service-facility">
                                                 <input type="checkbox" class="hide" name="chkIsTeleCon">
-                                                <label><span class="fas fa-bezier-curve mgr5"></span>Tele-Conference</label>
+                                                <label><span class="fas fa-chess-queen mgr5"></span> Tele-Conference
+                                                </label>
                                                 <span class="fa fa-check mgl5 "></span>
                                             </div>
                                         </div>
@@ -240,20 +241,31 @@
 
 
     <script>
+        //        var fileW76F2201;
+        @if ($task == "add" || $task == "edit")
+        $("#formW76F2201").on('click', '.service-facility', function () {
+            var check = $(this).find("input[type=checkbox]").prop("checked");
+            $(this).find("input[type=checkbox]").prop('checked', !check);
+            if (check == true)
+                $(this).find(".fa-check").addClass("hide");
+            else
+                $(this).find(".fa-check").removeClass("hide");
+        });
+        @endif
+
         $(document).ready(function () {
             $('#displayOrderW76F2201').inputmask("numeric", {
                 radixPoint: ".",
                 groupSeparator: ",",
                 digits: 0,
                 autoGroup: true,
-                //prefix: '$', //No Space, this will truncate the first character
                 rightAlign: true
-            }); $('#txtCapacityW76F2201').inputmask("numeric", {
+            });
+            $('#txtCapacityW76F2201').inputmask("numeric", {
                 radixPoint: ".",
                 groupSeparator: ",",
                 digits: 0,
                 autoGroup: true,
-                //prefix: '$', //No Space, this will truncate the first character
                 rightAlign: true
             });
             $("#toolbarW76F2201").digiMenu({
@@ -290,66 +302,61 @@
                             render: function (ui) {
                             },
                             postRender: function (ui) {
-//                                ui.$btn.click(function () {
-//                                    window.location.href = document.referrer.toString();
-//                                });
+                                ui.$btn.click(function () {
+                                    window.location.href = document.referrer.toString();
+                                });
                             }
                         }
                     ]
                 }
             );
-
-            function frmW76F2001Save() {
-                validationElements($("#createNewsW76F2141"), function () {
-                    //Kiem tra nhung truong hop khac
-                    checkID($("#txtCapacityW76F2201"));
-                    checkID($("#displayOrderW76F2201"));
-                    $("#createNewsW76F2201").find("#btnSubmitW76F2201").click();
-                });
-            }
-
-            $('#createNewsW76F2201').submit(function (e) {
-                {{--e.preventDefault();--}}
-                {{--//get all values of this form--}}
-                {{--var formData = new FormData($('#createNewsW76F2201')[0]);--}}
-
-                {{--var relativeNews =  $("#gridW76F2141").pqGrid('option','dataModel.data');--}}
-                {{----}}
-                {{--formData.append('newsID', '{{$newsID}}');--}}
-
-                {{--if (relativeNews.length > 0){--}}
-                    {{--formData.append('relativeNews', JSON.stringify(relativeNews));--}}
-                {{--}--}}
-                {{--var url = "";--}}
-                {{--var task = "{{$task}}";--}}
-                {{--if (task == "add") {--}}
-                    {{--url = '{{url("/w76f2141/save")}}';--}}
-                {{--}--}}
-                {{--if (task == "edit") {--}}
-                    {{--url = '{{url("/w76f2141/update")}}';--}}
-                {{--}--}}
-                {{--$.ajax({--}}
-                    {{--enctype: 'multipart/form-data',--}}
-                    {{--method: "POST",--}}
-                    {{--url: url,--}}
-                    {{--data: formData,--}}
-                    {{--processData: false,--}}
-                    {{--contentType: false,--}}
-                    {{--success: function (res) {--}}
-                        {{--var result = JSON.parse(res);--}}
-                        {{--switch (result.status) {--}}
-                            {{--case 'ERROR':--}}
-                                {{--alertError(result.message);--}}
-                                {{--break;--}}
-                            {{--case 'SUCC':--}}
-                                {{--window.location.href = document.referrer.toString();--}}
-                                {{--break;--}}
-                        {{--}--}}
-                    {{--}--}}
-                {{--});--}}
-            });
-
         });
+        enableControls('{{$task}}');
+
+
+
+        function frmW76F2001Save() {
+            validationElements($("#formW76F2201"), function () {
+                //Kiem tra nhung truong hop khac
+                checkID($("#txtCapacityW76F2201"));
+                checkID($("#displayOrderW76F2201"));
+                $("#formW76F2201").find("#btnSubmitW76F2201").click();
+            });
+        }
+
+        function enableControls(task) {
+            switch (task) {
+                case "view":
+                    $('#txtFacilityNoW76F2201').pop('disabled, true');
+                    $('#txtFacilityNameW76F2201').pop('disabled, true');
+                    $('#txtLocationW76F2201').pop('disabled, true');
+                    $('#txtCapacityW76F2201').pop('disabled, true');
+                    $('#txtDescriptionW76F2201').pop('disabled, true');
+                    $('#cbLogisticsW76F2201').pop('disabled, true');
+                    $('#cbDivisionIDW76F2201').pop('disabled, true');
+                    $('#cbCoordinatorW76F2201').pop('disabled, true');
+                    $('#displayOrderW76F2201').pop('disabled, true');
+                    $('#disabledW76F2201').pop('disabled, true');
+                    $("#toolbarW76F2201").data("digiMenu").hide('btnSaveW76F22201');
+                    break;
+                case "edit":
+                    $('#txtFacilityNoW76F2201').pop('disabled, true');
+                    $('#txtFacilityNameW76F2201').pop('disabled, false');
+                    $('#txtLocationW76F2201').pop('disabled, false');
+                    $('#txtCapacityW76F2201').pop('disabled, false');
+                    $('#txtDescriptionW76F2201').pop('disabled, false');
+                    $('#cbLogisticsW76F2201').pop('disabled, false');
+                    $('#cbDivisionIDW76F2201').pop('disabled, false');
+                    $('#cbCoordinatorW76F2201').pop('disabled, false');
+                    $('#displayOrderW76F2201').pop('disabled, false');
+                    $('#disabledW76F2201').pop('disabled, false');
+                    $("#toolbarW76F2201").data("digiMenu").show('btnSaveW76F22201');
+                    break;
+                case "add":
+                    $("#toolbarW76F2201").data("digiMenu").show('btnSaveW76F22201');
+                    break;
+            }
+        }
     </script>
 
 @stop

@@ -547,11 +547,27 @@ a:hover {
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }
+
+.radio label, .checkbox label {
+    min-height: 20px;
+    padding-left: 20px;
+    margin-bottom: 0;
+    font-weight: normal;
+    cursor: pointer !important;
+}
+.fa-check:before {
+    content: "\f00c";
+}
+#divConfirm .modal-footer button {
+    pointer-events: auto;
+}
+
 .text-center{
     text-align: center;
 }
 .verticle-align-middle td{
     vertical-align: middle;
 }
+
 
 /*End THANHTRAM - new views */
