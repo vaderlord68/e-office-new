@@ -453,7 +453,6 @@
                 processData: false,
                 contentType: false,
                 success: function (res) {
-//                    console.log(res);
                     var result = JSON.parse(res);
                     switch (result.status) {
                         case 'ERROR':

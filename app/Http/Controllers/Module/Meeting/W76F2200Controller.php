@@ -16,7 +16,8 @@ class  W76F2200Controller extends Controller
         switch ($task) {
             case '':
                 return view("system/module/Meeting/W76F2200/W76F2200", compact('task'));
-//                return View("system/module/Meeting/W76F2200/W76F2200",compact('task'));
+                break;
+            case "delete":
                 break;
         }
     }
