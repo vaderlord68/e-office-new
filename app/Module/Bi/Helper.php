@@ -2,6 +2,8 @@
 
 namespace App\Module\Bi;
 
+use Illuminate\Support\Facades\Auth;
+
 class Helper extends \Illuminate\Database\Eloquent\Model
 {
     protected $fullPath = [];
@@ -70,8 +72,11 @@ class Helper extends \Illuminate\Database\Eloquent\Model
 
     public function getAllChildDocument($folderID)
     {
-        $documentFactory = new Document();
-        $collection = $documentFactory->getDocumentsWithFolderId($folderID);
+        $UserID = Auth::id();
+//        $documentFactory = new Document();
+//        $collection = $documentFactory->getDocumentsWithFolderId($folderID);
+        $collection = \DB::select("EXEC W76P2000 '$UserID', '$folderID'");
+
         return $collection;
     }
 

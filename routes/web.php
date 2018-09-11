@@ -24,6 +24,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/bi', 'Module\Bi\IndexController@index');
     Route::get('/bi/folder/view', 'Module\Bi\Folder\ViewController@index');
     Route::post('/bi/folder/share', 'Module\Bi\Folder\ViewController@share');
+    Route::post('/bi/folder/share/execute', 'Module\Bi\Folder\ViewController@shareExecute');
     Route::get('/bi/folder/create/index', 'Module\Bi\Folder\CreateController@index');
     Route::post('/bi/folder/create/execute', 'Module\Bi\Folder\CreateController@execute');
     Route::get('/bi/folder/rename/index', 'Module\Bi\Folder\RenameController@index');

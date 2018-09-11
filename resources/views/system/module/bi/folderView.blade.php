@@ -118,31 +118,20 @@
                     </div>
                 </div>
             </div>
-            <div class="popover-share hide">
-                @include('system.module.bi.shareDocument');
-            </div>
         </div>
     </div>
     <script>
-        //Bi
-        //share document....
-        $('.shareDocument').on('click', function () {
-            var item_id = $(this).data('id');
+        $(document).ready(function () {
+            //Bi
+            //share document....
+            $('.shareDocument').on('click', function () {
+                var el = this;
+                var item_id = $(el).data('id');
 
-            $.ajax({
-                method: 'POST',
-                url: '{{ url('/bi/folder/share') }}',
-                data: {item_id: item_id, _token: '{{csrf_token()}}'},
-                success: function (data) {
-                    $('.popover-share').html(data);
-                    $(this).popover({
-                        placement: "bottom",
-                        trigger: "click",
-                        html: true,
-                        content: $('.popover-share').html()
-                    });
-                }
+                var data = {documentId: item_id, _token: '{{csrf_token()}}'};
+                showFormDialogPost('{{url('/bi/folder/share')}}', 'modalShareDocument', data,  null, null, null);
             });
+
         });
     </script>
 @stop

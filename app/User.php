@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 
@@ -75,5 +76,12 @@ class User extends Authenticatable
         }
         return false;
 
+    }
+
+    public function getAllUsers() {
+        $users = DB::table($this->table)
+            ->select('UserID', 'UserNameU as UserName', 'Email')
+            ->get();
+        return $users;
     }
 }
