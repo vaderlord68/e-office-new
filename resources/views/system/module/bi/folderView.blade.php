@@ -81,7 +81,11 @@
                             ?>
                             <tr role="row" class="odd bi-table-item type-document" document_id="<?php  echo $document->ID?>">
                                 <td><span class="folder-icon"><img src="{{ asset("/media/default_document_icon.png") }}"
+<<<<<<< HEAD
                                                                    alt=""></span><?php echo isset($document->Name) ? $document->Name : ""?>
+=======
+                                                                   alt=""></span><?php echo isset($document->ID) ? $document->FileName : ""?>
+>>>>>>> 2347755ab8244c991aad82721951f4bb398915c6
                                 </td>
                                 <td><?php ?></td>
                                 <td><?php echo $document->CreateUserID ? $document->CreateUserID : ""?></td>
