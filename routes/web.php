@@ -55,7 +55,7 @@ Route::group(['namespace' => 'Module\W76', 'middleware' => 'auth'], function () 
     Route::any('/w76f2140/{task?}', 'W76F2140Controller@index'); //news management
     Route::any('/w76f2141/{task?}', 'W76F2141Controller@index');//news management
     Route::any('/w76f2142/{component?}', 'W76F2142Controller@index');//display news
-    Route::any('/W76f2150/{type?}', 'W76F2150Controller@index');//document
+    Route::any('/W76F2150/{type?}', 'W76F2150Controller@index');//document
 });
 
 Route::group(['namespace' => 'Module\Meeting','middleware' => 'auth'], function () {
