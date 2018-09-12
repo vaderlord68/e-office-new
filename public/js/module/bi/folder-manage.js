@@ -11,9 +11,11 @@ $(document).ready(function () {
     /** click to open folder on grid **/
     $(document).on("click", ".bi-table-item.type-folder td:not(:first-child)", function (e) {
         var _this = $(this);
-        var stateUrl = "/bi/folder/view?FolderId=" + _this.attr("folder_id");
-        localStorage.setItem("currentSelectedFolderId", _this.attr("folder_id"));
-        var treeElement = $('li[folder_id="'+ _this.attr("folder_id") + '"]');
+        var selectfolderID = _this.parent().attr('folder_id');
+        console.log(selectfolderID);
+        var stateUrl = "/bi/folder/view?FolderId=" + selectfolderID;
+        localStorage.setItem("currentSelectedFolderId", selectfolderID);
+        var treeElement = $('li[folder_id="'+ selectfolderID + '"]');
         $("#folderTree").jstree("open_all");
         $("#folderTree").jstree("deselect_all",true);
         $('#folderTree').jstree('select_node', treeElement.attr("id"));
@@ -21,13 +23,13 @@ $(document).ready(function () {
         var loadingMask = $("#loading-mask");
         loadingMask.css("display","unset");
         setTimeout(function () {
-            window.location.href = stateUrl;
+            // window.location.href = stateUrl;
         },1000);
     });
     /** click to open document on grid **/
     $(document).on("click", ".bi-table-item.type-document td:not(:first-child)", function (e) {
         var _this = $(this);
-        var url = "/bi/document/view?DocumentId=" + _this.attr("document_id");
+        var url = "/bi/document/view?DocumentId=" + _this.parent().attr("document_id");
         var loadingMask = $("#loading-mask");
         loadingMask.css("display","unset");
         setTimeout(function () {
