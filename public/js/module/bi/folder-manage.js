@@ -19,24 +19,13 @@ $(document).ready(function () {
         $("#folderTree").jstree("open_all");
         $("#folderTree").jstree("deselect_all",true);
         $('#folderTree').jstree('select_node', treeElement.attr("id"));
-
-        var loadingMask = $("#loading-mask");
-        loadingMask.css("display","unset");
-        setTimeout(function () {
-            loadingMask.css("display","none");
-            window.location.href = stateUrl;
-        },500);
+        window.location.href = stateUrl;
     });
     /** click to open document on grid **/
     $(document).on("click", ".bi-table-item.type-document td:not(:first-child)", function (e) {
         var _this = $(this);
         var url = "/bi/document/view?DocumentId=" + _this.parent().attr("document_id");
-        var loadingMask = $("#loading-mask");
-        loadingMask.css("display","unset");
-        setTimeout(function () {
-            loadingMask.css("display","none");
-            window.location.href = url;
-        },500);
+        window.location.href = url;
 
     });
     /** Add new attached file **/
@@ -146,30 +135,18 @@ $(document).ready(function () {
         .on('changed.jstree', function (e, data) {
             var selectedFolderId = data.node.li_attr.folder_id;
             var nodeId = data.node.id;
-            var loadingMask = $("#loading-mask");
-            loadingMask.css("display","unset");
-            setTimeout(
-                function () {
-                    if (typeof selectedFolderId != 'undefined') {
-                        localStorage.setItem("currentSelectedFolderId", selectedFolderId);
-                        localStorage.setItem("currentSelectedNodeId", nodeId);
-                        var url = "/bi/folder/view?FolderId=" + selectedFolderId;
-                        loadingMask.css("display","none");
-                        window.location.href = url;
-                    } else {
-                        var selectedDocumentId = data.node.li_attr.document_id;
-                        var url = "/bi/document/view?DocumentId=" + selectedDocumentId;
-                        loadingMask.css("display","none");
-                        window.location.href = url;
-                    }
-                }
-            , 500);
+            if (typeof selectedFolderId != 'undefined') {
+                localStorage.setItem("currentSelectedFolderId", selectedFolderId);
+                localStorage.setItem("currentSelectedNodeId", nodeId);
+                var url = "/bi/folder/view?FolderId=" + selectedFolderId;
+                window.location.href = url;
+            } else {
+                var selectedDocumentId = data.node.li_attr.document_id;
+                var url = "/bi/document/view?DocumentId=" + selectedDocumentId;
+                window.location.href = url;
+            }
 
         })
         .jstree();
-    //
-    // setTimeout(function () {
-    //
-    // },1000);
 
 });
