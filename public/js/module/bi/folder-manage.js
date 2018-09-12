@@ -23,7 +23,8 @@ $(document).ready(function () {
         var loadingMask = $("#loading-mask");
         loadingMask.css("display","unset");
         setTimeout(function () {
-            // window.location.href = stateUrl;
+            loadingMask.css("display","none");
+            window.location.href = stateUrl;
         },1000);
     });
     /** click to open document on grid **/
@@ -33,6 +34,7 @@ $(document).ready(function () {
         var loadingMask = $("#loading-mask");
         loadingMask.css("display","unset");
         setTimeout(function () {
+            loadingMask.css("display","none");
             window.location.href = url;
         },1000);
 
@@ -152,10 +154,12 @@ $(document).ready(function () {
                         localStorage.setItem("currentSelectedFolderId", selectedFolderId);
                         localStorage.setItem("currentSelectedNodeId", nodeId);
                         var url = "/bi/folder/view?FolderId=" + selectedFolderId;
+                        loadingMask.css("display","none");
                         window.location.href = url;
                     } else {
                         var selectedDocumentId = data.node.li_attr.document_id;
                         var url = "/bi/document/view?DocumentId=" + selectedDocumentId;
+                        loadingMask.css("display","none");
                         window.location.href = url;
                     }
                 }
