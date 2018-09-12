@@ -110,10 +110,11 @@ class Helper extends \Illuminate\Database\Eloquent\Model
         $filePath = 'public/users-upload/';
         try{
             $file->storeAs($filePath, $fileName);
-            return $fileName;
+
         }catch (\Exception $ex){
             \Debugbar::info($ex->getMessage());
         }
+        return $fileName;
     }
 
 }

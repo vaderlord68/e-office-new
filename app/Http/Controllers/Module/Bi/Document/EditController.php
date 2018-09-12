@@ -44,12 +44,10 @@ class  EditController extends Controller
         try {
 
             $uploadedFiles = $request->file('AttachedFiles');
-            $fileOrderNumber = 1;
             $filePaths = [];
             if ($uploadedFiles && is_array($uploadedFiles) && count($uploadedFiles)) {
                 foreach ($uploadedFiles as $uploadedFile) {
-                    $filePaths[] = $this->biHelper->uploadFile($uploadedFile,$fileOrderNumber);
-                    $fileOrderNumber++;
+                    $filePaths[] = $this->biHelper->uploadFile($uploadedFile,0);
                 }
             }
             $DocumentName = $dataPost['DocumentName'];
