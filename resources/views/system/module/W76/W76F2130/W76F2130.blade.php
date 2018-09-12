@@ -45,7 +45,7 @@
                             postRender: function (ui) {
                                 console.log(ui);
                                 ui.$btn.click(function () {
-                                    window.location.href = "{{url('/w76f2131/add')}}";
+                                    window.location.href = "{{url('/W76F2131/add')}}";
                                 });
                             }
                         }
@@ -63,13 +63,13 @@
                 scrollModel: {horizontal: true, autoFit: false, lastColumn: 'none'},
                 showTitle: false,
                 dataType: "JSON",
-                wrap: false,
-                hwrap: false,
+                wrap: true,
+                hwrap: true,
                 collapsible: false,
                 postRenderInterval: -1,
                 colModel: [
                     {
-                        title: "{{Helpers::getRS('Xu_ly')}}",
+                        title: "#",
                         width: 61,
                         align: "center",
                         dataIndx: "View",
@@ -87,17 +87,16 @@
                             var rowData = ui.rowData;
                             $cell.find("#btnEditW76F2130").bind("click", function (evt) {
                                 var data = {
-                                    newsID: rowData.NewsID,
-                                    channelID: rowData.ChannelID
+                                    ID: rowData.ID
                                 }
-                                window.location.href = "{{url('/w76f2131/edit')}}" + "?" + $.param(data);
+                                window.location.href = "{{url('/W76F2131/edit')}}" + "?" + $.param(data);
                             });
                             $cell.find("#btnDeleteW76F2130").bind("click", function (evt) {
                                 ask_delete(function () {
                                     $.ajax({
                                         method: "POST",
-                                        url: '{{url('/w76f2130/delete')}}',
-                                        data: {newsID: rowData.NewsID, _token: '{{ csrf_token() }}'},
+                                        url: '{{url('/W76F2130/delete')}}',
+                                        data: {ID: rowData.ID, _token: '{{ csrf_token() }}'},
                                         success: function (res) {
                                             var data = JSON.parse(res);
                                             switch (data.status) {
@@ -122,111 +121,94 @@
                     }
                     , {
                         title: "",
-                        width: 110,
+                        width: 70,
                         align: "center",
-                        dataIndx: "NewsID",
+                        dataIndx: "ID",
                         editor: false,
                         hidden: true
                     }
                     , {
-                        title: "{{Helpers::getRS('Tieu_de')}}",
-                        width: 220,
-                        align: "center",
-                        dataIndx: "Title",
+                        title: "Số",
+                        width: 140,
+                        align: "left",
+                        dataIndx: "ContractNo",
                         dataType: "string",
                         editor: false,
                         filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']},
-                    },
-                    {
-                        title: "{{Helpers::getRS('Chuyen_muc')}}",
+                    }
+                    , {
+                        title: "Đối tác ký kết",
                         width: 170,
+                        align: "left",
+                        dataIndx: "Partner",
                         dataType: "string",
                         editor: false,
-                        hidden: false,
-                        align: "center",
-                        dataIndx: "ChannelID",
                         filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']},
-                    },
-                    {
-                        title: "{{Helpers::getRS('Trang_thai')}}",
-                        width: 90,
+                    }
+                    , {
+                        title: "Phân loại",
+                        width: 170,
                         align: "center",
+                        dataIndx: "ContractTypeName",
                         dataType: "string",
                         editor: false,
-                        dataIndx: "StatusID",
-                        render: function (ui) {
-                            var rowData = ui.rowData;
-                            var isCheck = rowData.StatusID == 1 ? 'checked' : '';
-                            return '<input type="checkbox" ' + isCheck + ' disabled />';
-                        }
-                    },
-                    {
-                        title: "{{Helpers::getRS('So_luot_xem')}}",
+                        filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']},
+                    }
+                    , {
+                        title: "Người đại diện",
+                        width: 170,
+                        align: "center",
+                        dataIndx: "SignerName",
+                        dataType: "string",
+                        editor: false,
+                        filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']},
+                    }
+                    , {
+                        title: "Trích yếu",
+                        width: 270,
+                        align: "left",
+                        dataIndx: "Content",
+                        dataType: "string",
+                        editor: false,
+                        filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']},
+                    }
+                    , {
+                        title: "Hiệu lực từ",
                         width: 110,
-                        dataType: "string",
-                        editor: false,
                         align: "center",
-                        dataIndx: "Hits",
-                        filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']}
-                    },
-                    {
-                        title: "{{Helpers::getRS('Ngay_soan_thao')}}",
-                        width: 180,
-                        align: "center",
+                        dataIndx: "EffectDateFrom",
                         dataType: "date",
                         editor: false,
-                        dataIndx: "CreateDate",
-                        filter: {type: "textbox", condition: "equal", init: pqDatePicker, listeners: ['change']}
-                    },
-                    {
-                        title: "{{Helpers::getRS('Ngay_dang_tin')}}",
-                        width: 180,
+                        filter: {type: "textbox", condition: "equal", init: pqDatePicker, listeners: ['change']},
+                    }
+                    , {
+                        title: "Hiệu lực đến",
+                        width: 110,
                         align: "center",
+                        dataIndx: "EffectDateTo",
                         dataType: "date",
                         editor: false,
-                        dataIndx: "ReleaseDate",
-                        filter: {type: "textbox", condition: "equal", init: pqDatePicker, listeners: ['change']}
-                    },
-                    {
-                        title: "{{Helpers::getRS('Nguoi_dang_tin')}}",
-                        width: 170,
-                        dataType: "string",
-                        editor: false,
-                        dataIndx: "CreateUserID",
-                        filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']}
-                    },
-                    {
-                        title: "{{Helpers::getRS('Tin_noi_bat')}}",
-                        width: 90,
+                        filter: {type: "textbox", condition: "equal", init: pqDatePicker, listeners: ['change']},
+                    }
+                    , {
+                        title: "Trạng thái",
+                        width: 110,
                         align: "center",
+                        dataIndx: "StatusName",
                         dataType: "string",
                         editor: false,
-                        dataIndx: "IsHotNews",
-                        render: function (ui) {
-                            var rowData = ui.rowData;
-                            var isCheck = rowData.IsHotNews == 1 ? 'checked' : '';
-                            return '<input type="checkbox" ' + isCheck + ' disabled />';
-                        }
-                    },
-                    {
-                        title: "{{Helpers::getRS('Tac_gia')}}",
-                        width: 170,
-                        align: "center",
-                        dataType: "string",
-                        editor: false,
-                        dataIndx: "Author",
-                        filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']}
+                        filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']},
                     }
                 ],
                 dataModel: {
-                    data: [],
+                    data: {!! $rsData !!},
                 },
                 pageModel: {type: 'local', rPP: 20, rPPOptions: [20, 30, 40, 50]},
                 complete: function (event, ui) {
-                    var data = $("#gridW76F2130").pqGrid('option', 'dataModel.data');
-                    if (data.length > 0) {
-                        $("#gridW76F2130").pqGrid("setSelection", {rowIndx: 0});
-                    }
+//                    var data = $("#gridW76F2130").pqGrid('option', 'dataModel.data');
+//                    if (data.length > 0) {
+//                        $("#gridW76F2130").pqGrid("setSelection", {rowIndx: 0});
+//                    }
                 }
             };
 

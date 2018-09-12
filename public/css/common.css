@@ -29,11 +29,6 @@
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-body{
-    overflow-x: hidden;
-    display: inline-flex;
-}
-
 body, textarea {
     font-family: Source Serif Pro, Arial, PT Sans, Trebuchet MS, Helvetica !important;
     font-size: 13px !important;
@@ -239,13 +234,12 @@ body, textarea {
 }
 
 input:required, select:required, textarea:required {
-    background-color: beige !important;
+    background-color: #ece0bb !important;
     /*border: 1px solid #EAC151;*/
 }
 
-input:read-only, select:read-only, textarea:read-only {
-    background-color: #EEEEEE;
-
+input:read-only,  textarea:read-only{
+    background-color: #EEEEEE !important;
 }
 
 .input-group.date .dropdown-menu {
@@ -380,7 +374,7 @@ img {
 }
 
 .logo{
-    width: 80px;
+    width: 36px;
     height: 36px;
     margin-top: 6px;
     border-radius: 0px;
