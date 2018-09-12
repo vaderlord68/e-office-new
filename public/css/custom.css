@@ -622,6 +622,18 @@ aside.left-panel {
     height: 23px;
     line-height: 22px;
 }
+#bi-folder-path {
+    margin-top: 10px;
+}
+#bi-folder-path span {
+    background-color: #dddddd;
+    border: 1px solid #d7d7d7;
+    border-radius: 5px;
+    padding: 5px;
+}
+.path-separator {
+    margin: 0 5px 0 5px;
+}
 #loading-mask {
     display: none;
     position: absolute;
