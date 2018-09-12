@@ -29,6 +29,11 @@
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+body{
+    overflow-x: hidden;
+    display: inline-flex;
+}
+
 body, textarea {
     font-family: Source Serif Pro, Arial, PT Sans, Trebuchet MS, Helvetica !important;
     font-size: 13px !important;
@@ -622,4 +627,5 @@ a:hover {
     width: 60px;
     border: none;
 }
+
 /* End TRIHAO */

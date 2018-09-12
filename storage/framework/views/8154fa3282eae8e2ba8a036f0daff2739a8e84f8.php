@@ -1,23 +1,33 @@
 <?php $__env->startSection('body_content'); ?>
     ##parent-placeholder-5a4526adfe28f01223dccf37a363ace9165900d0##
-    <section>
-        <div class="row mgb5">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div id="toolbarW76F2130">
+    <div class="card document-sidebar">
+        <div class="card-header">
+            <h4>Quản lý hợp đồng</h4>
+        </div>
+        <div class="card-body">
+            <section>
+                <div class="row mgb5">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div id="toolbarW76F2130">
+                        </div>
+                    </div>
                 </div>
-            </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div id="gridW76F2130"></div>
+                    </div>
+                </div>
+            </section>
         </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div id="gridW76F2130"></div>
-            </div>
-        </div>
-    </section>
+    </div>
+
+
 
     <script>
         $(document).ready(function () {
             $("#toolbarW76F2130").digiMenu({
                     showText: true,
+                    style: 'border: none',
                     buttonList: [
                         {
                             ID: "btnAddW76F2130",
@@ -43,7 +53,7 @@
             );
             var obj = {
                 width: '100%',
-                height: 600,
+                height: 400,
                 freezeCols: 1,
                 numberCell: {show: false},
                 selectionModel: {type: 'row', mode: 'single'},

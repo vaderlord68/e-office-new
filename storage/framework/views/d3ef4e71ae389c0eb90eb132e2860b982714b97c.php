@@ -78,9 +78,6 @@
                             <a class="dropdown-item media" href="/w76f2140">
                                 <p><?php echo e(Helpers::getRS('Quan_ly_ban_tin')); ?></p>
                             </a>
-                            <a class="dropdown-item media" href="/w76f2200">
-                                <p><?php echo e(Helpers::getRS('Danh_sach_phong_hop')); ?></p>
-                            </a>
                         </div>
                     </div>
                     <div class="dropdown for-notification">
@@ -91,6 +88,9 @@
                         <div class="dropdown-menu" aria-labelledby="notification">
                             <a class="dropdown-item" href="<?php echo e(url('/w76f1555')); ?>">
                                 <p>Danh mục dùng chung</p>
+                            </a>
+                            <a class="dropdown-item media" href="/w76f2200">
+                                <p><?php echo e(Helpers::getRS('Danh_sach_phong_hop')); ?></p>
                             </a>
 
                         </div>
