@@ -64,10 +64,13 @@
                                                             <?php
                                                             foreach ($attachedFiles as $attachedFile) :
                                                             ?>
+                                                            <?php
+                                                            $attachedFileArg = explode("/",$attachedFile)
+                                                            ?>
                                                             <li>
-                                                                <a href="/storage/users-upload/<?php echo $attachedFile?>"><?php echo $attachedFile?></a>
+                                                                <a href="/storage/users-upload/<?php echo $attachedFile?>"><?php echo $attachedFileArg[1]?></a>
                                                                 <a class="delete-file-link"
-                                                                   href="/bi/document/deleteAttachment/<?php echo $currentDocumentID?>/<?php echo $attachedFile?>">
+                                                                   href="/bi/document/deleteAttachment/<?php echo $currentDocumentID?>/<?php echo base64_encode($attachedFile)?>">
                                                                     Xóa
                                                                 </a>
                                                             </li>
