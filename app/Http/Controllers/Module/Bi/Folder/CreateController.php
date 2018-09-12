@@ -32,7 +32,7 @@ class  CreateController extends Controller
             $folder = new Folder();
             $folder->setAttribute('FolderName', $dataPost['FolderName']);
             $folder->setAttribute('ID', base64_encode($dataPost['FolderName']));
-            $folder->setAttribute('FolderParentID', $dataPost['FolderParentID']);
+            $folder->setAttribute('FolderParentID', base64_encode($dataPost['FolderParentID']));
             $folder->setAttribute('FolderDescription', $dataPost['FolderDescription']);
             $folder->setAttribute('CreateUserID', $dataPost['CreateUserID']);
             $folder->setAttribute('LastModifyUserID', $dataPost['CreateUserID']);
