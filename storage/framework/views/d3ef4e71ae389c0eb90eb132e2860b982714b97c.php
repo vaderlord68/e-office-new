@@ -37,6 +37,14 @@
                         </div>
                     </div>
                     <div class="dropdown for-notification">
+                        <button class="btn btn-secondary dropdown-toggle btn-module-link" href="/W76F2130" type="button"
+                                id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span>Quản lý hợp đồng</span>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="notification">
+                        </div>
+                    </div>
+                    <div class="dropdown for-notification" style="display: none;">
                         <button class="btn btn-secondary dropdown-toggle btn-module-link" href="/W76F2150" type="button"
                                 id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span>Hồ sơ - tài liệu</span>

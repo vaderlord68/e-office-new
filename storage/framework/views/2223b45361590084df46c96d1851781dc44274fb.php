@@ -94,7 +94,7 @@
         }else{
 
             //window.location.href = '<?php echo e(url("/W76F2150/create-document")); ?>' + "/?currentFolderID=" + selectedNode[0];
-            showFormDialogPost('<?php echo e(url("/W76F2150/create-document")); ?>', 'popCreateDocument', {_token: '<?php echo e(csrf_token()); ?>', currentFolderID: selectedNode[0]}, function(){
+            showFormDialogPost('<?php echo e(url("/W76F2150/create-document")); ?>', 'popCreateDocument', {_token: '<?php echo e(csrf_token()); ?>', currentFolderID: selectedNode[0],file: file}, function(){
                 alert("test");
                 console.log(file);
                 //$("#attFile").val(file);
