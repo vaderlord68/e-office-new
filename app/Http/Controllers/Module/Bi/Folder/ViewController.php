@@ -32,7 +32,9 @@ class  ViewController extends Controller
         $requestFolderId = $dataPost['FolderId'];
         $childFolders = $this->getChildFolders($requestFolderId);
         $childDocuments = $this->getChildDocuments($requestFolderId);
+        $fullPath = $this->biHelper->getFullPath($requestFolderId);
         return view("system/module/bi/folderView")
+            ->with("currentDirectoryPath", $fullPath)
             ->with("folderTree", $this->biHelper->getFolderTree())
             ->with("childDocuments",$childDocuments)
             ->with("childFolders",$childFolders);

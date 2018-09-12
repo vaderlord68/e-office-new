@@ -82,16 +82,23 @@ class Helper extends \Illuminate\Database\Eloquent\Model
 
     public function getFullPath($folderId)
     {
+
         $folder = Folder::find($folderId);
-        if (($folder->FolderParentId) || ($folder->FolderParentId == "")) {
-            $this->fullPath[] = $folderId;
-            return $this->fullPath;
+        $this->fullPath[] = $folder->FolderName;
+        if ($folder->FolderParentID != "") {
+            $this->getNextParent($folder->FolderParentID);
         }
-        $parentId = $folder->FolderParentId;
-        $this->fullPath[] = $parentId;
-        return $this->getFullPath($parentId);
+        return implode(" \ ",array_reverse($this->fullPath));
     }
 
+    public function getNextParent($folderId)
+    {
+        $folder = Folder::find($folderId);
+        $this->fullPath[] = $folder->FolderName;
+        if ($folder->FolderParentID != "") {
+            $this->getNextParent($folder->FolderParentID);
+        }
+    }
     public function getFolderTree()
     {
         $tree = self::viewTree();

@@ -3,6 +3,11 @@
         <?php if (!isset($searchView)) : ?>
         <a id="bi-createDocument" class="toolbar-btn action-on-header" href="/bi/module/document/new">
             <i class="fa fa-plus-circle"></i> Thêm tài liệu</a>
+        <div>
+            <span>
+                <?php echo $currentDirectoryPath?>
+            </span>
+        </div>
         <?php endif;?>
     </div>
     <div class="right-table-header">
