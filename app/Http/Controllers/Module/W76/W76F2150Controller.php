@@ -43,7 +43,7 @@ class  W76F2150Controller extends Controller
         $treeViewData = $this->getTreeView($currentFolderID);
         switch ($type) {
             case '':
-                $documentList = $this->d76T1010->where('FolderParentID','=',$currentFolderID)->get();
+                $documentList = $this->d76T1020->where('FolderParentID','=',$currentFolderID)->get();
                 return view("system/module/W76/W76F2150/W76F2150", compact('treeViewData','currentFolderID','documentList'));
                 break;
             case 'create-folder':
@@ -57,7 +57,7 @@ class  W76F2150Controller extends Controller
                 \Debugbar::info($request->input);
                 if ($txtFolderID == ''){
 
-                    if ($this->d76T1010->where('FolderName', '=',$txtFolderName)->where('FolderParentID', '=',$folderParentID)->first() != null){
+                    if ($this->d76T1020->where('FolderName', '=',$txtFolderName)->where('FolderParentID', '=',$folderParentID)->first() != null){
                         return json_encode(['status'=>'ERROR', 'message'=>'Thư mục đã bị trùng tên trong hệ thống']);
                     }
 
@@ -72,7 +72,7 @@ class  W76F2150Controller extends Controller
                     ];
 
                     try{
-                        $this->d76T1010->insert($rowData);
+                        $this->d76T1020->insert($rowData);
                         Helper::setSession('successMessage','Thư mục đã được tạo thành công');
                         return json_encode(['status'=>'OKAY', 'message'=>'']);
                     }catch (\Exception $ex){
@@ -89,7 +89,7 @@ class  W76F2150Controller extends Controller
                     ];
 
                     try{
-                        $this->d76T1010->update($rowData);
+                        $this->d76T1020->update($rowData);
                         Helper::setSession('successMessage','Thư mục đã cập nhật thành công');
                         return json_encode(['status'=>'OKAY', 'message'=>'']);
                     }catch (\Exception $ex){
@@ -111,13 +111,13 @@ class  W76F2150Controller extends Controller
 
     private function getTreeView($folderId){
         $json = [];
-        $d76T1010List = $this->d76T1010->get()->toArray();
-        $currentNode = $this->d76T1010->where('FolderParentID', '=', '')->first();
-        $json = $this->createTreeViewData($currentNode, $d76T1010List, $json, $folderId);
+//        $d76T1010List = $this->d76T1010->get()->toArray();
+//        $currentNode = $this->d76T1010->where('FolderParentID', '=', '')->first();
+//        $json = $this->createTreeViewData($currentNode, $d76T1010List, $json, $folderId);
 
         $d76T1020List = $this->d76T1020->get()->toArray();
         $currentNode = $this->d76T1020->where('FolderParentID', '=','')->first();
-        $json = $this->createTreeViewData($currentNode, $d76T1010List, $json, $folderId);
+        $json = $this->createTreeViewData($currentNode, $d76T1020List, $json, $folderId);
         \Debugbar::info($json);
         $json = json_encode($json);
         return $json;

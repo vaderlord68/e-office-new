@@ -235,7 +235,7 @@ body, textarea {
 
 input:required, select:required, textarea:required {
     background-color: beige !important;
-    border: 1px solid #EAC151;
+    /*border: 1px solid #EAC151;*/
 }
 
 input:read-only, select:read-only, textarea:read-only {
@@ -568,6 +568,8 @@ a:hover {
 .verticle-align-middle td{
     vertical-align: middle;
 }
-
+.hover{
+    background-color: orange;
+}
 
 /*End THANHTRAM - new views */

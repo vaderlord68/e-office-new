@@ -1,13 +1,12 @@
-@extends('system.module.W76.W76F2150.components.layout')
-@section('document-header')
+<?php $__env->startSection('document-header'); ?>
    <button id="btnUploadFile" type="button" title="Đăng tập tin" class="btn btn-default  pull-right"><i class="fa fa-upload text-primary mgr5"></i>Đăng tập tin</button>
    <button id="btnCreateFolder" type="button" title="Tạo thư mục" class="btn btn-default  pull-right mgr5"><i class="fa fa-folder text-warning mgr5"></i>Tạo thư mục</button>
-@stop
-@section('document-body')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('document-body'); ?>
     <div id="divW76F2150">
         <div class="row form-group">
             <div class="col-sm-12">
-                @include('page.content.alert-dismissible')
+                <?php echo $__env->make('page.content.alert-dismissible', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
             </div>
         </div>
         <div id="bootstrap-data-table_wrapper"
@@ -47,21 +46,22 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($documentList as $row)
+                        <?php $__currentLoopData = $documentList; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr role="row" class="odd bi-table-item type-folder verticle-align-middle">
                                 <td>
-                                    <a href="{{url('/W76F2150/?currentFolderID=').$row->ID}}">
+                                    <a href="<?php echo e(url('/W76F2150/?currentFolderID=').$row->ID); ?>">
                                         <span class="folder-icon"><img src="http://eoffice.local/media/default_folder_icon.png" alt=""></span>
-                                        {{$row->FolderName}}
+                                        <?php echo e($row->FolderName); ?>
+
                                     </a>
                                 </td>
-                                <td>{{$row->CreateUserID}}</td>
-                                <td>{{$row->CreateDate}}</td>
-                                <td>{{$row->LastModifyUserID}}</td>
-                                <td>{{$row->LastModifyDate}}</td>
+                                <td><?php echo e($row->CreateUserID); ?></td>
+                                <td><?php echo e($row->CreateDate); ?></td>
+                                <td><?php echo e($row->LastModifyUserID); ?></td>
+                                <td><?php echo e($row->LastModifyDate); ?></td>
                                 <td><button id="btnDeleteFolder" type="button" title="Xoá thư mục" class="btn btn-default  pull-right mgr5"><i class="fa fa-trash text-red mgr5"></i></button></td>
                             </tr>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tbody>
                         <tfoot class="hide">
                         <tr role="row" class="odd bi-table-item type-folder">
@@ -80,9 +80,9 @@
             </div>
         </div>
     </div>
-@stop
+<?php $__env->stopSection(); ?>
 
-@section('script')
+<?php $__env->startSection('script'); ?>
 <script type="text/javascript">
 
     function showFormCreateDocument(file){
@@ -93,8 +93,8 @@
             alertError("Bạn chưa chọn thư mục nào.", $("#divW76F2150"))
         }else{
 
-            //window.location.href = '{{url("/W76F2150/create-document")}}' + "/?currentFolderID=" + selectedNode[0];
-            showFormDialogPost('{{url("/W76F2150/create-document")}}', 'popCreateDocument', {_token: '{{csrf_token()}}', currentFolderID: selectedNode[0],file: file}, function(){
+            //window.location.href = '<?php echo e(url("/W76F2150/create-document")); ?>' + "/?currentFolderID=" + selectedNode[0];
+            showFormDialogPost('<?php echo e(url("/W76F2150/create-document")); ?>', 'popCreateDocument', {_token: '<?php echo e(csrf_token()); ?>', currentFolderID: selectedNode[0]}, function(){
                 alert("test");
                 console.log(file);
                 //$("#attFile").val(file);
@@ -115,8 +115,8 @@
             if (selectedNode.length == 0){
                 alertError("Bạn chưa chọn thư mục nào.", $("#divW76F2150"))
             }else{
-                //window.location.href = '{{url("/W76F2150/create-folder")}}' + "/?currentFolderID=" + selectedNode[0];
-                showFormDialogPost('{{url("/W76F2150/create-folder")}}', 'popCreateFolder', {_token: '{{csrf_token()}}', currentFolderID: selectedNode[0]}, function(){
+                //window.location.href = '<?php echo e(url("/W76F2150/create-folder")); ?>' + "/?currentFolderID=" + selectedNode[0];
+                showFormDialogPost('<?php echo e(url("/W76F2150/create-folder")); ?>', 'popCreateFolder', {_token: '<?php echo e(csrf_token()); ?>', currentFolderID: selectedNode[0]}, function(){
 
                 }, null, function (res) {
 
@@ -154,24 +154,26 @@
             //reader.readAsDataURL(file);
         };
 
-        {{--$("#btnDeleteFolder").click(function(evt){--}}
-            {{--console.log("dfdsf");--}}
-            {{--var idList = [];--}}
-            {{--$.each($(".chkIDList"), function( index, el ) {--}}
-                {{--if ($(el).is(":checked")){--}}
-                    {{--idList.push($(el).val());--}}
-                {{--}--}}
-            {{--});--}}
-            {{--idList.push()--}}
-            {{--if (idList.length > 0){--}}
-                {{--postMethod('{{url("W76F2150/delete-folder")}}', function(res){--}}
+        
+            
+            
+            
+                
+                    
+                
+            
+            
+            
+                
 
-                {{--},{idList: JSON.stringify(idList), _token: "{{csrf_token()}}"})--}}
-            {{--}else{--}}
-                {{--alertError("Bạn chưa chọn thư mục nào để xoá.")--}}
+                
+            
+                
 
-            {{--}--}}
-        {{--});--}}
+            
+        
     });
 </script>
-@stop
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('system.module.W76.W76F2150.components.layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

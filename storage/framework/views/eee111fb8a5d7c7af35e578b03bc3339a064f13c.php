@@ -52,9 +52,9 @@
                         </div>
                         <div class="col-sm-10">
                             <select class="form-control" id="cboDocType" name="cboDocType">
-                                @foreach($docTypeList as $row)
-                                    <option value="{{$row->CodeID}}">{{$row->CodeName}}</option>
-                                @endforeach
+                                <?php $__currentLoopData = $docTypeList; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($row->CodeID); ?>"><?php echo e($row->CodeName); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
                     </div>
@@ -64,9 +64,9 @@
                         </div>
                         <div class="col-sm-10">
                             <select class="form-control" id="cboFieldDoc" name="cboFieldDoc">
-                                @foreach($docTypeList as $row)
-                                    <option value="{{$row->CodeID}}">{{$row->CodeName}}</option>
-                                @endforeach
+                                <?php $__currentLoopData = $docTypeList; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($row->CodeID); ?>"><?php echo e($row->CodeName); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
                     </div>
@@ -76,9 +76,9 @@
                         </div>
                         <div class="col-sm-10">
                             <select class="form-control" id="cboOrgDoc" name="cboOrgDoc">
-                                @foreach($docTypeList as $row)
-                                    <option value="{{$row->CodeID}}">{{$row->CodeName}}</option>
-                                @endforeach
+                                <?php $__currentLoopData = $docTypeList; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($row->CodeID); ?>"><?php echo e($row->CodeName); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
                     </div>
@@ -92,9 +92,9 @@
                         </div>
                     </div>
 
-                    <input type="hidden" name="hdParentFolderID" value="{{$currentFolderID}}">
+                    <input type="hidden" name="hdParentFolderID" value="<?php echo e($currentFolderID); ?>">
                     <input type="hidden" name="hdFolderID" value="">
-                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                    <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                     <button id="hdBtnSaveFolder" class="hide"></button>
                 </form>
             </div>
@@ -126,7 +126,7 @@
 
         $("#frmCreateFolder").submit(function (evt) {
             evt.preventDefault();
-            postMethod("{{url('/W76F2150/save-folder')}}", function (res) {
+            postMethod("<?php echo e(url('/W76F2150/save-folder')); ?>", function (res) {
                 var data = JSON.parse(res);
                 switch (data.status) {
                     case 'OKAY':
