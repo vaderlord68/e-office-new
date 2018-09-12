@@ -25,7 +25,7 @@ $(document).ready(function () {
         setTimeout(function () {
             loadingMask.css("display","none");
             window.location.href = stateUrl;
-        },1000);
+        },500);
     });
     /** click to open document on grid **/
     $(document).on("click", ".bi-table-item.type-document td:not(:first-child)", function (e) {
@@ -36,7 +36,7 @@ $(document).ready(function () {
         setTimeout(function () {
             loadingMask.css("display","none");
             window.location.href = url;
-        },1000);
+        },500);
 
     });
     /** Add new attached file **/
@@ -129,7 +129,7 @@ $(document).ready(function () {
             $('#folder-tree-loading').css("display","none");
             var nodeSelector = "#" + localStorage.getItem("currentSelectedNodeId") + "_anchor";
             $(nodeSelector).css("background-color","#FFC107");
-        },1000);
+        },500);
     }).jstree({
         'core': {
             'multiple': false,
@@ -163,7 +163,7 @@ $(document).ready(function () {
                         window.location.href = url;
                     }
                 }
-            , 1000);
+            , 500);
 
         })
         .jstree();
