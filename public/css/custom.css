@@ -626,10 +626,10 @@ aside.left-panel {
     margin-top: 10px;
 }
 #bi-folder-path span {
-    background-color: #dddddd;
-    border: 1px solid #d7d7d7;
-    border-radius: 5px;
-    padding: 5px;
+    /*background-color: #dddddd;*/
+    /*border: 1px solid #d7d7d7;*/
+    /*border-radius: 5px;*/
+    /*padding: 5px;*/
 }
 .path-separator {
     margin: 0 5px 0 5px;
