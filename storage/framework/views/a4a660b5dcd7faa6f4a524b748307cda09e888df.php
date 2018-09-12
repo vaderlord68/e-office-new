@@ -1,6 +1,5 @@
-@extends('page.master')
-@section('body_content')
-    @parent
+<?php $__env->startSection('body_content'); ?>
+    ##parent-placeholder-5a4526adfe28f01223dccf37a363ace9165900d0##
     <?php
     if ($task == 'edit' || $task == 'view') {
         $ID = $rsData->ID;
@@ -51,9 +50,10 @@
                         </div>
                         <div class="col-sm-4">
                             <input type="text" name="txtContractNo" class="form-control" id="txtContractNo"
-                                   {{$task == 'add' ? 'autofocus':''}}
-                                   placeholder="" autocomplete="off" value="{{$txtContractNo}}"
-                                   {{$task != 'add' ? 'readonly':''}} required>
+                                   <?php echo e($task == 'add' ? 'autofocus':''); ?>
+
+                                   placeholder="" autocomplete="off" value="<?php echo e($txtContractNo); ?>"
+                                   <?php echo e($task != 'add' ? 'readonly':''); ?> required>
                         </div>
                     </div>
                     <div class="row mgb5">
@@ -62,8 +62,9 @@
                         </div>
                         <div class="col-sm-4">
                             <input type="text" name="txtPartner" class="form-control" id="txtPartner"
-                                   {{$task != 'add' ? 'autofocus':''}}
-                                   placeholder="" autocomplete="off" value="{{$txtPartner}}" required>
+                                   <?php echo e($task != 'add' ? 'autofocus':''); ?>
+
+                                   placeholder="" autocomplete="off" value="<?php echo e($txtPartner); ?>" required>
                         </div>
                         <div class="col-sm-2">
                             <label class="lbl-normal">Phân loại</label>
@@ -71,9 +72,9 @@
                         <div class="col-sm-4">
                             <select name="cboContractType" id="cboContractType" class="form-control" required>
                                 <option value="">--</option>
-                                @foreach($rsContractType as  $row)
-                                    <option value="{{$row->ID}}" {{$cboContractType == $row->ID ? 'selected': ''}}>{{$row->Name}}</option>
-                                @endforeach
+                                <?php $__currentLoopData = $rsContractType; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($row->ID); ?>" <?php echo e($cboContractType == $row->ID ? 'selected': ''); ?>><?php echo e($row->Name); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
                     </div>
@@ -84,9 +85,9 @@
                         <div class="col-sm-4">
                             <select name="cboSignerID" id="cboSignerID" class="form-control" required>
                                 <option value="">--</option>
-                                @foreach($rsSignerID as  $row)
-                                    <option value="{{$row->ID}}" {{$cboSignerID == $row->ID ? 'selected': ''}}>{{$row->Name}}</option>
-                                @endforeach
+                                <?php $__currentLoopData = $rsSignerID; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($row->ID); ?>" <?php echo e($cboSignerID == $row->ID ? 'selected': ''); ?>><?php echo e($row->Name); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
                         <div class="col-sm-2">
@@ -95,9 +96,9 @@
                         <div class="col-sm-4">
                             <select name="cboStatusID" id="cboStatusID" class="form-control" required>
                                 <option value="">--</option>
-                                @foreach($rsStatusID as  $row)
-                                    <option value="{{$row->ID}}" {{$cboStatusID == $row->ID ? 'selected': ''}}>{{$row->Name}}</option>
-                                @endforeach
+                                <?php $__currentLoopData = $rsStatusID; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($row->ID); ?>" <?php echo e($cboStatusID == $row->ID ? 'selected': ''); ?>><?php echo e($row->Name); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
                     </div>
@@ -108,7 +109,7 @@
                         <div class="col-sm-4">
                             <div class="input-group ">
                                 <input type="text" class="form-control" id="dtpEffectDateFrom"
-                                       name="dtpEffectDateFrom" value="{{$dtpEffectDateFrom}}" autocomplete="off"
+                                       name="dtpEffectDateFrom" value="<?php echo e($dtpEffectDateFrom); ?>" autocomplete="off"
                                        required>
                             </div>
                         </div>
@@ -118,7 +119,7 @@
                         <div class="col-sm-4">
                             <div class="input-group ">
                                 <input type="text" class="form-control" id="dtpEffectDateTo"
-                                       name="dtpEffectDateTo" value="{{$dtpEffectDateTo}}" autocomplete="off">
+                                       name="dtpEffectDateTo" value="<?php echo e($dtpEffectDateTo); ?>" autocomplete="off">
                             </div>
                         </div>
                     </div>
@@ -132,7 +133,7 @@
                                     type="button" class="btn btn-default">Đính kèm
                             </button>
                             <label id="attachmentName"><a target="_blank"
-                                                          href="{{url('/W76F2131/download?ID=').$ID}}">{{$fileName}}</a></label>
+                                                          href="<?php echo e(url('/W76F2131/download?ID=').$ID); ?>"><?php echo e($fileName); ?></a></label>
                             <label id="attRemove"><a class="fas fa-trash-alt cursor-pointer text-red"></a></label>
                         </div>
 
@@ -196,9 +197,9 @@
         var attachmentFile = null;
         $(document).ready(function () {
             $("#attRemove").click(function () {
-                var id = "{{$ID}}";
+                var id = "<?php echo e($ID); ?>";
                 if (id != ""){
-                    postMethod("{{url('/W76F2131/removefile')}}", function (res) {
+                    postMethod("<?php echo e(url('/W76F2131/removefile')); ?>", function (res) {
                         var result = JSON.parse(res);
                         switch (result.status) {
                             case 'ERROR':
@@ -208,7 +209,7 @@
                                 window.location.reload();
                                 break;
                         }
-                    }, {ID: id, _token: '{{ csrf_token() }}'});
+                    }, {ID: id, _token: '<?php echo e(csrf_token()); ?>'});
                 }else{
                     $("#fileAttachment").val('');
                     attachmentFile = null;
@@ -222,13 +223,13 @@
                 todayHighlight: true,
                 autoclose: true,
                 format: "dd/mm/yyyy",
-                language: '{{Helpers::getLocale()}}'
+                language: '<?php echo e(Helpers::getLocale()); ?>'
             });
             $('#dtpEffectDateTo').datepicker({
                 todayHighlight: true,
                 autoclose: true,
                 format: "dd/mm/yyyy",
-                language: '{{Helpers::getLocale()}}'
+                language: '<?php echo e(Helpers::getLocale()); ?>'
             });
             $("#toolbarW76F2131").digiMenu({
                     showText: true,
@@ -238,7 +239,7 @@
                         {
                             ID: "btnSaveW76F2131",
                             icon: "fa fa-save",
-                            title: "{{Helpers::getRS('Luu')}}",
+                            title: "<?php echo e(Helpers::getRS('Luu')); ?>",
                             enable: function () {
                                 return true;
                             },
@@ -256,7 +257,7 @@
                         , {
                             ID: "btnBack",
                             icon: "fa fa-arrow-left",
-                            title: '{{Helpers::getRS("Quay_lai")}}',
+                            title: '<?php echo e(Helpers::getRS("Quay_lai")); ?>',
                             enable: true,
                             hidden: false,
                             type: "button",
@@ -303,16 +304,16 @@
                 formData.append('file', attachmentFile);
             }
 
-            formData.append('_token', '{{ csrf_token() }}');
-            formData.append('ID', '{{ $ID }}');
+            formData.append('_token', '<?php echo e(csrf_token()); ?>');
+            formData.append('ID', '<?php echo e($ID); ?>');
 
             var url = "";
-            var task = "{{$task}}";
+            var task = "<?php echo e($task); ?>";
             if (task == "add") {
-                url = '{{url("/W76F2131/save")}}';
+                url = '<?php echo e(url("/W76F2131/save")); ?>';
             }
             if (task == "edit") {
-                url = '{{url("/W76F2131/update")}}';
+                url = '<?php echo e(url("/W76F2131/update")); ?>';
             }
             $.ajax({
                 enctype: 'multipart/form-data',
@@ -335,4 +336,6 @@
             });
         });
     </script>
-@stop
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('page.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
