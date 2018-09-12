@@ -88,7 +88,7 @@ class Helper extends \Illuminate\Database\Eloquent\Model
         if ($folder->FolderParentID != "") {
             $this->getNextParent($folder->FolderParentID);
         }
-        return $this->fullPath;
+        return array_reverse($this->fullPath);
     }
 
     public function getNextParent($folderId)
