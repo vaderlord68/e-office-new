@@ -9,7 +9,7 @@ $(document).ready(function () {
     // localStorage.removeItem("currentSelectedFolderId");
 
     /** click to open folder on grid **/
-    $(document).on("click", ".bi-table-item.type-folder", function (e) {
+    $(document).on("click", ".bi-table-item.type-folder td:not(:first-child)", function (e) {
         var _this = $(this);
         var stateUrl = "/bi/folder/view?FolderId=" + _this.attr("folder_id");
         localStorage.setItem("currentSelectedFolderId", _this.attr("folder_id"));
@@ -17,13 +17,23 @@ $(document).ready(function () {
         $("#folderTree").jstree("open_all");
         $("#folderTree").jstree("deselect_all",true);
         $('#folderTree').jstree('select_node', treeElement.attr("id"));
-        window.location.href = stateUrl;
+
+        var loadingMask = $("#loading-mask");
+        loadingMask.css("display","unset");
+        setTimeout(function () {
+            window.location.href = stateUrl;
+        },1000);
     });
     /** click to open document on grid **/
-    $(document).on("click", ".bi-table-item.type-document", function (e) {
+    $(document).on("click", ".bi-table-item.type-document td:not(:first-child)", function (e) {
         var _this = $(this);
         var url = "/bi/document/view?DocumentId=" + _this.attr("document_id");
-        window.location.href = url;
+        var loadingMask = $("#loading-mask");
+        loadingMask.css("display","unset");
+        setTimeout(function () {
+            window.location.href = url;
+        },1000);
+
     });
     /** Add new attached file **/
     var attachedFileInputCount = 0;
@@ -109,10 +119,17 @@ $(document).ready(function () {
 
 
     /** Init Folder Tree **/
-    $('#folderTree').jstree({
+    $('#folderTree').bind('loaded.jstree',function (e, data) {
+        setTimeout(function () {
+            $('#folderTree').css("display","block");
+            $('#folder-tree-loading').css("display","none");
+            var nodeSelector = "#" + localStorage.getItem("currentSelectedNodeId") + "_anchor";
+            $(nodeSelector).css("background-color","#FFC107");
+        },1000);
+    }).jstree({
         'core': {
             'multiple': false,
-        }
+        },
     });
 
 
@@ -124,15 +141,29 @@ $(document).ready(function () {
     // listen for event
         .on('changed.jstree', function (e, data) {
             var selectedFolderId = data.node.li_attr.folder_id;
-            if (typeof selectedFolderId != 'undefined') {
-                localStorage.setItem("currentSelectedFolderId", selectedFolderId);
-                var url = "/bi/folder/view?FolderId=" + selectedFolderId;
-                window.location.href = url;
-            } else {
-                var selectedDocumentId = data.node.li_attr.document_id;
-                var url = "/bi/document/view?DocumentId=" + selectedDocumentId;
-                window.location.href = url;
-            }
+            var nodeId = data.node.id;
+            var loadingMask = $("#loading-mask");
+            loadingMask.css("display","unset");
+            setTimeout(
+                function () {
+                    if (typeof selectedFolderId != 'undefined') {
+                        localStorage.setItem("currentSelectedFolderId", selectedFolderId);
+                        localStorage.setItem("currentSelectedNodeId", nodeId);
+                        var url = "/bi/folder/view?FolderId=" + selectedFolderId;
+                        window.location.href = url;
+                    } else {
+                        var selectedDocumentId = data.node.li_attr.document_id;
+                        var url = "/bi/document/view?DocumentId=" + selectedDocumentId;
+                        window.location.href = url;
+                    }
+                }
+            , 1000);
+
         })
         .jstree();
+    //
+    // setTimeout(function () {
+    //
+    // },1000);
+
 });

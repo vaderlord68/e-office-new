@@ -5,10 +5,8 @@
         ClassicEditor
             .create( document.querySelector('#documentContent' ))
             .then( editor => {
-                console.log( editor );
             } )
             .catch( error => {
-                console.error( error );
             } );
         // tinymce.init({
         //     selector:'#documentContent',
