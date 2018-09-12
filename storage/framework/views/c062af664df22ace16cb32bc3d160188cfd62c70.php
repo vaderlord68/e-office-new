@@ -1,11 +1,9 @@
-
-@extends('system.module.bi')
-@section("folderView")
-    @parent
+<?php $__env->startSection("folderView"); ?>
+    ##parent-placeholder-9f3e12f98d9ee531c43b3db281a9fcf165eca90f##
     <div class="card">
-        @section("rightToolbar")
-            @include("system.module.bi.rightToolbar")
-        @show
+        <?php $__env->startSection("rightToolbar"); ?>
+            <?php echo $__env->make("system.module.bi.rightToolbar", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+        <?php echo $__env->yieldSection(); ?>
         <div class="card-body">
 
             <div id="bootstrap-data-table_wrapper"
@@ -61,14 +59,14 @@
                             ?>
                             <tr role="row" class="odd bi-table-item type-folder" folder_id="<?php  echo $folder->ID?>">
                                 <td></td>
-                                <td><span class="folder-icon"><img src="{{ asset("/media/default_folder_icon.png") }}"
+                                <td><span class="folder-icon"><img src="<?php echo e(asset("/media/default_folder_icon.png")); ?>"
                                                                    alt=""></span><?php echo isset($folder->FolderName) ? $folder->FolderName : ""?>
                                 </td>
                                 <td><?php echo isset($folder->FolderDescription) ? $folder->FolderDescription : ""?></td>
                                 <td><?php echo $folder->CreateUserID ? $folder->CreateUserID : ""?></td>
-                                <td><?php echo date("Y-m-d",strtotime($folder->CreateDate))?></td>
+                                <td><?php echo $folder->CreateDate?></td>
                                 <td><?php echo isset($folder->LastModifyUserID) ? $folder->LastModifyUserID : ""?></td>
-                                <td><?php echo date("Y-m-d",strtotime($folder->LastModifyDate))?></td>
+                                <td><?php echo $folder->LastModifyDate?></td>
                             </tr>
                             <?php
                             endforeach;
@@ -86,16 +84,16 @@
                             ?>
                             <tr role="row" class="odd bi-table-item type-document" document_id="<?php  echo $document->ID?>">
                                 <td style="text-align: center; vertical-align: middle">
-                                    <span class="shareDocument" data-id="{{isset($document->ID) ? $document->ID : ''}}"><i class="far fa-share"></i></span>
+                                    <span class="shareDocument" data-id="<?php echo e(isset($document->ID) ? $document->ID : ''); ?>"><i class="far fa-share"></i></span>
                                 </td>
-                                <td><span class="folder-icon"><img src="{{ asset("/media/default_document_icon.png") }}"
-                                                                   alt=""></span><?php echo isset($document->Name) ? $document->Name : ""?>
+                                <td><span class="folder-icon"><img src="<?php echo e(asset("/media/default_document_icon.png")); ?>"
+                                                                   alt=""></span><?php echo isset($document->ID) ? $document->FileName : ""?>
                                 </td>
                                 <td><?php ?></td>
                                 <td><?php echo $document->CreateUserID ? $document->CreateUserID : ""?></td>
-                                <td><?php echo date("Y-m-d",strtotime($document->CreateDate))?></td>
+                                <td><?php echo $document->CreateDate?></td>
                                 <td><?php echo isset($document->LastModifyUserID) ? $document->LastModifyUserID : ""?></td>
-                                <td><?php echo date("Y-m-d",strtotime($document->LastModifyDate))?></td>
+                                <td><?php echo $document->LastModifyDate?></td>
                             </tr>
                             <?php
                             endforeach;
@@ -128,10 +126,12 @@
                 var el = this;
                 var item_id = $(el).data('id');
 
-                var data = {documentId: item_id, _token: '{{csrf_token()}}'};
-                showFormDialogPost('{{url('/bi/folder/share')}}', 'modalShareDocument', data,  null, null, null);
+                var data = {documentId: item_id, _token: '<?php echo e(csrf_token()); ?>'};
+                showFormDialogPost('<?php echo e(url('/bi/folder/share')); ?>', 'modalShareDocument', data,  null, null, null);
             });
 
         });
     </script>
-@stop
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('system.module.bi', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

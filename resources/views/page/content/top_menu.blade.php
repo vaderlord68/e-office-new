@@ -78,9 +78,6 @@
                             <a class="dropdown-item media" href="/w76f2140">
                                 <p>{{Helpers::getRS('Quan_ly_ban_tin')}}</p>
                             </a>
-                            <a class="dropdown-item media" href="/w76f2200">
-                                <p>{{Helpers::getRS('Danh_sach_phong_hop')}}</p>
-                            </a>
                         </div>
                     </div>
                     <div class="dropdown for-notification">
@@ -91,6 +88,9 @@
                         <div class="dropdown-menu" aria-labelledby="notification">
                             <a class="dropdown-item" href="{{url('/w76f1555')}}">
                                 <p>Danh mục dùng chung</p>
+                            </a>
+                            <a class="dropdown-item media" href="/w76f2200">
+                                <p>{{Helpers::getRS('Danh_sach_phong_hop')}}</p>
                             </a>
 
                         </div>
