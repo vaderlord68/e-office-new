@@ -17,9 +17,9 @@ class D76T2140 extends \Eloquent
     public $timestamps = false;
     public $incrementing = false;
 
-//    public function insert($attributes){
-//        return DB::table($this->table)->insert($attributes);
-//    }
+    public function insert($attributes){
+        return DB::table($this->table)->insert($attributes);
+    }
 
 //    public function update($attributes){
 //        return DB::table($this->table)->update($attributes);

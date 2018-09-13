@@ -1,7 +1,13 @@
 @extends('page.master')
 @section('body_content')
     @parent
-
+    <?php
+    $lastNewsModified = "";
+    if (session("lastNewsModified")) {
+        $lastNewsModified = session("lastNewsModified");
+        session()->remove("lastNewsModified");
+    }
+    ?>
     <section>
         <form id="frmW76F2200" name="frmW76F2200" method="post">
             <div class="row form-group">
@@ -9,7 +15,8 @@
                     <label class="lbl-normal">{{Helpers::getRS("Tim_kiem")}}</label>
                 </div>
                 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                    <input type="text" class="form-control" id="txtDocNo" name="txtDocNo" autocomplete="off">
+                    <input type="text" class="form-control" id="txtDocNo" name="txtSearchValueW76F2200"
+                           id="txtSearchValueW76F2200" autocomplete="off">
                 </div>
             </div>
         </form>
@@ -51,9 +58,29 @@
                                 });
                             }
                         }
+                        , {
+                            ID: "txtSearchValueW76F2200",
+                            icon: "fa  fa-search text-yellow",
+                            title: "{{Helpers::getRS('Tim_kiem')}}",
+                            enable: true,
+                            hidden: function () {
+                                return false;
+                            },
+                            cls: "",
+                            type: "button",
+                            render: function (ui) {
+                            },
+                            postRender: function (ui) {
+                                ui.$btn.click(function () {
+                                    loadDataW76F2200();
+
+                                });
+                            }
+                        }
                     ]
                 }
             );
+
             var obj = {
                 width: '100%',
                 height: 600,
@@ -78,12 +105,52 @@
                         isExport: false,
                         editor: false,
                         render: function (ui) {
-                            var str = '<a id="btnAddW76F2200" title="{{Helpers::getRS("Xem")}}"><i class="fas fa-eye mgr10 text-primary cursor-pointer"></i></a>';
+                            var str = '<a id="btnViewW76F2200" title="{{Helpers::getRS("Xem")}}"><i class="fas fa-eye mgr10 text-primary cursor-pointer"></i></a>';
                             str += '<a id="btnEditW76F2200" title="{{Helpers::getRS("Sua")}}"><i class="fas fa-edit mgr10 text-yellow cursor-pointer"></i></a>';
                             str += '<a id="btnDeleteW76F2200" title="{{Helpers::getRS("Xoa")}}"><i class="fas fa-trash-alt text-danger cursor-pointer"></i></a>';
                             return str;
                         },
                         postRender: function (ui) {
+                            var rowIndx = ui.rowIndx,
+                                grid = this,
+                                $cell = grid.getCell(ui);
+                            var rowData = ui.rowData;
+                            $cell.find("#btnViewW76F2200").bind("click", function (evt) {
+                                var data = {
+                                    facilityID: rowData.FacilityID
+                                }
+                                window.location.href = "{{url('/w76f2201/view')}}" + "?" + $.param(data);
+                            });
+                            $cell.find("#btnEditW76F2200").bind("click", function (evt) {
+                                var data = {
+                                    facilityID: rowData.FacilityID
+                                }
+                                window.location.href = "{{url('/w76f2201/edit')}}" + "?" + $.param(data);
+                            });
+                            $cell.find("#btnDeleteW76F2200").bind("click", function (evt) {
+                                ask_delete(function () {
+                                    $.ajax({
+                                        method: "POST",
+                                        url: '{{url('/w76f2200/delete')}}',
+                                        data: {facilityID: rowData.FacilityID, _token: '{{ csrf_token() }}'},
+                                        success: function (res) {
+                                            var data = JSON.parse(res);
+                                            switch (data.status) {
+                                                case "SUCC":
+                                                    var $grid = $("#gridW76F2200");
+                                                    delete_ok(function () {
+                                                        update4ParamGrid($grid, null, 'delete');
+                                                    });
+                                                    break;
+                                                case "ERROR":
+                                                    alertError(data.message);
+                                                    break;
+                                            }
+                                        }
+                                    })
+                                });
+
+                            });
                         }
                     }
                     , {
@@ -141,13 +208,13 @@
                         dataIndx: "Disabled",
                         render: function (ui) {
                             var rowData = ui.rowData;
-//                            var isCheck = rowData.StatusID == 1 ? 'checked' : '';
-//                            return '<input type="checkbox" ' + isCheck + ' disabled />';
+                            var isCheck = rowData.Disabled == 1 ? 'checked' : '';
+                            return '<input type="checkbox" ' + isCheck + ' disabled />';
                         }
                     }
                 ],
                 dataModel: {
-                    data: {},
+                    data: {!! ($newsCollection) !!},
                 },
                 pageModel: {type: 'local', rPP: 20, rPPOptions: [20, 30, 40, 50]},
                 complete: function (event, ui) {
@@ -162,8 +229,33 @@
             $("#gridW76F2200").pqGrid("option", $.paramquery.pqGrid.regional['{{Session::get("locate")}}']);
             $("#gridW76F2200").find(".pq-pager").pqPager("option", $.paramquery.pqPager.regional['{{Session::get("locate")}}']);
             $("#gridW76F2200").pqGrid("refreshDataAndView");
-
         });
+        setTimeout(function () {
+            //loadDataW76F2200();
+            resizePqGrid();
+        }, 600);
+
+        $("#frmW76F2200").on('submit', function (e) {
+            e.preventDefault();
+            loadDataW76F2200();
+        });
+
+        function loadDataW76F2200() {
+           $("#gridW76F2200").pqGrid("showLoading");
+            $.ajax({
+                method: "POST",
+                url: '{{url("/w76f2200/filter")}}',
+                data: $("#frmW76F2200").serialize()+  "&_token={{ csrf_token() }}",
+                success: function (data) {
+                    $("#gridW76F2200").pqGrid("hideLoading");
+                    var temp = reformatData(JSON.parse(data), $("#gridW76F2200"));
+                    $("#gridW76F2200").pqGrid("option", "dataModel.data", temp);
+                    $("#gridW76F2200").pqGrid("refreshDataAndView");
+                }
+            });
+        }
+
+
     </script>
 
 @stop

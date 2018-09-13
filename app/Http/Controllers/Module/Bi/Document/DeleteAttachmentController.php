@@ -14,7 +14,7 @@ class  DeleteAttachmentController extends Controller
     {
         try {
             $document = Document::find($documentID);
-            $attachedFilesArray = json_decode($document->AttachedFiles);
+            $attachedFilesArray = json_decode($document->AttachedFiles,true);
             if (($key = array_search($fileName, $attachedFilesArray)) !== false) {
                 unset($attachedFilesArray[$key]);
             }

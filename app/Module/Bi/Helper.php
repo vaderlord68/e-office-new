@@ -2,6 +2,8 @@
 
 namespace App\Module\Bi;
 
+use Illuminate\Support\Facades\Auth;
+
 class Helper extends \Illuminate\Database\Eloquent\Model
 {
     protected $fullPath = [];
@@ -36,7 +38,7 @@ class Helper extends \Illuminate\Database\Eloquent\Model
                 $output .= $this->getAllChildren($this->folders[$i]->ID);
                 $documentsCollection = $this->getAllChildDocument($this->folders[$i]->ID);
                 foreach ($documentsCollection as $document) {
-                    $output .= "<li class='node-type-document' type='document' document_id='$document->ID'>". $document->FileName ."</li>";
+                    $output .= "<li class='node-type-document' type='document' document_id='$document->ID'>". $document->Name ."</li>";
                 }
                 $output .= "</ul></li>";
 
@@ -59,7 +61,7 @@ class Helper extends \Illuminate\Database\Eloquent\Model
                 $output .= $this->getAllChildren($this->folders[$i]->ID);
                 $documentsCollection = $this->getAllChildDocument($this->folders[$i]->ID);
                 foreach ($documentsCollection as $document) {
-                    $output .= "<li class='node-type-document' type='document' document_id='$document->ID'>". $document->FileName ."</li>";
+                    $output .= "<li class='node-type-document' type='document' document_id='$document->ID'>". $document->Name ."</li>";
                 }
                 $output .= "</ul></li>";
 
@@ -70,8 +72,11 @@ class Helper extends \Illuminate\Database\Eloquent\Model
 
     public function getAllChildDocument($folderID)
     {
-        $documentFactory = new Document();
-        $collection = $documentFactory->getDocumentsWithFolderId($folderID);
+        $UserID = Auth::id();
+//        $documentFactory = new Document();
+//        $collection = $documentFactory->getDocumentsWithFolderId($folderID);
+        $collection = \DB::select("EXEC W76P2000 '$UserID', '$folderID'");
+
         return $collection;
     }
 
@@ -105,10 +110,11 @@ class Helper extends \Illuminate\Database\Eloquent\Model
         $filePath = 'public/users-upload/';
         try{
             $file->storeAs($filePath, $fileName);
-            return $fileName;
+
         }catch (\Exception $ex){
             \Debugbar::info($ex->getMessage());
         }
+        return $fileName;
     }
 
 }

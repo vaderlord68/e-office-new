@@ -8,8 +8,8 @@ $(document).ready(function () {
     /** Clear selected folder id in local storage **/
     // localStorage.removeItem("currentSelectedFolderId");
 
-    /** Double click to open folder on grid **/
-    $(document).on("dblclick", ".bi-table-item.type-folder", function (e) {
+    /** click to open folder on grid **/
+    $(document).on("click", ".bi-table-item.type-folder", function (e) {
         var _this = $(this);
         var stateUrl = "/bi/folder/view?FolderId=" + _this.attr("folder_id");
         localStorage.setItem("currentSelectedFolderId", _this.attr("folder_id"));
@@ -19,8 +19,8 @@ $(document).ready(function () {
         $('#folderTree').jstree('select_node', treeElement.attr("id"));
         window.location.href = stateUrl;
     });
-    /** Double click to open document on grid **/
-    $(document).on("dblclick", ".bi-table-item.type-document", function (e) {
+    /** click to open document on grid **/
+    $(document).on("click", ".bi-table-item.type-document", function (e) {
         var _this = $(this);
         var url = "/bi/document/view?DocumentId=" + _this.attr("document_id");
         window.location.href = url;
