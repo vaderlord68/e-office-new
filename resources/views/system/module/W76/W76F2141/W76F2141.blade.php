@@ -54,7 +54,8 @@
                             <div class="row mgb5">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                     <input type="file" id="image" name="image" class="form-control hide">
-                                    <a id="imgPreviewThumbnail"  href="{{htmlentities($image) }}" data-toggle="lightbox" data-title="Thumbnail" data-footer="" >
+                                    <a id="btnChooseThumbnail"
+                                        data-footer="">
                                         <img src="{{htmlentities($image) }}" class="img-fluid">
                                     </a>
                                 </div>
@@ -62,9 +63,14 @@
                             <div class="row mgb5">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                     <div class="btn-group">
-                                        <button id="btnChooseThumbnail" title="{{Helpers::getRS('Chon_anh')}}" type="button" class="btn btn-default">---</button>
-                                        <button id="btnPreviewThumbnail" title="{{Helpers::getRS('Xem_anh')}}" type="button" class="btn btn-default"><i class="fa fa-eye"></i></button>
-                                        <button id="btnRemoveThumbnail" title="{{Helpers::getRS('Xoa_anh')}}" type="button" class="btn btn-default"><i class="fa fa-remove text-red"></i></button>
+                                        <button id="btnChooseThumbnail" title="{{Helpers::getRS('Chon_anh')}}"
+                                                type="button" class="btn btn-default">---
+                                        </button>
+                                        <button id="btnPreviewThumbnail" title="{{Helpers::getRS('Xem_anh')}}"
+                                                type="button" class="btn btn-default"><i class="fa fa-eye"></i></button>
+                                        <button id="btnRemoveThumbnail" title="{{Helpers::getRS('Xoa_anh')}}"
+                                                type="button" class="btn btn-default"><i
+                                                    class="fas fa-trash-alt text-red"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -85,7 +91,7 @@
                                 </div>
                                 <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
                             <textarea type="text" id="remarkW76F2141" name="remarkW76F2141" class="form-control"
-                                      autocomplete="off" style="height: 100px">{{$remarkW76F2141}}</textarea>
+                                      autocomplete="off" style="height: 80px">{{$remarkW76F2141}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -95,7 +101,7 @@
                         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                             <label class="lbl-normal">{{Helpers::getRS("Chuyen_muc")}}</label>
                         </div>
-                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                             <select name="channelIDW76F2141" id="channelIDW76F2141" class="form-control" required>
                                 <option value="">--</option>
                                 @foreach($channelIDList as  $channelIDItem)
@@ -103,12 +109,33 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                             <label class="lbl-normal">{{Helpers::getRS("Tac_gia")}}</label>
                         </div>
-                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                             <input type="text" class="form-control" id="authorW76F2141" name="authorW76F2141" readonly
                                    class="form-control" value="{{$authorW76F2141}}" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div  class="row mgb5">
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                            <label class="lbl-normal">{{Helpers::getRS('Tu_khoa')}}</label>
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                            <input type="text" name="keywordW76F2141" class="form-control" id="keywordW76F2141"
+                                   placeholder="" autocomplete="off" value="{{$keywordW76F2141}}">
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                            <div class="form-group">
+                                <label class="lbl-normal">{{Helpers::getRS("Ngay_phat_hanh")}}</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                            <div class="input-group ">
+                                <input type="text" class="form-control" id="releaseDateW76F2141"
+                                       name="releaseDateW76F2141" value="{{$releaseDateW76F2141}}" autocomplete="off">
+                            </div>
                         </div>
                     </div>
                     <div class="row mgb5">
@@ -121,17 +148,6 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                            <div class="form-group">
-                                <label class="lbl-normal">{{Helpers::getRS("Ngay_phat_hanh")}}</label>
-                            </div>
-                        </div>
-                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                            <div class="input-group ">
-                                <input type="text" class="form-control" id="releaseDateW76F2141"
-                                       name="releaseDateW76F2141" value="{{$releaseDateW76F2141}}" autocomplete="off">
-                            </div>
-                        </div>
                         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 ">
                             <div class="form-check">
                                 <label class="form-check-label">
@@ -142,29 +158,20 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                             <div class="form-check">
                                 <label class="form-check-label">
                                     <input type="checkbox" id="is_ShowBestNewsW76F2141"
                                            name="is_ShowBestNewsW76F2141" value="1"
                                            {{$is_ShowBestNewsW76F2141 == 1 ? 'checked':''}}
-                                           class="form-check-input">{{Helpers::getRS("Dang_tai_ban_tin_moi_nhat")}}
+                                           class="form-check-input">{{Helpers::getRS("Tin_moi_nhat")}}
                                 </label>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row mgb5">
-                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                            <label class="lbl-normal">{{Helpers::getRS('Tu_khoa')}}</label>
-                        </div>
-                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                            <input type="text" name="keywordW76F2141" class="form-control" id="keywordW76F2141"
-                                   placeholder="" autocomplete="off" value="{{$keywordW76F2141}}">
                         </div>
                         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                             <label class="lbl-normal">{{Helpers::getRS("Thu_tu_hien_thi")}}</label>
                         </div>
-                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                             <input class="form-control" type="text" class="form-control" name="orderNoW76F2141"
                                    maxlength="4" onkeypress="return inputNumber(event);" min="1" step="1"
                                    id="orderNoW76F2141" value="{{$orderNoW76F2141}}" placeholder="" autocomplete="off">
@@ -207,21 +214,21 @@
     </div>
 
     <script>
-        $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+        $(document).on('click', '[data-toggle="lightbox"]', function (event) {
             event.preventDefault();
             $(this).ekkoLightbox();
         });
 
         $(document).ready(function () {
-            $("#btnChooseThumbnail").click(function(){
+            $("#btnChooseThumbnail").click(function () {
                 $("#image").trigger('click');
             });
 
-            $("#btnPreviewThumbnail").click(function(){
+            $("#btnPreviewThumbnail").click(function () {
                 $('#imgPreviewThumbnail').click();
             });
 
-            $("#btnRemoveThumbnail").click(function(){
+            $("#btnRemoveThumbnail").click(function () {
                 $("#image").val('');
                 $('#imgPreviewThumbnail').attr('href', '{{asset('media/no-photo.jpg')}}');
                 $('#imgPreviewThumbnail').find("img").attr('src', '{{asset('media/no-photo.jpg')}}');
@@ -254,10 +261,10 @@
                 showFormDialogPost('{{url('/w76f2141/load-selectnews')}}', 'popW76F2141SelectNews', {_token: '{{csrf_token()}}'}, null, null, function (res) {
                     //merge
                     var selectedData = window.selectedNews;
-                    var data = $("#gridW76F2141").pqGrid('option','dataModel.data');
+                    var data = $("#gridW76F2141").pqGrid('option', 'dataModel.data');
                     var mergedData = data.concat(selectedData);
 
-                    $("#gridW76F2141").pqGrid('option','dataModel.data', mergedData);
+                    $("#gridW76F2141").pqGrid('option', 'dataModel.data', mergedData);
                     $("#gridW76F2141").pqGrid('refreshDataAndView');
                 });
             });
@@ -292,7 +299,7 @@
                     cls: '',
                     style: 'border: none;float:right',
                     buttonList: [
-                        {{--{--}}
+                            {{--{--}}
                             {{--ID: "btnSaveCloseW76F2141",--}}
                             {{--icon: "fa fa-save",--}}
                             {{--title: '{{Helpers::getRS("Luu_va_dongU")}}',--}}
@@ -303,12 +310,12 @@
                             {{--render: function (ui) {--}}
                             {{--},--}}
                             {{--postRender: function (ui) {--}}
-                                {{--ui.$btn.click(function () {--}}
-                                    {{--frmW76F2141Save();--}}
-                                {{--});--}}
+                            {{--ui.$btn.click(function () {--}}
+                            {{--frmW76F2141Save();--}}
+                            {{--});--}}
                             {{--}--}}
-                        {{--}--}}
-                         {
+                            {{--}--}}
+                        {
                             ID: "btnSaveW76F2141",
                             icon: "fa fa-save",
                             title: "{{Helpers::getRS('Luu')}}",
@@ -426,15 +433,15 @@
             var formData = new FormData($('#createNewsW76F2141')[0]);
             var content = CKEDITOR.instances.contentW76F2141.getData();
 
-            var relativeNews =  $("#gridW76F2141").pqGrid('option','dataModel.data');
-            var file= $("#image").val();
+            var relativeNews = $("#gridW76F2141").pqGrid('option', 'dataModel.data');
+            var file = $("#image").val();
 
             formData.append('contentW76F2141', content);
             formData.append('newsID', '{{$newsID}}');
             formData.append('image', file);
 
 
-            if (relativeNews.length > 0){
+            if (relativeNews.length > 0) {
                 formData.append('relativeNews', JSON.stringify(relativeNews));
             }
             var url = "";
@@ -465,7 +472,7 @@
                             //console.log(document.referrer);
                             window.location.href = document.referrer.toString();
 //                         //   window.location.href = $('<div/>').html(url).text();
-                           // window.location.href = result.redirectTo;
+                            // window.location.href = result.redirectTo;
                             break;
                     }
                 }
