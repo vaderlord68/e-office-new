@@ -134,14 +134,15 @@ class  W76F2141Controller extends Controller
                                 "RelatedNewsID" => $newsIDRelative
                             ];
                             $this->d76T2141->insert($detail);
+                            \Debugbar::info($detail);
                         }
                     }
 
 
                     \Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'));
                     \Helpers::setSession('lastNewsModified', $newsID);
-                    //\Debugbar::info();
-                    return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong')]);
+                    \Debugbar::info($detail);
+                    //return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong')]);
                 } catch (\Exception $ex) {
                     \Helpers::log($ex->getMessage());
                     return json_encode(['status' => 'ERROR', 'message' => $ex->getMessage()]);
