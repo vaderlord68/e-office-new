@@ -11,21 +11,22 @@
                 <form id="frmCreateFolder">
                     <div class="row form-group">
                         <div class="col-sm-2">
-                            <label for="txtDocName" class="hide">Đính kèm</label>
-                        </div>
-                        <div class="col-sm-10">
-                            <button type="button" class="btn btn-primary" id="btnChoose" name="btnChoose">Chọn tập tin
-                            </button>
-                            <input type="file" name="attFile" class="form-control hide" id="attFile">
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-sm-2">
                             <label for="txtDocName">Tên tài liệu</label>
                         </div>
                         <div class="col-sm-10">
-                            <input type="text" name="txtDocName" class="form-control" id="txtDocName" autofocus
-                                   required>
+                            <div class="input-group mb-3">
+                                <input type="text" name="txtDocName" class="form-control" id="txtDocName" autofocus
+                                       required>
+                                <div class="input-group-append">
+                                    <span class="input-group-text hide" id="lblExtension">s</span>
+                                </div>
+                                <div class="input-group-append">
+                                    <input type="file" name="attFile" class="form-control hide" id="attFile">
+                                    <button type="button" class="btn btn-default" id="btnChoose" name="btnChoose">...
+                                    </button>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <div class="row form-group">
@@ -108,6 +109,8 @@
 </div>
 <script>
     $(document).ready(function () {
+        var file = $("#attFile").val();
+        console.log(file);
         $("#btnChoose").click(function(){
             $("#attFile").trigger('click');
         });
@@ -120,6 +123,7 @@
             $("#hdBtnSaveFolder").trigger("click");
 
         });
+
         $("#frmCreateFolder").submit(function (evt) {
             evt.preventDefault();
             postMethod("{{url('/W76F2150/save-folder')}}", function (res) {

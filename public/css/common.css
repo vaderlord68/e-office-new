@@ -234,13 +234,12 @@ body, textarea {
 }
 
 input:required, select:required, textarea:required {
-    background-color: beige !important;
-    border: 1px solid #EAC151;
+    background-color: #ece0bb !important;
+    /*border: 1px solid #EAC151;*/
 }
 
-input:read-only, select:read-only, textarea:read-only {
-    background-color: #EEEEEE;
-
+input:read-only,  textarea:read-only{
+    background-color: #EEEEEE !important;
 }
 
 .input-group.date .dropdown-menu {
@@ -375,7 +374,7 @@ img {
 }
 
 .logo{
-    width: 80px;
+    width: 36px;
     height: 36px;
     margin-top: 6px;
     border-radius: 0px;
@@ -568,7 +567,9 @@ a:hover {
 .verticle-align-middle td{
     vertical-align: middle;
 }
-
+.hover{
+    background-color: orange;
+}
 
 /*End THANHTRAM - new views */
 
@@ -620,4 +621,5 @@ a:hover {
     width: 60px;
     border: none;
 }
+
 /* End TRIHAO */

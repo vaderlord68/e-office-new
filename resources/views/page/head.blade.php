@@ -69,6 +69,10 @@ $locale = Helpers::getLocale();
 <!-- CKeditor for editor -->
 <script src="{{ asset('plugins/ckeditor/ckeditor.js') }}"></script>
 
+<script src="{{ asset('plugins/ckeditor5-build-classic/ckeditor.js') }}"></script>
+
+<!-- Validation JS-->
+<script src="{{ asset('plugins/validation-js/validate.min.js') }}"></script>
 
 <!-- Bootbox support confirmation dialog -->
 <script type="text/javascript" src="{!! asset('plugins/bootstrap-bootbox/bootbox.js') !!}"></script>
