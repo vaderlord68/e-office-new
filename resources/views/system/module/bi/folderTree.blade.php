@@ -13,7 +13,10 @@
     </div>
     <div class="card-body">
         <h5 class="">Tài liệu ưa thích</h5>
-        <div id="folderTree">
+        <div id="folder-tree-loading">
+            <img src="{{asset("media/loading_icon.gif")}}" alt="" style="">
+        </div>
+        <div id="folderTree" style="display:none">
             {!!html_entity_decode($folderTree)!!}
         </div>
     </div>

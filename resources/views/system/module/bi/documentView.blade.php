@@ -36,8 +36,11 @@
 
                                     foreach ($attachedFiles as $attachedFile) :
                                     ?>
+                                    <?php
+                                    $attachedFileArg = explode("/",$attachedFile)
+                                    ?>
                                     <li>
-                                        <a href="/storage/users-upload/<?php echo $attachedFile?>"><?php echo $attachedFile?></a>
+                                        <a href="/storage/users-upload/<?php echo $attachedFile?>"><?php echo $attachedFileArg[1]?></a>
                                     </li>
                                     <?php endforeach;?>
                                 </ul>

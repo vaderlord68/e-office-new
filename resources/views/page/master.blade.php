@@ -16,6 +16,7 @@
     @show
     @section('footer')
     @show
+
     </body>
 @show
 
