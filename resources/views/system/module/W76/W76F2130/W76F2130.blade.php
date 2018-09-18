@@ -52,6 +52,23 @@
                     ]
                 }
             );
+
+            var groupModel = {
+                on: true,
+                dataIndx: ['ContractYear'],
+                collapsed: [false],
+                headerMenu: false,
+                summaryEditType: false,
+                summaryInTitleRowType: '',
+                merge: true,
+//                title: [
+//                    "{0} ({1})",
+//                    "{0} - {1}"
+//                ],
+                titleDefault: "{0} - (<b>{1})</b>",
+            };
+
+
             var obj = {
                 width: '100%',
                 height: 400,
@@ -67,6 +84,7 @@
                 hwrap: true,
                 collapsible: false,
                 postRenderInterval: -1,
+                groupModel: groupModel,
                 colModel: [
                     {
                         title: "#",
@@ -76,10 +94,18 @@
                         isExport: false,
                         editor: false,
                         render: function (ui) {
-                            var str = '<a id="btnEditW76F2130" title="{{Helpers::getRS("Sua")}}"><i class="fa fa-edit mgr10 text-yellow cursor-pointer"></i></a>';
+                            console.log(ui);
+                            if (ui.rowData.pq_close == true){
+                                return "";
+                            }else{
+                                var str = '<a id="btnEditW76F2130" title="{{Helpers::getRS("Sua")}}"><i class="fa fa-edit mgr10 text-yellow cursor-pointer"></i></a>';
                                 str += '<a id="btnDeleteW76F2130" title="{{Helpers::getRS("Xoa")}}"><i class="fa fa-trash text-danger cursor-pointer"></i></a>';
-                            return str;
+                                return str;
+                            }
+
                         },
+                        groupable: false,
+                        nodrag: true,
                         postRender: function (ui) {
                             var rowIndx = ui.rowIndx,
                                 grid = this,
@@ -197,6 +223,16 @@
                         dataIndx: "StatusName",
                         dataType: "string",
                         editor: false,
+                        filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']},
+                    }
+                    , {
+                        title: "Năm hợp đồng",
+                        width: 110,
+                        align: "center",
+                        dataIndx: "ContractYear",
+                        dataType: "string",
+                        editor: false,
+                        hidden: true,
                         filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']},
                     }
                 ],

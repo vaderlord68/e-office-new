@@ -49,7 +49,7 @@ class  AuthenticateController extends Controller
             }
             return redirect()->intended();
         } catch (\Exception $e) {
-            die($e->getMessage());
+            return $e->getMessage();
         }
     }
 

@@ -1016,6 +1016,15 @@ jQuery.each([ "toggle", "show", "hide" ], function( i, name ) {
 });
 ///THANH TRAM _END//
 
+function showLoading(){
+    $("#spinLoading").removeClass('hide');
+}
+
+function hideLoading(){
+    $("#spinLoading").addClass('hide');
+}
+
+
 
 
 

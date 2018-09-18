@@ -248,7 +248,7 @@ input:read-only,  textarea:read-only{
 }
 
 .hide {
-    display: none;
+    display: none !important;
 }
 
 .alert-message {
