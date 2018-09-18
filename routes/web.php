@@ -66,3 +66,22 @@ Route::group(['namespace' => 'Module\Meeting','middleware' => 'auth'], function 
     Route::any('/w76f2200/{task?}', 'W76F2200Controller@index'); //news management
     Route::any('/w76f2201/{task?}', 'W76F2201Controller@index');//news management
 });
+
+
+//Back pages
+Route::group(['namespace' => 'Admin'], function() {
+    Route::any('/administrator', function(){
+        return Redirect::to('/admin/home');
+    });
+    Route::any('/adminlogin', function(){
+        return Redirect::to('/admin/home');
+    });
+});
+Route::group(['namespace' => 'Admin'], function() {
+    Route::any('/admin/home', 'AuthController@home');
+    Route::any('/admin/login/{task?}', 'AuthController@login');
+    Route::any('/admin/logout', 'AuthController@logout');
+    Route::any('/admin/W00F0001/{task?}', 'W00F0001Controller@index');
+    Route::any('/admin/W00F0002/{task?}', 'W00F0002Controller@index');
+    Route::any('/admin/W00F0003/{task?}', 'W00F0003Controller@index');
+});

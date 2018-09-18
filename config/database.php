@@ -77,7 +77,16 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
         ],
-
+        'sqlsrvLMS' => [
+            'driver' => 'sqlsrv',
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '1433'),
+            'database' => env('DB_DATABASE_LMS', 'LEMONSYS'),
+            'username' => env('DB_USERNAME', 'sa'),
+            'password' => env('DB_PASSWORD', 'root'),
+            'charset' => 'utf8',
+            'prefix' => '',
+        ],
     ],
 
     /*
