@@ -114,6 +114,10 @@ body, textarea {
     padding-left: 5px;
 }
 
+.pdl0 {
+    padding-left: 0px !important;
+}
+
 .pdr5 {
     padding-right: 5px;
 }
@@ -177,6 +181,7 @@ body, textarea {
 .mgr5 {
     margin-right: 5px !important;
 }
+
 .mgr10 {
     margin-right: 10px !important;
 }
@@ -238,7 +243,7 @@ input:required, select:required, textarea:required {
     /*border: 1px solid #EAC151;*/
 }
 
-input:read-only,  textarea:read-only{
+input:read-only, textarea:read-only {
     background-color: #EEEEEE !important;
 }
 
@@ -280,10 +285,12 @@ input:read-only,  textarea:read-only{
     margin-bottom: 0px;
     color: #333;
 }
+
 .card {
     margin-bottom: 0.5rem;
     border-radius: 0;
 }
+
 .cursor-pointer {
     cursor: pointer;
 }
@@ -356,14 +363,16 @@ img {
 .content {
     float: left;
     margin: 5px;
-    width: calc(100% - 10px );
+    width: calc(100% - 10px);
     height: 80vh;
     padding: 5px;
     box-sizing: border-box;
 }
+
 .mt-3, .my-3 {
     margin-top: 5px !important;
 }
+
 .right-panel header.header {
     background: #fff;
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.15);
@@ -373,7 +382,7 @@ img {
     width: 100%;
 }
 
-.logo{
+.logo {
     width: 36px;
     height: 36px;
     margin-top: 6px;
@@ -381,9 +390,11 @@ img {
     border: none;
     margin-left: 10px;
 }
-.inline{
+
+.inline {
     display: inline-flex;;
 }
+
 a {
     color: #007bff;
     text-decoration: none;
@@ -488,12 +499,15 @@ a:hover {
 .news .list-group-item {
     padding: 4px 20px;
 }
-.newslist{
-    border: 1px solid rgba(0,0,0,.125);
+
+.newslist {
+    border: 1px solid rgba(0, 0, 0, .125);
 }
-.fs20{
+
+.fs20 {
     font-size: 20px !important;
 }
+
 .cut-text {
     text-overflow: ellipsis;
     overflow: hidden;
@@ -540,6 +554,7 @@ a:hover {
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }
+
 .latest-img {
     width: 80px;
     background-size: cover;
@@ -554,25 +569,28 @@ a:hover {
     font-weight: normal;
     cursor: pointer !important;
 }
+
 .fa-check:before {
     content: "\f00c";
 }
+
 #divConfirm .modal-footer button {
     pointer-events: auto;
 }
 
-.text-center{
+.text-center {
     text-align: center;
 }
-.verticle-align-middle td{
+
+.verticle-align-middle td {
     vertical-align: middle;
 }
-.hover{
+
+.hover {
     background-color: orange;
 }
 
 /*End THANHTRAM - new views */
-
 
 /*TRIHAO*/
 .custom-checkbox {
@@ -582,9 +600,11 @@ a:hover {
     top: 3px;
     margin-right: 5px !important;
 }
+
 .select2-container .select2-selection {
     min-height: 62px;
 }
+
 .loading {
     position: absolute;
     text-align: center;
@@ -593,6 +613,7 @@ a:hover {
     height: 100%;
     /*opacity: 0.4;*/
 }
+
 .loading .backdrop-loading {
     background: #3c3c3c;
     position: absolute;
@@ -601,6 +622,7 @@ a:hover {
     height: 100%;
     opacity: 0.4;
 }
+
 .loading .icon-loading {
     position: absolute;
     z-index: 1251;
@@ -608,6 +630,7 @@ a:hover {
     width: 100%;
     height: 100%;
 }
+
 .loading .icon-loading div {
     margin: auto;
     vertical-align: middle;
@@ -616,6 +639,7 @@ a:hover {
     font-size: 14px;
     letter-spacing: 0.6;
 }
+
 .loading img {
     height: 60px;
     width: 60px;

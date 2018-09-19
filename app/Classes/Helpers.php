@@ -638,7 +638,16 @@ class Helpers
         return "'" . DateTime::createFromFormat('d/m/Y', $dateInput)->format('m/d/Y') . "'";
     }
 
-    public static function createDateTime($stringDateDMY){
+    // chuyền từ d/m/Y sang formatstring
+    public static function convertDateWithFormat($dateInput, $format = 'm/d/Y', $isReturnNull = true)
+    {
+        if ($dateInput == "")
+            return ($isReturnNull == true ? "null" : "''");
+        return DateTime::createFromFormat('d/m/Y', $dateInput)->format($format);
+    }
+
+    public static function createDateTime($stringDateDMY)
+    {
         if ($stringDateDMY == "")
             return DB::raw('null');
         return DateTime::createFromFormat('d/m/Y', $stringDateDMY);
@@ -2347,7 +2356,8 @@ class Helpers
     }
 
     //lay extension dinh kem
-    static function getAttExtList(){
+    static function getAttExtList()
+    {
         $arrFileExt = \Config::get('attachment.fileExtension');
         $arrFileType = array();
         foreach ($arrFileExt as $key => $value) {
@@ -2360,16 +2370,18 @@ class Helpers
         return $arrFileType;
     }
 
-    public static function getLocale(){
-        if (session('locate')){
+    public static function getLocale()
+    {
+        if (session('locate')) {
             return session('locate');
         }
         Helpers::setLang(App::getLocale());
         return App::getLocale();
     }
 
-    public static  function getLang(){
-        if (session('lang')){
+    public static function getLang()
+    {
+        if (session('lang')) {
             return session('lang');
         }
         Helpers::setLang(App::getLocale());
@@ -2384,22 +2396,22 @@ class Helpers
             case 'en' :
                 session(['lang' => '01']);
                 session(['i18n' => 'en_US']);
-                session(['locate' =>  'en']);
+                session(['locate' => 'en']);
                 break;
             case 'ja' :
                 session(['lang' => '81']);
                 session(['i18n' => 'jp_JP']);
-                session(['locate' =>  'ja']);
+                session(['locate' => 'ja']);
                 break;
             case 'zh' :
                 session(['lang' => '86']);
                 session(['i18n' => 'ch_CH']);
-                session(['locate' =>  'zh']);
+                session(['locate' => 'zh']);
                 break;
             default :
                 session(['lang' => '84']);
                 session(['i18n' => 'vi_VI']);
-                session(['locate' =>  'vi']);
+                session(['locate' => 'vi']);
 
                 break;
         }
@@ -2434,10 +2446,13 @@ class Helpers
         return false;
     }
 
-    public static function getUserID(){
+    public static function getUserID()
+    {
         return Auth::user()->UserID;
     }
-    public static function createNEWID(){
+
+    public static function createNEWID()
+    {
         DB::selectOne('select NEWID() as NewsID')->NewsID;
     }
 }

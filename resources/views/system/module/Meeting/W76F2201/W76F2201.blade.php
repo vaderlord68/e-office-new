@@ -57,7 +57,7 @@
                     <form id="formW76F2201" method="POST" enctype="multipart/form-data" action="">
                         {{csrf_field()}}
                         <div class="row">
-                            <div class="col-sm-8">
+                                <div class="col-sm-8">
                                 <div class="row mgb5">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                         <label class="lbl-normal">{{Helpers::getRS("Phong_hopU")}}</label>
@@ -460,7 +460,6 @@
                     $('#coordinatorW76F2201').prop('disabled', false);
                     $('#displayOrderW76F2201').prop('disabled', false);
                     $('#disabledW76F2201').prop('disabled', false);
-                    $("#toolbarW76F2201").data("digiMenu").show('btnSaveW76F22201');
                     break;
                 case "edit":
                     $('#txtFacilityNoW76F2201').prop('disabled', true);
