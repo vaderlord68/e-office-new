@@ -73,6 +73,7 @@ class User extends Authenticatable
         $user = User::where("UserID", $username)->first();
         if ($user != null && strtoupper($username) == strtoupper($user->UserID) && $userData['UserPassword'] == $user->UserPassword) {
             Auth::login($user, $remember);
+
             return true;
         }
         return false;

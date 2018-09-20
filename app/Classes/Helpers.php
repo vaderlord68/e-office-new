@@ -1,11 +1,13 @@
 <?php
 //namespace App\Classes;
 
+
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
+use Jenssegers\Agent\Agent;
 
 
 /**
@@ -638,7 +640,8 @@ class Helpers
         return "'" . DateTime::createFromFormat('d/m/Y', $dateInput)->format('m/d/Y') . "'";
     }
 
-    public static function createDateTime($stringDateDMY){
+    public static function createDateTime($stringDateDMY)
+    {
         if ($stringDateDMY == "")
             return DB::raw('null');
         return DateTime::createFromFormat('d/m/Y', $stringDateDMY);
@@ -817,8 +820,14 @@ class Helpers
         $agent = new Agent();
         if ($agent->isDesktop()) return "DESKTOP";
         if ($agent->isTablet()) return "TABLET";
-        if ($agent->isPhone()) return "PHONE";
+        if ($agent->isPhone()) return "MOBILE";
         return "UNDEFINED";
+    }
+
+    // get Device
+    public static function getBrowser()
+    {
+
     }
 
     public static function ExportFile($dataExport)
@@ -2347,7 +2356,8 @@ class Helpers
     }
 
     //lay extension dinh kem
-    static function getAttExtList(){
+    static function getAttExtList()
+    {
         $arrFileExt = \Config::get('attachment.fileExtension');
         $arrFileType = array();
         foreach ($arrFileExt as $key => $value) {
@@ -2360,16 +2370,18 @@ class Helpers
         return $arrFileType;
     }
 
-    public static function getLocale(){
-        if (session('locate')){
+    public static function getLocale()
+    {
+        if (session('locate')) {
             return session('locate');
         }
         Helpers::setLang(App::getLocale());
         return App::getLocale();
     }
 
-    public static  function getLang(){
-        if (session('lang')){
+    public static function getLang()
+    {
+        if (session('lang')) {
             return session('lang');
         }
         Helpers::setLang(App::getLocale());
@@ -2384,22 +2396,22 @@ class Helpers
             case 'en' :
                 session(['lang' => '01']);
                 session(['i18n' => 'en_US']);
-                session(['locate' =>  'en']);
+                session(['locate' => 'en']);
                 break;
             case 'ja' :
                 session(['lang' => '81']);
                 session(['i18n' => 'jp_JP']);
-                session(['locate' =>  'ja']);
+                session(['locate' => 'ja']);
                 break;
             case 'zh' :
                 session(['lang' => '86']);
                 session(['i18n' => 'ch_CH']);
-                session(['locate' =>  'zh']);
+                session(['locate' => 'zh']);
                 break;
             default :
                 session(['lang' => '84']);
                 session(['i18n' => 'vi_VI']);
-                session(['locate' =>  'vi']);
+                session(['locate' => 'vi']);
 
                 break;
         }
@@ -2434,15 +2446,19 @@ class Helpers
         return false;
     }
 
-    public static function getUserID(){
+    public static function getUserID()
+    {
         return Auth::user()->UserID;
     }
-    public static function createNEWID(){
+
+    public static function createNEWID()
+    {
         DB::selectOne('select NEWID() as NewsID')->NewsID;
     }
 
-    public static function changeEnv($data = array()){
-        if(count($data) > 0){
+    public static function changeEnv($data = array())
+    {
+        if (count($data) > 0) {
 
             // Read .env-file
             $env = file_get_contents(base_path() . '/.env');
@@ -2451,17 +2467,17 @@ class Helpers
             $env = preg_split('/\s+/', $env);;
 
             // Loop through given data
-            foreach((array)$data as $key => $value){
+            foreach ((array)$data as $key => $value) {
 
                 // Loop through .env-data
-                foreach($env as $env_key => $env_value){
+                foreach ($env as $env_key => $env_value) {
 
                     // Turn the value into an array and stop after the first split
                     // So it's not possible to split e.g. the App-Key by accident
                     $entry = explode("=", $env_value, 2);
 
                     // Check, if new key fits the actual .env-key
-                    if($entry[0] == $key){
+                    if ($entry[0] == $key) {
                         // If yes, overwrite it with the new one
                         $env[$env_key] = $key . "=" . $value;
                     } else {
@@ -2483,7 +2499,8 @@ class Helpers
         }
     }
 
-    public static function getEnv(){
+    public static function getEnv()
+    {
         $env = file_get_contents(base_path() . '/.env');
         // Split string on every " " and write into array
         $env = preg_split('/\s+/', $env);;
@@ -2491,8 +2508,63 @@ class Helpers
         $output = [];
         foreach ($env as $key => $value) {
             $row = explode('=', $value);
-            $output[$row[0]] = (isset( $row[1]) ?  $row[1] : '');
+            $output[$row[0]] = (isset($row[1]) ? $row[1] : '');
         }
         return $output;
+    }
+
+    public static function getMainMenu()
+    {
+        return [
+            new Menu('1', 'w76f2142', 'Tin tức nội bộ', 'fa fa-home', '', []),
+            new Menu('2', 'W76F2130', 'Quản lý hợp đồng', 'fa fa-home', '', []),
+            new Menu('3', 'bi', 'Tài liệu số', 'fa fa-home', '', []),
+            new Menu('4', '', 'Ứng dụng tiện ích', 'fa fa-home', '', array(
+                new Menu('5', 'w76f2140', 'Quản lý bản tin', 'fa fa-home', '4', []),
+            )),
+            new Menu('6', '', 'Hệ thống', 'fa fa-home', '', array(
+                new Menu('7', 'w76f1555', 'Danh mục dùng chung', 'fa fa-home', '6', []),
+                new Menu('8', 'w76f2200', 'Danh sách phòng họp', 'fa fa-home', '6', []),
+            )),
+        ];
+    }
+
+
+    public static function createMainMenu()
+    {
+        $menuList = Helpers::getMainMenu();
+        $str = '<ul class="nav navbar-nav d-md-down-none top-menu">';
+        foreach ($menuList as $row) {
+            $str .= Helpers::createMenuItem($row, $str, 0);
+        }
+        $str .= '</ul>';
+        return $str;
+    }
+
+    public static function createMenuItem($row, &$str, $level)
+    {
+        $childrend = $row->childrend;
+        \Debugbar::info($level);
+        $str .= '<li class="nav-item dropdown ' . ($level > 0 ? "dropdown-submenu" : "") .'">';
+        $str .= '<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">';
+        $str .= $row->menuName;
+        $str .= '</a>';
+        if (count($childrend) > 0) {
+            $str .= '<ul class="dropdown-menu" >';
+            foreach ($childrend as $rowChild) {
+                $level +=$level+1;
+                Helpers::createMenuItem($rowChild, $str,$level);
+            }
+            $str .= '</ul >';
+        }
+        $str .= '</li>';
+    }
+
+    public static function createCommonParameter(){
+        $userID =Auth::user()->UserID;
+        $sql = '--Lay thong tin chung'.PHP_EOL;
+        $sql .= "EXEC W76P0000 '$userID'".PHP_EOL;
+        $rsRow = DB::connection()->selectOne($sql);
+        return $rsRow;
     }
 }

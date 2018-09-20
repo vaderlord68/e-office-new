@@ -25,6 +25,8 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
     <!-- jQuery-UI -->
     <link href="{{ asset('plugins/jQueryUI/jquery-ui.css') }}" media="all" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('plugins/jQueryUI/jquery-ui.theme.min.css') }}" media="all" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('plugins/bootstrap/css/bootstrap.css') }}" media="all" rel="stylesheet" type="text/css"/>
+
     <!-- DatePicker -->
     <link href="{{ asset('plugins/datepicker/datepicker3.css') }}" rel="stylesheet" type="text/css"/>
     <!-- Select2 -->
@@ -51,15 +53,15 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
     <link href="{{url('css/common.css')}}" rel="stylesheet">
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
-@include('admin.layout.header')
+@include('admin.layouts.header')
 <div class="app-body">
-    @include('admin.layout.sidebar')
+    @include('admin.layouts.sidebar')
     <main class="main">
         <!-- Breadcrumb-->
-        @include('admin.layout.breadcrumb')
-        @include('admin.layout.container')
+        @include('admin.layouts.breadcrumb')
+        @include('admin.layouts.container')
     </main>
-    @include('admin.layout.aside-menu')
+    @include('admin.layouts.aside-menu')
 </div>
 <footer class="app-footer">
     <div>
