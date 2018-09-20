@@ -77,3 +77,21 @@ Route::group(['namespace' => 'Module\BookingRoom','middleware' => 'auth'], funct
     Route::any('/w76f2231/{task?}', 'W76F2231Controller@index');
 });
 //end-quan li phong hop
+
+//Back pages
+Route::group(['namespace' => 'Admin'], function() {
+    Route::any('/administrator', function(){
+        return Redirect::to('/admin/home');
+    });
+    Route::any('/adminlogin', function(){
+        return Redirect::to('/admin/home');
+    });
+});
+Route::group(['namespace' => 'Admin'], function() {
+    Route::any('/admin/home', 'AuthController@home');
+    Route::any('/admin/login/{task?}', 'AuthController@login');
+    Route::any('/admin/logout', 'AuthController@logout');
+    Route::any('/admin/W00F0001/{task?}', 'W00F0001Controller@index');
+    Route::any('/admin/W00F0002/{task?}', 'W00F0002Controller@index');
+    Route::any('/admin/W00F0003/{task?}', 'W00F0003Controller@index');
+});
