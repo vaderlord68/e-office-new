@@ -12,5 +12,6 @@ class  IndexController extends Controller
     public function index()
     {
         return view('system/landing');
+        //return view('index');
     }
 }

@@ -43,6 +43,7 @@ class  AuthenticateController extends Controller
             $success = $this->accountAuthenticate($userData);
             if ($success) {
                 Helper::setSession('current_user',$userData['UserName']);
+                Helper::setSession('W76P0000', \Helpers::createCommonParameter());
                 Helper::setSession('successMessage',"Đăng nhập thành công");
             } else {
                 Helper::setSession('errorMessage',"Thông tin đăng nhập không chính xác");

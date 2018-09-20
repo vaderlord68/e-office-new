@@ -1024,6 +1024,10 @@ function hideLoading(){
     $("#spinLoading").addClass('hide');
 }
 
+function toggleSidebar(){
+    $("body").toggleClass('sidebar-lg-show');
+}
+
 
 
 
