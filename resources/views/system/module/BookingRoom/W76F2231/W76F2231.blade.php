@@ -39,6 +39,8 @@
                     $master = $rowData;
                     $logisticsW76F2231 = $rowData["Logistics"];
                     $cbFacilityIDW76F2231 = $rowData["FacilityName"];
+                    $cbHostPersonW76F2231 = $rowData["Fullname"];
+                    $cbParticipantsW76F2231 = $rowData["Fullname"];
 
                     $start = '';
                     $end = '';
@@ -49,13 +51,14 @@
                     $start = $all["start"];
                     $end = $all["end"];
                     $date = $all["date"];
+                    $orgunitIDW76F2231 = "";
                     $logisticsW76F2231 = "";
                     $cbFacilityIDW76F2231 = "";
                     $descriptionW76F2231 = "";
                     $cbHostPersonW76F2231 = "";
-                    $cbParticipantsW76f2231 = "";
+                    $cbParticipantsW76F2231 = "";
                     $txtNumParticipantsW76F2231 = "";
-                    $isBlackboardW76F2231 =0;
+                    $isBlackboardW76F2231 = 0;
                     $isProjectorW76F2231 = 0;
                     $isProjectorW76F2231 = 0;
                     $isPCW76F2231 = 0;
@@ -81,9 +84,8 @@
                                             <label class="lbl-normal">{{Helpers::getRS("Nguoi_tao")}}</label>
                                         </div>
                                         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                            <input type="text" class="form-control" id="authorW76F2141"
-                                                   name="authorW76F2141"
-                                                   class="form-control" value="{{$userID}}" autocomplete="off">
+                                            <label >{{$userID}}
+                                            </label>
                                         </div>
                                         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                                             <label class="lbl-normal">{{Helpers::getRS("Phong_hopU")}}</label>
@@ -137,18 +139,12 @@
                                     </div>
                                     <div class="row mgb5">
                                         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                            <label class="lbl-normal">{{Helpers::getRS("Phong_ban")}}</label>
+                                            <label class="lbl-normal">{{Helpers::getRS("Co_cau_to_chuc")}}</label>
                                         </div>
                                         <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                                            <select name="channelIDW76F2141" id="channelIDW76F2141" class="form-control"
-                                            >
-                                                <option value="">--</option>
-                                                <option value="">dfffsf</option>
-                                                <option value="">tytutyuyuyuon>
-                                                {{--@foreach($channelIDList as  $channelIDItem)--}}
-                                                {{--<option value="{{$channelIDItem->CodeID}}" {{$channelIDItem->CodeID == $channelIDW76F2141 ? 'selected': ''}}>{{$channelIDItem->CodeName}}</option>--}}
-                                                {{--@endforeach--}}
-                                            </select>
+                                            <input name="orgunitIDW76F2231" id="orgunitIDW76F2231" class="form-control"
+                                                   readonly="">
+                                            </input>
                                         </div>
                                     </div>
                                     <div class="row mgb5">
@@ -171,12 +167,9 @@
                                             <select name="cbHostPersonW76F2231" id="cbHostPersonW76F2231"
                                                     class="form-control">
                                                 <option value="">--</option>
-                                                <option value="">zdfdf</option>
-                                                <option value="">-dsfsf-</option>
-                                                s
-                                                {{--@foreach($channelIDList as  $channelIDItem)--}}
-                                                {{--<option value="{{$channelIDItem->CodeID}}" {{$channelIDItem->CodeID == $channelIDW76F2141 ? 'selected': ''}}>{{$channelIDItem->CodeName}}</option>--}}
-                                                {{--@endforeach--}}
+                                                @foreach($hostPersonList as  $hostPersonListItem)
+                                                    <option value="{{$hostPersonListItem->EmployeeCode}}" {{$hostPersonListItem->EmployeeCode == $cbHostPersonW76F2231 ? 'selected': ''}}>{{$hostPersonListItem->Fullname}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -187,14 +180,9 @@
                                         <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
                                             <select name="cbParticipantsW76F2231" id="cbParticipantsW76F2231"
                                                     class="form-control" multiple>
-                                                <option value="">--</option>
-                                                <option value="">zdfdf</option>
-                                                <option value="">-dsfsf-</option>
-                                                <option value="">-uyiyutii-</option>
-                                                <option value="">-dsbnbnmmfsf-</option>
-                                                {{--@foreach($channelIDList as  $channelIDItem)--}}
-                                                {{--<option value="{{$channelIDItem->CodeID}}" {{$channelIDItem->CodeID == $channelIDW76F2141 ? 'selected': ''}}>{{$channelIDItem->CodeName}}</option>--}}
-                                                {{--@endforeach--}}
+                                                @foreach($participantsList as  $participantsListItem)
+                                                    <option value="{{$participantsListItem->EmployeeCode}}" {{$participantsListItem->EmployeeCode == $cbParticipantsW76F2231 ? 'selected': ''}}>{{$participantsListItem->Fullname}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -210,11 +198,11 @@
                                                     <div class="checkbox service-facility">
                                                         <input type="checkbox" id="isBlackboardW76F2231"
                                                                name="isBlackboardW76F2231"
-                                                               class="hide">
+                                                               class="hide" value="1">
                                                         <label class="pdl0">
                                                             <span class="fas fa-chalkboard mgr5"></span> {{Helpers::getRS("Bang_ghi")}}
                                                         </label>
-                                                        <span class="fa fa-check mgl5 "></span>
+                                                        <span class="fa fa-check mgl5 " value="1"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -222,11 +210,11 @@
                                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                                     <div class="checkbox service-facility">
                                                         <input type="checkbox" id="isProjectorW76F2231"
-                                                               name="isProjectorW76F2231" class="hide">
+                                                               name="isProjectorW76F2231" class="hide" value="1">
                                                         <label class="pdl0">
                                                             <span class="fas fa-procedures mgr5"></span> {{Helpers::getRS("May_chieu")}}
                                                         </label>
-                                                        <span class="fa fa-check mgl5 "></span>
+                                                        <span class="fa fa-check mgl5 " value="1"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -234,10 +222,10 @@
                                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                                     <div class="checkbox service-facility">
                                                         <input type="checkbox" class="hide" id="isEthernetW76F2231"
-                                                               name="isEthernetW76F2231">
+                                                               name="isEthernetW76F2231" value="1">
                                                         <label class="pdl0"><span
                                                                     class="fab fa-ethereum mgr5"></span>Ethernet</label>
-                                                        <span class="fa fa-check mgl5"></span>
+                                                        <span class="fa fa-check mgl5" value="1"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -245,10 +233,10 @@
                                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                                     <div class="checkbox service-facility">
                                                         <input type="checkbox" class="hide" id="isMicrophoneW76F2231"
-                                                               name="isMicrophoneW76F2231">
+                                                               name="isMicrophoneW76F2231" value="1">
                                                         <label class="pdl0"><span class="fas fa-microphone mgr5"></span>
                                                             Microphone</label>
-                                                        <span class="fa fa-check mgl5 "></span>
+                                                        <span class="fa fa-check mgl5 " value="1"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -258,9 +246,9 @@
                                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                                     <div class="checkbox service-facility">
                                                         <input type="checkbox" class="hide" id="isPCW76F2231"
-                                                               name="isPCW76F2231">
+                                                               name="isPCW76F2231" value="1">
                                                         <label><span class="fas fa-desktop mgr5"></span> PC</label>
-                                                        <span class="fa fa-check mgl5 "></span>
+                                                        <span class="fa fa-check mgl5 " value="1"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -268,11 +256,11 @@
                                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                                     <div class="checkbox service-facility">
                                                         <input type="checkbox" class="hide" id="isTeleConW76F2231"
-                                                               name="isTeleConW76F2231">
+                                                               name="isTeleConW76F2231" value="1">
                                                         <label><span class="fas fa-chess-queen mgr5"></span>
                                                             Tele-Conference
                                                         </label>
-                                                        <span class="fa fa-check mgl5 "></span>
+                                                        <span class="fa fa-check mgl5 " value="1"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -280,10 +268,10 @@
                                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                                     <div class="checkbox service-facility">
                                                         <input type="checkbox" class="hide" id="isVideoConW76F2231"
-                                                               name="isVideoConW76F2231">
+                                                               name="isVideoConW76F2231" value="1">
                                                         <label><span class="fas fa-video mgr5"></span>
                                                             Video-Conference</label>
-                                                        <span class="fa fa-check mgl5"></span>
+                                                        <span class="fa fa-check mgl5" value="1"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -291,9 +279,9 @@
                                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                                     <div class="checkbox service-facility">
                                                         <input type="checkbox" class="hide" id="isWifiW76F2231"
-                                                               name="isWifiW76F2231">
+                                                               name="isWifiW76F2231" value="1">
                                                         <label><span class="fas fa-wifi mgr5"></span> Wifi</label>
-                                                        <span class="fa fa-check mgl5 "></span>
+                                                        <span class="fa fa-check mgl5  " value="1"></span>
                                                     </div>
                                                 </div>
                                             </div>

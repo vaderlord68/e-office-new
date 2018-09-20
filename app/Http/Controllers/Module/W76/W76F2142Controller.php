@@ -45,7 +45,7 @@ class  W76F2142Controller extends Controller
                         //Lay danh sach news cho channel
                         $channelID = $request->input('channelID', '');
                         if ($channelID == '') {
-                            $channelFirst = $this->d76T5556->first();
+                            $channelFirst =  $this->d76T5556->where('ListTypeID', 'NEW_CATEGORIES')->first();
                             if ($channelFirst != null) {
                                 $channelID = $channelFirst->CodeID;
                             }
@@ -109,7 +109,7 @@ class  W76F2142Controller extends Controller
 
     public function updateCount($id)
     {
-        //C?p nh?t l??ng truy c?p news_hitcount
+        //cap nhat luot truy cap
         $prevID = Helper::getSession('ViewCount');
         if (empty($prevID) || $prevID != $id) {
             $this->d76T2140->where('NewsID', $id)->increment('ViewCount');
@@ -142,7 +142,10 @@ class  W76F2142Controller extends Controller
 
     function getNewsOfChannel($channelID)
     {
-        $newsList = $this->d76T2140->where('ChannelID', '=', $channelID)->get();
+        $userID = Auth::user()->UserID;
+        $sql = "--Lay danh sach bang tin".PHP_EOL;
+        $sql .= "EXEC W76P2142 '$userID', '$channelID'".PHP_EOL;
+        $newsList = DB::connection('sqlsrv')->select($sql);
         foreach ($newsList as &$item) {
             if ($item->Image == ""){
                 $item->Image = asset('media/available.png');
@@ -150,6 +153,14 @@ class  W76F2142Controller extends Controller
                 $item->Image = 'data:image/jpeg;base64, ' . base64_encode($item->Image);
             }
         }
+        /*$newsList = $this->d76T2140->where('ChannelID', '=', $channelID)->get();
+        foreach ($newsList as &$item) {
+            if ($item->Image == ""){
+                $item->Image = asset('media/available.png');
+            }else{
+                $item->Image = 'data:image/jpeg;base64, ' . base64_encode($item->Image);
+            }
+        }*/
         return $newsList;
     }
 }

@@ -63,7 +63,7 @@
                                         <label class="lbl-normal">{{Helpers::getRS("Phong_hopU")}}</label>
                                     </div>
                                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                        <input type="text" id="txtFacilityNoW76F2201" name="txtFacilityNoW76F2201"
+                                        <input type="text" id="txtFacilityNoW76F2201" maxlength="500" name="txtFacilityNoW76F2201"
                                                class="form-control"
                                                value="{{$txtFacilityNoW76F2201}}" required>
                                     </div>
@@ -76,7 +76,7 @@
                                         <label class="lbl-normal">{{Helpers::getRS("Ten_phong_hop")}}</label>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <input type="text" id="txtFacilityNameW76F2201" name="txtFacilityNameW76F2201"
+                                        <input type="text" id="txtFacilityNameW76F2201" maxlength="1000" name="txtFacilityNameW76F2201"
                                                class="form-control" value="{{$txtFacilityNameW76F2201}}" required>
                                     </div>
                                 </div>
@@ -86,7 +86,7 @@
                                         <label class="lbl-normal">{{Helpers::getRS("Dia_diem")}}</label>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <input type="text" id="txtLocationW76F2201" name="txtLocationW76F2201"
+                                        <input type="text" id="txtLocationW76F2201" maxlength="4000" name="txtLocationW76F2201"
                                                class="form-control"
                                                value="{{$txtLocationW76F2201}}">
                                     </div>
@@ -112,7 +112,7 @@
                                         <label class="lbl-normal">{{Helpers::getRS("Ghi_chu")}}</label>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <textarea type="text" id="txtDescriptionW76F2201" name="txtDescriptionW76F2201"
+                                        <textarea type="text" id="txtDescriptionW76F2201" maxlength="4000" name="txtDescriptionW76F2201"
                                                   class="form-control"
                                                   autocomplete="off"
                                                   style="height: 60px">{{$txtDescriptionW76F2201}}</textarea>
@@ -214,11 +214,11 @@
                                             <div class="checkbox service-facility">
                                                 <input type="checkbox" id="isBlackboardW76F2201"
                                                        name="isBlackboardW76F2201"
-                                                       class="hide" {{$isBlackboardW76F2201}}>
+                                                       class="hide" value="1" {{$isBlackboardW76F2201}}>
                                                 <label>
                                                     <span class="fas fa-chalkboard mgr5"></span> {{Helpers::getRS("Bang_ghi")}}
                                                 </label>
-                                                <span class="fa fa-check mgl5 {{$isBlackboardW76F2201}}"></span>
+                                                <span class="fa fa-check mgl5  {{$isBlackboardW76F2201}}" value="1"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -226,11 +226,11 @@
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                             <div class="checkbox service-facility">
                                                 <input type="checkbox" id="isProjectorW76F2201"
-                                                       name="isProjectorW76F2201" class="hide" {{$isProjectorW76F2201}}>
+                                                       name="isProjectorW76F2201" class="hide" value="1" {{$isProjectorW76F2201}}>
                                                 <label><span
                                                             class="fas fa-procedures mgr5"></span> {{Helpers::getRS("May_chieu")}}
                                                 </label>
-                                                <span class="fa fa-check mgl5 {{$isProjectorW76F2201}}"></span>
+                                                <span class="fa fa-check mgl5 {{$isProjectorW76F2201}}" value="1"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -238,9 +238,9 @@
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                             <div class="checkbox service-facility">
                                                 <input type="checkbox" class="hide" id="isEthernetW76F2201"
-                                                       name="isEthernetW76F2201" {{$isEthernetW76F2201}}>
+                                                       name="isEthernetW76F2201" {{$isEthernetW76F2201}} value="1">
                                                 <label><span class="fab fa-ethereum mgr5"></span>Ethernet</label>
-                                                <span class="fa fa-check mgl5 {{$isEthernetW76F2201}}"></span>
+                                                <span class="fa fa-check mgl5 {{$isEthernetW76F2201}}" value="1"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -248,9 +248,9 @@
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                             <div class="checkbox service-facility">
                                                 <input type="checkbox" class="hide" id="isMicrophoneW76F2201"
-                                                       name="isMicrophoneW76F2201" {{$isMicrophoneW76F2201}}>
+                                                       name="isMicrophoneW76F2201" value="1" {{$isMicrophoneW76F2201}}>
                                                 <label><span class="fas fa-microphone mgr5"></span> Microphone</label>
-                                                <span class="fa fa-check mgl5 {{$isMicrophoneW76F2201}}"></span>
+                                                <span class="fa fa-check mgl5 {{$isMicrophoneW76F2201}}" value="1"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -258,9 +258,9 @@
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                             <div class="checkbox service-facility">
                                                 <input type="checkbox" class="hide" id="isPCW76F2201"
-                                                       name="isPCW76F2201" {{$isPCW76F2201}}>
+                                                       name="isPCW76F2201" {{$isPCW76F2201}} value="1">
                                                 <label><span class="fas fa-desktop mgr5"></span> PC</label>
-                                                <span class="fa fa-check mgl5 {{$isPCW76F2201}}"></span>
+                                                <span class="fa fa-check mgl5 {{$isPCW76F2201}}" value="1"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -268,10 +268,10 @@
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                             <div class="checkbox service-facility">
                                                 <input type="checkbox" class="hide" id="isTeleConW76F2201"
-                                                       name="isTeleConW76F2201" {{$isTeleConW76F2201}}>
+                                                       name="isTeleConW76F2201" {{$isTeleConW76F2201}} value="1">
                                                 <label><span class="fas fa-chess-queen mgr5"></span> Tele-Conference
                                                 </label>
-                                                <span class="fa fa-check mgl5 {{$isTeleConW76F2201}}"></span>
+                                                <span class="fa fa-check mgl5 {{$isTeleConW76F2201}}" value="1"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -279,10 +279,10 @@
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                             <div class="checkbox service-facility">
                                                 <input type="checkbox" class="hide" id="isVideoConW76F2201"
-                                                       name="isVideoConW76F2201" {{$isVideoConW76F2201}}>
+                                                       name="isVideoConW76F2201" {{$isVideoConW76F2201}} value="1">
                                                 <label><span class="fas fa-video mgr5"></span>
                                                     Video-Conference</label>
-                                                <span class="fa fa-check mgl5 {{$isVideoConW76F2201}}"></span>
+                                                <span class="fa fa-check mgl5 {{$isVideoConW76F2201}}" value="1"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -290,9 +290,9 @@
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                             <div class="checkbox service-facility">
                                                 <input type="checkbox" class="hide" id="isWifiW76F2201"
-                                                       name="isWifiW76F2201" {{$isWifiW76F2201}}>
+                                                       name="isWifiW76F2201" {{$isWifiW76F2201}} value="1">
                                                 <label><span class="fas fa-wifi mgr5"></span> Wifi</label>
-                                                <span class="fa fa-check mgl5 {{$isWifiW76F2201}}"></span>
+                                                <span class="fa fa-check mgl5 {{$isWifiW76F2201}}" value="1"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -422,6 +422,9 @@
                     var result = JSON.parse(res);
                     console.log("luu");
                     switch (result.status) {
+                        case "EXIST":
+                            alert_error(result.message);
+                            break;
                         case 'ERROR':
                             alertError(result.message);
                             break;

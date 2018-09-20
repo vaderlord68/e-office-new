@@ -30,10 +30,26 @@ class  W76F2230Controller extends Controller
                 $meetingRoomList = $this->d76T2200->select('FacilityNo as id', 'FacilityName as title')->get();
                 $meetingRoomList = json_encode($meetingRoomList);
                 $divisionIDList = json_encode($divisionIDList);
-                \Debugbar::info($divisionIDList);
                 return view("system/module/BookingRoom/W76F2230/W76F2230", compact('rowData','divisionIDList','meetingRoomList','task'));
                 break;
+            case 'loadCalender':
+                $newsCollection = $this->getCalender();
+                \Debugbar::info($newsCollection);
+                return $newsCollection();
+                break;
         }
+    }
+
+    public function getCalender()
+    {
+        $userID = Auth::user()->UserID;
+        $divisionID = Auth::user()->DivisionID;
+        $orgUnitID = Auth::user()->OrgUnitID;
+        $sql = '--Do nguon cho luoi'.PHP_EOL;
+        $sql .= "EXEC W76P2230 '$userID', '$divisionID','$orgUnitID'";
+        $collection = DB::select($sql);
+        \Debugbar::info($collection);
+        return json_encode($collection) ;
     }
 
 }

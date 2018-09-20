@@ -38,7 +38,7 @@
                     <div class="row mgl5">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 cut-text">
                             <a>
-                                {!! $newsRow-> Content or '' !!}
+                                {!! $newsRow-> Remark or '' !!}
                             </a>
                         </div>
                     </div>

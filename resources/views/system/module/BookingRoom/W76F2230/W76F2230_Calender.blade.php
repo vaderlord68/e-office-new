@@ -4,29 +4,23 @@
 <script type="text/javascript">
     var viewmodeW76F4050 = "";
     $(document).ready(function () {
-        var rooms = [
-            {
-                id: "a",
-                title: "Phòng 4.1"
-            },
-            {
-                id: "b",
-                title: "Phòng 4.2"
-            },
-            {
-                id: "c",
-                title: "Phòng 4.2"
-            },
-            {
-                id: "d",
-                title: "Phòng 4.2"
-            },
-
-        ];
-
         var rooms =
                 {!! $meetingRoomList !!}
         var events = [
+                        {{--{--}}
+                        {{--url: '{{url('w76f2230/loadCalendar')}}',--}}
+                        {{--cache: false,--}}
+                        {{--method: 'post',--}}
+                        {{--data: function () { // a function that returns an object--}}
+                        {{--return {--}}
+                        {{--dynamic_value: Math.random(),--}}
+                        {{--array: {{json_encode($all)}},--}}
+                        {{--mode: 1,--}}
+                        {{--// faci: $('#slFacilityIDW76F4050').val(),--}}
+                        {{--// view: viewmodeW76F4050--}}
+                        {{--};--}}
+                        {{--}--}}
+                        {{--}--}}
                 {
                     "resourceId": "b",
                     title: 'Event Title1',
@@ -84,7 +78,8 @@
                 var start = event.start.format("HH:mm");
                 var end = event.end.format("HH:mm");
                 var roomID = resource.id;
-                var date = event.start.format("DD/MM/YYYY");;
+                var date = event.start.format("DD/MM/YYYY");
+                ;
                 console.log(momentStart);
 
                 var data = {

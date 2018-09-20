@@ -42,7 +42,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 @foreach($newRowDetail as $newDetail)
-                    <li><a>{{$newDetail-> Title or '    '}}</a></li>
+                    <li><a>{{$newDetail-> Title or ''}}</a></li>
                 @endforeach
             </div>
         </div>

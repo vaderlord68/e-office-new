@@ -55,23 +55,9 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                     <input type="file" id="image" name="image" class="form-control hide">
                                     <a id="btnChooseThumbnail"
-                                        data-footer="">
+                                       data-footer="">
                                         <img src="{{htmlentities($image) }}" class="img-fluid">
                                     </a>
-                                </div>
-                            </div>
-                            <div class="row mgb5">
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                    <div class="btn-group">
-                                        <button id="btnChooseThumbnail" title="{{Helpers::getRS('Chon_anh')}}"
-                                                type="button" class="btn btn-default">---
-                                        </button>
-                                        <button id="btnPreviewThumbnail" title="{{Helpers::getRS('Xem_anh')}}"
-                                                type="button" class="btn btn-default"><i class="fa fa-eye"></i></button>
-                                        <button id="btnRemoveThumbnail" title="{{Helpers::getRS('Xoa_anh')}}"
-                                                type="button" class="btn btn-default"><i
-                                                    class="fas fa-trash-alt text-red"></i></button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -82,6 +68,7 @@
                                 </div>
                                 <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
                                     <input type="text" name="titleW76F2141" id="titleW76F2141" class="form-control"
+                                           maxlength="250"
                                            autocomplete="off" value="{{$titleW76F2141}}" required>
                                 </div>
                             </div>
@@ -91,90 +78,95 @@
                                 </div>
                                 <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
                             <textarea type="text" id="remarkW76F2141" name="remarkW76F2141" class="form-control"
-                                      autocomplete="off" style="height: 80px">{{$remarkW76F2141}}</textarea>
+                                      maxlength="2000"
+                                      autocomplete="off" style="height: 60px">{{$remarkW76F2141}}</textarea>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="row mgb5">
-                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                            <label class="lbl-normal">{{Helpers::getRS("Chuyen_muc")}}</label>
-                        </div>
-                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                            <select name="channelIDW76F2141" id="channelIDW76F2141" class="form-control" required>
-                                <option value="">--</option>
-                                @foreach($channelIDList as  $channelIDItem)
-                                    <option value="{{$channelIDItem->CodeID}}" {{$channelIDItem->CodeID == $channelIDW76F2141 ? 'selected': ''}}>{{$channelIDItem->CodeName}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                            <label class="lbl-normal">{{Helpers::getRS("Tac_gia")}}</label>
-                        </div>
-                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                            <input type="text" class="form-control" id="authorW76F2141" name="authorW76F2141" readonly
-                                   class="form-control" value="{{$authorW76F2141}}" autocomplete="off">
-                        </div>
-                    </div>
-
-                    <div  class="row mgb5">
-                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                            <label class="lbl-normal">{{Helpers::getRS('Tu_khoa')}}</label>
-                        </div>
-                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                            <input type="text" name="keywordW76F2141" class="form-control" id="keywordW76F2141"
-                                   placeholder="" autocomplete="off" value="{{$keywordW76F2141}}">
-                        </div>
-                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                            <div class="form-group">
-                                <label class="lbl-normal">{{Helpers::getRS("Ngay_phat_hanh")}}</label>
+                            <div class="row mgb5">
+                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                    <label class="lbl-normal">{{Helpers::getRS("Chuyen_muc")}}</label>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                    <select name="channelIDW76F2141" id="channelIDW76F2141" class="form-control"
+                                            required>
+                                        <option value="">--</option>
+                                        @foreach($channelIDList as  $channelIDItem)
+                                            <option value="{{$channelIDItem->CodeID}}" {{$channelIDItem->CodeID == $channelIDW76F2141 ? 'selected': ''}}>{{$channelIDItem->CodeName}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                    <label class="lbl-normal">{{Helpers::getRS("Tac_gia")}}</label>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                    <input type="text" class="form-control" id="authorW76F2141" name="authorW76F2141"
+                                           readonly
+                                           class="form-control" value="{{$authorW76F2141}}" autocomplete="off">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                            <div class="input-group ">
-                                <input type="text" class="form-control" id="releaseDateW76F2141"
-                                       name="releaseDateW76F2141" value="{{$releaseDateW76F2141}}" autocomplete="off">
+                            <div class="row mgb5">
+                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                    <label class="lbl-normal">{{Helpers::getRS('Tu_khoa')}}</label>
+                                </div>
+                                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                                    <input type="text" name="keywordW76F2141" class="form-control" id="keywordW76F2141"
+                                           placeholder="" autocomplete="off" value="{{$keywordW76F2141}}">
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row mgb5">
-                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 ">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" id="status_idW76F2141"
-                                           name="status_idW76F2141"
-                                           {{$status_idW76F2141 == 1 ? 'checked': ''}} value="1"> {{Helpers::getRS("Phat_hanh")}}
-                                </label>
+                            <div class="row mgb5">
+                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                    <div class="form-group">
+                                        <label class="lbl-normal">{{Helpers::getRS("Ngay_phat_hanh")}}</label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                    <div class="input-group ">
+                                        <input type="text" class="form-control" id="releaseDateW76F2141"
+                                               name="releaseDateW76F2141" value="{{$releaseDateW76F2141}}"
+                                               autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                    <label class="lbl-normal">{{Helpers::getRS("Thu_tu_hien_thi")}}</label>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                    <input class="form-control" type="text" class="form-control" name="orderNoW76F2141"
+                                           maxlength="4" onkeypress="return inputNumber(event);" min="1" step="1"
+                                           id="orderNoW76F2141" value="{{$orderNoW76F2141}}" placeholder=""
+                                           autocomplete="off">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 ">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input type="checkbox" id="is_hotnewsW76F2141"
-                                           name="is_hotnewsW76F2141"
-                                           class="form-check-input"
-                                           {{$is_hotnewsW76F2141 == 1 ? 'checked': ''}} value="1">{{Helpers::getRS("Tin_noi_bat")}}
-                                </label>
+                            <div class="row mgb5">
+                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 ">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" id="status_idW76F2141"
+                                                   name="status_idW76F2141"
+                                                   {{$status_idW76F2141 == 1 ? 'checked': ''}} value="1"> {{Helpers::getRS("Phat_hanh")}}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 ">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" id="is_hotnewsW76F2141"
+                                                   name="is_hotnewsW76F2141"
+                                                   class="form-check-input"
+                                                   {{$is_hotnewsW76F2141 == 1 ? 'checked': ''}} value="1">{{Helpers::getRS("Tin_noi_bat")}}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" id="is_ShowBestNewsW76F2141"
+                                                   name="is_ShowBestNewsW76F2141" value="1"
+                                                   {{$is_ShowBestNewsW76F2141 == 1 ? 'checked':''}}
+                                                   class="form-check-input">{{Helpers::getRS("Tin_moi_nhat")}}
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input type="checkbox" id="is_ShowBestNewsW76F2141"
-                                           name="is_ShowBestNewsW76F2141" value="1"
-                                           {{$is_ShowBestNewsW76F2141 == 1 ? 'checked':''}}
-                                           class="form-check-input">{{Helpers::getRS("Tin_moi_nhat")}}
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                            <label class="lbl-normal">{{Helpers::getRS("Thu_tu_hien_thi")}}</label>
-                        </div>
-                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                            <input class="form-control" type="text" class="form-control" name="orderNoW76F2141"
-                                   maxlength="4" onkeypress="return inputNumber(event);" min="1" step="1"
-                                   id="orderNoW76F2141" value="{{$orderNoW76F2141}}" placeholder="" autocomplete="off">
                         </div>
                     </div>
 
@@ -224,16 +216,6 @@
                 $("#image").trigger('click');
             });
 
-            $("#btnPreviewThumbnail").click(function () {
-                $('#imgPreviewThumbnail').click();
-            });
-
-            $("#btnRemoveThumbnail").click(function () {
-                $("#image").val('');
-                $('#imgPreviewThumbnail').attr('href', '{{asset('media/no-photo.jpg')}}');
-                $('#imgPreviewThumbnail').find("img").attr('src', '{{asset('media/no-photo.jpg')}}');
-            });
-
             $("#image").on("change", function (event) {
                 console.log("file change");
                 var file = this.files[0];
@@ -250,8 +232,8 @@
                     }, function (blob, didItResize) {
                         blob_to_data_URL(blob, function (url) {
                             hideAlert();
-                            $('#imgPreviewThumbnail').attr('href', url);
-                            $('#imgPreviewThumbnail').find("img").attr('src', url);
+                            $('#btnChooseThumbnail').attr('href', url);
+                            $('#btnChooseThumbnail').find("img").attr('src', url);
                         });
                     });
                 }
@@ -287,8 +269,8 @@
             CKEDITOR.replace('contentW76F2141', {
                 removeButtons: 'Source',
                 removePlugins: 'save,print,preview,find,about,maximize,showblocks,elementspath,spellchecker',
-                resize_enabled: false
-                // The rest of options...
+                resize_enabled: false,
+                height:400
             });
             $("#submitCreateNewsW76F2141").click(function () {
                 $("#smForm").click();
@@ -299,22 +281,6 @@
                     cls: '',
                     style: 'border: none;float:right',
                     buttonList: [
-                            {{--{--}}
-                            {{--ID: "btnSaveCloseW76F2141",--}}
-                            {{--icon: "fa fa-save",--}}
-                            {{--title: '{{Helpers::getRS("Luu_va_dongU")}}',--}}
-                            {{--enable: true,--}}
-                            {{--hidden: false,--}}
-                            {{--type: "button",--}}
-                            {{--cls: "btn btn-info pull-right",--}}
-                            {{--render: function (ui) {--}}
-                            {{--},--}}
-                            {{--postRender: function (ui) {--}}
-                            {{--ui.$btn.click(function () {--}}
-                            {{--frmW76F2141Save();--}}
-                            {{--});--}}
-                            {{--}--}}
-                            {{--}--}}
                         {
                             ID: "btnSaveW76F2141",
                             icon: "fa fa-save",

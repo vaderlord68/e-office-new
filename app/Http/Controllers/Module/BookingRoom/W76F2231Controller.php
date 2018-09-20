@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Module\BookingRoom;
 
 use App\Eoffice\Helper;
 use App\Http\Controllers\Controller;
+use App\Module\BookingRoom\D76T9020;
 use App\Module\Meeting\D76T2200;
 use App\Module\BookingRoom\D76T2230;
 use App\Module\W76\D76T1556;
@@ -19,12 +20,14 @@ class  W76F2231Controller extends Controller
     private $d76T1556;
     private $d76T2200;
     private $d76T2230;
+    private $d76T9020;
 
-    public function __construct(D76T1556 $d76T1556, D76T2200 $d76T2200, D76T2230 $d76T2230)
+    public function __construct(D76T1556 $d76T1556,D76T9020 $d76T9020, D76T2200 $d76T2200, D76T2230 $d76T2230)
     {
         $this->d76T1556 = $d76T1556;
         $this->d76T2200 = $d76T2200;
         $this->d76T2230 = $d76T2230;
+        $this->d76T9020 = $d76T9020;
     }
 
     public function index(Request $request, $task = "")
@@ -32,11 +35,14 @@ class  W76F2231Controller extends Controller
         switch ($task) {
             case 'add':
                 $all = $request->input();
+                $hostPersonList = $this->d76T9020->select('EmployeeCode', 'Fullname')->orderBy('Fullname', 'desc')->get();
+                $participantsList = $this->d76T9020->select('EmployeeCode', 'Fullname')->orderBy('Fullname', 'desc')->get();
+                \Debugbar::info($participantsList);
                 $facilityList = $this->d76T2200->select('FacilityNo', 'FacilityName')->get();
                 $logisticsList = $this->d76T1556->where('ListTypeID', '=', 'D76T2200_Logistics')->select('CodeID', 'CodeName')->get();
                 $CreateUserID = Auth::user()->UserID;
                 $rowData = json_encode(array());
-                return view("system/module/BookingRoom/W76F2231/W76F2231", compact('facilityList', 'meetingRoomList', 'all', 'rowData', 'CreateUserID', 'logisticsList', 'task'));
+                return view("system/module/BookingRoom/W76F2231/W76F2231", compact('participantsList','hostPersonList','facilityList', 'meetingRoomList', 'all', 'rowData', 'CreateUserID', 'logisticsList', 'task'));
                 break;
             case 'save':
                 try {
@@ -44,7 +50,7 @@ class  W76F2231Controller extends Controller
                     $descriptionW76F2231 = \Helpers::sqlstring($request->input('descriptionW76F2231', ''));
                     $orgunitIDW76F2231 = \Helpers::sqlstring($request->input('orgunitIDW76F2231', ''));
                     $cbHostPersonW76F2231 = \Helpers::sqlstring($request->input('cbHostPersonW76F2231', ''));
-                    $cbParticipantsW76f2231 = \Helpers::sqlstring($request->input('cbParticipantsW76f2231', ''));
+                    $cbParticipantsW76F2231 = \Helpers::sqlstring($request->input('cbParticipantsW76F2231', ''));
                     $txtNumParticipantsW76F22311 = \Helpers::sqlNumber($request->input('txtNumParticipantsW76F2231', 1));
 
                     $dateFromW76F2231 =  $request->input('dateFromW76F2231', '');
@@ -64,17 +70,28 @@ class  W76F2231Controller extends Controller
                     $isMicrophoneW76F2231 = \Helpers::sqlNumber($request->input('isMicrophoneW76F2231', 1));
                     $isTeleConW76F2231 = \Helpers::sqlNumber($request->input('isTeleConW76F223', 1));
                     $isWifiW76F2231 = \Helpers::sqlNumber($request->input('isWifiW76F223', 1));
-                    $logisticsW76F2231 = \Helpers::sqlNumber($request->input('logisticsW76F2231', 1));
                     $createDateW76F2231 = Carbon::now();
                     $createUserIDW76F2231 = Auth::user()->UserID;
                     $lastModifyDateW76F2231 = Carbon::now();
                     $lastModifyUserIDW76F2231 = Auth::user()->UserID;
+
+
+//                    $sql = "---Kiem tra du lieu truoc khi luu" . PHP_EOL;
+//                    $sql .= "SELECT Top 1 1 as check_exist " . PHP_EOL;
+//                    $sql .= "FROM D76T2230 WITH(NOLOCK)" . PHP_EOL;
+//                    $sql .= "WHERE FacilityID = '$cbFacilityIDW76F2231'" . PHP_EOL;
+
+                    $logisticsW76F2231 = "";
+                    if ($logisticsW76F2231 != "" && $logisticsW76F2231 != null){
+                        $logisticsW76F2231 = implode(';', $logisticsW76F2231);
+                    }
+
                     $data = [
                         "FacilityID" => $cbFacilityIDW76F2231,
                         "Description" => $descriptionW76F2231,
                         "OrgunitID" => $orgunitIDW76F2231,
                         "HostPerson" => $cbHostPersonW76F2231,
-                        "Participants" => $cbParticipantsW76f2231,
+                        "Participants" => $cbParticipantsW76F2231,
                         "NumParticipants" => $txtNumParticipantsW76F22311,
                         "RequestedDateFrom" => $requestedDateFromW76F2231,
                         "RequestedDateTo" => $requestedDateToW76F2231,
@@ -85,7 +102,7 @@ class  W76F2231Controller extends Controller
                         "IsMicrophone" => $isMicrophoneW76F2231,
                         "IsTeleCon" => $isTeleConW76F2231,
                         "IsWifi" => $isWifiW76F2231,
-                        "Logistics" => implode(';', $logisticsW76F2231),
+                        "Logistics" => $logisticsW76F2231,
                         "CreateDate" => $createDateW76F2231,
                         "CreateUserID" => $createUserIDW76F2231,
                         "LastModifyDate" => $lastModifyDateW76F2231,
@@ -104,4 +121,5 @@ class  W76F2231Controller extends Controller
                 break;
         }
     }
+
 }
