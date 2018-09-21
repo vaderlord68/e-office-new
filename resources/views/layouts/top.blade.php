@@ -518,6 +518,7 @@
 <style>
     .top-menu .dropdown:hover > .dropdown-menu {
         display: block !important;
+        transition: visibility 0s linear 0.33s, opacity 0.33s linear;
         margin: 0px;
         border: none !important;
         white-space: nowrap;
@@ -525,7 +526,7 @@
 
     .top-menu .dropdown-submenu {
         position: relative !important;
-        padding: 1px 0px 5px 0px;
+        padding: 1px 0px 0px 0px;
         color: #333 !important;
     }
 
@@ -552,8 +553,12 @@
 
     .dropdown-submenu:hover > .dropdown-menu {
         display: block !important;
+        transition: visibility 0s linear 0.33s, opacity 0.33s linear;
     }
 
+    .dropdown-submenu:has(ul){
+
+    }
     .top-menu .dropdown-submenu > a:after {
         display: block !important;
         content: " " !important;
@@ -597,5 +602,10 @@
     }
 </style>
 @section('script')
+    <script>
+        $(".nav-item").click(function(evt){
+            $(".nav-item").removeClass('show');
+        });
 
+    </script>
 @stop
