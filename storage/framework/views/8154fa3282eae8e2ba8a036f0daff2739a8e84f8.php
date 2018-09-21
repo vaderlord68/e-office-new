@@ -1,6 +1,5 @@
-@extends('page.master')
-@section('body_content')
-    @parent
+<?php $__env->startSection('body_content'); ?>
+    ##parent-placeholder-5a4526adfe28f01223dccf37a363ace9165900d0##
     <div class="card document-sidebar">
         <div class="card-header">
             <h4>Quản lý hợp đồng</h4>
@@ -33,7 +32,7 @@
                         {
                             ID: "btnAddW76F2130",
                             icon: "fa fa-plus",
-                            title: "{{Helpers::getRS('Them_moi1')}}",
+                            title: "<?php echo e(Helpers::getRS('Them_moi1')); ?>",
                             cls: "btn btn-info",
                             enable: true,
                             hidden: function () {
@@ -45,7 +44,7 @@
                             postRender: function (ui) {
                                 console.log(ui);
                                 ui.$btn.click(function () {
-                                    window.location.href = "{{url('/W76F2131/add')}}";
+                                    window.location.href = "<?php echo e(url('/W76F2131/add')); ?>";
                                 });
                             }
                         }
@@ -104,8 +103,8 @@
                             if (ui.rowData.pq_close == true){
                                 return "";
                             }else{
-                                var str = '<a id="btnEditW76F2130" title="{{Helpers::getRS("Sua")}}"><i class="fa fa-edit mgr10 text-yellow cursor-pointer"></i></a>';
-                                str += '<a id="btnDeleteW76F2130" title="{{Helpers::getRS("Xoa")}}"><i class="fa fa-trash text-danger cursor-pointer"></i></a>';
+                                var str = '<a id="btnEditW76F2130" title="<?php echo e(Helpers::getRS("Sua")); ?>"><i class="fa fa-edit mgr10 text-yellow cursor-pointer"></i></a>';
+                                str += '<a id="btnDeleteW76F2130" title="<?php echo e(Helpers::getRS("Xoa")); ?>"><i class="fa fa-trash text-danger cursor-pointer"></i></a>';
                                 return str;
                             }
 
@@ -121,14 +120,14 @@
                                 var data = {
                                     ID: rowData.ID
                                 }
-                                window.location.href = "{{url('/W76F2131/edit')}}" + "?" + $.param(data);
+                                window.location.href = "<?php echo e(url('/W76F2131/edit')); ?>" + "?" + $.param(data);
                             });
                             $cell.find("#btnDeleteW76F2130").bind("click", function (evt) {
                                 ask_delete(function () {
                                     $.ajax({
                                         method: "POST",
-                                        url: '{{url('/W76F2130/delete')}}',
-                                        data: {ID: rowData.ID, _token: '{{ csrf_token() }}'},
+                                        url: '<?php echo e(url('/W76F2130/delete')); ?>',
+                                        data: {ID: rowData.ID, _token: '<?php echo e(csrf_token()); ?>'},
                                         success: function (res) {
                                             var data = JSON.parse(res);
                                             switch (data.status) {
@@ -252,7 +251,7 @@
                     }
                 ],
                 dataModel: {
-                    data: {!! $rsData !!},
+                    data: <?php echo $rsData; ?>,
                 },
                 pageModel: {type: 'local', rPP: 20, rPPOptions: [20, 30, 40, 50]},
                 complete: function (event, ui) {
@@ -264,10 +263,12 @@
             };
 
             $("#gridW76F2130").pqGrid(obj);
-            $("#gridW76F2130").pqGrid("option", $.paramquery.pqGrid.regional['{{Session::get("locate")}}']);
-            $("#gridW76F2130").find(".pq-pager").pqPager("option", $.paramquery.pqPager.regional['{{Session::get("locate")}}']);
+            $("#gridW76F2130").pqGrid("option", $.paramquery.pqGrid.regional['<?php echo e(Session::get("locate")); ?>']);
+            $("#gridW76F2130").find(".pq-pager").pqPager("option", $.paramquery.pqPager.regional['<?php echo e(Session::get("locate")); ?>']);
             $("#gridW76F2130").pqGrid("refreshDataAndView");
 
         });
     </script>
-@stop
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('page.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

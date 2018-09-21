@@ -51,9 +51,10 @@ class  W76F2131Controller extends Controller
                 //return "test";
                 $ID = $request->input('ID', '');
                 $sql = "--Load master" . PHP_EOL;
-                $sql .= "select convert(varchar,EffectDateFrom, 103) as EffectDateFrom1, convert(varchar,EffectDateTo, 103) as EffectDateTo1, * from D76T2130 where ID = $ID" . PHP_EOL;
+                $sql .= "select convert(varchar,LastModifyDate, 103) as LastModifyDate1, convert(varchar,CreateDate, 103) as CreateDate1, convert(varchar,EffectDateFrom, 103) as EffectDateFrom1, convert(varchar,EffectDateTo, 103) as EffectDateTo1, * from D76T2130 where ID = $ID" . PHP_EOL;
                 $rsData = DB::selectOne($sql);
                 //var_dump($rsData);die;
+                \Debugbar::info($rsData);
                 return view("system/module/W76/W76F2130/W76F2131", compact('rsData', 'task', 'rsContractType', 'rsSignerID', 'rsStatusID'));
                 break;
             case 'download':
@@ -94,13 +95,8 @@ class  W76F2131Controller extends Controller
                 }
                 break;
             case 'save':
-            case 'update':
                 $ID = $request->input('ID', '');
-                if ($ID != '' && $ID != null) {
-                    $sql = "--Xoa hop dong" . PHP_EOL;
-                    $sql .= "delete from D76T2130 where ID = $ID" . PHP_EOL;
-                    DB::statement($sql);
-                }
+
                 $txtContractNo = \Helpers::sqlstring($request->input('txtContractNo', ''));
                 $txtPartner = \Helpers::sqlstring($request->input('txtPartner', ''));
                 $cboContractType = \Helpers::sqlstring($request->input('cboContractType', ''));
@@ -118,6 +114,12 @@ class  W76F2131Controller extends Controller
                 $CreateDate = Carbon::now();
                 $byteArray = null;
                 $fileName = "";
+
+                $sql = "--Kiem tra trung" . PHP_EOL;
+                $sql .= "select *  from D76T2130 where ContractNo = '$txtContractNo'" . PHP_EOL;
+                if (DB::connection()->selectOne($sql) != null){
+                    return json_encode(['status' => 'ERROR', 'message' => 'Hợp đồng này đã tồn tại trong hệ thống']);
+                }
 
                 if ($request->hasFile('file')) {
                     \Debugbar::info("sdfdsf");
@@ -155,13 +157,92 @@ class  W76F2131Controller extends Controller
 
                 try {
                     DB::statement($sql);
-                    if ($ID != '' && $ID != null) {
-                        \Helpers::setSession('successMessage', 'Hợp đồng đã được cập nhật thành công.');
-                    } else {
-                        \Helpers::setSession('successMessage', 'Hợp đồng đã được lưu thành công');
-                    }
+                    \Helpers::setSession('successMessage', 'Hợp đồng đã được lưu thành công');
 
                     return json_encode(['status' => 'SUCC', 'message' => 'Hợp đồng đã được lưu thành công', 'redirectTo' => $_SERVER["HTTP_REFERER"]]);
+                } catch (\Exception $ex) {
+                    \Helpers::log($ex->getMessage());
+                    return json_encode(['status' => 'ERROR', 'message' => $ex->getMessage()]);
+                }
+                break;
+            case 'update':
+                $ID = $request->input('ID', '');
+
+                $txtContractNo = \Helpers::sqlstring($request->input('txtContractNo', ''));
+                $txtPartner = \Helpers::sqlstring($request->input('txtPartner', ''));
+                $cboContractType = \Helpers::sqlstring($request->input('cboContractType', ''));
+                $cboSignerID = \Helpers::sqlstring($request->input('cboSignerID', ''));
+                $cboStatusID = \Helpers::sqlstring($request->input('cboStatusID', ''));
+                $dtpEffectDateFrom = \Helpers::convertDate($request->input('dtpEffectDateFrom', ''));
+                $dtpEffectDateTo = \Helpers::convertDate($request->input('dtpEffectDateTo', ''));
+                $txtContent = \Helpers::sqlstring($request->input('txtContent', ''));
+                $txtSheftNo = \Helpers::sqlstring($request->input('txtSheftNo', ''));
+                $txtFloorNo = \Helpers::sqlstring($request->input('txtFloorNo', ''));
+                $txtPartitionNo = \Helpers::sqlstring($request->input('txtPartitionNo', ''));
+                $txtFolderNo = \Helpers::sqlstring($request->input('txtFolderNo', ''));
+
+                $CreateUserID = Auth::user()->UserID;
+                $CreateDate = Carbon::now();
+                $byteArray = null;
+                $fileName = "";
+
+
+                if ($request->hasFile('file')) {
+                    \Debugbar::info("sdfdsf");
+                    $file = $request->file('file', null);
+                    $fileName = $file->getClientOriginalName();
+                    $byteArray = ("0x" . bin2hex(file_get_contents($file->getRealPath())));
+
+                    $sql ="--Cap nhat hop dong".PHP_EOL;
+                    $sql .="Update D76T2130 Set ".PHP_EOL;
+                    $sql .="ContractNo = '$txtContractNo',".PHP_EOL;
+                    $sql .="ContractType = '$cboContractType',".PHP_EOL;
+                    $sql .="Partner =  N'$txtPartner',".PHP_EOL;
+                    $sql .="SignerID = '$cboSignerID',".PHP_EOL;
+                    $sql .="Content =  N'$txtContent',".PHP_EOL;
+                    $sql .="StatusID = '$cboStatusID',".PHP_EOL;
+                    $sql .="EffectDateFrom = $dtpEffectDateFrom,".PHP_EOL;
+                    $sql .="EffectDateTo = $dtpEffectDateTo,".PHP_EOL;
+                    $sql .="SheftNo =  N'$txtSheftNo',".PHP_EOL;
+                    $sql .="FloorNo =  N'$txtFloorNo',".PHP_EOL;
+                    $sql .="PartitionNo =  N'$txtPartitionNo',".PHP_EOL;
+                    $sql .="FolderNo =  N'$txtFolderNo',".PHP_EOL;
+                    $sql .="Deleted = 0,".PHP_EOL;
+
+                    $sql .="LastModifyUserID = '$CreateUserID',".PHP_EOL;
+                    $sql .="LastModifyDate = '$CreateDate',".PHP_EOL;
+                    $sql .="FileName =  N'$fileName',".PHP_EOL;
+                    $sql .="FileContent = $byteArray".PHP_EOL;
+                    $sql .=" Where ID = $ID".PHP_EOL;
+
+
+                } else {
+                    $sql ="--Cap nhat hop dong".PHP_EOL;
+                    $sql .="Update D76T2130 Set ".PHP_EOL;
+                    $sql .="ContractNo = '$txtContractNo',".PHP_EOL;
+                    $sql .="ContractType = '$cboContractType',".PHP_EOL;
+                    $sql .="Partner =  N'$txtPartner',".PHP_EOL;
+                    $sql .="SignerID = '$cboSignerID',".PHP_EOL;
+                    $sql .="Content =  N'$txtContent',".PHP_EOL;
+                    $sql .="StatusID = '$cboStatusID',".PHP_EOL;
+                    $sql .="EffectDateFrom = $dtpEffectDateFrom,".PHP_EOL;
+                    $sql .="EffectDateTo = $dtpEffectDateTo,".PHP_EOL;
+                    $sql .="SheftNo =  N'$txtSheftNo',".PHP_EOL;
+                    $sql .="FloorNo =  N'$txtFloorNo',".PHP_EOL;
+                    $sql .="PartitionNo =  N'$txtPartitionNo',".PHP_EOL;
+                    $sql .="FolderNo =  N'$txtFolderNo',".PHP_EOL;
+                    $sql .="Deleted = 0,".PHP_EOL;
+
+                    $sql .="LastModifyUserID = '$CreateUserID',".PHP_EOL;
+                    $sql .="LastModifyDate = '$CreateDate'".PHP_EOL;
+                    $sql .=" Where ID = $ID".PHP_EOL;
+                }
+
+
+                try {
+                    DB::statement($sql);
+                    \Helpers::setSession('successMessage', 'Hợp đồng đã được cập nhật thành công.');
+                    return json_encode(['status' => 'SUCC', 'message' => 'Hợp đồng đã được cập nhật thành công.', 'redirectTo' => $_SERVER["HTTP_REFERER"]]);
                 } catch (\Exception $ex) {
                     \Helpers::log($ex->getMessage());
                     return json_encode(['status' => 'ERROR', 'message' => $ex->getMessage()]);

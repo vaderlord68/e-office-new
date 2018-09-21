@@ -3,45 +3,46 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" href="#">
-        <img class="navbar-brand-full" src="{{asset('img/logo.png')}}" height="32"
+        <img class="navbar-brand-full" src="<?php echo e(asset('img/logo.png')); ?>" height="32"
              alt="CoreUI Logo">
-        <img class="navbar-brand-minimized" src="{{asset('img/logo.png')}}" height="32"
+        <img class="navbar-brand-minimized" src="<?php echo e(asset('img/logo.png')); ?>" height="32"
              alt="CoreUI Logo">
     </a>
-    @if (Helpers::getDevice() != 'DESKTOP')
+    <?php if(Helpers::getDevice() != 'DESKTOP'): ?>
         <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
             <span class="navbar-toggler-icon"></span>
         </button>
-    @endif
+    <?php endif; ?>
 
-    {{--<div class="top-menu">--}}
-    {{--<ul class="nav navbar-nav d-md-down-none">--}}
-    {{--<li class="nav-item dropdown">--}}
-    {{--<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">--}}
-    {{--Danh mục--}}
-    {{--</a>--}}
-    {{--<ul class="dropdown-menu">--}}
-    {{--<li class="nav-item dropdown-submenu">--}}
-    {{--<a href="#" class="nav-link dropdown-toggle has-child" data-toggle="dropdown">Tài chính</a>--}}
-    {{--<ul class="dropdown-menu">--}}
-    {{--<li class="dropdown-submenu">--}}
-    {{--<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Danh mục khối</a>--}}
-    {{--</li>--}}
-    {{--<li class="dropdown-submenu">--}}
-    {{--<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Danh mục phòng ban</a>--}}
-    {{--</li>--}}
-    {{--<li class="dropdown-submenu">--}}
-    {{--<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Danh mục nhóm</a>--}}
-    {{--</li>--}}
-    {{--</ul>--}}
-    {{--</li>--}}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
-    {{--</ul>--}}
-    {{--</li>--}}
-    {{--</ul>--}}
-    {{--</div>--}}
+    
+    
+    
+    
 
-    {!! Helpers::createMainMenu() !!}
+    <?php echo Helpers::createMainMenu(); ?>
+
 
 
 
@@ -572,11 +573,11 @@
 
 
 </style>
-@section('script')
+<?php $__env->startSection('script'); ?>
     <script>
         $(".nav-item").click(function (evt) {
             $(".nav-item").removeClass('show');
         });
 
     </script>
-@stop
+<?php $__env->stopSection(); ?>

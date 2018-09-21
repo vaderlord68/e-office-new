@@ -46,7 +46,7 @@ class  W76F2130Controller extends Controller
                 $sql .= "delete from D76T2130 where ID = $ID".PHP_EOL;
                 try {
                     DB::statement($sql);
-                    \Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_xoa_thanh_cong'));
+                    //\Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_xoa_thanh_cong'));
                     return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_xoa_thanh_cong')]);
                 } catch (\Exception $ex) {
                     \Helpers::log($ex->getMessage());
