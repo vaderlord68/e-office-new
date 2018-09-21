@@ -78,6 +78,9 @@
                             <a class="dropdown-item media" href="/w76f2140">
                                 <p>{{Helpers::getRS('Quan_ly_ban_tin')}}</p>
                             </a>
+                            <a class="dropdown-item media" href="/w76f2230">
+                                <p>{{Helpers::getRS('Quan_ly_phong_hop')}}</p>
+                            </a>
                         </div>
                     </div>
                     <div class="dropdown for-notification">

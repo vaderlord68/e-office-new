@@ -4,7 +4,7 @@
     <span class="pull-right">
             <a href="{{url('/w76f2141/edit?newsID='.$newsRow->NewsID)}}" title="{{Helpers::getRS("Sua")}}"><i class="fa fa-edit mgr10 text-yellow cursor-pointer fs20 mgt5"></i></a>
         </span>
-    <div class="well ">
+    <div class="">
         <label class="label font cut-detail">{{$newsRow->Title}}</label>
         <div class="row">
             <div class="col-xs-2 pd10">
@@ -42,7 +42,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 @foreach($newRowDetail as $newDetail)
-                    <li><a>{{$newDetail-> Title or '    '}}</a></li>
+                    <li><a>{{$newDetail-> Title or ''}}</a></li>
                 @endforeach
             </div>
         </div>

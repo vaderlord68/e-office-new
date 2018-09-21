@@ -50,11 +50,6 @@ class  W76F2200Controller extends Controller
         }
     }
 
-//    public function getList()
-//    {
-//        $collection = $this->d76T2200->orderBy('LastModifyDate', 'desc')->get();
-//        return ($collection);
-//    }
     public function getFilterList($txtFacilityNameW76F2201)
     {
         $userID = Auth::user()->UserID;

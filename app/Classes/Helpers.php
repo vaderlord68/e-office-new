@@ -640,6 +640,14 @@ class Helpers
         return "'" . DateTime::createFromFormat('d/m/Y', $dateInput)->format('m/d/Y') . "'";
     }
 
+    // chuyền từ d/m/Y sang formatstring
+    public static function convertDateWithFormat($dateInput, $format = 'm/d/Y', $isReturnNull = true)
+    {
+        if ($dateInput == "")
+            return ($isReturnNull == true ? "null" : "''");
+        return DateTime::createFromFormat('d/m/Y', $dateInput)->format($format);
+    }
+
     public static function createDateTime($stringDateDMY)
     {
         if ($stringDateDMY == "")
