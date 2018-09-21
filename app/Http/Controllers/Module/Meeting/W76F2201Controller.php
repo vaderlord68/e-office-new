@@ -70,7 +70,7 @@ class  W76F2201Controller extends Controller
                     $isWifiW76F2201 = \Helpers::sqlNumber($request->input('isWifiW76F2201', 1));
                     $isVideoConW76F2201 = \Helpers::sqlNumber($request->input('isVideoConW76F2201', 1));
                     $divisionIDW76F2201 = \Helpers::sqlstring($request->input('divisionIDW76F2201', ''));
-                    //$logisticsW76F2201 = \Helpers::sqlstring($request->input('logisticsW76F2201', ''));
+                    $logisticsW76F2201 = $request->input('logisticsW76F2201', []);
                     $coordinatorW76F2201 = \Helpers::sqlstring($request->input('coordinatorW76F2201', ''));
                     $displayOrderW76F2201 = \Helpers::sqlNumber($request->input('displayOrderW76F2201', 1));
                     $createDateW76F2201 = Carbon::now();
@@ -95,12 +95,6 @@ class  W76F2201Controller extends Controller
                         \Debugbar::info("sdfds");
                         return json_encode(["status" => "EXIST", "message" => \Helpers::getRS('Ma_phong_hop_nay_da_ton_tai_ban_khong_duoc_phep_luu')]);
                     } else {
-
-                        $logisticsW76F2201 = "";
-                        if ($logisticsW76F2201 != "" && $logisticsW76F2201 != null) {
-                            $logisticsW76F2201 = implode(';', $logisticsW76F2201);
-                        }
-
                         $data = [
                             "FacilityNo" => $txtFacilityNoW76F2201,
                             "FacilityName" => $txtFacilityNameW76F2201,
@@ -117,8 +111,8 @@ class  W76F2201Controller extends Controller
                             "IsWifi" => $isWifiW76F2201,
                             "IsVideoCon" => $isVideoConW76F2201,
                             "DivisionID" => $divisionIDW76F2201,
-                            "Logistics" => $logisticsW76F2201,
-                            //"Logistics" => implode(';', $logisticsW76F2201),
+                            //"Logistics" => $logisticsW76F2201,
+                            "Logistics" => implode(';', $logisticsW76F2201),
                             "Coordinator" => $coordinatorW76F2201,
                             "DisplayOrder" => $displayOrderW76F2201,
                             "CreateUserID" => $createUserIDW76F2201,
@@ -155,17 +149,14 @@ class  W76F2201Controller extends Controller
                     $isWifiW76F2201 = \Helpers::sqlNumber($request->input('isWifiW76F2201', 1));
                     $isVideoConW76F2201 = \Helpers::sqlNumber($request->input('isVideoConW76F2201', 1));
                     $divisionIDW76F2201 = \Helpers::sqlstring($request->input('divisionIDW76F2201', ''));
-                    $logisticsW76F2201 = \Helpers::sqlstring($request->input('logisticsW76F2201', ''));
+
+                    $logisticsW76F2201 = $request->input('logisticsW76F2201', []);
                     $coordinatorW76F2201 = \Helpers::sqlstring($request->input('coordinatorW76F2201', ''));
                     $displayOrderW76F2201 = \Helpers::sqlNumber($request->input('displayOrderW76F2201', 1));
                     $createUserIDW76F2201 = Auth::user()->UserID;
                     $lastModifyDateW76F2201 = Carbon::now();
                     $lastModifyUserIDW76F2201 = Auth::user()->UserID;
 
-                    $logisticsW76F2201 = "";
-                    if ($logisticsW76F2201 == "" || $logisticsW76F2201 == null) {
-                        $logisticsW76F2201 = implode(';', $logisticsW76F2201);
-                    }
 
                     $data = [
                         "FacilityName" => $txtFacilityNameW76F2201,
@@ -182,8 +173,7 @@ class  W76F2201Controller extends Controller
                         "IsWifi" => $isWifiW76F2201,
                         "IsVideoCon" => $isVideoConW76F2201,
                         "DivisionID" => $divisionIDW76F2201,
-                        "Logistics" => $logisticsW76F2201,
-                        //"Logistics" => implode(';', $logisticsW76F2201),
+                        "Logistics" => implode(';', $logisticsW76F2201),
                         "Coordinator" => $coordinatorW76F2201,
                         "DisplayOrder" => $displayOrderW76F2201,
                         "CreateUserID" => $createUserIDW76F2201,

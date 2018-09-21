@@ -41,19 +41,21 @@
                     $cbFacilityIDW76F2231 = $rowData["FacilityName"];
                     $cbHostPersonW76F2231 = $rowData["Fullname"];
                     $cbParticipantsW76F2231 = $rowData["Fullname"];
-
+                    $orgunitIDW76F2231 = $rowData["OrgunitID"];
+                    $orgunitNameW76F2231 = $rowData["OrgunitName"];
                     $start = '';
                     $end = '';
                     $date = '';
                     $userID = '';
 
                 } else {
+                    $orgunitIDW76F2231 = session('W76P0000')->OrgUnitID;
+                    $orgunitNameW76F2231 = session('W76P0000')->OrgUnitName;
                     $start = $all["start"];
                     $end = $all["end"];
                     $date = $all["date"];
-                    $orgunitIDW76F2231 = "";
                     $logisticsW76F2231 = "";
-                    $cbFacilityIDW76F2231 = "";
+                    $cbFacilityIDW76F2231 = $all["roomID"];
                     $descriptionW76F2231 = "";
                     $cbHostPersonW76F2231 = "";
                     $cbParticipantsW76F2231 = "";
@@ -75,6 +77,11 @@
                         {{--<h4 class="card-title"></h4>--}}
                         {{--</div>--}}
                         <div class="card-body" id="modalW76F2231">
+                            <div class="row form-group">
+                                <div class="col-sm-12">
+                                    @include('page.content.alert-dismissible')
+                                </div>
+                            </div>
                             <div id="bootstrap-data-table_wrapper"
                                  class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer table-documentary">
                                 <form id="formW76F2231" method="POST" enctype="multipart/form-data" action="">
@@ -84,7 +91,7 @@
                                             <label class="lbl-normal">{{Helpers::getRS("Nguoi_tao")}}</label>
                                         </div>
                                         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                            <label >{{$userID}}
+                                            <label>{{$userID}}
                                             </label>
                                         </div>
                                         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
@@ -107,6 +114,7 @@
                                         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                                             <div class="input-group ">
                                                 <input type="text" class="form-control" id="dateFromW76F2231"
+                                                       placeholder="00:00"
                                                        name="dateFromW76F2231" value="{{$date}}"
                                                        autocomplete="off" required>
 
@@ -125,6 +133,7 @@
                                         </div>
                                         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                                             <input type="text" class="form-control" id="dateToW76F2231"
+                                                   placeholder="00:00"
                                                    name="dateToW76F2231"
                                                    class="form-control" value="{{$date}}" autocomplete="off" required>
                                         </div>
@@ -142,8 +151,9 @@
                                             <label class="lbl-normal">{{Helpers::getRS("Co_cau_to_chuc")}}</label>
                                         </div>
                                         <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                                            <input name="orgunitIDW76F2231" id="orgunitIDW76F2231" class="form-control"
-                                                   readonly="">
+                                            <input name="orgunitNameW76F2231" id="orgunitNameW76F2231"
+                                                   class="form-control"
+                                                   readonly="" value="{{$orgunitNameW76F2231}}">
                                             </input>
                                         </div>
                                     </div>
@@ -165,7 +175,7 @@
                                         </div>
                                         <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
                                             <select name="cbHostPersonW76F2231" id="cbHostPersonW76F2231"
-                                                    class="form-control">
+                                                    class="form-control" required>
                                                 <option value="">--</option>
                                                 @foreach($hostPersonList as  $hostPersonListItem)
                                                     <option value="{{$hostPersonListItem->EmployeeCode}}" {{$hostPersonListItem->EmployeeCode == $cbHostPersonW76F2231 ? 'selected': ''}}>{{$hostPersonListItem->Fullname}}</option>
@@ -178,10 +188,14 @@
                                             <label class="lbl-normal">{{Helpers::getRS("Nguoi_tham_du")}}</label>
                                         </div>
                                         <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                                            <select name="cbParticipantsW76F2231" id="cbParticipantsW76F2231"
+                                            <select name="cbParticipantsW76F2231[]" id="cbParticipantsW76F2231"
                                                     class="form-control" multiple>
                                                 @foreach($participantsList as  $participantsListItem)
-                                                    <option value="{{$participantsListItem->EmployeeCode}}" {{$participantsListItem->EmployeeCode == $cbParticipantsW76F2231 ? 'selected': ''}}>{{$participantsListItem->Fullname}}</option>
+                                                    <option value="{{$participantsListItem->EmployeeCode}}"
+                                                            {{ isset($cbParticipantsW76F2231) && !empty($cbParticipantsW76F2231) && isset($participantsListItem->EmployeeCode)
+                                                    && in_array($participantsListItem->EmployeeCode, $cbParticipantsW76F2231) ? 'selected' : '' }}
+                                                            {{--{{$participantsListItem->EmployeeCode == $cbParticipantsW76F2231 ? 'selected': ''}}--}}
+                                                    >{{$participantsListItem->Fullname}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -380,25 +394,25 @@
             autoGroup: true,
             rightAlign: true
         });
-        $('#requestedDateFromW76F2231').datepicker({
+        $('#DateFromW76F2231').datepicker({
             todayHighlight: true,
             autoclose: true,
             format: "dd/mm/yyyy",
             language: '{{Session::get("locate")}}'
         });
-        $('#requestedDateToW76F2231').datepicker({
+        $('#DateToW76F2231').datepicker({
             todayHighlight: true,
             autoclose: true,
             format: "dd/mm/yyyy",
             language: '{{Session::get("locate")}}'
         });
 
-        $('#requestedTimeFromW76F2231').inputmask({
+        $('#timeFromW76F2231').inputmask({
             alias: "datetime",
             mask: "h:s",
             placeholder: "__:__"
         });
-        $('#requestedTimeToW76F2231').inputmask({
+        $('#timeToW76F2231').inputmask({
             alias: "datetime",
             mask: "h:s",
             placeholder: "__:__"
@@ -465,24 +479,28 @@
                 url = '{{url("/w76f2231/save")}}';
             }
             console.log(url);
+            hideAlert();
             $.ajax({
                 //enctype: 'multipart/form-data',
                 method: "POST",
                 url: url,
-                data: formData + "&facilityID=",
-                //processData: false,
+                data: formData + "&facilityID=" + "&orgunitIDW76F2231={{$orgunitIDW76F2231}}",
+               // processData: false,
                 //contentType: false,
                 success: function (res) {
-//                    var result = JSON.parse(res);
-//                    console.log("luu");
-//                    switch (result.status) {
-//                        case 'ERROR':
-//                            alertError(result.message);
-//                            break;
-//                        case 'SUCC':
-//                            window.location.href = document.referrer.toString();
-//                            break;
-//                    }
+                    var result = JSON.parse(res);
+                    console.log("luu");
+                    switch (result.status) {
+                        case 'ERROR':
+                            alertError(result.message, $("#modalW76F2231"))
+                            break;
+                        case 'EXIST':
+                            alertError(result.message, $("#modalW76F2231"))
+                            break;
+                        case 'SUCC':
+                            window.location.href = document.referrer.toString();
+                            break;
+                    }
                 }
             });
         });

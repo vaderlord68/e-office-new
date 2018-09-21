@@ -7,20 +7,20 @@
         var rooms =
                 {!! $meetingRoomList !!}
         var events = [
-                        {{--{--}}
-                        {{--url: '{{url('w76f2230/loadCalendar')}}',--}}
-                        {{--cache: false,--}}
-                        {{--method: 'post',--}}
-                        {{--data: function () { // a function that returns an object--}}
-                        {{--return {--}}
-                        {{--dynamic_value: Math.random(),--}}
-                        {{--array: {{json_encode($all)}},--}}
-                        {{--mode: 1,--}}
-                        {{--// faci: $('#slFacilityIDW76F4050').val(),--}}
-                        {{--// view: viewmodeW76F4050--}}
-                        {{--};--}}
-                        {{--}--}}
-                        {{--}--}}
+                {
+                    url: '{{url('w76f2230/loadCalendar')}}',
+                    cache: false,
+                    method: 'post',
+                    data: function () { // a function that returns an object
+                        return {
+                            dynamic_value: Math.random(),
+                            //ay: {{--{{json_encode($all)}}--}},
+                            //mode: 1,
+                            // faci: $('#slFacilityIDW76F4050').val(),
+                            // view: viewmodeW76F4050
+                        };
+                    }
+                }/*,s
                 {
                     "resourceId": "b",
                     title: 'Event Title1',
@@ -32,10 +32,15 @@
                     title: 'Event Title3',
                     start: '2018-09-17T13:13:55.008',
                     end: '2018-09-17T13:13:55.008'
-                }
+                }*/
             ];
 
+        var events = {!! $newsCollection !!};
         $('#calendar').fullCalendar({
+            //disableDragging: true,
+            selectOverlap: false,
+            eventOverlap: false,
+            //editable: false,
             title: "HELLO BUM",
             defaultView: 'timeline',
             defaultDate: '2018-09-17',
@@ -97,12 +102,20 @@
             eventRender: function (event, element, view) {
                 //no code here
             },
+            eventDrag: function (event) {
+                //event.preventDefault();
+            },
             eventDrop: function (event) {
+                console.log("HELLO BUM");
                 //Điều chỉnh booking drag & drop
                 var timefrom = moment(event.start).format("HH:mm");
                 var timeto = moment(event.end).format("HH:mm");
                 var date = moment(event.end).format("YYYY-MM-DD");
 
+
+                postMethod("{{url('/w76f2231/update')}}", function(res){
+
+                }, event)
                 console.log(event);
                 console.log(timeto);
                 console.log(date);

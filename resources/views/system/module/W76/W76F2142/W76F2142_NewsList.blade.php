@@ -1,7 +1,7 @@
 @extends('system.module.W76.W76F2142.components.layout')
 @section('news-wrapper')
     <label class="labelb">{{Helpers::getRS("Tin_tuc_noi_bo")}}</label>
-    <div class="well">
+    <div class="">
         @foreach($newsList as $newsRow)
             <?php
             $newsID = $newsRow->NewsID;
