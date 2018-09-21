@@ -14,100 +14,38 @@
         </button>
     @endif
 
-    <div class="top-menu">
-        <ul class="nav navbar-nav d-md-down-none">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                    Danh mục
-                </a>
-                <ul class="dropdown-menu">
-                    <li class="nav-item dropdown-submenu">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tài chính</a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-submenu">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Danh mục khối</a>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Danh mục phòng ban</a>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Danh mục nhóm</a>
-                            </li>
-                        </ul>
-                    </li>
+    {{--<div class="top-menu">--}}
+    {{--<ul class="nav navbar-nav d-md-down-none">--}}
+    {{--<li class="nav-item dropdown">--}}
+    {{--<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">--}}
+    {{--Danh mục--}}
+    {{--</a>--}}
+    {{--<ul class="dropdown-menu">--}}
+    {{--<li class="nav-item dropdown-submenu">--}}
+    {{--<a href="#" class="nav-link dropdown-toggle has-child" data-toggle="dropdown">Tài chính</a>--}}
+    {{--<ul class="dropdown-menu">--}}
+    {{--<li class="dropdown-submenu">--}}
+    {{--<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Danh mục khối</a>--}}
+    {{--</li>--}}
+    {{--<li class="dropdown-submenu">--}}
+    {{--<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Danh mục phòng ban</a>--}}
+    {{--</li>--}}
+    {{--<li class="dropdown-submenu">--}}
+    {{--<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Danh mục nhóm</a>--}}
+    {{--</li>--}}
+    {{--</ul>--}}
+    {{--</li>--}}
 
-                </ul>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                    Danh mục
-                </a>
-                <ul class="dropdown-menu">
-                    <li class="nav-item dropdown-submenu">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tài chính</a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-submenu">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Danh mục khối</a>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Danh mục phòng ban</a>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Danh mục nhóm</a>
-                            </li>
-                        </ul>
-                    </li>
+    {{--</ul>--}}
+    {{--</li>--}}
+    {{--</ul>--}}
+    {{--</div>--}}
 
-                </ul>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                    Danh mục
-                </a>
-                <ul class="dropdown-menu">
-                    <li class="nav-item dropdown-submenu">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tài chính</a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-submenu">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Danh mục khối</a>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Danh mục phòng ban</a>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Danh mục nhóm</a>
-                            </li>
-                        </ul>
-                    </li>
+    {!! Helpers::createMainMenu() !!}
 
-                </ul>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                    Danh mục
-                </a>
-                <ul class="dropdown-menu">
-                    <li class="nav-item dropdown-submenu">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tài chính</a>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-submenu">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Danh mục khối</a>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Danh mục phòng ban</a>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Danh mục nhóm</a>
-                            </li>
-                        </ul>
-                    </li>
 
-                </ul>
-            </li>
-        </ul>
-    </div>
 
-    {{--{!! Helpers::createMainMenu() !!}--}}
+
     <ul class="nav navbar-nav ml-auto">
         <li class="nav-item dropdown d-md-down-none">
             <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
@@ -518,6 +456,7 @@
 <style>
     .top-menu .dropdown:hover > .dropdown-menu {
         display: block !important;
+        transition: visibility 0s linear 0.33s, opacity 0.33s linear;
         margin: 0px;
         border: none !important;
         white-space: nowrap;
@@ -525,7 +464,7 @@
 
     .top-menu .dropdown-submenu {
         position: relative !important;
-        padding: 1px 0px 5px 0px;
+        padding: 1px 0px 0px 0px;
         color: #333 !important;
     }
 
@@ -552,9 +491,29 @@
 
     .dropdown-submenu:hover > .dropdown-menu {
         display: block !important;
+        transition: visibility 0s linear 0.33s, opacity 0.33s linear;
     }
 
     .top-menu .dropdown-submenu > a:after {
+        display: none !important;
+        content: " " !important;
+        float: right !important;
+        width: 0 !important;
+        height: 0 !important;
+        border-color: transparent !important;
+        border-style: solid !important;
+        border-width: 5px 0 5px 5px !important;
+        border-left-color: #000 !important;
+        margin-top: 5px !important;
+        margin-left: 0.255em;
+        vertical-align: 0.255em;
+        border-top: 0.3em solid;
+        border-right: 0.3em solid transparent;
+        border-bottom: 0;
+        border-left: 0.3em solid transparent;
+    }
+
+    .top-menu .dropdown-submenu > a.has-child:after {
         display: block !important;
         content: " " !important;
         float: right !important;
@@ -563,18 +522,33 @@
         border-color: transparent !important;
         border-style: solid !important;
         border-width: 5px 0 5px 5px !important;
-        border-left-color: #ccc !important;
+        border-left-color: #000 !important;
         margin-top: 5px !important;
-        margin-right: -10px !important;
+        margin-left: 0.255em;
+        vertical-align: 0.255em;
+        border-top: 0.3em solid;
+        border-right: 0.3em solid transparent;
+        border-bottom: 0;
+        border-left: 0.3em solid transparent;
     }
 
-    .top-menu .dropdown-submenu:hover > a:after {
-        border-left-color: yellow !important;
-    }
+    /*.top-menu .dropdown-submenu > a:after {*/
+    /*display: block !important;*/
+    /*content: " " !important;*/
+    /*float: right !important;*/
+    /*width: 0 !important;*/
+    /*height: 0 !important;*/
+    /*border-color: transparent !important;*/
+    /*border-style: solid !important;*/
+    /*border-width: 5px 0 5px 5px !important;*/
+    /*border-left-color: #ccc !important;*/
+    /*margin-top: 5px !important;*/
+    /*margin-right: -10px !important;*/
+    /*}*/
 
-    .top-menu .dropdown-submenu.pull-left {
-        float: none !important;
-    }
+    /*.top-menu .dropdown-submenu:hover > a:after {*/
+    /*border-left-color: yellow !important;*/
+    /*}*/
 
     .top-menu .dropdown-submenu.pull-left > .dropdown-menu {
         left: -100% !important;
@@ -588,14 +562,21 @@
         font-size: 14px !important;
     }
 
-    .top-menu .nav-link{
+    .top-menu .nav-link {
         padding: 5px 10px !important;
         text-align: left;
         background-color: #ffc13f !important;
         /*border-radius: 15px;*/
         margin: 0px 0px;
     }
+
+
 </style>
 @section('script')
+    <script>
+        $(".nav-item").click(function (evt) {
+            $(".nav-item").removeClass('show');
+        });
 
+    </script>
 @stop

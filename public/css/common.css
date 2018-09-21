@@ -625,4 +625,8 @@ a:hover {
     font-size: 13px;
 }
 
+.pq-col-sort-asc, .pq-col-sort-desc{
+    color: #000 !important;
+}
+
 /* End TRIHAO */

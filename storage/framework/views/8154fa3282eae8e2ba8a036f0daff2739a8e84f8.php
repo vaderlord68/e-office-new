@@ -58,19 +58,24 @@
                 collapsed: [false],
                 headerMenu: false,
                 summaryEditType: false,
-                summaryInTitleRowType: '',
+                //summaryInTitleRowType: '',
                 merge: true,
-//                title: [
-//                    "{0} ({1})",
-//                    "{0} - {1}"
-//                ],
-                titleDefault: "{0} - (<b>{1})</b>",
+                title: [
+                    "{0}",
+                    "{0}"
+                ],
+                //titleDefault: "{0} - (<b>{1})</b>",
             };
 
 
             var obj = {
+                sortModel: {
+                    number: false,
+                    type: "local"
+
+                },
                 width: '100%',
-                height: 400,
+                height: $(window).height() - 210,
                 freezeCols: 1,
                 numberCell: {show: false},
                 selectionModel: {type: 'row', mode: 'single'},
@@ -92,6 +97,7 @@
                         dataIndx: "View",
                         isExport: false,
                         editor: false,
+                        sortable: false,
                         render: function (ui) {
                             console.log(ui);
                             if (ui.rowData.pq_close == true){
@@ -159,6 +165,7 @@
                         dataIndx: "ContractNo",
                         dataType: "string",
                         editor: false,
+                        sortable: false,
                         filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']},
                     }
                     , {
@@ -168,6 +175,7 @@
                         dataIndx: "Partner",
                         dataType: "string",
                         editor: false,
+                        sortable: false,
                         filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']},
                     }
                     , {
@@ -177,6 +185,7 @@
                         dataIndx: "ContractTypeName",
                         dataType: "string",
                         editor: false,
+                        sortable: false,
                         filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']},
                     }
                     , {
@@ -186,6 +195,7 @@
                         dataIndx: "SignerName",
                         dataType: "string",
                         editor: false,
+                        sortable: false,
                         filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']},
                     }
                     , {
@@ -195,6 +205,7 @@
                         dataIndx: "Content",
                         dataType: "string",
                         editor: false,
+                        sortable: false,
                         filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']},
                     }
                     , {
@@ -203,6 +214,7 @@
                         align: "center",
                         dataIndx: "EffectDateFrom",
                         dataType: "date",
+                        sortable: false,
                         editor: false,
                         filter: {type: "textbox", condition: "equal", init: pqDatePicker, listeners: ['change']},
                     }
@@ -213,6 +225,7 @@
                         dataIndx: "EffectDateTo",
                         dataType: "date",
                         editor: false,
+                        sortable: false,
                         filter: {type: "textbox", condition: "equal", init: pqDatePicker, listeners: ['change']},
                     }
                     , {
@@ -221,17 +234,19 @@
                         align: "center",
                         dataIndx: "StatusName",
                         dataType: "string",
+                        sortable: false,
                         editor: false,
                         filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']},
                     }
                     , {
                         title: "Năm hợp đồng",
-                        width: 110,
+                        width: 150,
                         align: "center",
                         dataIndx: "ContractYear",
                         dataType: "string",
+                        sortable: false,
                         editor: false,
-                        hidden: true,
+                        hidden: false,
                         filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']},
                     }
                 ],

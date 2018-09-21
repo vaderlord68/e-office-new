@@ -2530,35 +2530,71 @@ class Helpers
     }
 
 
+
     public static function createMainMenu()
     {
         $menuList = Helpers::getMainMenu();
-        $str = '<ul class="nav navbar-nav d-md-down-none top-menu">';
+        $str = '<div class="top-menu">';
+        $str .= '<ul class="nav navbar-nav d-md-down-none">';
         foreach ($menuList as $row) {
-            $str .= Helpers::createMenuItem($row, $str, 0);
+            $str .= Helpers::createMenuItem($row, $str);
         }
         $str .= '</ul>';
+        $str .= '</div>';
         return $str;
     }
 
-    public static function createMenuItem($row, &$str, $level)
+    public static function createMenuItem($row, &$str, &$level = 0)
     {
+        //\Debugbar::info($hasChild);
         $childrend = $row->childrend;
-        \Debugbar::info($level);
-        $str .= '<li class="nav-item dropdown ' . ($level > 0 ? "dropdown-submenu" : "") .'">';
-        $str .= '<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">';
+        $hasChild = count($childrend) > 1 && $level > 0 ? 'has-child':'';
+        \Debugbar::info($childrend);
+        $str .= '<li class="nav-item dropdown ' . ($hasChild == "has-child"  ? "dropdown-submenu" : "") .'">';
+        $str .= '<a class="nav-link dropdown-toggle ' . $hasChild .'" href="#" id="navbardrop" data-toggle="dropdown">';
         $str .= $row->menuName;
         $str .= '</a>';
         if (count($childrend) > 0) {
             $str .= '<ul class="dropdown-menu" >';
             foreach ($childrend as $rowChild) {
-                $level +=$level+1;
-                Helpers::createMenuItem($rowChild, $str,$level);
+                $level .=$level + 1;
+
+                Helpers::createMenuItem($rowChild, $str, $level);
             }
             $str .= '</ul >';
         }
         $str .= '</li>';
     }
+
+//    public static function createMainMenu()
+//    {
+//        $menuList = Helpers::getMainMenu();
+//        $str = '<ul class="nav navbar-nav d-md-down-none top-menu">';
+//        foreach ($menuList as $row) {
+//            $str .= Helpers::createMenuItem($row, $str, 0);
+//        }
+//        $str .= '</ul>';
+//        return $str;
+//    }
+//
+//    public static function createMenuItem($row, &$str, $level)
+//    {
+//        $childrend = $row->childrend;
+//        \Debugbar::info($level);
+//        $str .= '<li class="nav-item dropdown ' . ($level > 0 ? "dropdown-submenu" : "") .'">';
+//        $str .= '<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">';
+//        $str .= $row->menuName;
+//        $str .= '</a>';
+//        if (count($childrend) > 0) {
+//            $str .= '<ul class="dropdown-menu" >';
+//            foreach ($childrend as $rowChild) {
+//                $level +=$level+1;
+//                Helpers::createMenuItem($rowChild, $str,$level);
+//            }
+//            $str .= '</ul >';
+//        }
+//        $str .= '</li>';
+//    }
 
     public static function createCommonParameter(){
         $userID =Auth::user()->UserID;
