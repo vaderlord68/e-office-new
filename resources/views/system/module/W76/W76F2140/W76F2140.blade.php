@@ -151,7 +151,7 @@
                         editor: false,
                         hidden: false,
                         align: "center",
-                        dataIndx: "ChannelID",
+                        dataIndx: "ChannelName",
                         filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']},
                     },
                     {

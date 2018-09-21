@@ -34,6 +34,15 @@ $locale = Helpers::getLocale();
 <!-- Moment -->
 <script type="text/javascript" src="{!! asset('plugins/moment/moment.js') !!}"></script>
 
+<!-- full calendar-->
+
+<link rel="stylesheet" href="{{ asset('plugins/fullcalendar-3.9.0/fullcalendar.css') }}">
+<link rel="stylesheet" href="{{ asset('/plugins/fullcalendar-3.9.0/scheduler.min.css') }}">
+<script src="{{asset("plugins/fullcalendar-3.9.0/fullcalendar.js")}}"></script>
+<script src="{{asset("plugins/fullcalendar-3.9.0/locale-all.js")}}"></script>
+<script src="{{asset("plugins/fullcalendar-3.9.0/scheduler.min.js")}}"></script>
+
+
 <!-- DatePicker -->
 <link href="{{ asset('plugins/datepicker/datepicker3.css') }}" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="{!! asset('plugins/datepicker/bootstrap-datepicker.js') !!}"></script>

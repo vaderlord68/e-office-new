@@ -40,11 +40,11 @@
         }else{
             $parent.find(".alert-message").removeClass('hide');
             //hide success
-            $parent.find$("#divSuccessMessage").addClass('hide');
+            $parent.find("#divSuccessMessage").addClass('hide');
             //show error
-            $parent.find$("#divErrorMessage").removeClass("hide");
+            $parent.find("#divErrorMessage").removeClass("hide");
             //set the value of error message
-            $parent.find$("#divErrorMessage").find("#msgErrorMessage").html($str);
+            $parent.find("#divErrorMessage").find("#msgErrorMessage").html($str);
         }
 
 
@@ -66,7 +66,7 @@
             //show success
             $parent.find("#divSuccessMessage").removeClass("hide");
             //set the value of error message
-            $parent.find$("#divSuccessMessage").find("#msgSuccessMessage").html($str);
+            $parent.find("#divSuccessMessage").find("#msgSuccessMessage").html($str);
             $parent.find(".alert-message").removeClass('hide');
         }
 

@@ -4,7 +4,7 @@
     <section class="news-view">
         <div class="rơw">
             <div class="col-sm-3 news-box">
-                <div class="well">
+                <div class="">
                     @include('system.module.W76.W76F2142.components.ChannelList')
                     @include('system.module.W76.W76F2142.components.LastestNewsList')
                 </div>

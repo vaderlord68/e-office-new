@@ -70,42 +70,62 @@ class  W76F2201Controller extends Controller
                     $isWifiW76F2201 = \Helpers::sqlNumber($request->input('isWifiW76F2201', 1));
                     $isVideoConW76F2201 = \Helpers::sqlNumber($request->input('isVideoConW76F2201', 1));
                     $divisionIDW76F2201 = \Helpers::sqlstring($request->input('divisionIDW76F2201', ''));
-                    $logisticsW76F2201 = \Helpers::sqlstring($request->input('logisticsW76F2201', ''));
+                    $logisticsW76F2201 = $request->input('logisticsW76F2201', []);
                     $coordinatorW76F2201 = \Helpers::sqlstring($request->input('coordinatorW76F2201', ''));
                     $displayOrderW76F2201 = \Helpers::sqlNumber($request->input('displayOrderW76F2201', 1));
                     $createDateW76F2201 = Carbon::now();
                     $createUserIDW76F2201 = Auth::user()->UserID;
                     $lastModifyDateW76F2201 = Carbon::now();
                     $lastModifyUserIDW76F2201 = Auth::user()->UserID;
-                    $data = [
-                        "FacilityNo" => $txtFacilityNoW76F2201,
-                        "FacilityName" => $txtFacilityNameW76F2201,
-                        "Description" => $txtDescriptionW76F2201,
-                        "Location" => $txtLocationW76F2201,
-                        "Capacity" => $txtCapacityW76F2201,
-                        "Disabled" => $disabledW76F2201,
-                        "IsBlackboard" => $isBlackboardW76F2201,
-                        "IsProjector" => $isProjectorW76F2201,
-                        "IsEthernet" => $isEthernetW76F2201,
-                        "IsPC" => $isPCW76F2201,
-                        "IsMicrophone" => $isMicrophoneW76F2201,
-                        "IsTeleCon" => $isTeleConW76F2201,
-                        "IsWifi" => $isWifiW76F2201,
-                        "IsVideoCon" => $isVideoConW76F2201,
-                        "DivisionID" => $divisionIDW76F2201,
-                        "Logistics" => implode(';', $logisticsW76F2201),
-                        "Coordinator" => $coordinatorW76F2201,
-                        "DisplayOrder" => $displayOrderW76F2201,
-                        "CreateUserID" => $createUserIDW76F2201,
-                        "CreateDate" => $createDateW76F2201,
-                        "LastModifyUserID" => $lastModifyUserIDW76F2201,
-                        "LastModifyDate" => $lastModifyDateW76F2201,
-                    ];
-                    $this->d76T2200->insert($data);
 
-                    \Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'));
-                    \Debugbar::info();
-                    return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'), 'redirectTo' => $_SERVER["HTTP_REFERER"]]);
+
+                    $sql = "---Kiem tra du lieu truoc khi luu" . PHP_EOL;
+                    $sql .= "SELECT Top 1 1 as check_exist " . PHP_EOL;
+                    $sql .= "FROM D76T2200 WITH(NOLOCK)" . PHP_EOL;
+                    $sql .= "WHERE FacilityNo = '$txtFacilityNoW76F2201'" . PHP_EOL;
+
+                    $check_store = DB::selectOne($sql);
+
+                    //\Debugbar::info($check_store->check_exist);
+                    $exist = "";
+                    if ($check_store != null){
+                        $exist = intval($check_store->check_exist);
+                    }
+                    if ($exist == 1) {
+                        \Debugbar::info("sdfds");
+                        return json_encode(["status" => "EXIST", "message" => \Helpers::getRS('Ma_phong_hop_nay_da_ton_tai_ban_khong_duoc_phep_luu')]);
+                    } else {
+                        $data = [
+                            "FacilityNo" => $txtFacilityNoW76F2201,
+                            "FacilityName" => $txtFacilityNameW76F2201,
+                            "Description" => $txtDescriptionW76F2201,
+                            "Location" => $txtLocationW76F2201,
+                            "Capacity" => $txtCapacityW76F2201,
+                            "Disabled" => $disabledW76F2201,
+                            "IsBlackboard" => $isBlackboardW76F2201,
+                            "IsProjector" => $isProjectorW76F2201,
+                            "IsEthernet" => $isEthernetW76F2201,
+                            "IsPC" => $isPCW76F2201,
+                            "IsMicrophone" => $isMicrophoneW76F2201,
+                            "IsTeleCon" => $isTeleConW76F2201,
+                            "IsWifi" => $isWifiW76F2201,
+                            "IsVideoCon" => $isVideoConW76F2201,
+                            "DivisionID" => $divisionIDW76F2201,
+                            //"Logistics" => $logisticsW76F2201,
+                            "Logistics" => implode(';', $logisticsW76F2201),
+                            "Coordinator" => $coordinatorW76F2201,
+                            "DisplayOrder" => $displayOrderW76F2201,
+                            "CreateUserID" => $createUserIDW76F2201,
+                            "CreateDate" => $createDateW76F2201,
+                            "LastModifyUserID" => $lastModifyUserIDW76F2201,
+                            "LastModifyDate" => $lastModifyDateW76F2201,
+                        ];
+                        $this->d76T2200->insert($data);
+
+                        \Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'));
+                        \Debugbar::info();
+                        return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'), 'redirectTo' => $_SERVER["HTTP_REFERER"]]);
+                    }
                 } catch (\Exception $ex) {
                     \Helpers::log($ex->getMessage());
                     return json_encode(['status' => 'ERROR', 'message' => $ex->getMessage()]);
@@ -115,7 +135,6 @@ class  W76F2201Controller extends Controller
                 try {
                     $facilityID = $request->input('facilityID', '');
                     \Debugbar::info($request->input());
-                    $txtFacilityNoW76F2201 = \Helpers::sqlstring($request->input('txtFacilityNoW76F2201', ''));
                     $txtFacilityNameW76F2201 = \Helpers::sqlstring($request->input('txtFacilityNameW76F2201', ''));
                     $txtDescriptionW76F2201 = \Helpers::sqlstring($request->input('txtDescriptionW76F2201', ''));
                     $txtLocationW76F2201 = \Helpers::sqlstring($request->input('txtLocationW76F2201', ''));
@@ -130,14 +149,16 @@ class  W76F2201Controller extends Controller
                     $isWifiW76F2201 = \Helpers::sqlNumber($request->input('isWifiW76F2201', 1));
                     $isVideoConW76F2201 = \Helpers::sqlNumber($request->input('isVideoConW76F2201', 1));
                     $divisionIDW76F2201 = \Helpers::sqlstring($request->input('divisionIDW76F2201', ''));
-                    $logisticsW76F2201 = \Helpers::sqlstring($request->input('logisticsW76F2201', ''));
+
+                    $logisticsW76F2201 = $request->input('logisticsW76F2201', []);
                     $coordinatorW76F2201 = \Helpers::sqlstring($request->input('coordinatorW76F2201', ''));
                     $displayOrderW76F2201 = \Helpers::sqlNumber($request->input('displayOrderW76F2201', 1));
                     $createUserIDW76F2201 = Auth::user()->UserID;
-                    $lastModifyDateW76F2201 =Carbon::now();
+                    $lastModifyDateW76F2201 = Carbon::now();
                     $lastModifyUserIDW76F2201 = Auth::user()->UserID;
+
+
                     $data = [
-//                        "FacilityNo" => $txtFacilityNoW76F2201,
                         "FacilityName" => $txtFacilityNameW76F2201,
                         "Description" => $txtDescriptionW76F2201,
                         "Location" => $txtLocationW76F2201,

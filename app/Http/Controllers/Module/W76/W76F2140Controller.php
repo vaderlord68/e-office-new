@@ -8,6 +8,8 @@ use App\Module\News\D76T2140;
 use App\Module\News\D76T2141;
 use App\Module\News\News;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class  W76F2140Controller extends Controller
 {
@@ -63,12 +65,16 @@ class  W76F2140Controller extends Controller
 
     public function getList()
     {
-        $collection = $this->d76T2140->orderBy('LastModifyDate', 'desc')->get();
+        $userID = Auth::user()->UserID;
+        $sql = '--Do nguon cho luoi'.PHP_EOL;
+        $sql .= "EXEC W76P2140 '$userID'";
+        $collection = DB::select($sql);
+        \Debugbar::info($collection);
         foreach ($collection as &$item) {
             //unset($item->Image);
             $item->Image = htmlentities($item->Image);
         }
-        return ($collection);
+        return $collection ;
     }
 
     public function getFilterList($title)
