@@ -15,6 +15,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'Modules\W77', 'middleware' => 'auth'], function () {
-
+    Route::any('/W77F1000/{task?}', 'W77F1000Controller@index');
+    Route::any('/W77F1001/{task?}', 'W77F1001Controller@index');
 });
 

@@ -39,3 +39,9 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
     @endif
 </style>
 
+<script>
+    //store resources for using of javascript
+    var langText = JSON.parse('{!! json_encode(\Lang::get('message')) !!}');
+    var lang = "{{\Helpers::getLang()}}";
+</script>
+
