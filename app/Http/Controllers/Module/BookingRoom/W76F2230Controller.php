@@ -30,14 +30,16 @@ class  W76F2230Controller extends Controller
         switch ($task) {
             case '':
                 $divisionIDList = $this->d76T9000->where('DISABLED', '=', 0)->select('OrgunitID', 'OrgunitName')->get();
-                $meetingRoomList = $this->d76T2200->select('FacilityNo as id', 'FacilityName as title')->where("DivisionID", '=', session('W76P0000')->DivisionID)->get();
+                $meetingRoomList = $this->d76T2200->select('FacilityNo as id', 'FacilityName as title', 'DisplayOrder as display')
+                    ->where("DivisionID", '=', session('W76P0000')->DivisionID)->get();
                 $meetingRoomList = json_encode($meetingRoomList);
                 $divisionIDList = json_encode($divisionIDList);
-
+                $meetingRoomDetail = $this->d76T2200->where("DivisionID", '=', session('W76P0000')->DivisionID)->get();
+                \Debugbar::info($meetingRoomDetail);
                 $newsCollection = $this->getCalender();
                 $newsCollection = ($newsCollection);
-                //\Debugbar::info($newsCollection);
-                return view("system/module/BookingRoom/W76F2230/W76F2230", compact('newsCollection', 'rowData', 'divisionIDList', 'meetingRoomList', 'task'));
+
+                return view("system/module/BookingRoom/W76F2230/W76F2230", compact('meetingRoomDetail', 'newsCollection', 'rowData', 'divisionIDList', 'meetingRoomList', 'task'));
                 break;
             case 'loadCalender':
                 $newsCollection = $this->getCalender();
@@ -45,15 +47,15 @@ class  W76F2230Controller extends Controller
                 return $newsCollection();
                 break;
             case 'delete':
+                $ID = $request->input('id', '');
+                \Debugbar::info($ID);
+                $sql = "--Xoa hop dong" . PHP_EOL;
+                $sql .= "delete from D76T2230 where ID = '$ID'" . PHP_EOL;
+                \Debugbar::info($sql);
                 try {
-                    $ID = $request->input('ID', '');
-                    \Debugbar::info($ID );
-                    if ($this->deleteCalender($ID)) {
-                        \Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_xoa_thanh_cong'));
-                        return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_xoa_thanh_cong')]);
-                    } else {
-                        return json_encode(array('status' => 'ERROR', 'message' => \Helpers::getRS("Co_loi_xay_ra_trong_qua_trinh_xoa_du_lieu")));
-                    }
+                    DB::statement($sql);
+                    \Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_xoa_thanh_cong'));
+                    return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_xoa_thanh_cong')]);
                 } catch (\Exception $ex) {
                     \Helpers::log($ex->getMessage());
                     return json_encode(['status' => 'ERROR', 'message' => $ex->getMessage()]);
@@ -85,7 +87,7 @@ class  W76F2230Controller extends Controller
     public function deleteCalender($ID)
     {
         $result = $this->d76T2230->where("ID", "=", $ID)->delete();
-        \Debugbar::info($result);
+        //\Debugbar::info($result);
         return $result;
     }
 
