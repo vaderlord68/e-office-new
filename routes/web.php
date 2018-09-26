@@ -24,6 +24,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'Core\IndexController@index');
 });
 
+//Danh muc xe cong tac
+Route::group(['namespace' => 'Module\W77','middleware' => 'auth'], function () {
+    Route::any('/W77F1000/{task?}', 'W77F1000Controller@index');
+    Route::any('/W77F1001/{task?}', 'W77F1001Controller@index');
+});
+//end-Danh muc xe cong tac
 //Back pages
 Route::group(['namespace' => 'Admin'], function() {
     Route::any('/administrator', function(){
