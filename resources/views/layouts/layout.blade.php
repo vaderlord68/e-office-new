@@ -11,7 +11,7 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
     <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
     <meta name="author" content="Diginet Corp.">
     <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
-    <title>eOFFICE</title>
+    <title>eOffice</title>
     @include('layouts.head')
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
@@ -24,7 +24,7 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
     </main>
     @include('layouts.aside-menu')
 </div>
-<footer class="app-footer">
+<footer class="app-footer hide">
     @include('layouts.footer')
 </footer>
 </body>

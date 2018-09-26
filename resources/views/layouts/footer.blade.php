@@ -1,4 +1,4 @@
-<div>
+<div class="hide">
     <a href="http://diginet.com.vn">Diginet Corp.</a>
     <span class="hide">&copy; 2018 creativeLabs.</span>
 </div>

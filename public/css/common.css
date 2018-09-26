@@ -135,7 +135,7 @@ body, textarea {
 }
 
 .pdl10 {
-    padding-left: 10px;
+    padding-left: 10px !important;
 }
 
 .pdr10 {
