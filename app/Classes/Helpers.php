@@ -411,26 +411,26 @@ class Helpers
         //$conn->open("Driver={SQL Server};Server=".  Helpers::decrypt_userpass($condef['host']) .";Database=".Helpers::decrypt_userpass($condef['database']).";Uid=".Helpers::decrypt_userpass($condef['username']).";Pwd=".Helpers::decrypt_userpass($condef['password'])."");
 
         $conn->open("Provider=SQLNCLI11;Server=" . Helpers::decrypt_userpass($condef['host']) . ";Database=" . Helpers::decrypt_userpass($condef['database']) . ";Uid=" . Helpers::decrypt_userpass($condef['username']) . ";Pwd=" . Helpers::decrypt_userpass($condef['password']) . "");
-        \Debugbar::info("Provider=SQLNCLI11;Server=" . Helpers::decrypt_userpass($condef['host']) . ";Database=" . Helpers::decrypt_userpass($condef['database']) . ";Uid=" . Helpers::decrypt_userpass($condef['username']) . ";Pwd=" . Helpers::decrypt_userpass($condef['password']) . "");
+        ////\Debugbar::info("Provider=SQLNCLI11;Server=" . Helpers::decrypt_userpass($condef['host']) . ";Database=" . Helpers::decrypt_userpass($condef['database']) . ";Uid=" . Helpers::decrypt_userpass($condef['username']) . ";Pwd=" . Helpers::decrypt_userpass($condef['password']) . "");
         $recordset = new COM("ADODB.RecordSet");
-        \Debugbar::info("Main SQL: " . $mainsql);
+        ////\Debugbar::info("Main SQL: " . $mainsql);
         $recordset->open($mainsql, $conn, 3);
         $creport->Database->setDataSource($recordset, 3, 1);
 
-        \Debugbar::info($subreport);
-        \Debugbar::info($sqlsub);
+        ////\Debugbar::info($subreport);
+        ////\Debugbar::info($sqlsub);
 
         //Sub report
         $subcount = count($subreport);
         for ($k = 0; $k < $subcount; $k++) {
             $sr = (string)$subreport[$k];
-            \Debugbar::info($sr);
+            ////\Debugbar::info($sr);
             try {
                 // echo $sr."___".$sqlsub[$k];
                 //Set datasource for subreport
                 $subrecordset = new COM("ADODB.RecordSet");
-                \Debugbar::info($conn);
-                \Debugbar::info($sqlsub[$k]);
+                ////\Debugbar::info($conn);
+                ////\Debugbar::info($sqlsub[$k]);
                 $subrecordset->open($sqlsub[$k], $conn, 3);
                 if (strpos($sr, '.rpt') == -1) {
                     $sr = $sr . ".rpt";
@@ -481,7 +481,7 @@ class Helpers
          $objectDLL->ArrSQLSub = $sqlsub;
          $objectDLL->ArrSubName = $subreport;
          $mess = $objectDLL->ExportPDF();
-         \Debugbar::info($mess);
+         ////\Debugbar::info($mess);
          return $my_pdf;
      }*/
 
@@ -622,7 +622,7 @@ class Helpers
     public static function sumFooter($array, $field, $isArray = false)
     {
         $rs = 0;
-        \Debugbar::info($array);
+        ////\Debugbar::info($array);
         foreach ($array as $row) {
             if ($isArray == false)
                 $rs += $row[$field];
@@ -729,9 +729,9 @@ class Helpers
                 $params = ['sXCode' => htmlentities($xCode), 'sDeviceType' => $sDeviceType, 'sBrowseType' => $sBrowseTYpe, 'sUserID' => $sUserID];
                 $rsValue = $client->CheckLoginWeb($params)->CheckLogInWebResult;
                 $rsValue = $objectDLL->EncodeInformation($rsValue, $gsTYPEENCRYPT);
-                \Debugbar::info('$rsValue.' . $rsValue);
+                ////\Debugbar::info('$rsValue.' . $rsValue);
                 $rsValueArr = explode($objectDLL->STR_RESULTLOGININFO, $rsValue);
-                \Debugbar::info($rsValueArr);
+                ////\Debugbar::info($rsValueArr);
                 return $rsValueArr;
             } catch (Exception $e) {
                 $e->getMessage();
@@ -2146,7 +2146,7 @@ class Helpers
                 }
                 $row[$col["FieldName"]] = $value;
             }
-            \Debugbar::info($row);
+            ////\Debugbar::info($row);
             array_push($result, $row);
         }
         return $result;
@@ -2398,7 +2398,7 @@ class Helpers
 
     public static function setLang($lang)
     {
-        \Debugbar::info($lang);
+        ////\Debugbar::info($lang);
         App::setLocale($lang);
         switch ($lang) {
             case 'en' :
@@ -2523,20 +2523,55 @@ class Helpers
 
     public static function getMainMenu()
     {
-        return [
-            new Menu('1', 'w76f2142', 'Tin tức nội bộ', 'fa fa-home', '', []),
-            new Menu('2', 'W76F2130', 'Quản lý hợp đồng', 'fa fa-home', '', []),
-            new Menu('3', 'bi', 'Tài liệu số', 'fa fa-home', '', []),
-            new Menu('4', '', 'Ứng dụng tiện ích', 'fa fa-home', '', array(
-                new Menu('5', 'w76f2140', 'Quản lý bản tin', 'fa fa-home', '4', []),
-            )),
-            new Menu('6', '', 'Hệ thống', 'fa fa-home', '', array(
-                new Menu('7', 'w76f1555', 'Danh mục dùng chung', 'fa fa-home', '6', []),
-                new Menu('8', 'w76f2200', 'Danh sách phòng họp', 'fa fa-home', '6', []),
-            )),
-        ];
+        $menuList = \App\Models\D76T0001::where('ParentMenuID', '=', '')->select("*", "MenuName84 as MenuName")->get()->toArray();
+        $array = \App\Models\D76T0001::select("*", "MenuName84 as MenuName")->get()->toArray();
+        $outputArray = [];
+        foreach ($menuList as $node) {
+            $outputItem = null;
+            Helpers::createMenuNode($node, $array, $outputArray);
+
+        }
+        return $outputArray;
+//        return [
+//            new Menu('1', 'w76f2142', 'Tin tức nội bộ', 'fas fa-home', '', []),
+//            new Menu('2', 'W76F2130', 'Quản lý hợp đồng', 'fal fa-file-signature', '', []),
+//            new Menu('3', 'bi', 'Tài liệu số', 'fal fa-file-invoice', '', []),
+//            new Menu('4', '', 'Ứng dụng tiện ích', 'fa fa-home', '', array(
+//                new Menu('5', 'w76f2140', 'Quản lý bản tin', 'fal fa-newspaper', '4', []),
+//            )),
+//            new Menu('6', '', 'Hệ thống', 'fas fa-cogs', '', array(
+//                new Menu('7', 'w76f1555', 'Danh mục dùng chung', 'far fa-list-alt', '6',
+//                    array(
+//                        new Menu('9', 'w76f1555', 'test 1', 'fa fa-home', '7', []),
+//                        new Menu('10', 'w76f2200', 'test 2', 'fa fa-home', '7', []),
+//                    )),
+//                new Menu('8', 'w76f2200', 'Danh sách phòng họp', 'fa fa-home', '6', []),
+//            )),
+//        ];
     }
 
+    public static function createMenuNode($node, $array, &$outputArray)
+    {
+
+        $ID = $node["ID"];
+        $arrayFilter = array_filter($array, function ($row) use ($ID) {
+            return intval($row["ParentMenuID"]) == intval($ID);
+        });
+
+        $menu = new Menu();
+        $menu->id = $node["ID"];
+        $menu->menuID = $node["MenuID"];
+        $menu->menuName = $node["MenuName"];
+        $menu->formID = $node["FormID"];
+        $menu->menuIcon = $node["MenuIcon"];
+        $menu->parentMenuID = $node["ParentMenuID"];
+        $childrend = [];
+        foreach ($arrayFilter as $child) {
+            Helpers::createMenuNode($child, $array, $childrend);
+        }
+        $menu->childrend = $childrend;
+        array_push($outputArray, $menu);
+    }
 
 
     public static function createMainMenu()
@@ -2554,18 +2589,25 @@ class Helpers
 
     public static function createMenuItem($row, &$str, &$level = 0)
     {
-        //\Debugbar::info($hasChild);
         $childrend = $row->childrend;
-        $hasChild = count($childrend) > 1 && $level > 0 ? 'has-child':'';
-        \Debugbar::info($childrend);
-        $str .= '<li class="nav-item dropdown ' . ($hasChild == "has-child"  ? "dropdown-submenu" : "") .'">';
-        $str .= '<a class="nav-link dropdown-toggle ' . $hasChild .'" href="#" id="navbardrop" data-toggle="dropdown">';
+        $hasChild = count($childrend) > 1 && $level > 0 ? 'has-child' : '';
+        $str .= '<li class="nav-item dropdown ' . ($hasChild == "has-child" ? "dropdown-submenu" : "no-submenu") . '">';
+        if (count($childrend) > 0) {
+            $str .= '<a class="nav-link '.($level > 0 ? 'dropdown-item': '').'  dropdown-toggle ' . $hasChild . '" href="' . url("/" . $row->formID) . '" id="navbardrop" data-toggle="dropdown">';
+        } else {
+            $str .= '<a class="nav-link '.($level > 0 ? 'dropdown-item': '').'' . $hasChild . '" href="' . url("/" . $row->formID) . '" id="navbardrop" >';
+        }
+
+        $str .= '<i class="' . $row->menuIcon . ' mgr5"></i>';
         $str .= $row->menuName;
+        if ($level == 0 && count($childrend) > 0) {
+            $str .= '<i class="fas fa-caret-down mgl5"></i>';
+        }
         $str .= '</a>';
         if (count($childrend) > 0) {
-            $str .= '<ul class="dropdown-menu" >';
+            $str .= '<ul class="dropdown-menu " >';
             foreach ($childrend as $rowChild) {
-                $level .=$level + 1;
+                $level .= $level + 1;
 
                 Helpers::createMenuItem($rowChild, $str, $level);
             }
@@ -2588,7 +2630,7 @@ class Helpers
 //    public static function createMenuItem($row, &$str, $level)
 //    {
 //        $childrend = $row->childrend;
-//        \Debugbar::info($level);
+//        ////\Debugbar::info($level);
 //        $str .= '<li class="nav-item dropdown ' . ($level > 0 ? "dropdown-submenu" : "") .'">';
 //        $str .= '<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">';
 //        $str .= $row->menuName;
@@ -2604,10 +2646,11 @@ class Helpers
 //        $str .= '</li>';
 //    }
 
-    public static function createCommonParameter(){
-        $userID =Auth::user()->UserID;
-        $sql = '--Lay thong tin chung'.PHP_EOL;
-        $sql .= "EXEC W76P0000 '$userID'".PHP_EOL;
+    public static function createCommonParameter()
+    {
+        $userID = Auth::user()->UserID;
+        $sql = '--Lay thong tin chung' . PHP_EOL;
+        $sql .= "EXEC W76P0000 '$userID'" . PHP_EOL;
         $rsRow = DB::connection()->selectOne($sql);
         return $rsRow;
     }
