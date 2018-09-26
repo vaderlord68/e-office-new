@@ -39,17 +39,17 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
     <link href="{{ asset('plugins/paramquery-3.3.4/pqgrid.ui.min.css') }}" media="all" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('plugins/paramquery-3.3.4/themes/office/pqgrid.css') }}" media="all" rel="stylesheet" type="text/css"/>
     <!-- Theme -->
-    <link href="{{url('admin/plugins/@coreui/coreui/dist/css/coreui.css')}}" rel="stylesheet">
+    <link href="{{url('themes/@coreui/coreui/dist/css/coreui.css')}}" rel="stylesheet">
     <!-- Icons-->
-    <link href="{{url('admin/plugins/@coreui/icons/css/coreui-icons.css')}}" rel="stylesheet">
-    <link href="{{url('admin/plugins/flag-icon-css/css/flag-icon.css')}}" rel="stylesheet">
-    <link href="{{url('admin/plugins/font-awesome/css/font-awesome.css')}}" rel="stylesheet">
-    <link href="{{url('admin/plugins/simple-line-icons/css/simple-line-icons.css')}}" rel="stylesheet">
+    <link href="{{url('themes/@coreui/icons/css/coreui-icons.css')}}" rel="stylesheet">
+    <link href="{{url('plugins/flag-icon-css/css/flag-icon.css')}}" rel="stylesheet">
+    <link href="{{url('plugins/fontawesome-pro-5.0.13/web-fonts-with-css/css/fontawesome-all.css')}}" rel="stylesheet">
+    <link href="{{url('plugins/simple-line-icons/css/simple-line-icons.css')}}" rel="stylesheet">
 
     <!-- Main styles for this application-->
-    <link href="{{url('admin/css/style.css')}}" rel="stylesheet">
-    <link href="{{url('admin/plugins/pace-progress/css/pace.min.css')}}" rel="stylesheet">
-    <link href="{{url('admin/plugins/spinkit/spinkit.css')}}" rel="stylesheet">
+    {{--<link href="{{url('css/style.css')}}" rel="stylesheet">--}}
+    <link href="{{url('plugins/pace-progress/css/pace.min.css')}}" rel="stylesheet">
+    <link href="{{url('plugins/spinkit/spinkit.css')}}" rel="stylesheet">
     <link href="{{url('css/common.css')}}" rel="stylesheet">
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
@@ -77,8 +77,8 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
 
 <script type="text/javascript" src="{!! asset('js/jquery-3.3.1.min.js') !!}"></script>
 <script type="text/javascript" src="{!! asset('plugins/jQueryUI/jquery-ui.js') !!}"></script>
-<script src="{{url('admin/plugins/popper.js/dist/popper.min.js')}}"></script>
-<script type="text/javascript" src="{!! asset('admin/plugins/bootstrap/dist/js/bootstrap.js') !!}"></script>
+<script src="{{url('plugins/popper.js/dist/popper.min.js')}}"></script>
+<script type="text/javascript" src="{!! asset('plugins/bootstrap/js/bootstrap.js') !!}"></script>
 <script type="text/javascript" src="{!! asset('plugins/datepicker/bootstrap-datepicker.js') !!}"></script>
 <script type="text/javascript" src="{!! asset('plugins/datepicker/date.js') !!}"></script>
 <script type="text/javascript" src="{{asset("plugins/datepicker/locales/bootstrap-datepicker.$locale.js") }}"></script>
@@ -96,13 +96,13 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
 <!-- CKeditor for editor -->
 <script src="{{ asset('plugins/ckeditor5-build-classic/ckeditor.js') }}"></script>
 <!-- CoreUI and necessary plugins-->
-<script src="{{url('admin/plugins/pace-progress/pace.js')}}"></script>
-<script src="{{url('admin/plugins/perfect-scrollbar/dist/perfect-scrollbar.js')}}"></script>
-<script src="{{url('admin/plugins/@coreui/coreui/dist/js/coreui.js')}}"></script>
+<script src="{{url('plugins/pace-progress/pace.js')}}"></script>
+<script src="{{url('plugins/perfect-scrollbar/dist/perfect-scrollbar.js')}}"></script>
+<script src="{{url('themes/@coreui/coreui/dist/js/coreui.js')}}"></script>
 <!-- Plugins and scripts required by this view-->
-{{--<script src="{{url('admin/plugins/chart.js/dist/Chart.js')}}"></script>--}}
-{{--<script src="{{url('admin/plugins/@coreui/coreui-plugin-chartjs-custom-tooltips/dist/js/custom-tooltips.js')}}"></script>--}}
-{{--<script src="{{url('admin/js/main.js')}}"></script>--}}
+{{--<script src="{{url('plugins/chart.js/dist/Chart.js')}}"></script>--}}
+{{--<script src="{{url('plugins/@coreui/coreui-plugin-chartjs-custom-tooltips/dist/js/custom-tooltips.js')}}"></script>--}}
+{{--<script src="{{url('js/main.js')}}"></script>--}}
 <script type="text/javascript" src="{!! asset('js/common.js') !!}"></script>
 @yield('script')
 </body>
