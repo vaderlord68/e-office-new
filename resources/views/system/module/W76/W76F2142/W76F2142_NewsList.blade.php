@@ -1,7 +1,7 @@
 @extends('system.module.W76.W76F2142.components.layout')
 @section('news-wrapper')
     <label class="labelb">{{Helpers::getRS("Tin_tuc_noi_bo")}}</label>
-    <div class="well">
+    <div class="">
         @foreach($newsList as $newsRow)
             <?php
             $newsID = $newsRow->NewsID;
@@ -38,7 +38,7 @@
                     <div class="row mgl5">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 cut-text">
                             <a>
-                                {!! $newsRow-> Content or '' !!}
+                                {!! $newsRow-> Remark or '' !!}
                             </a>
                         </div>
                     </div>

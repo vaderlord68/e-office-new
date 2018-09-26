@@ -34,6 +34,15 @@ $locale = Helpers::getLocale();
 <!-- Moment -->
 <script type="text/javascript" src="{!! asset('plugins/moment/moment.js') !!}"></script>
 
+<!-- full calendar-->
+
+<link rel="stylesheet" href="{{ asset('plugins/fullcalendar-3.9.0/fullcalendar.css') }}">
+<link rel="stylesheet" href="{{ asset('/plugins/fullcalendar-3.9.0/scheduler.min.css') }}">
+<script src="{{asset("plugins/fullcalendar-3.9.0/fullcalendar.js")}}"></script>
+<script src="{{asset("plugins/fullcalendar-3.9.0/locale-all.js")}}"></script>
+<script src="{{asset("plugins/fullcalendar-3.9.0/scheduler.min.js")}}"></script>
+
+
 <!-- DatePicker -->
 <link href="{{ asset('plugins/datepicker/datepicker3.css') }}" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="{!! asset('plugins/datepicker/bootstrap-datepicker.js') !!}"></script>
@@ -69,6 +78,10 @@ $locale = Helpers::getLocale();
 <!-- CKeditor for editor -->
 <script src="{{ asset('plugins/ckeditor/ckeditor.js') }}"></script>
 
+<script src="{{ asset('plugins/ckeditor5-build-classic/ckeditor.js') }}"></script>
+
+<!-- Validation JS-->
+<script src="{{ asset('plugins/validation-js/validate.min.js') }}"></script>
 
 <!-- Bootbox support confirmation dialog -->
 <script type="text/javascript" src="{!! asset('plugins/bootstrap-bootbox/bootbox.js') !!}"></script>

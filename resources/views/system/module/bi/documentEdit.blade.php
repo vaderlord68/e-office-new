@@ -29,7 +29,7 @@
                                                         <input class="form-control input-md" type="text"
                                                                id="DocumentName" name="DocumentName"
                                                                placeholder="Tên tài liệu"
-                                                               value="<?php echo $currentDocument->Name?>">
+                                                               value="<?php echo isset($currentDocument->Name) ? $currentDocument->Name : ""?>">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
@@ -64,10 +64,13 @@
                                                             <?php
                                                             foreach ($attachedFiles as $attachedFile) :
                                                             ?>
+                                                            <?php
+                                                            $attachedFileArg = explode("/",$attachedFile)
+                                                            ?>
                                                             <li>
-                                                                <a href="/storage/users-upload/<?php echo $attachedFile?>"><?php echo $attachedFile?></a>
+                                                                <a href="/storage/users-upload/<?php echo $attachedFile?>"><?php echo $attachedFileArg[1]?></a>
                                                                 <a class="delete-file-link"
-                                                                   href="/bi/document/deleteAttachment/<?php echo $currentDocumentID?>/<?php echo $attachedFile?>">
+                                                                   href="/bi/document/deleteAttachment/<?php echo $currentDocumentID?>/<?php echo base64_encode($attachedFile)?>">
                                                                     Xóa
                                                                 </a>
                                                             </li>
@@ -98,14 +101,14 @@
                                                             foreach ($relatedDocuments as $relatedDocument) :
                                                             ?>
                                                             <li>
-                                                                <a href="/bi/document/view?DocumentId=<?php echo $relatedDocument->ID?>"><?php echo $relatedDocument->Name?></a>
+                                                                <a href="/bi/document/view?DocumentId=<?php echo $relatedDocument->ID?>"><?php echo isset($relatedDocument->Name) ? $relatedDocument->Name : ""?></a>
                                                             </li>
                                                             <?php endforeach; ?>
                                                         </ul>
                                                         <?php
                                                         endif;
                                                         ?>
-                                                        <button class="form-control input-md" data-toggle="modal"
+                                                        <button class="form-control input-md saveBtn-right-toolbar" data-toggle="modal"
                                                                 data-target="#relatedDocumentModal" type="button"
                                                                 id="documentRelated" name="DocumentRelated"
                                                                 class="btn btn-info form-control input-md"

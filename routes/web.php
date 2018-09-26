@@ -53,14 +53,45 @@ Route::group(['middleware' => 'auth'], function () {
     Route::any('/w76f1555/{task?}', 'Module\W76\W76F1555\W76F1555Controller@index');
 });
 
+//Quan li ban tin
 Route::group(['namespace' => 'Module\W76', 'middleware' => 'auth'], function () {
     Route::any('/w76f2140/{task?}', 'W76F2140Controller@index'); //news management
     Route::any('/w76f2141/{task?}', 'W76F2141Controller@index');//news management
     Route::any('/w76f2142/{component?}', 'W76F2142Controller@index');//display news
     Route::any('/W76F2150/{type?}', 'W76F2150Controller@index');//document
+    Route::any('/W76F2130/{task?}', 'W76F2130Controller@index');
+    Route::any('/W76F2131/{task?}', 'W76F2131Controller@index');
 });
+//end-quan li ban tin
 
+//Danh sach phong hop
 Route::group(['namespace' => 'Module\Meeting','middleware' => 'auth'], function () {
-    Route::any('/w76f2200/{task?}', 'W76F2200Controller@index'); //news management
-    Route::any('/w76f2201/{task?}', 'W76F2201Controller@index');//news management
+    Route::any('/w76f2200/{task?}', 'W76F2200Controller@index');
+    Route::any('/w76f2201/{task?}', 'W76F2201Controller@index');
+});
+//end-Danh sach phong hop
+
+//quan li phong hop
+Route::group(['namespace' => 'Module\BookingRoom','middleware' => 'auth'], function () {
+    Route::any('/w76f2230/{task?}', 'W76F2230Controller@index');
+    Route::any('/w76f2231/{task?}', 'W76F2231Controller@index');
+});
+//end-quan li phong hop
+
+//Back pages
+Route::group(['namespace' => 'Admin'], function() {
+    Route::any('/administrator', function(){
+        return Redirect::to('/admin/home');
+    });
+    Route::any('/adminlogin', function(){
+        return Redirect::to('/admin/home');
+    });
+});
+Route::group(['namespace' => 'Admin'], function() {
+    Route::any('/admin/home', 'AuthController@home');
+    Route::any('/admin/login/{task?}', 'AuthController@login');
+    Route::any('/admin/logout', 'AuthController@logout');
+    Route::any('/admin/W00F0001/{task?}', 'W00F0001Controller@index');
+    Route::any('/admin/W00F0002/{task?}', 'W00F0002Controller@index');
+    Route::any('/admin/W00F0003/{task?}', 'W00F0003Controller@index');
 });

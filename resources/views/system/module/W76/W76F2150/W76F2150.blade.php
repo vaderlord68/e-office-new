@@ -14,7 +14,7 @@
              class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer table-documentary" style="padding-left: 0px; padding-right: 0px;">
             <div class="row">
                 <div class="col-sm-12">
-                    <table id="bootstrap-data-table"
+                    <table id="tblW76F2150"
                            class="table table-striped table-bordered dataTable no-footer table-hover" role="grid"
                            aria-describedby="bootstrap-data-table_info">
                         <thead>
@@ -84,6 +84,29 @@
 
 @section('script')
 <script type="text/javascript">
+
+    function showFormCreateDocument(file){
+        var instance = $('#jstree').jstree(true);
+        var selectedNode =  instance.get_selected();
+        hideAlert($("#divW76F2150"));
+        if (selectedNode.length == 0){
+            alertError("Bạn chưa chọn thư mục nào.", $("#divW76F2150"))
+        }else{
+
+            //window.location.href = '{{url("/W76F2150/create-document")}}' + "/?currentFolderID=" + selectedNode[0];
+            showFormDialogPost('{{url("/W76F2150/create-document")}}', 'popCreateDocument', {_token: '{{csrf_token()}}', currentFolderID: selectedNode[0],file: file}, function(){
+                alert("test");
+                console.log(file);
+                //$("#attFile").val(file);
+                document.getElementById("attFile").value = file;
+            }, null, function (res) {
+                //merge
+
+            });
+
+        }
+    }
+
     $(document).ready(function(){
         $("#btnCreateFolder").click(function(evt){
             var instance = $('#jstree').jstree(true);
@@ -92,34 +115,44 @@
             if (selectedNode.length == 0){
                 alertError("Bạn chưa chọn thư mục nào.", $("#divW76F2150"))
             }else{
-
                 //window.location.href = '{{url("/W76F2150/create-folder")}}' + "/?currentFolderID=" + selectedNode[0];
-                showFormDialogPost('{{url("/W76F2150/create-folder")}}', 'popCreateFolder', {_token: '{{csrf_token()}}', currentFolderID: selectedNode[0]}, null, null, function (res) {
+                showFormDialogPost('{{url("/W76F2150/create-folder")}}', 'popCreateFolder', {_token: '{{csrf_token()}}', currentFolderID: selectedNode[0]}, function(){
+
+                }, null, function (res) {
 
                 });
             }
-
-
         });
 
         $("#btnUploadFile").click(function(evt){
-            var instance = $('#jstree').jstree(true);
-            var selectedNode =  instance.get_selected();
-            hideAlert($("#divW76F2150"));
-            if (selectedNode.length == 0){
-                alertError("Bạn chưa chọn thư mục nào.", $("#divW76F2150"))
-            }else{
-
-                //window.location.href = '{{url("/W76F2150/create-document")}}' + "/?currentFolderID=" + selectedNode[0];
-                showFormDialogPost('{{url("/W76F2150/create-document")}}', 'popCreateDocument', {_token: '{{csrf_token()}}', currentFolderID: selectedNode[0]}, null, null, function (res) {
-                    //merge
-
-                });
-
-            }
+            showFormCreateDocument();
         });
 
 
+
+
+        var holder = document.getElementById('tblW76F2150');
+        holder.ondragover = function () {
+            $(this).addClass('hover');
+            return false;
+        };
+//        holder.onmouseout = function () {
+//            $(this).removeClass('hover');
+//            return false;
+//        };
+        holder.ondrop = function (e) {
+            e.preventDefault();
+            $(this).removeClass('hover');
+            console.log("sdfdf");
+            var file = e.dataTransfer.files[0];
+            showFormCreateDocument(file);
+
+            var reader = new FileReader();
+            //reader.onload = function (event) {
+                //$('#image_droped').attr('src', event.target.result);
+            //};
+            //reader.readAsDataURL(file);
+        };
 
         {{--$("#btnDeleteFolder").click(function(evt){--}}
             {{--console.log("dfdsf");--}}
@@ -141,4 +174,4 @@
         {{--});--}}
     });
 </script>
-   @stop
+@stop

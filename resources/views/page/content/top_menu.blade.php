@@ -37,6 +37,14 @@
                         </div>
                     </div>
                     <div class="dropdown for-notification">
+                        <button class="btn btn-secondary dropdown-toggle btn-module-link" href="/W76F2130" type="button"
+                                id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span>Quản lý hợp đồng</span>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="notification">
+                        </div>
+                    </div>
+                    <div class="dropdown for-notification" style="display: none;">
                         <button class="btn btn-secondary dropdown-toggle btn-module-link" href="/W76F2150" type="button"
                                 id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span>Hồ sơ - tài liệu</span>
@@ -70,8 +78,8 @@
                             <a class="dropdown-item media" href="/w76f2140">
                                 <p>{{Helpers::getRS('Quan_ly_ban_tin')}}</p>
                             </a>
-                            <a class="dropdown-item media" href="/w76f2200">
-                                <p>{{Helpers::getRS('Danh_sach_phong_hop')}}</p>
+                            <a class="dropdown-item media" href="/w76f2230">
+                                <p>{{Helpers::getRS('Quan_ly_phong_hop')}}</p>
                             </a>
                         </div>
                     </div>
@@ -83,6 +91,9 @@
                         <div class="dropdown-menu" aria-labelledby="notification">
                             <a class="dropdown-item" href="{{url('/w76f1555')}}">
                                 <p>Danh mục dùng chung</p>
+                            </a>
+                            <a class="dropdown-item media" href="/w76f2200">
+                                <p>{{Helpers::getRS('Danh_sach_phong_hop')}}</p>
                             </a>
 
                         </div>

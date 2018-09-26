@@ -38,7 +38,7 @@ class Helper extends \Illuminate\Database\Eloquent\Model
                 $output .= $this->getAllChildren($this->folders[$i]->ID);
                 $documentsCollection = $this->getAllChildDocument($this->folders[$i]->ID);
                 foreach ($documentsCollection as $document) {
-                    $output .= "<li class='node-type-document' type='document' document_id='$document->ID'>". $document->FileName ."</li>";
+                    $output .= "<li class='node-type-document' type='document' document_id='$document->ID'>". $document->Name ."</li>";
                 }
                 $output .= "</ul></li>";
 
@@ -61,7 +61,7 @@ class Helper extends \Illuminate\Database\Eloquent\Model
                 $output .= $this->getAllChildren($this->folders[$i]->ID);
                 $documentsCollection = $this->getAllChildDocument($this->folders[$i]->ID);
                 foreach ($documentsCollection as $document) {
-                    $output .= "<li class='node-type-document' type='document' document_id='$document->ID'>". $document->FileName ."</li>";
+                    $output .= "<li class='node-type-document' type='document' document_id='$document->ID'>". $document->Name ."</li>";
                 }
                 $output .= "</ul></li>";
 
@@ -82,16 +82,34 @@ class Helper extends \Illuminate\Database\Eloquent\Model
 
     public function getFullPath($folderId)
     {
+
         $folder = Folder::find($folderId);
-        if (($folder->FolderParentId) || ($folder->FolderParentId == "")) {
-            $this->fullPath[] = $folderId;
-            return $this->fullPath;
+        $this->fullPath[] = ['name' => $folder->FolderName , 'id' => $folderId];
+        if ($folder->FolderParentID != "") {
+            $this->getNextParent($folder->FolderParentID);
         }
-        $parentId = $folder->FolderParentId;
-        $this->fullPath[] = $parentId;
-        return $this->getFullPath($parentId);
+        return array_reverse($this->fullPath);
     }
 
+    public function getNextParent($folderId)
+    {
+        $folder = Folder::find($folderId);
+        $this->fullPath[] = ['name' => $folder->FolderName , 'id' => $folderId];
+        if ($folder->FolderParentID != "") {
+            $this->getNextParent($folder->FolderParentID);
+        }
+    }
+
+    public function processFullPath($fullPath)
+    {
+        $htmlOutput = "";
+        foreach ($fullPath as $path) {
+            $folderId = $path['id'];
+            $folderName = $path['name'];
+            $htmlOutput .= "<a href='/bi/folder/view?FolderId=$folderId'>".$folderName."</a>";
+        }
+        return $htmlOutput;
+    }
     public function getFolderTree()
     {
         $tree = self::viewTree();
@@ -104,16 +122,15 @@ class Helper extends \Illuminate\Database\Eloquent\Model
          * Upload user image and get the path then save it into database
          */
         $userId = session("current_user");
-        $timestamp = time();
-        $fileExtension = \File::extension($file->getClientOriginalName());
-        $fileName = "user_$userId" . "_" . "$timestamp". "_" .$fileOrderNumber. "." .$fileExtension;
-        $filePath = 'public/users-upload/';
+        $fileName = $file->getClientOriginalName();
+        $filePath = 'public/users-upload/'.$userId."/";
         try{
             $file->storeAs($filePath, $fileName);
-            return $fileName;
+
         }catch (\Exception $ex){
             \Debugbar::info($ex->getMessage());
         }
+        return $userId."/".$fileName;
     }
 
 }

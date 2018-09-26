@@ -52,7 +52,7 @@ class  CreateController extends Controller
 
             $document = new Document();
             $document->setAttribute("ID",$DocumentID);
-            $document->setAttribute("FileName",$DocumentName);
+            $document->setAttribute("Name",$DocumentName);
             $document->setAttribute("Content",$DocumentContent);
             $document->setAttribute("StatusID",$StatusID ? true : false);
             $document->setAttribute("CreateUserID",$CreateUserID);
@@ -60,7 +60,7 @@ class  CreateController extends Controller
             $document->setAttribute("ReadQuan",0);
             $document->setAttribute("LikeQuan",0);
             $document->setAttribute("LastModifyUserID",$CreateUserID);
-            $document->setAttribute("FilePath",json_encode($filePaths));
+            $document->setAttribute("AttachedFiles",json_encode($filePaths));
             $document->save();
 
             if (isset($dataPost['relatedDocumentIds'])) {

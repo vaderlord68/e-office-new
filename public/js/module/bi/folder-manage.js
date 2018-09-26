@@ -8,22 +8,25 @@ $(document).ready(function () {
     /** Clear selected folder id in local storage **/
     // localStorage.removeItem("currentSelectedFolderId");
 
-    /** Double click to open folder on grid **/
-    $(document).on("dblclick", ".bi-table-item.type-folder", function (e) {
+    /** click to open folder on grid **/
+    $(document).on("click", ".bi-table-item.type-folder td:not(:first-child)", function (e) {
         var _this = $(this);
-        var stateUrl = "/bi/folder/view?FolderId=" + _this.attr("folder_id");
-        localStorage.setItem("currentSelectedFolderId", _this.attr("folder_id"));
-        var treeElement = $('li[folder_id="'+ _this.attr("folder_id") + '"]');
+        var selectfolderID = _this.parent().attr('folder_id');
+        console.log(selectfolderID);
+        var stateUrl = "/bi/folder/view?FolderId=" + selectfolderID;
+        localStorage.setItem("currentSelectedFolderId", selectfolderID);
+        var treeElement = $('li[folder_id="'+ selectfolderID + '"]');
         $("#folderTree").jstree("open_all");
         $("#folderTree").jstree("deselect_all",true);
         $('#folderTree').jstree('select_node', treeElement.attr("id"));
         window.location.href = stateUrl;
     });
-    /** Double click to open document on grid **/
-    $(document).on("dblclick", ".bi-table-item.type-document", function (e) {
+    /** click to open document on grid **/
+    $(document).on("click", ".bi-table-item.type-document td:not(:first-child)", function (e) {
         var _this = $(this);
-        var url = "/bi/document/view?DocumentId=" + _this.attr("document_id");
+        var url = "/bi/document/view?DocumentId=" + _this.parent().attr("document_id");
         window.location.href = url;
+
     });
     /** Add new attached file **/
     var attachedFileInputCount = 0;
@@ -109,10 +112,17 @@ $(document).ready(function () {
 
 
     /** Init Folder Tree **/
-    $('#folderTree').jstree({
+    $('#folderTree').bind('loaded.jstree',function (e, data) {
+        setTimeout(function () {
+            $('#folderTree').css("display","block");
+            $('#folder-tree-loading').css("display","none");
+            var nodeSelector = "#" + localStorage.getItem("currentSelectedNodeId") + "_anchor";
+            $(nodeSelector).css("background-color","#FFC107");
+        },500);
+    }).jstree({
         'core': {
             'multiple': false,
-        }
+        },
     });
 
 
@@ -124,8 +134,10 @@ $(document).ready(function () {
     // listen for event
         .on('changed.jstree', function (e, data) {
             var selectedFolderId = data.node.li_attr.folder_id;
+            var nodeId = data.node.id;
             if (typeof selectedFolderId != 'undefined') {
                 localStorage.setItem("currentSelectedFolderId", selectedFolderId);
+                localStorage.setItem("currentSelectedNodeId", nodeId);
                 var url = "/bi/folder/view?FolderId=" + selectedFolderId;
                 window.location.href = url;
             } else {
@@ -133,6 +145,8 @@ $(document).ready(function () {
                 var url = "/bi/document/view?DocumentId=" + selectedDocumentId;
                 window.location.href = url;
             }
+
         })
         .jstree();
+
 });
