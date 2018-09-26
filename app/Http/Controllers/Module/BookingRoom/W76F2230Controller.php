@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Module\BookingRoom;
 
 use App\Eoffice\Helper;
 use App\Http\Controllers\Controller;
+use App\Module\BookingRoom\D76T2230;
 use App\Module\Meeting\D76T2200;
 use App\Module\Meeting\D76T9000;
 use Illuminate\Http\Request;
@@ -14,15 +15,17 @@ class  W76F2230Controller extends Controller
 {
     private $d76T2200;
     private $d76T9000;
+    private $d76T2230;
 
-    public function __construct(D76T2200 $d76T2200, D76T9000 $d76T9000)
+    public function __construct(D76T2200 $d76T2200, D76T9000 $d76T9000, D76T2230 $d76T2230)
     {
         $this->d76T2200 = $d76T2200;
-        $this->d76T9000 =$d76T9000;
+        $this->d76T9000 = $d76T9000;
+        $this->d76T2230 = $d76T2230;
         $this->newsHelper = new \App\Module\News\Helper();
     }
 
-    public function index($task = "")
+    public function index($task = "", Request $request)
     {
         switch ($task) {
             case '':
@@ -33,13 +36,28 @@ class  W76F2230Controller extends Controller
 
                 $newsCollection = $this->getCalender();
                 $newsCollection = ($newsCollection);
-                \Debugbar::info($newsCollection);
-                return view("system/module/BookingRoom/W76F2230/W76F2230", compact('newsCollection','rowData','divisionIDList','meetingRoomList','task'));
+                //\Debugbar::info($newsCollection);
+                return view("system/module/BookingRoom/W76F2230/W76F2230", compact('newsCollection', 'rowData', 'divisionIDList', 'meetingRoomList', 'task'));
                 break;
             case 'loadCalender':
                 $newsCollection = $this->getCalender();
-                \Debugbar::info($newsCollection);
+                //\Debugbar::info($newsCollection);
                 return $newsCollection();
+                break;
+            case 'delete':
+                try {
+                    $ID = $request->input('ID', '');
+                    \Debugbar::info($ID );
+                    if ($this->deleteCalender($ID)) {
+                        \Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_xoa_thanh_cong'));
+                        return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_xoa_thanh_cong')]);
+                    } else {
+                        return json_encode(array('status' => 'ERROR', 'message' => \Helpers::getRS("Co_loi_xay_ra_trong_qua_trinh_xoa_du_lieu")));
+                    }
+                } catch (\Exception $ex) {
+                    \Helpers::log($ex->getMessage());
+                    return json_encode(['status' => 'ERROR', 'message' => $ex->getMessage()]);
+                }
                 break;
         }
     }
@@ -49,31 +67,26 @@ class  W76F2230Controller extends Controller
         $userID = Auth::user()->UserID;
         $divisionID = session('W76P0000')->DivisionID;
         $orgUnitID = session('W76P0000')->OrgUnitID;
-        $sql = '--Do nguon cho luoi'.PHP_EOL;
+        $sql = '--Do nguon cho luoi' . PHP_EOL;
         $sql .= "EXEC W76P2230 '$userID', '$divisionID','$orgUnitID'";
         $collection = DB::select($sql);
-
-//        {
-//            "resourceId": "b",
-//                    title: 'Event Title1',
-//                    start: '2018-09-17T13:13:55.008',
-//                    end: '2018-09-17T13:13:55.008'
-//                },
-
-
-//
-
-        foreach ($collection as $row){
+        foreach ($collection as $row) {
             $row->resourceId = $row->FacilityID;
             $row->title = $row->Description;
             $RequestedDateFrom = $row->RequestedDateFrom;
             $RequestedDateTo = $row->RequestedDateTo;
-            $row->start = str_replace(' ','T', $RequestedDateFrom);
-            $row->end = str_replace(' ','T', $RequestedDateTo);
+            $row->start = str_replace(' ', 'T', $RequestedDateFrom);
+            $row->end = str_replace(' ', 'T', $RequestedDateTo);
         }
+        //\Debugbar::info($collection);
+        return json_encode($collection);
+    }
 
-        \Debugbar::info($collection);
-        return json_encode($collection) ;
+    public function deleteCalender($ID)
+    {
+        $result = $this->d76T2230->where("ID", "=", $ID)->delete();
+        \Debugbar::info($result);
+        return $result;
     }
 
 }

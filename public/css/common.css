@@ -590,6 +590,21 @@ a:hover {
     background-color: orange;
 }
 
+.fc-event, .fc-event-dot {
+    background-color: #f2e487;
+    border: 1px solid #ECE0BB;
+}
+
+.spanDelW76F2230 {
+    z-index: 100;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+}
+
+
+
+
 /*End THANHTRAM - new views */
 
 /*TRIHAO*/

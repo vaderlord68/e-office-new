@@ -5,10 +5,11 @@
     var btnClickDel = false;
     $(document).ready(function () {
         var rooms =
-                {!! $meetingRoomList !!}
+                <?php echo $meetingRoomList; ?>
+
         var events = [
                 {
-                    url: '{{url('w76f2230/loadCalendar')}}',
+                    url: '<?php echo e(url('w76f2230/loadCalendar')); ?>',
                     cache: false,
                     method: 'post',
                     data: function () { // a function that returns an object
@@ -18,7 +19,7 @@
                     }
                 }
             ];
-        var events = {!! $newsCollection !!};
+        var events = <?php echo $newsCollection; ?>;
         $('#calendar').fullCalendar({
             //disableDragging: true,
             selectOverlap: false,
@@ -73,9 +74,9 @@
                     end: end,
                     roomID: roomID,
                     date: date,
-                    _token: '{{ csrf_token() }}'
+                    _token: '<?php echo e(csrf_token()); ?>'
                 }
-                showFormDialogPost("{{url('/w76f2231/add')}}", 'myModal', data);
+                showFormDialogPost("<?php echo e(url('/w76f2231/add')); ?>", 'myModal', data);
                 $('#calendar').fullCalendar('renderEvent', event, true); // stick? = true
                 $('#calendar').fullCalendar('unselect');
             },
@@ -94,9 +95,9 @@
                         roomID: roomID,
                         ID: calEvent.ID,
                         date: date,
-                        _token: '{{ csrf_token() }}'
+                        _token: '<?php echo e(csrf_token()); ?>'
                     }
-                    showFormDialogPost("{{url('/w76f2231/edit')}}", 'myModal', data);
+                    showFormDialogPost("<?php echo e(url('/w76f2231/edit')); ?>", 'myModal', data);
                     $('#calendar').fullCalendar('renderEvent', event, true); // stick? = true
                     $('#calendar').fullCalendar('unselect');
                 }
@@ -117,10 +118,10 @@
                     date: date,
                     roomID: event.resourceId,
                     ID: event.ID,
-                    _token: '{{ csrf_token() }}'
+                    _token: '<?php echo e(csrf_token()); ?>'
                 }
                 hideAlert();
-                postMethod("{{url('/w76f2231/updatedrag')}}", function (res) {
+                postMethod("<?php echo e(url('/w76f2231/updatedrag')); ?>", function (res) {
                     var result = JSON.parse(res);
                     console.log("luu");
                     switch (result.status) {
@@ -138,15 +139,15 @@
                 }, data)
             },
             eventRender: function (event, element) {
-                element.append('<span class="pull-right spanDelW76F2230"><a id="deleteW76F2230" title="{{Helpers::getRS("Xoa")}}"><i class="fas fa-trash-alt text-danger cursor-pointer"></i></a></span>');
+                element.append('<span class="pull-right spanDelW76F2230"><a id="deleteW76F2230" title="<?php echo e(Helpers::getRS("Xoa")); ?>"><i class="fas fa-trash-alt text-danger cursor-pointer"></i></a></span>');
                 element.find("#deleteW76F2230").on("click", function (event) {
                     console.log(btnClickDel);
                     btnClickDel = true;
                     ask_delete(function () {
                         $.ajax({
                             method: "POST",
-                            url: '{{url('/w76f2230/delete')}}',
-                            data: {ID: event.ID, _token: '{{ csrf_token() }}'},
+                            url: '<?php echo e(url('/w76f2230/delete')); ?>',
+                            data: {ID: event.ID, _token: '<?php echo e(csrf_token()); ?>'},
                             success: function (res) {
                                 var data = JSON.parse(res);
                                 switch (data.status) {
