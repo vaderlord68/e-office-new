@@ -95,6 +95,9 @@
                             <a class="dropdown-item media" href="/w76f2200">
                                 <p>{{Helpers::getRS('Danh_sach_phong_hop')}}</p>
                             </a>
+                            <a class="dropdown-item media" href="/W77F1000">
+                                <p>{{Helpers::getRS('Danh_muc_xe_cong_tac')}}</p>
+                            </a>
 
                         </div>
                     </div>
