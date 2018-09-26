@@ -29,7 +29,7 @@
     // the base DOM structure needed to create a modal
     var templates = {
         dialog: "<div id='divConfirm' class='bootbox modal' tabindex='-1' role='dialog' style='border-radius:2px !important'>" +
-        "<div class='modal-dialog' style='display:table' " +
+        "<div class='modal-dialog modal-md' style='' " +
         "<div class='modal-content'>" +
         "<div class='modal-body' style='line-height:2.34 !important;background-color:#fff !important;vertical-align: middle;padding: 10px 20px 10px 20px'><div class='bootbox-body'></div></div>" +
         "</div>" +

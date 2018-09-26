@@ -667,5 +667,10 @@ a:hover {
 .pq-col-sort-asc, .pq-col-sort-desc{
     color: #000 !important;
 }
+/*@media (max-width: 1020px) {*/
+    /*.pq-grid {*/
+        /*width: 1020px !important;*/
+    /*}*/
+/*}*/
 
 /* End TRIHAO */

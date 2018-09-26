@@ -1,5 +1,5 @@
-@extends('page.master')
-@section('body_content')
+@extends('layouts.layout')
+@section('content')
     @parent
     <?php
     if ($task == "edit") {//Edit
@@ -34,9 +34,7 @@
             <div class="card-header">
                 <h4 class="card-title">{{Helpers::getRS('Cap_nhat_xe_cong_tac')}}</h4>
             </div>
-            <div class="card-body" id="modalW77F1001">
-                <div id="bootstrap-data-table_wrapper"
-                     class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer table-documentary">
+            <div class="card-body" id="modalW77F1001" style="padding: 15px">
                     <form id="formW77F1001" method="POST" enctype="multipart/form-data" action="">
                         {{csrf_field()}}
                         <div class="row">
@@ -138,16 +136,18 @@
                             </div>
 
                         </div>
+                        <input type="hidden" name="hdCarNoW77F1001" id="hdCarNoW77F1001" value="{{ $carNo }}" />
                         <button type="submit" id="btnSubmitW77F1001" class="hide"></button>
                     </form>
-                </div>
             </div>
             <div class="card-footer">
                 <div class="row">
                     <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
                         @if ($task == 'edit')
                         <span class="text-muted">{{Helpers::getRS('Duoc_tao_vao') . ' ' . $createDate . ' ' . Helpers::getRS('boi') . ' ' . $createUserID }}</span><br>
-                        <span class="text-muted">{{Helpers::getRS('Lan_chinh_sua_cuoi')  . ' ' . $lastModifyDate . ' ' . Helpers::getRS('boi') . ' ' . $lastModifyUserID }}</span>
+                            @if (!empty($lastModifyUserID))
+                                <span class="text-muted">{{Helpers::getRS('Lan_chinh_sua_cuoi')  . ' ' . $lastModifyDate . ' ' . Helpers::getRS('boi') . ' ' . $lastModifyUserID }}</span>
+                            @endif
                         @endif
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 pull-right">
