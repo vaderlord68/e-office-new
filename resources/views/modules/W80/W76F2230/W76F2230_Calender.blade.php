@@ -80,9 +80,7 @@
                 $('#calendar').fullCalendar('unselect');
             },
             eventClick: function (calEvent, resource) {
-
                 if (!btnClickDel) {
-
                     var start = calEvent.start.format("HH:mm");
                     var end = calEvent.end.format("HH:mm");
                     var roomID = calEvent.id;
@@ -168,7 +166,6 @@
             },
             eventMouseover: function (data, event, events, view) {
                 btnClickDel = false;
-                console.log(data);
                 tooltip = '<div class="tooltiptopicevent" style="width:auto;height:auto;background:#ECE0BB;position:absolute;z-index:10001;' +
                     'padding:5px 5px 5px 5px ;  line-height: 200%;">Title: ' + data.title + '</br>Time: ' + moment(data.start).format('HH:mm') + '</div>';
                 $("body").append(tooltip);
@@ -185,6 +182,23 @@
                 $(this).css('z-index', 8);
                 $('.tooltiptopicevent').remove();
             },
+            resourceRender: function (resourceObj, $td) {
+                console.log(resourceObj);
+                $td.eq(0).find('.fc-cell-content').popover({ //
+                    placement: 'left',
+                    title: resourceObj.title,
+                    content: resourceObj.display,
+                    trigger: 'hover',
+                    container: "body",
+                });
+                $td.eq(0).find('.fc-cell-content').on('shown.bs.popover', function () {
+                    var pop = $(this).attr('aria-describedby');
+                    var left = $('#' + pop).offset().left;
+                    var width = $('#' + pop).width();
+                    $('#' + pop).offset({left: left + width + 15});
+                    //console.log($('#'+pop).offset().left);
+                });
+            }
         });
 
     });

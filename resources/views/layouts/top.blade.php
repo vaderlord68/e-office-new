@@ -455,14 +455,15 @@
     .top-menu .dropdown > .dropdown-menu{
         white-space: nowrap;
         margin: 0px;
-        border: 1px solid #ccc !important;
+        border: 1px solid #f5ebce !important;
+        padding: 0px !important;
     }
     .top-menu .dropdown:hover > .dropdown-menu {
         display: block !important;
-        /*-webkit-animation: slide-down .3s ease-out;*/
-        /*-moz-animation: slide-down .3s ease-out;*/
+        -webkit-animation: slide-down .3s ease-out;
+        -moz-animation: slide-down .3s ease-out;
         margin: 0px;
-        border: 1px solid #ccc !important;
+
         white-space: nowrap;
     }
 
@@ -535,11 +536,12 @@
     }
 
     .top-menu a {
-        font-size: 13px !important;
+        font-size: 12px !important;
+        font-weight: bold;
     }
 
     .top-menu .nav-link {
-        padding: 5px 10px !important;
+        padding: 2px 10px !important;
         text-align: left;
         /*background-color: #ffc13f !important;*/
         border-radius: 1px;
@@ -598,12 +600,8 @@
         font-size: 11px !important;
         border-bottom: 1px solid #FCEABB !important;
     }
-</style>
-@section('script')
-    <script>
-        $(".nav-item").click(function (evt) {
-            $(".nav-item").removeClass('show');
-        });
 
-    </script>
-@stop
+    body{
+        overflow-y: scroll;
+    }
+</style>

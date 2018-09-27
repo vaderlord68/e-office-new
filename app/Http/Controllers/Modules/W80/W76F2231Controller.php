@@ -99,8 +99,8 @@ class  W76F2231Controller extends Controller
                     $Key04ID = "";
                     $Key05ID = "";
                     $Dat03 = \Helpers::convertDate('');
-                    $Dat04 = \Helpers::convertDate('');;
-                    $Dat05 = \Helpers::convertDate('');;
+                    $Dat04 = \Helpers::convertDate('');
+                    $Dat05 = \Helpers::convertDate('');
                     $FormID = "W76F2230";
                     $codeTable = 1;
 

@@ -1,4 +1,5 @@
 <ol class="breadcrumb">
+
     <?php
     $title = isset($title) ? $title : "Trang chủ";
     ?>
@@ -10,6 +11,7 @@
     <!-- Breadcrumb Menu-->
     <li class="breadcrumb-menu d-md-down-none">
         <div class="btn-group" role="group" aria-label="Button group">
+
             <a class="btn" href="#">
                 <i class="icon-speech"></i>
             </a>
