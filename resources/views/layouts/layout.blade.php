@@ -47,9 +47,11 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
     $(document).ready(function(){
         $(".app-body").removeClass("hide").fadeIn();
         setTimeout(function() {
-            resizePqGrid();
+            //$(".app-body").removeClass("hide").fadeIn(function(){
+            //    resizePqGrid();
+            //});
+        }, 300 );
 
-        }, 100 );
 
     });
 
@@ -71,5 +73,14 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
     }
     @endif
 </style>
+<div id="divModalContainer"></div>
+</html>
+
+<script>
+    //store resources for using of javascript
+    var langText = JSON.parse('{!! json_encode(Lang::get('message')) !!}');
+    var lang = "{{Helpers::getLang()}}";
+
+</script>
 
 

@@ -1,8 +1,7 @@
 @extends('layouts.layout')
 @section('content')
-    @parent
     <section class="news-view">
-        <div class="rơw">
+        <div class="row">
             <div class="col-sm-3 news-box">
                 <div class="">
                     @include('modules.W83.W76F2142.components.ChannelList')
