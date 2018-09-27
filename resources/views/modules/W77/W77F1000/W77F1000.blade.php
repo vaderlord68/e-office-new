@@ -36,7 +36,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="table-responsive">
-                            <div id="gridW77F1000"></div>
+                            <div id="gridW77F1000" style="width: 100%"></div>
                         </div>
                     </div>
                 </div>
@@ -48,6 +48,11 @@
 
     <script>
         $(document).ready(function () {
+
+            setTimeout(function() {
+                resizePqGrid();
+            }, 300);
+
             $("#toolbarW77F1000").digiMenu({
                     showText: true,
                     style: 'border: none',
