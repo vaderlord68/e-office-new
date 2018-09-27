@@ -16,7 +16,7 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
 @include('layouts.top')
-<div class="app-body ">
+<div class="app-body">
     @include('layouts.sidebar')
     <main class="main">
         @include('layouts.breadcrumb')
@@ -28,6 +28,7 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
     @include('layouts.footer')
 </footer>
 </body>
+
 <script>
     //store resources for using of javascript
     var langText = JSON.parse('{!! json_encode(\Lang::get('message')) !!}');
@@ -44,12 +45,13 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
 
 
     $(document).ready(function(){
+        $(".app-body").removeClass("hide").fadeIn();
         setTimeout(function() {
-
-            $(".app-body").removeClass("hide").fadeIn(function(){
-                resizePqGrid();
-            });
+            //$(".app-body").removeClass("hide").fadeIn(function(){
+            //    resizePqGrid();
+            //});
         }, 300 );
+
 
     });
 

@@ -2557,7 +2557,7 @@ class Helpers
         $arrayFilter = array_filter($array, function ($row) use ($menuID) {
             return $row["ParentMenuID"] == $menuID;
         });
-        \Debugbar::info($array);
+        //\Debugbar::info($array);
         $menu = new Menu();
         $menu->menuID = $node["MenuID"];
         $menu->menuName = $node["MenuName"];
@@ -2592,9 +2592,9 @@ class Helpers
         $hasChild = count($childrend) > 1 && $level > 0 ? 'has-child' : '';
         $str .= '<li class="nav-item dropdown ' . ($hasChild == "has-child" ? "dropdown-submenu" : "no-submenu") . '">';
         if (count($childrend) > 0) {
-            $str .= '<a class="nav-link '.($level > 0 ? 'dropdown-item': '').'  dropdown-toggle ' . $hasChild . '" href="' . url("/" . $row->formID) . '" id="navbardrop" data-toggle="dropdown">';
+            $str .= '<a class="nav-link ' . ($level > 0 ? 'dropdown-item' : '') . '  dropdown-toggle ' . $hasChild . '" href="' . url("/" . $row->formID) . '" id="navbardrop" data-toggle="dropdown">';
         } else {
-            $str .= '<a class="nav-link '.($level > 0 ? 'dropdown-item': '').'' . $hasChild . '" href="' . url("/" . $row->formID) . '" id="navbardrop" >';
+            $str .= '<a class="nav-link ' . ($level > 0 ? 'dropdown-item' : '') . '' . $hasChild . '" href="' . url("/" . $row->formID) . '" id="navbardrop" >';
         }
 
         $str .= '<i class="' . $row->menuIcon . ' mgr5"></i>';
@@ -2629,7 +2629,7 @@ class Helpers
 //    public static function createMenuItem($row, &$str, $level)
 //    {
 //        $childrend = $row->childrend;
-//        ////\Debugbar::info($level);
+//        //////\Debugbar::info($level);
 //        $str .= '<li class="nav-item dropdown ' . ($level > 0 ? "dropdown-submenu" : "") .'">';
 //        $str .= '<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">';
 //        $str .= $row->menuName;
@@ -2652,5 +2652,21 @@ class Helpers
         $sql .= "EXEC W76P0000 '$userID'" . PHP_EOL;
         $rsRow = DB::connection()->selectOne($sql);
         return $rsRow;
+    }
+
+    public static function getPermission($formID = '', $function = '', $convertToBool = false)
+    {
+        $userID = Auth::user()->UserID;
+        $sql = '--Lay phan quyen' . PHP_EOL;
+        $sql .= "EXEC D76P0002  '$userID'" . PHP_EOL;
+        $rsRows = DB::connection()->select($sql);
+        $filter = array_filter($rsRows, function ($row) use($formID,$function) {
+            return $row->FuntionID == $formID && $row->FormID == $function;
+        });
+        $result = count($filter) > 0 ? $filter[0]->Permisions: 0;
+        if ($convertToBool){
+            return $result == 1 ? true:false;
+        }
+        return $result;
     }
 }
