@@ -16,7 +16,7 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
 @include('layouts.top')
-<div class="app-body">
+<div class="app-body hide">
     @include('layouts.sidebar')
     <main class="main">
         @include('layouts.breadcrumb')
@@ -28,6 +28,37 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
     @include('layouts.footer')
 </footer>
 </body>
+<script>
+    //store resources for using of javascript
+    var langText = JSON.parse('{!! json_encode(\Lang::get('message')) !!}');
+    var lang = "{{\Helpers::getLang()}}";
+
+    $(".nav-item").click(function (evt) {
+        $(".dropdown").removeClass('show');
+    });
+//    $(".nav-link").hover(function(){
+//        $(".dropdown").removeClass('show');
+//        $(".dropdown-menu").removeClass('show');
+//
+//    });
+
+
+    $(document).ready(function(){
+        setTimeout(function() {
+            resizePqGrid();
+            $(".app-body").removeClass("hide").fadeIn();
+        }, 1000 );
+
+    });
+
+    $(window).resize(function(){
+        setTimeout(function() {
+            resizePqGrid();
+        }, 200 );
+    });
+
+
+</script>
 @yield('script')
 <div id="spinLoading" class="loading hide">Loading&#8230;</div>
 </html>
@@ -39,9 +70,4 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
     @endif
 </style>
 
-<script>
-    //store resources for using of javascript
-    var langText = JSON.parse('{!! json_encode(\Lang::get('message')) !!}');
-    var lang = "{{\Helpers::getLang()}}";
-</script>
 
