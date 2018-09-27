@@ -12,20 +12,20 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
     <meta name="author" content="Diginet Corp.">
     <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
     <title>eOffice</title>
-    @include('layouts.head')
+    <?php echo $__env->make('layouts.head', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
-@include('layouts.top')
+<?php echo $__env->make('layouts.top', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <div class="app-body">
-    @include('layouts.sidebar')
+    <?php echo $__env->make('layouts.sidebar', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
     <main class="main">
-        @include('layouts.breadcrumb')
-        @include('layouts.container')
+        <?php echo $__env->make('layouts.breadcrumb', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+        <?php echo $__env->make('layouts.container', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
     </main>
-    @include('layouts.aside-menu')
+    <?php echo $__env->make('layouts.aside-menu', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 </div>
 <footer class="app-footer hide">
-    @include('layouts.footer')
+    <?php echo $__env->make('layouts.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 </footer>
 </body>
 <style>
@@ -35,8 +35,8 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
 </style>
 <script>
     //store resources for using of javascript
-    var langText = JSON.parse('{!! json_encode(\Lang::get('message')) !!}');
-    var lang = "{{\Helpers::getLang()}}";
+    var langText = JSON.parse('<?php echo json_encode(\Lang::get('message')); ?>');
+    var lang = "<?php echo e(\Helpers::getLang()); ?>";
 
     $(".nav-item").click(function (evt) {
         $(".dropdown").removeClass('show');
@@ -67,23 +67,23 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
 
 
 </script>
-@yield('script')
+<?php echo $__env->yieldContent('script'); ?>
 <div id="spinLoading" class="loading hide">Loading&#8230;</div>
 </html>
 <style>
-    @if (Helpers::getDevice() == 'DESKTOP')
+    <?php if(Helpers::getDevice() == 'DESKTOP'): ?>
     .main{
         margin-left: 0px !important;
     }
-    @endif
+    <?php endif; ?>
 </style>
 <div id="divModalContainer"></div>
 </html>
 
 <script>
     //store resources for using of javascript
-    var langText = JSON.parse('{!! json_encode(Lang::get('message')) !!}');
-    var lang = "{{Helpers::getLang()}}";
+    var langText = JSON.parse('<?php echo json_encode(Lang::get('message')); ?>');
+    var lang = "<?php echo e(Helpers::getLang()); ?>";
 
 </script>
 

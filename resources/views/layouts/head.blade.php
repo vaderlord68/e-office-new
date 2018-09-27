@@ -90,7 +90,7 @@
 <!-- TinyMCE for editor -->
 <script type="text/javascript" src="{{ asset('plugins/tinymce/tinymce.js') }}"></script>
 <!-- CKeditor for editor -->
-<script type="text/javascript" src="{{ asset('plugins/ckeditor5-build-classic/ckeditor.js') }}"></script>
+<script type="text/javascript" src="{{ asset('plugins/ckeditor/ckeditor.js') }}"></script>
 <!-- Validation JS-->
 <script src="{{ asset('plugins/validation-js/validate.min.js') }}"></script>
 <!--Lightbox -->
