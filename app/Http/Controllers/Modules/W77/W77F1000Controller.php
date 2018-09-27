@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Module\W77;
+namespace App\Http\Controllers\Modules\W77;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
@@ -27,20 +27,34 @@ class  W77F1000Controller extends Controller
     public function index(Request $request, $task = '') {
 
         $title = "Danh mục xe công tác";
-        $rsData = $this->getLists();
-        \Debugbar::info($rsData);
-        return view("system/module/W77/W77F1000/W77F1000", compact('title', 'rsData'));
+        switch($task) {
+            case "":
+                $rsData = $this->getLists('');
+                \Debugbar::info($rsData);
+                return view("modules/W77/W77F1000/W77F1000", compact('title', 'rsData'));
+                break;
+            case "search":
+                $strSearch = $request->input('txtSearchValueW76F2200', '');
+                $rsData = $this->getLists($strSearch);
+                \Debugbar::info($rsData);
+                return json_encode($rsData);
+                break;
+        }
     }
 
-    public function getLists() {
+    public function getLists($strSearch) {
         $userID = Auth::id();
         $divisionID = session('W76P0000')->DivisionID;
         $orgUnitID = session('W76P0000')->OrgUnitID;
         $sql = '--Do nguon cho luoi'.PHP_EOL;
-        $sql .= "EXEC W77P1000 '$userID', '$divisionID', '$orgUnitID'";
+        $sql .= "EXEC W77P1000 '$userID', '$divisionID', '$orgUnitID', '$strSearch'";
         $collection = DB::select($sql);
 
         return $collection ;
+    }
+
+    public function getSearchLists() {
+
     }
 
 }

@@ -1,5 +1,5 @@
-@extends('page.master')
-@section('body_content')
+@extends('layouts.layout')
+@section('content')
     @parent
     <div class="card document-sidebar">
         <div class="card-header">
@@ -7,18 +7,21 @@
         </div>
         <div class="card-body" style="padding: 15px">
             <section>
-                <form id="frmW76F2200" name="frmW76F2200" method="post">
+                <form id="frmSearchW77F1000" name="frmSearchW77F1000" method="post">
+                    {{ csrf_field() }}
                     <div class="row form-group">
                         <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1">
                             <label class="lbl-normal">{{Helpers::getRS("Tim_kiem")}}</label>
                         </div>
                         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                            <div class="form-group">
                             <input type="text" class="form-control" id="txtDocNo" name="txtSearchValueW76F2200"
                                    id="txtSearchValueW76F2200" placeholder="{{ Helpers::getRS('Tim_kiem_xe') }}"
                                    autocomplete="off" required>
+                            </div>
                         </div>
                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                            <button type="submit" id="btnAddW76F2130" title="Thêm mới" class="btn btn-default smallbtn mgr5" style="margin-top: -2px">
+                            <button type="submit" id="btnSearchW77F1000" title="Thêm mới" class="btn btn-default smallbtn pull-right">
                                 <span class="fa fa-search text-yellow mgr5"></span>{{ Helpers::getRS('Tim_kiem') }}
                             </button>
                         </div>
@@ -32,7 +35,9 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div id="gridW77F1000"></div>
+                        <div class="table-responsive">
+                            <div id="gridW77F1000"></div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -70,21 +75,21 @@
                 }
             );
 
-            var groupModel = {
-                on: true,
-                dataIndx: ['ContractYear'],
-                collapsed: [false],
-                headerMenu: false,
-                summaryEditType: false,
-                //summaryInTitleRowType: '',
-                merge: true,
-                title: [
-                    "{0}",
-                    "{0}"
-                ],
-                //titleDefault: "{0} - (<b>{1})</b>",
-            };
-
+            $('#frmSearchW77F1000').on('submit', function(e) {
+                e.preventDefault();
+                $("#gridW77F1000").pqGrid("showLoading");
+                $.ajax({
+                    method: "POST",
+                    url: '{{ url("/W77F1000/search") }}',
+                    data: $('#frmSearchW77F1000').serialize(),
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        $("#gridW77F1000").pqGrid("hideLoading");
+                        $("#gridW77F1000").pqGrid("option", "dataModel.data", data);
+                        $("#gridW77F1000").pqGrid("refreshDataAndView");
+                    }
+                });
+            });
 
             var obj = {
                 width: '100%',
@@ -111,7 +116,7 @@
                         isExport: false,
                         editor: false,
                         render: function (ui) {
-                            var str = '<a id="btnViewW77F1000" title="{{Helpers::getRS("Xem")}}"><i class="fas fa-eye mgr10 text-primary cursor-pointer"></i></a>';
+                            var str = '';
                             str += '<a id="btnEditW77F1000" title="{{Helpers::getRS("Sua")}}"><i class="fas fa-edit mgr10 text-yellow cursor-pointer"></i></a>';
                             str += '<a id="btnDeleteW77F1000" title="{{Helpers::getRS("Xoa")}}"><i class="fas fa-trash-alt text-danger cursor-pointer"></i></a>';
                             return str;
@@ -129,13 +134,13 @@
                                 ask_delete(function () {
                                     $.ajax({
                                         method: "POST",
-                                        url: '{{url('/w76f2200/delete')}}',
-                                        data: {facilityID: rowData.FacilityID, _token: '{{ csrf_token() }}'},
+                                        url: '{{url('/W77F1001/delete')}}',
+                                        data: { carNo: rowData.CarNo, _token: '{{ csrf_token() }}'},
                                         success: function (res) {
                                             var data = JSON.parse(res);
                                             switch (data.status) {
                                                 case "SUCC":
-                                                    var $grid = $("#gridW76F2200");
+                                                    var $grid = $("#gridW77F1000");
                                                     delete_ok(function () {
                                                         update4ParamGrid($grid, null, 'delete');
                                                     });
@@ -206,7 +211,7 @@
                         dataIndx: "DISABLED",
                         render: function (ui) {
                             var rowData = ui.rowData;
-                            var isCheck = rowData.Disabled == 1 ? 'checked' : '';
+                            var isCheck = rowData.DISABLED == 0 ? 'checked' : '';
                             return '<input type="checkbox" ' + isCheck + ' disabled />';
                         }
                     }

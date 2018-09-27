@@ -37,6 +37,7 @@
 <link href="{{asset('plugins/spinkit/spinkit.css')}}" rel="stylesheet">
 <!-- customize-->
 <link href="{{asset('css/common.css')}}" rel="stylesheet">
+<link href="{{asset('css/affects.css')}}" rel="stylesheet">
 
 
 <!-- *************************************************************************************************************** -->
@@ -107,3 +108,6 @@
 <script src="{{asset("plugins/digi-contextmenu/digi-contextmenu.js")}}"></script>
 <script src="{{ asset('js/module/bi/folder-manage.js') }}"></script>
 <script src="{{asset("js/common.js")}}"></script>
+
+
+
