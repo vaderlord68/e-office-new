@@ -28,7 +28,11 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
     @include('layouts.footer')
 </footer>
 </body>
-
+<style>
+    .opacity{
+        0
+    }
+</style>
 <script>
     //store resources for using of javascript
     var langText = JSON.parse('{!! json_encode(\Lang::get('message')) !!}');
