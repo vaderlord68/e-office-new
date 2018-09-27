@@ -1,3 +1,24 @@
+
+<div id="template">
+    <div class="form-horizontal hide">
+        <div class="row">
+            <label class="lbl-normal col-sm-12">Sức chứa: <strong>12</strong></label>
+        </div>
+        <div class="row">
+            <label class="lbl-normal col-sm-12">Thiết bị: <strong>12</strong></label>
+        </div>
+        <div class="row">
+            <label class="lbl-normal col-sm-12">Hậu cần : <strong>12</strong></label>
+        </div>
+        <div class="row">
+            <label class="lbl-normal col-sm-12">Vị trí : <strong>12</strong></label>
+        </div>
+        <div class="row">
+            <label class="lbl-normal col-sm-12">Mô tả : <strong>12</strong></label>
+        </div>
+    </div>
+</div>
+
 <div id='calendar'></div>
 
 <script type="text/javascript">
@@ -8,7 +29,7 @@
                 {!! $meetingRoomList !!}
         var events = [
                 {
-                    url: '{{url('w76f2230/loadCalendar')}}',
+                    url: '{{url('/W76F2230/loadCalendar')}}',
                     cache: false,
                     method: 'post',
                     data: function () { // a function that returns an object
@@ -165,6 +186,10 @@
                 });
             },
             eventMouseover: function (data, event, events, view) {
+                console.log(data);
+                console.log(event);
+                console.log(events);
+                console.log(view);
                 btnClickDel = false;
                 tooltip = '<div class="tooltiptopicevent" style="width:auto;height:auto;background:#ECE0BB;position:absolute;z-index:10001;' +
                     'padding:5px 5px 5px 5px ;  line-height: 200%;">Title: ' + data.title + '</br>Time: ' + moment(data.start).format('HH:mm') + '</div>';
@@ -183,23 +208,68 @@
                 $('.tooltiptopicevent').remove();
             },
             resourceRender: function (resourceObj, $td) {
-                console.log(resourceObj);
+               // console.log(resourceObj);
                 $td.eq(0).find('.fc-cell-content').popover({ //
                     placement: 'left',
                     title: resourceObj.title,
-                    content: resourceObj.display,
+                    //trigger: "click",
+                    content: function () {
+                        return showPopOver(resourceObj);
+                    },
                     trigger: 'hover',
                     container: "body",
+                    html: true,
                 });
-                $td.eq(0).find('.fc-cell-content').on('shown.bs.popover', function () {
-                    var pop = $(this).attr('aria-describedby');
-                    var left = $('#' + pop).offset().left;
-                    var width = $('#' + pop).width();
-                    $('#' + pop).offset({left: left + width + 15});
-                    //console.log($('#'+pop).offset().left);
+                $td.eq(0).find('.fc-cell-content').on('show.bs.popover', function (e, i) {
+                    var pop = $(e.target).data("bs.popover").tip;
+                    $(pop).css('display', 'none');
+//                    var left = $(pop).offset().left;
+//                    var width = $(pop).width();
+//                    console.log($(pop));
+//                    $(pop).offset({left: left + width + 15});
+                });
+                $td.eq(0).find('.fc-cell-content').on('shown.bs.popover', function (e, i) {
+                    var pop = $(e.target).data("bs.popover").tip;
+                    var top = $(pop).offset().top;
+                    var left = $(pop).offset().left;
+                    $(pop).offset({left: left + 12, top: top - 12});
+                    $(pop).css('display', 'block');
                 });
             }
         });
 
     });
+
+    function showPopOver(resourceObj){
+        //console.log(resourceObj);
+        var str='';
+        str+='<div id="template">';
+        str+='<div class="form-horizontal">';
+        str+='<div class="row">';
+        str+='<label class="lbl-normal col-sm-12">Sức chứa: <strong>'+resourceObj.Capacity+'</strong></label>';
+        str+='</div>';
+        str+='<div class="row">';
+        str+='<label class="lbl-normal col-sm-12">Thiết bị: <strong>'+resourceObj.IsBlackboardName +','+' '+resourceObj.IsProjectorName +','+' '+resourceObj.IsEthernetName+','+' '+resourceObj.IsPCName+','+' '+resourceObj.IsMicrophoneName+','+' '+resourceObj.IsTeleConName+','+' '+resourceObj.IsWifiName+'</strong></label>';
+        str+='</div>';
+        str+='<div class="row">';
+        str+='<label class="lbl-normal col-sm-12">Hậu cần : <strong>'+resourceObj.LogisticsName+'</strong></label>';
+        str+='</div>';
+        str+='<div class="row">';
+        str+='<label class="lbl-normal col-sm-12">Vị trí : <strong>'+resourceObj.Location+'2</strong></label>';
+        str+='</div>';
+        str+='<div class="row">';
+        str+='<label class="lbl-normal col-sm-12">Mô tả : <strong>'+resourceObj.Description+'</strong></label>';
+        str+='</div>';
+        str+='</div>';
+        str+='</div>';
+        return str;
+    }
 </script>
+<style>
+    /*.popover-body {*/
+        /*min-width: 220px;*/
+    /*}*/
+    /*.popover{*/
+        /*min-width: 220px;*/
+    /*}*/
+</style>

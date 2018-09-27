@@ -438,7 +438,7 @@
                         }
                     }
                     , {
-                        ID: "btnBack",
+                        ID: "btnEject",
                         icon: "fas fa-arrow-left",
                         title: '{{Helpers::getRS("Tu_choi")}}',
                         enable: true,
@@ -448,15 +448,15 @@
                         render: function (ui) {
                         },
                         postRender: function (ui) {
-//                            ui.$btn.click(function () {
-//                                window.location.href = document.referrer.toString();
-//                            });
+                            ui.$btn.click(function () {
+                                updateApproveStatus(2);
+                            });
                         }
                     }
                     ,{
-                        ID: "btnSaveW76F22231",
+                        ID: "btnApprove",
                         icon: "fas fa-save",
-                        title: "{{Helpers::getRS('duyet')}}",
+                        title: "{{Helpers::getRS('Duyet')}}",
                         enable: function () {
                             return true;
                         },
@@ -466,9 +466,9 @@
                         render: function (ui) {
                         },
                         postRender: function (ui) {
-//                            ui.$btn.click(function () {
-//                                frmW76F2231save();
-//                            });
+                            ui.$btn.click(function () {
+                                updateApproveStatus(1);
+                            });
                         }
                     }
 
@@ -484,6 +484,30 @@
             });
         }
 
+        function updateApproveStatus(status) {
+            $.ajax({
+                //enctype: 'multipart/form-data',
+                method: "POST",
+                url: '{{ url('/W76F2231/updateStatus') }}',
+                data: { status: status, id: '{{$ID}}', _token: '{{ csrf_token() }}'},
+                success: function (res) {
+                    var result = JSON.parse(res);
+                    console.log("luu");
+                    switch (result.status) {
+                        case 'ERROR':
+                            alertError(result.message, $("#modalW76F2231"))
+                            break;
+                        case 'INVAILD':
+                            alertError(result.message, $("#modalW76F2231"))
+                            break;
+                        case 'SUCC':
+                            window.location.reload();
+                            break;
+                    }
+                }
+            });
+        }
+
         $('#formW76F2231').submit(function (e) {
             e.preventDefault();
 
@@ -492,10 +516,10 @@
             var url = "";
             var task = "{{$task}}";
             if (task == "add") {
-                url = '{{url("/w76f2231/save")}}';
+                url = '{{url("/W76F2231/save")}}';
             }
             if (task == "edit") {
-                url = '{{url("/w76f2231/update")}}';
+                url = '{{url("/W76F2231/update")}}';
             }
             console.log(url);
             hideAlert();

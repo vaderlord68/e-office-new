@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Modules\W80;
 
 use App\Http\Controllers\Controller;
@@ -260,6 +259,21 @@ class  W76F2231Controller extends Controller
                     return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'), 'redirectTo' => $_SERVER["HTTP_REFERER"]]);
                 }catch (\Exception $ex){
                     return json_encode(['status' => 'ERROR', 'message' => $ex->getMessage()]);
+                }
+                break;
+            case 'updateStatus':
+                $status = $request->input('status', '');
+                $id = $request->input("id", '');
+                if ($status !== '') {
+                    try{
+                        $this->d76T2230->where('ID', $id)->update(['ApproveStatus' => $status]);
+                        \Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'));
+                        return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'), 'redirectTo' => $_SERVER["HTTP_REFERER"]]);
+                    }catch (\Exception $ex){
+                        return json_encode(['status' => 'ERROR', 'message' => $ex->getMessage()]);
+                    }
+                } else {
+                    return json_encode(['status' => 'INVAILD', 'message' => 'Trang thai khong hop le']);
                 }
                 break;
 
