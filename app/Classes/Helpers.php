@@ -2553,13 +2553,12 @@ class Helpers
     public static function createMenuNode($node, $array, &$outputArray)
     {
 
-        $ID = $node["ID"];
-        $arrayFilter = array_filter($array, function ($row) use ($ID) {
-            return intval($row["ParentMenuID"]) == intval($ID);
+        $menuID = $node["MenuID"];
+        $arrayFilter = array_filter($array, function ($row) use ($menuID) {
+            return $row["ParentMenuID"] == $menuID;
         });
-
+        \Debugbar::info($array);
         $menu = new Menu();
-        $menu->id = $node["ID"];
         $menu->menuID = $node["MenuID"];
         $menu->menuName = $node["MenuName"];
         $menu->formID = $node["FormID"];

@@ -37,6 +37,7 @@
 <link href="{{asset('plugins/spinkit/spinkit.css')}}" rel="stylesheet">
 <!-- customize-->
 <link href="{{asset('css/common.css')}}" rel="stylesheet">
+<link href="{{asset('css/affects.css')}}" rel="stylesheet">
 
 
 <!-- *************************************************************************************************************** -->
