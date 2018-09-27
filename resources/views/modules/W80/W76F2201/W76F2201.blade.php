@@ -14,14 +14,14 @@
         $txtLocationW76F2201 = $rowData["Location"];
         $txtCapacityW76F2201 = $rowData["Capacity"];
         $disabledW76F2201 = $rowData["Disabled"];
-        $isBlackboardW76F2201 = $rowData["IsBlackboard"];
-        $isProjectorW76F2201 = $rowData["IsProjector"];
-        $isEthernetW76F2201 = $rowData["IsEthernet"];
-        $isPCW76F2201 = $rowData["IsPC"];
-        $isMicrophoneW76F2201 = $rowData["IsMicrophone"];
-        $isTeleConW76F2201 = $rowData["IsTeleCon"];
-        $isWifiW76F2201 = $rowData["IsWifi"];
-        $isVideoConW76F2201 = $rowData["IsVideoCon"];
+        $isBlackboardW76F2201 = $rowData["IsBlackboard"] == 1 ? "checked" : "";
+        $isProjectorW76F2201 = $rowData["IsProjector"] == 1 ? "checked" : "";
+        $isEthernetW76F2201 = $rowData["IsEthernet"] == 1 ? "checked" : "";
+        $isPCW76F2201 = $rowData["IsPC"] == 1 ? "checked" : "";
+        $isMicrophoneW76F2201 = $rowData["IsMicrophone"] == 1 ? "checked" : "";
+        $isTeleConW76F2201 = $rowData["IsTeleCon"] == 1 ? "checked" : "";
+        $isWifiW76F2201 = $rowData["IsWifi"] == 1 ? "checked" : "";
+        $isVideoConW76F2201 = $rowData["IsVideoCon"] == 1 ? "checked" : "";
         $displayOrderW76F2201 = $rowData["DisplayOrder"];
     } else {
         $facilityID = "";
@@ -218,7 +218,7 @@
                                                 <label>
                                                     <span class="fas fa-chalkboard mgr5"></span> {{Helpers::getRS("Bang_ghi")}}
                                                 </label>
-                                                <span class="fa fa-check mgl5  {{$isBlackboardW76F2201}}" value="1"></span>
+                                                <span class="fa fa-check mgl5  {{$isBlackboardW76F2201 == '' ? 'hide': ''}}" value="1"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -230,7 +230,7 @@
                                                 <label><span
                                                             class="fas fa-procedures mgr5"></span> {{Helpers::getRS("May_chieu")}}
                                                 </label>
-                                                <span class="fa fa-check mgl5 {{$isProjectorW76F2201}}" value="1"></span>
+                                                <span class="fa fa-check mgl5 {{$isProjectorW76F2201 == '' ? 'hide': ''}}" value="1"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -240,7 +240,7 @@
                                                 <input type="checkbox" class="hide" id="isEthernetW76F2201"
                                                        name="isEthernetW76F2201" {{$isEthernetW76F2201}} value="1">
                                                 <label><span class="fab fa-ethereum mgr5"></span>Ethernet</label>
-                                                <span class="fa fa-check mgl5 {{$isEthernetW76F2201}}" value="1"></span>
+                                                <span class="fa fa-check mgl5 {{$isEthernetW76F2201 == '' ? 'hide': ''}}" value="1"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -250,7 +250,7 @@
                                                 <input type="checkbox" class="hide" id="isMicrophoneW76F2201"
                                                        name="isMicrophoneW76F2201" value="1" {{$isMicrophoneW76F2201}}>
                                                 <label><span class="fas fa-microphone mgr5"></span> Microphone</label>
-                                                <span class="fa fa-check mgl5 {{$isMicrophoneW76F2201}}" value="1"></span>
+                                                <span class="fa fa-check mgl5 {{$isMicrophoneW76F2201 == '' ? 'hide': ''}}" value="1"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -260,7 +260,7 @@
                                                 <input type="checkbox" class="hide" id="isPCW76F2201"
                                                        name="isPCW76F2201" {{$isPCW76F2201}} value="1">
                                                 <label><span class="fas fa-desktop mgr5"></span> PC</label>
-                                                <span class="fa fa-check mgl5 {{$isPCW76F2201}}" value="1"></span>
+                                                <span class="fa fa-check mgl5 {{$isPCW76F2201 == '' ? 'hide': ''}}" value="1"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -271,7 +271,7 @@
                                                        name="isTeleConW76F2201" {{$isTeleConW76F2201}} value="1">
                                                 <label><span class="fas fa-chess-queen mgr5"></span> Tele-Conference
                                                 </label>
-                                                <span class="fa fa-check mgl5 {{$isTeleConW76F2201}}" value="1"></span>
+                                                <span class="fa fa-check mgl5 {{$isTeleConW76F2201 == '' ? 'hide': ''}}" value="1"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -282,7 +282,7 @@
                                                        name="isVideoConW76F2201" {{$isVideoConW76F2201}} value="1">
                                                 <label><span class="fas fa-video mgr5"></span>
                                                     Video-Conference</label>
-                                                <span class="fa fa-check mgl5 {{$isVideoConW76F2201}}" value="1"></span>
+                                                <span class="fa fa-check mgl5 {{$isVideoConW76F2201 == '' ? 'hide': ''}}" value="1"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -292,7 +292,7 @@
                                                 <input type="checkbox" class="hide" id="isWifiW76F2201"
                                                        name="isWifiW76F2201" {{$isWifiW76F2201}} value="1">
                                                 <label><span class="fas fa-wifi mgr5"></span> Wifi</label>
-                                                <span class="fa fa-check mgl5 {{$isWifiW76F2201}}" value="1"></span>
+                                                <span class="fa fa-check mgl5 {{$isWifiW76F2201 == '' ? 'hide': ''}}" value="1"></span>
                                             </div>
                                         </div>
                                     </div>

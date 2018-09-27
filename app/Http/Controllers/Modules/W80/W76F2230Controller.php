@@ -29,7 +29,6 @@ class  W76F2230Controller extends Controller
     {
         switch ($task) {
             case '':
-
                 $divisionIDList = $this->d76T9000->where('DISABLED', '=', 0)->select('OrgunitID', 'OrgunitName')->get();
                 $isblackBoardName = 'Bảng ghi';
                 $isProjectorName = 'Máy chiếu';
@@ -53,7 +52,7 @@ class  W76F2230Controller extends Controller
                     ->where("DivisionID", '=', session('W76P0000')->DivisionID)->get();
                 $Logistics = DB::table('D76T1556')
                     ->where('ListTypeID', 'D76T2200_Logistics')
-                    ->select('CodeID' ,'CodeName')
+                    ->select('CodeID', 'CodeName')
                     ->get()->toArray();
                 foreach ($meetingRoomList as &$item) {
                     $l = explode(';', $item->Logistics);
@@ -75,11 +74,11 @@ class  W76F2230Controller extends Controller
                 $meetingRoomList = json_encode($meetingRoomList);
                 $divisionIDList = json_encode($divisionIDList);
                 $meetingRoomDetail = $this->d76T2200->where("DivisionID", '=', session('W76P0000')->DivisionID)->get();
-                \Debugbar::info($meetingRoomDetail);
+                //\Debugbar::info($meetingRoomDetail)
                 $newsCollection = $this->getCalender();
                 $newsCollection = ($newsCollection);
 
-                return view("modules/W80/W76F2230/W76F2230", compact('meetingRoomDetail', 'newsCollection', 'rowData', 'divisionIDList', 'meetingRoomList', 'task'));
+                return view("modules/W80/W76F2230/W76F2230", compact('hostPersonDetail', 'meetingRoomDetail', 'newsCollection', 'rowData', 'divisionIDList', 'meetingRoomList', 'task'));
                 break;
             case 'loadCalender':
                 $newsCollection = $this->getCalender();
@@ -87,11 +86,11 @@ class  W76F2230Controller extends Controller
                 return $newsCollection();
                 break;
             case 'delete':
-                $ID = $request->input('id', '');
-                \Debugbar::info($ID);
+                $ID = $request->input('ID', '');
+                //\Debugbar::info($ID);
                 $sql = "--Xoa hop dong" . PHP_EOL;
                 $sql .= "delete from D76T2230 where ID = '$ID'" . PHP_EOL;
-                \Debugbar::info($sql);
+                //\Debugbar::info($sql);
                 try {
                     DB::statement($sql);
                     \Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_xoa_thanh_cong'));

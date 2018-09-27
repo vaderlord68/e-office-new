@@ -23,6 +23,7 @@
                     $logisticsW76F2231 = $rowData["Logistics"];
                     $cbFacilityIDW76F2231 = $rowData["FacilityID"];
                     $descriptionW76F2231 = $rowData["Description"];
+                    $approvalNotesW76F2231 = $rowData["ApprovalNotes"];
                     $cbHostPersonW76F2231 = $rowData["HostPerson"];
                     $cbParticipantsW76F2231 = $rowData["Participants"];
                     $txtNumParticipantsW76F2231 = $rowData["NumParticipants"];
@@ -46,6 +47,7 @@
                     $logisticsW76F2231 = "";
                     $cbFacilityIDW76F2231 = $all["roomID"];
                     $descriptionW76F2231 = "";
+                    $approvalNotesW76F2231 = "";
                     $cbHostPersonW76F2231 = "";
                     $cbParticipantsW76F2231 = "";
                     $txtNumParticipantsW76F2231 = "";
@@ -107,7 +109,7 @@
                                                 <input type="text" class="form-control" id="dateFromW76F2231"
                                                        placeholder="00:00"
                                                        name="dateFromW76F2231" value="{{$date}}"
-                                                       autocomplete="off" required>
+                                                       autocomplete="off" readonly>
                                             </div>
                                         </div>
                                         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
@@ -125,7 +127,7 @@
                                             <input type="text" class="form-control" id="dateToW76F2231"
                                                    placeholder="00:00"
                                                    name="dateToW76F2231"
-                                                   class="form-control" value="{{$date}}" autocomplete="off" required>
+                                                   class="form-control" value="{{$date}}" autocomplete="off" readonly>
                                         </div>
                                         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                                             <div class="input-group ">
@@ -155,7 +157,7 @@
                                             <textarea type="text" style="height: 60px" class="form-control"
                                                       autocomplete="off" required
                                                       class="form-control" id="descriptionW76F2231"
-                                                      name="descriptionW76F2231" value="">{{$descriptionW76F2231}}
+                                                      name="descriptionW76F2231">{{$descriptionW76F2231}}
                                             </textarea>
                                         </div>
                                     </div>
@@ -331,6 +333,17 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row mgb5">
+                                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                            <label class="lbl-normal">{{Helpers::getRS("Ghi_chu_duyet")}}</label>
+                                        </div>
+                                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                                            <input type="text" class="form-control"
+                                                      autocomplete="off" class="form-control" id="approvalNotesW76F2231"
+                                                      name="approvalNotesW76F2231" value="{{$approvalNotesW76F2231}}">
+                                            </input>
+                                        </div>
+                                    </div>
                                     <button id="btnSubmitW76F2231" class="hide"></button>
                                 </form>
                             </div>
@@ -403,10 +416,10 @@
                 cls: 'none-border none-background',
                 style: '',
                 buttonList: [
-                     {
+                    {
                         ID: "btnBack",
                         icon: "fas fa-arrow-left",
-                        title: '{{Helpers::getRS("Dong")}}',
+                        title: '{{Helpers::getRS("Quay_lai")}}',
                         enable: true,
                         hidden: false,
                         type: "button",
@@ -419,7 +432,7 @@
                             });
                         }
                     }
-                    ,{
+                    , {
                         ID: "btnSaveW76F22231",
                         icon: "fas fa-save",
                         title: "{{Helpers::getRS('Gui_duyet')}}",
@@ -428,7 +441,7 @@
                         },
                         hidden: false,
                         type: "button",
-                        cls: "btn  btn-info pull-right",
+                        cls: "btn btn-info pull-right",
                         render: function (ui) {
                         },
                         postRender: function (ui) {
@@ -439,12 +452,12 @@
                     }
                     , {
                         ID: "btnEject",
-                        icon: "fas fa-arrow-left",
+                        icon: "fas fa-ban",
                         title: '{{Helpers::getRS("Tu_choi")}}',
                         enable: true,
                         hidden: false,
                         type: "button",
-                        cls: "btn  btn-info pull-right",
+                        cls: "btn btn-info pull-right",
                         render: function (ui) {
                         },
                         postRender: function (ui) {
@@ -453,7 +466,7 @@
                             });
                         }
                     }
-                    ,{
+                    , {
                         ID: "btnApprove",
                         icon: "fas fa-save",
                         title: "{{Helpers::getRS('Duyet')}}",
@@ -489,7 +502,7 @@
                 //enctype: 'multipart/form-data',
                 method: "POST",
                 url: '{{ url('/W76F2231/updateStatus') }}',
-                data: { status: status, id: '{{$ID}}', _token: '{{ csrf_token() }}'},
+                data: {status: status, id: '{{$ID}}', _token: '{{ csrf_token() }}'},
                 success: function (res) {
                     var result = JSON.parse(res);
                     console.log("luu");
