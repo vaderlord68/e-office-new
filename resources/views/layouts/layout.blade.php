@@ -16,7 +16,7 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
 @include('layouts.top')
-<div class="app-body hide">
+<div class="app-body">
     @include('layouts.sidebar')
     <main class="main">
         @include('layouts.breadcrumb')
@@ -44,10 +44,10 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
 
 
     $(document).ready(function(){
-        setTimeout(function() {
-            resizePqGrid();
-            $(".app-body").removeClass("hide").fadeIn();
-        }, 1000 );
+//        setTimeout(function() {
+//            resizePqGrid();
+//            $(".app-body").removeClass("hide").fadeIn();
+//        }, 1000 );
 
     });
 
