@@ -11,13 +11,15 @@
     <!-- Breadcrumb Menu-->
     <li class="breadcrumb-menu d-md-down-none">
         <div class="btn-group" role="group" aria-label="Button group">
+            @yield('toolbar')
 
-            <a class="btn" href="#">
+
+            <a class="btn hide" href="#">
                 <i class="icon-speech"></i>
             </a>
-            <a class="btn" href="./">
+            <a class="btn hide" href="./">
                 <i class="icon-graph"></i>  Chuyển tiếp</a>
-            <a class="btn" href="#">
+            <a class="btn hide" href="#">
                 <i class="icon-settings"></i>  Chia sẽ</a>
         </div>
     </li>

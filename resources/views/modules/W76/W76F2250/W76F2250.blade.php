@@ -1,7 +1,15 @@
 @extends('layouts.layout')
+
+@section('toolbar')
+    <a class="btn" href="./">
+        <i class="icon-graph"></i>  Chuyển tiếp</a>
+    <a class="btn" href="#">
+        <i class="icon-settings"></i>  Chia sẽ</a>
+@stop
+
+
 @section('content')
     @parent
-
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
