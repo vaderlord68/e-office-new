@@ -19,5 +19,7 @@ Route::group(['namespace' => 'Modules\W76', 'middleware' => 'auth'], function ()
     Route::any('/W76F1555/{task?}', 'W76F1555Controller@index');
     //Quản lý văn bản
     Route::any('/W76F2250/{task?}', 'W76F2250Controller@index');
+    //Thêm mới văn bản
+    Route::any('/W76F2251/{task?}', 'W76F2251Controller@index');
 });
 
