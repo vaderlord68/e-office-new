@@ -72,7 +72,6 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
 //            });
         }, 500 );
 
-
     });
 
     $(window).resize(function(){

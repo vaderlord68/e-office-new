@@ -667,6 +667,48 @@ a:hover {
 .pq-col-sort-asc, .pq-col-sort-desc{
     color: #000 !important;
 }
+
+.no-border {
+    border: 0 !important;
+}
+
+/*Full calendar*/
+#calendarW79F1000 .ui-widget-header th {
+    line-height: 30px;
+}
+#calendarW79F1000 .ui-state-highlight,#calendarW79F1000 .ui-widget-content .ui-state-highlight, #calendarW79F1000 .ui-widget-header .ui-state-highlight {
+    border: 1px double #9BC53D;
+    background: #dceff8
+}
+#calendarW79F1000 .fc-event, #calendarW79F1000 .fc-event-dot {
+    background-color: #fcd264;
+    border: 1px solid #9BC53D99;
+    margin: 1px;
+    margin-right: -1px;
+    box-shadow: 1px 1px 0px 0px #9BC53D99;
+    padding: 3px;
+}
+#calendarW79F1000 .fc-time-grid-event .fc-content {
+    font-size: 12px;
+}
+#calendarW79F1000 .fc-time-grid-event .fc-time {
+    font-weight: 600;
+    font-style: italic;
+    text-decoration: underline;
+    margin-bottom: 3px;
+}
+#calendarW79F1000 .ui-widget-content .fc-time-grid-container {
+    height: auto !important;
+}
+.fc-license-message {
+    display: none;
+}
+
+.lich-lam-viec .select2-container .select2-selection {
+    min-height: auto;
+}
+
+
 /*@media (max-width: 1020px) {*/
     /*.pq-grid {*/
         /*width: 1020px !important;*/
