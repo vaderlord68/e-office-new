@@ -2,10 +2,10 @@
 
 @section('toolbar')
     <a class="btn" href="{{url('/W76F2251/add')}}">
-        <i class="far fa-plus text-primary mgr5"></i>Tạo mới</a>
+        <i class="far fa-plus text-primary mgr5 text-bold"></i>Tạo mới</a>
 
     <a class="btn" href="#">
-        <i class="fal fa-reply text-orangered rotateY180"></i>  Chuyển tiếp</a>
+        <i class="fal fa-reply text-orangered rotateY180 text-bold"></i>  Chuyển tiếp</a>
 @stop
 
 

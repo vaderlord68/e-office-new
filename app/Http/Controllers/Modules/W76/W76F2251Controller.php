@@ -16,11 +16,11 @@ class  W76F2251Controller extends Controller
     {
         $lang = \Helpers::getLang();
         $userID = Auth::user()->UserID;
-
+        $title = 'Cập nhật văn bản đến';
         switch ($task) {
             case '':
             case 'add':
-                 return View("modules.W76.W76f2251.W76f2251", compact( 'task'));
+                 return View("modules.W76.W76f2251.W76f2251", compact( 'task', 'title'));
                 break;
 
         }

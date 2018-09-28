@@ -678,3 +678,11 @@ a:hover {
 .rotateY180{
     transform: rotateY(180deg);
 }
+
+.breadcrumb {
+    margin-bottom: 10px;
+}
+
+.text-bold{
+    font-weight: bold;
+}

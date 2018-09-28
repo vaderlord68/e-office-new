@@ -2,12 +2,19 @@
 
 @section('toolbar')
     <a class="btn" href="{{url('/W76F2251/save')}}">
-        <i class="fal fa-save text-primary mgr5"></i>Lưu</a>
+        <i class="fal fa-save text-primary mgr5 text-bold"></i>Lưu
+    </a>
 
     <a class="btn" href="#">
-        <i class="fal fa-reply text-orangered rotateY180"></i>  Chuyển xử lý</a>
-@stop
+        <i class="fal fa-reply text-orangered rotateY180 text-bold"></i>
+         Chuyển xử lý
+    </a>
 
+    <a class="btn" href="{{url('/W76F2250')}}">
+        <i class="fal fa-arrow-circle-left text-red text-bold" ></i>
+         Quay lại
+    </a>
+@stop
 
 @section('content')
     @parent
@@ -15,7 +22,7 @@
         <div class="col-sm-12">
             <div class="card">
 
-                <div class="card-header">
+                <div class="card-header hide">
                     <strong>Cập nhật văn bản đến</strong>
                 </div>
                 <div class="card-body">

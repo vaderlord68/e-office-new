@@ -1,13 +1,15 @@
 <ol class="breadcrumb">
 
     <?php
-    $title = isset($title) ? $title : "Trang chủ";
+    $title = isset($title) ? $title : "";
     ?>
-    <li class="breadcrumb-item text-primary"><strong>{{$title}}</strong></li>
-    <li class="breadcrumb-item">
+    <li class="breadcrumb-item text-primary">
+        <strong><a href="{{url('/')}}">Trang chủ</a></strong>
+    </li>
+    <li class="breadcrumb-item hide">
         <a href="#">Admin</a>
     </li>
-    <li class="breadcrumb-item active hide">Dashboard</li>
+    <li class="breadcrumb-item active ">{{$title}}</li>
     <!-- Breadcrumb Menu-->
     <li class="breadcrumb-menu d-md-down-none">
         <div class="btn-group" role="group" aria-label="Button group">
