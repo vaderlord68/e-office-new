@@ -8,7 +8,7 @@
         <img class="navbar-brand-minimized" src="{{asset('img/logo.png')}}" height="32"
              alt="CoreUI Logo">
     </a>
-    @if (Helpers::getDevice() != 'DESKTOP')
+    @if (Helpers::getDevice() == 'DESKTOP')
         <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
             <span class="navbar-toggler-icon"></span>
         </button>
