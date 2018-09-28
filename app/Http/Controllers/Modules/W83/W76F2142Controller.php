@@ -43,7 +43,7 @@ class  W76F2142Controller extends Controller
                         //Lay danh sach news cho channel
                         $channelID = $request->input('channelID', '');
                         if ($channelID == '') {
-                            $channelFirst =  $this->d76T5556->where('ListTypeID', 'NEW_CATEGORIES')->first();
+                            $channelFirst = $this->d76T5556->where('ListTypeID', 'NEW_CATEGORIES')->first();
                             if ($channelFirst != null) {
                                 $channelID = $channelFirst->CodeID;
                             }
@@ -68,11 +68,17 @@ class  W76F2142Controller extends Controller
 //                            ->select("CodeName","D76T2140.NewsID","D76T2140.ChannelID")
 //                            ->where("D76T2140.NewsID", '=', $newsID)
 //                            ->first();
-                        $newRowDetail = $this->d76T2141
-                            ->leftJoin("D76T2140", 'D76T2140.NewsID', '=', 'D76T2141.RelatedNewsID')
-                            ->select("D76T2140.Title", "D76T2141.NewsID", "D76T2141.RelatedNewsID")
-                            ->where("D76T2141.NewsID", "=", $newsID)
-                            ->get();
+//                        $newRowDetail = $this->d76T2141
+//                            ->leftJoin("D76T2140", 'D76T2140.NewsID', '=', 'D76T2141.RelatedNewsID')
+//                            ->select("D76T2140.Title", "D76T2141.NewsID", "D76T2141.RelatedNewsID")
+//                            ->where("D76T2141.NewsID", "=", $newsID)
+//                            ->get();
+
+                        $sql = "--Lay danh sach bang tin" . PHP_EOL;
+                        $sql .= "EXEC W76P2142 '$newsID'" . PHP_EOL;
+                        $newRowDetail = DB::connection('sqlsrv')->select($sql);
+
+                        \Debugbar::info($newRowDetail);
                         return view("modules/W83/W76F2142/W76F2142_NewsDetail", compact('channelName', 'newRowDetail', 'task', 'component', 'lastestNewsList', 'channelIDList', 'newsRow'));
                         break;
                 }
@@ -93,12 +99,14 @@ class  W76F2142Controller extends Controller
                             ->leftJoin("D76T1556", 'D76T1556.CodeID', '=', 'D76T2140.ChannelID')
                             ->where('NewsID', '=', $newsID)->first();
 
-                        $newsID = $request->input('newsID', '');
+                        //$newsID = $request->input('newsID', '');
                         $newRowDetail = $this->d76T2141
                             ->leftJoin("D76T2140", 'D76T2140.NewsID', '=', 'D76T2141.RelatedNewsID')
                             ->select("D76T2140.Title", "D76T2141.NewsID", "D76T2141.RelatedNewsID")
                             ->where("D76T2141.NewsID", "=", $newsID)
                             ->get();
+
+                        \Debugbar::info($newRowDetail);
                         return view("modules/W83/W76F2142/W76F2142_NewsDetail", compact('channelName', 'newRowDetail', 'task', 'component', 'lastestNewsList', 'channelIDList', 'newsRow'));
                         break;
                 }
@@ -129,9 +137,9 @@ class  W76F2142Controller extends Controller
             ->take(10)
             ->get();
         foreach ($lastestNewsList as &$item) {
-            if ($item->Image == ""){
+            if ($item->Image == "") {
                 $item->Image = asset('media/available.png');
-            }else{
+            } else {
                 $item->Image = 'data:image/jpeg;base64, ' . base64_encode($item->Image);
             }
         }
@@ -141,13 +149,13 @@ class  W76F2142Controller extends Controller
     function getNewsOfChannel($channelID)
     {
         $userID = Auth::user()->UserID;
-        $sql = "--Lay danh sach bang tin".PHP_EOL;
-        $sql .= "EXEC W76P2142 '$userID', '$channelID'".PHP_EOL;
+        $sql = "--Lay danh sach bang tin" . PHP_EOL;
+        $sql .= "EXEC W76P2142 '$userID', '$channelID'" . PHP_EOL;
         $newsList = DB::connection('sqlsrv')->select($sql);
         foreach ($newsList as &$item) {
-            if ($item->Image == ""){
+            if ($item->Image == "") {
                 $item->Image = asset('media/available.png');
-            }else{
+            } else {
                 $item->Image = 'data:image/jpeg;base64, ' . base64_encode($item->Image);
             }
         }

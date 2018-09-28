@@ -22,12 +22,6 @@ class  W76F2140Controller extends Controller
         switch ($task) {
             case '':
                 $newsCollection = $this->getList();
-
-//                //get route current...
-//                $currentUrl = $request->url();
-//                Helper::setSession('prevUrlNews', $currentUrl);
-
-                //\Debugbar::info($newsCollection);
                 return view("modules/W83/W76F2140/W76F2140")->with("newsCollection", json_encode($newsCollection));
                 break;
             case 'filter':

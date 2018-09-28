@@ -245,10 +245,12 @@ class  W76F2141Controller extends Controller
 
     private function getDetailData($newsID)
     {
-        return $this->d76T2141
-            ->leftJoin("D76T2140", 'D76T2140.NewsID', '=', 'D76T2141.RelatedNewsID')
-            ->select("D76T2140.Title", "D76T2141.NewsID", "D76T2141.RelatedNewsID")
-            ->where("D76T2141.NewsID", "=", $newsID)->get();
+//        return $this->d76T2141
+//            ->leftJoin("D76T2140", 'D76T2140.NewsID', '=', 'D76T2141.RelatedNewsID')
+//            ->select("D76T2140.Title", "D76T2141.NewsID", "D76T2141.RelatedNewsID")
+//            ->where("D76T2141.NewsID", "=", $newsID)->get();
+
+        return $this->d76T2140->select('NewsID', 'Title')->where('ChannelID', '=', 'NEWS_BLD')->orderBy('CreateDate', 'desc')->get();
     }
 
     private function getNewsFilter($cboChannelIDSelectNews)

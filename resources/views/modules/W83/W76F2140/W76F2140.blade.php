@@ -60,7 +60,7 @@
                 }
             );
             var obj = {
-                width: '100%',
+                //width: 100,
                 height: 600,
                 freezeCols: 1,
                 numberCell: {show: false},
@@ -84,7 +84,7 @@
                         editor: false,
                         render: function (ui) {
                             var str = '<a id="btnEditW76F2140" title="{{Helpers::getRS("Sua")}}"><i class="fa fa-edit mgr10 text-yellow cursor-pointer"></i></a>';
-                                str += '<a id="btnDeleteW76F2140" title="{{Helpers::getRS("Xoa")}}"><i class="fa fa-trash text-danger cursor-pointer"></i></a>';
+                            str += '<a id="btnDeleteW76F2140" title="{{Helpers::getRS("Xoa")}}"><i class="fa fa-trash text-danger cursor-pointer"></i></a>';
                             return str;
                         },
                         postRender: function (ui) {
@@ -111,7 +111,7 @@
                                                 case "SUCC":
                                                     var $grid = $("#gridW76F2140");
                                                     delete_ok(function () {
-                                                        update4ParamGrid($grid,null, 'delete');
+                                                        update4ParamGrid($grid, null, 'delete');
                                                     });
                                                     break;
                                                 case "ERROR":
@@ -121,9 +121,6 @@
                                         }
                                     })
                                 });
-//                                ask_delete(function(){
-//                                    alert("sdfdsf");
-//                                })
                             });
                         }
                     }
@@ -137,8 +134,8 @@
                     }
                     , {
                         title: "{{Helpers::getRS('Tieu_de')}}",
-                        width: 220,
-                        align: "center",
+                        width: 300,
+                        align: "left",
                         dataIndx: "Title",
                         dataType: "string",
                         editor: false,
@@ -173,7 +170,7 @@
                         dataType: "string",
                         editor: false,
                         align: "center",
-                        dataIndx: "Hits",
+                        dataIndx: "ViewCount",
                         filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']}
                     },
                     {
@@ -246,5 +243,5 @@
     </script>
 @stop
 {{--@section("deletePopup")--}}
-    {{--@include("system.module.news.delete")--}}
+{{--@include("system.module.news.delete")--}}
 {{--@show--}}
