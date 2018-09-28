@@ -67,10 +67,10 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
 
     $(document).ready(function(){
         setTimeout(function() {
-            $(".app-body").removeClass("opacity").fadeIn(function(){
-                resizePqGrid();
-            });
-        }, 300 );
+//            $(".app-body").removeClass("opacity").fadeIn(function(){
+//                resizePqGrid();
+//            });
+        }, 500 );
 
 
     });

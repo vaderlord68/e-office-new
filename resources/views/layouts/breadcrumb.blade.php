@@ -13,7 +13,6 @@
         <div class="btn-group" role="group" aria-label="Button group">
             @yield('toolbar')
 
-
             <a class="btn hide" href="#">
                 <i class="icon-speech"></i>
             </a>

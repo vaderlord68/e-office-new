@@ -1,11 +1,11 @@
 @extends('layouts.layout')
 
 @section('toolbar')
-    <a class="btn" href="{{url('/W76F2251/add')}}">
-        <i class="far fa-plus text-primary mgr5"></i>Tạo mới</a>
+    <a class="btn" href="{{url('/W76F2251/save')}}">
+        <i class="fal fa-save text-primary mgr5"></i>Lưu</a>
 
     <a class="btn" href="#">
-        <i class="fal fa-reply text-orangered rotateY180"></i>  Chuyển tiếp</a>
+        <i class="fal fa-reply text-orangered rotateY180"></i>  Chuyển xử lý</a>
 @stop
 
 
@@ -15,9 +15,8 @@
         <div class="col-sm-12">
             <div class="card">
 
-                <div class="card-header hide">
-                    <strong>Credit Card</strong>
-                    <small>Form</small>
+                <div class="card-header">
+                    <strong>Cập nhật văn bản đến</strong>
                 </div>
                 <div class="card-body">
                     <div class="row">
