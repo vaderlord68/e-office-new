@@ -8,7 +8,7 @@
         <img class="navbar-brand-minimized" src="{{asset('img/logo.png')}}" height="32"
              alt="CoreUI Logo">
     </a>
-    @if (Helpers::getDevice() != 'DESKTOP')
+    @if (Helpers::getDevice() == 'DESKTOP')
         <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -58,7 +58,7 @@
                     <div class="message">
                         <div class="py-3 mr-3 float-left">
                             <div class="avatar">
-                                <img class="img-avatar" src="img/avatars/7.jpg" alt="admin@bootstrapmaster.com">
+                                <img class="img-avatar" src="{{asset('img/avatars/7.jpg')}}" alt="admin@bootstrapmaster.com">
                                 <span class="avatar-status badge-success"></span>
                             </div>
                         </div>
@@ -78,7 +78,7 @@
                     <div class="message">
                         <div class="py-3 mr-3 float-left">
                             <div class="avatar">
-                                <img class="img-avatar" src="img/avatars/6.jpg" alt="admin@bootstrapmaster.com">
+                                <img class="img-avatar" src="{{asset('img/avatars/6.jpg')}}" alt="admin@bootstrapmaster.com">
                                 <span class="avatar-status badge-warning"></span>
                             </div>
                         </div>
@@ -96,7 +96,7 @@
                     <div class="message">
                         <div class="py-3 mr-3 float-left">
                             <div class="avatar">
-                                <img class="img-avatar" src="img/avatars/5.jpg" alt="admin@bootstrapmaster.com">
+                                <img class="img-avatar" src="{{asset('img/avatars/5.jpg')}}" alt="admin@bootstrapmaster.com">
                                 <span class="avatar-status badge-danger"></span>
                             </div>
                         </div>
@@ -114,7 +114,7 @@
                     <div class="message">
                         <div class="py-3 mr-3 float-left">
                             <div class="avatar">
-                                <img class="img-avatar" src="img/avatars/4.jpg" alt="admin@bootstrapmaster.com">
+                                <img class="img-avatar" src="{{asset('img/avatars/4.jpg')}}" alt="admin@bootstrapmaster.com">
                                 <span class="avatar-status badge-info"></span>
                             </div>
                         </div>
@@ -146,7 +146,7 @@
                     <div class="message">
                         <div class="py-3 mr-3 float-left">
                             <div class="avatar">
-                                <img class="img-avatar" src="img/avatars/7.jpg" alt="admin@bootstrapmaster.com">
+                                <img class="img-avatar" src="{{asset('img/avatars/7.jpg')}}" alt="admin@bootstrapmaster.com">
                                 <span class="avatar-status badge-success"></span>
                             </div>
                         </div>
@@ -166,7 +166,7 @@
                     <div class="message">
                         <div class="py-3 mr-3 float-left">
                             <div class="avatar">
-                                <img class="img-avatar" src="img/avatars/6.jpg" alt="admin@bootstrapmaster.com">
+                                <img class="img-avatar" src="{{asset('img/avatars/6.jpg')}}" alt="admin@bootstrapmaster.com">
                                 <span class="avatar-status badge-warning"></span>
                             </div>
                         </div>
@@ -184,7 +184,7 @@
                     <div class="message">
                         <div class="py-3 mr-3 float-left">
                             <div class="avatar">
-                                <img class="img-avatar" src="img/avatars/5.jpg" alt="admin@bootstrapmaster.com">
+                                <img class="img-avatar" src="{{asset('img/avatars/5.jpg')}}" alt="admin@bootstrapmaster.com">
                                 <span class="avatar-status badge-danger"></span>
                             </div>
                         </div>
@@ -202,7 +202,7 @@
                     <div class="message">
                         <div class="py-3 mr-3 float-left">
                             <div class="avatar">
-                                <img class="img-avatar" src="img/avatars/4.jpg" alt="admin@bootstrapmaster.com">
+                                <img class="img-avatar" src="{{asset('img/avatars/4.jpg')}}" alt="admin@bootstrapmaster.com">
                                 <span class="avatar-status badge-info"></span>
                             </div>
                         </div>
@@ -233,7 +233,7 @@
                     <div class="message">
                         <div class="py-3 mr-3 float-left">
                             <div class="avatar">
-                                <img class="img-avatar" src="img/avatars/7.jpg" alt="admin@bootstrapmaster.com">
+                                <img class="img-avatar" src="{{asset('img/avatars/7.jpg')}}" alt="admin@bootstrapmaster.com">
                                 <span class="avatar-status badge-success"></span>
                             </div>
                         </div>
@@ -253,7 +253,7 @@
                     <div class="message">
                         <div class="py-3 mr-3 float-left">
                             <div class="avatar">
-                                <img class="img-avatar" src="img/avatars/6.jpg" alt="admin@bootstrapmaster.com">
+                                <img class="img-avatar" src="{{asset('img/avatars/6.jpg')}}" alt="admin@bootstrapmaster.com">
                                 <span class="avatar-status badge-warning"></span>
                             </div>
                         </div>
@@ -271,7 +271,7 @@
                     <div class="message">
                         <div class="py-3 mr-3 float-left">
                             <div class="avatar">
-                                <img class="img-avatar" src="img/avatars/5.jpg" alt="admin@bootstrapmaster.com">
+                                <img class="img-avatar" src="{{asset('img/avatars/5.jpg')}}" alt="admin@bootstrapmaster.com">
                                 <span class="avatar-status badge-danger"></span>
                             </div>
                         </div>
@@ -289,7 +289,7 @@
                     <div class="message">
                         <div class="py-3 mr-3 float-left">
                             <div class="avatar">
-                                <img class="img-avatar" src="img/avatars/4.jpg" alt="admin@bootstrapmaster.com">
+                                <img class="img-avatar" src="{{asset('img/avatars/4.jpg')}}" alt="admin@bootstrapmaster.com">
                                 <span class="avatar-status badge-info"></span>
                             </div>
                         </div>
@@ -320,7 +320,7 @@
                     <div class="message">
                         <div class="py-3 mr-3 float-left">
                             <div class="avatar">
-                                <img class="img-avatar" src="img/avatars/7.jpg" alt="admin@bootstrapmaster.com">
+                                <img class="img-avatar" src="{{asset('img/avatars/7.jpg')}}" alt="admin@bootstrapmaster.com">
                                 <span class="avatar-status badge-success"></span>
                             </div>
                         </div>
@@ -340,7 +340,7 @@
                     <div class="message">
                         <div class="py-3 mr-3 float-left">
                             <div class="avatar">
-                                <img class="img-avatar" src="img/avatars/6.jpg" alt="admin@bootstrapmaster.com">
+                                <img class="img-avatar" src="{{asset('img/avatars/6.jpg')}}" alt="admin@bootstrapmaster.com">
                                 <span class="avatar-status badge-warning"></span>
                             </div>
                         </div>
@@ -358,7 +358,7 @@
                     <div class="message">
                         <div class="py-3 mr-3 float-left">
                             <div class="avatar">
-                                <img class="img-avatar" src="img/avatars/5.jpg" alt="admin@bootstrapmaster.com">
+                                <img class="img-avatar" src="{{asset('img/avatars/5.jpg')}}" alt="admin@bootstrapmaster.com">
                                 <span class="avatar-status badge-danger"></span>
                             </div>
                         </div>
@@ -376,7 +376,7 @@
                     <div class="message">
                         <div class="py-3 mr-3 float-left">
                             <div class="avatar">
-                                <img class="img-avatar" src="img/avatars/4.jpg" alt="admin@bootstrapmaster.com">
+                                <img class="img-avatar" src="{{asset('img/avatars/4.jpg')}}" alt="admin@bootstrapmaster.com">
                                 <span class="avatar-status badge-info"></span>
                             </div>
                         </div>
@@ -398,7 +398,7 @@
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                aria-expanded="false">
-                <img class="img-avatar" src="img/avatars/6.jpg" alt="admin@bootstrapmaster.com">
+                <img class="img-avatar" src="{{asset('img/avatars/6.jpg')}}" alt="admin@bootstrapmaster.com">
             </a>
             <div class="dropdown-menu dropdown-menu-right">
                 <div class="dropdown-header text-center">
@@ -549,6 +549,18 @@
         width: 98%;
         color: #333;
         text-transform: capitalize;
+    }
+
+    .top-menu .nav-link:hover {
+
+        background: transparent 50%;
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fceabb+0,f7cc60+0,f7db94+28,f9d986+75,efbb4a+100,fbdf93+100,f8b500+100 */
+        background: rgb(252,234,187); /* Old browsers */
+        background: -moz-linear-gradient(top, rgba(252,234,187,1) 0%, rgba(247,204,96,1) 0%, rgba(247,219,148,1) 28%, rgba(249,217,134,1) 75%, rgba(239,187,74,1) 100%, rgba(251,223,147,1) 100%, rgba(248,181,0,1) 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, rgba(252,234,187,1) 0%,rgba(247,204,96,1) 0%,rgba(247,219,148,1) 28%,rgba(249,217,134,1) 75%,rgba(239,187,74,1) 100%,rgba(251,223,147,1) 100%,rgba(248,181,0,1) 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, rgba(252,234,187,1) 0%,rgba(247,204,96,1) 0%,rgba(247,219,148,1) 28%,rgba(249,217,134,1) 75%,rgba(239,187,74,1) 100%,rgba(251,223,147,1) 100%,rgba(248,181,0,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', endColorstr='#f8b500',GradientType=0 ); /* IE6-9 */
+
     }
 
     @-webkit-keyframes slide-down {

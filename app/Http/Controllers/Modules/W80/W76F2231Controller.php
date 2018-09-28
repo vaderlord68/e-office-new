@@ -253,13 +253,34 @@ class  W76F2231Controller extends Controller
                     "LastModifyDate" => Carbon::now(),
                     "LastModifyUserID" => Auth::user()->UserID,
                 ];
-
-                try{
+                try {
                     $this->d76T2230->where('ID', '=', $request->input("ID", ''))->update($data);
                     \Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'));
                     return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'), 'redirectTo' => $_SERVER["HTTP_REFERER"]]);
-                }catch (\Exception $ex){
+                } catch (\Exception $ex) {
                     return json_encode(['status' => 'ERROR', 'message' => $ex->getMessage()]);
+                }
+                break;
+            case 'updateStatus':
+                $status = $request->input('status', '');
+                $userID = Auth::user()->UserID;
+                $approvalNotesW76F2231 = \Helpers::sqlstring($request->input('approvalNotesW76F2231', ''));
+                $id = $request->input("id", '');
+                $data = [
+                    "ApproveStatus" => $status,
+                    "ApprovalNotes" => $approvalNotesW76F2231,
+                    "ApprovalUser" => $userID,
+                ];
+                if ($status !== '') {
+                    try {
+                        $this->d76T2230->where('ID', $id)->update($data);
+                        \Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'));
+                        return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'), 'redirectTo' => $_SERVER["HTTP_REFERER"]]);
+                    } catch (\Exception $ex) {
+                        return json_encode(['status' => 'ERROR', 'message' => $ex->getMessage()]);
+                    }
+                } else {
+                    return json_encode(['status' => 'INVAILD', 'message' => 'Trang thai khong hop le']);
                 }
                 break;
 

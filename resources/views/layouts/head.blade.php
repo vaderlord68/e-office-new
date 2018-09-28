@@ -11,7 +11,7 @@
 <link href="{{url('plugins/flag-icon-css/css/flag-icon.css')}}" rel="stylesheet">
 <link href="{{url('plugins/fontawesome-pro-5.0.13/web-fonts-with-css/css/fontawesome-all.css')}}" rel="stylesheet">
 <link href="{{url('plugins/simple-line-icons/css/simple-line-icons.css')}}" rel="stylesheet">
-{{--<link href="{{url('css/style.css')}}" rel="stylesheet">--}}
+{{--<link href="{{url('admin/css/style.css')}}" rel="stylesheet">--}}
 <!-- Full calendar-->
 <link href="{{ asset('plugins/fullcalendar-3.9.0/fullcalendar.css') }}" rel="stylesheet">
 <link href="{{ asset('/plugins/fullcalendar-3.9.0/scheduler.min.css') }}" rel="stylesheet">
@@ -90,7 +90,7 @@
 <!-- TinyMCE for editor -->
 <script type="text/javascript" src="{{ asset('plugins/tinymce/tinymce.js') }}"></script>
 <!-- CKeditor for editor -->
-<script type="text/javascript" src="{{ asset('plugins/ckeditor5-build-classic/ckeditor.js') }}"></script>
+<script type="text/javascript" src="{{ asset('plugins/ckeditor/ckeditor.js') }}"></script>
 <!-- Validation JS-->
 <script src="{{ asset('plugins/validation-js/validate.min.js') }}"></script>
 <!--Lightbox -->

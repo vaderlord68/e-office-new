@@ -14,7 +14,11 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
     <title>eOffice</title>
     @include('layouts.head')
 </head>
-<body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
+@if (Helpers::getDevice() != 'DESKTOP')
+    <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
+@else
+    <body class="app sidebar-fixed">
+@endif
 @include('layouts.top')
 <div class="app-body">
     @include('layouts.sidebar')
@@ -28,6 +32,30 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
     @include('layouts.footer')
 </footer>
 </body>
+<style>
+    .app-body{
+        -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+        -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+        animation-name: example;
+        animation-duration: 1s;
+    }
+
+    /* Safari 4.0 - 8.0 */
+    @-webkit-keyframes example {
+        0%   {opacity: 0}
+        25%  {opacity: 0.25}
+        50%  {opacity: 0.5}
+        100% {opacity: 1}
+    }
+
+    /* Standard syntax */
+    @keyframes example {
+        0%   {opacity: 0}
+        25%  {opacity: 0.25}
+        50%  {opacity: 0.5}
+        100% {opacity: 1}
+    }
+</style>
 <script>
     //store resources for using of javascript
     var langText = JSON.parse('{!! json_encode(\Lang::get('message')) !!}');
@@ -36,18 +64,13 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
     $(".nav-item").click(function (evt) {
         $(".dropdown").removeClass('show');
     });
-//    $(".nav-link").hover(function(){
-//        $(".dropdown").removeClass('show');
-//        $(".dropdown-menu").removeClass('show');
-//
-//    });
-
 
     $(document).ready(function(){
-//        setTimeout(function() {
-//            resizePqGrid();
-//            $(".app-body").removeClass("hide").fadeIn();
-//        }, 1000 );
+        setTimeout(function() {
+//            $(".app-body").removeClass("opacity").fadeIn(function(){
+//                resizePqGrid();
+//            });
+        }, 500 );
 
     });
 
@@ -62,12 +85,14 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
 @yield('script')
 <div id="spinLoading" class="loading hide">Loading&#8230;</div>
 </html>
-<style>
-    @if (Helpers::getDevice() == 'DESKTOP')
-    .main{
-        margin-left: 0px !important;
-    }
-    @endif
-</style>
+<div id="divModalContainer"></div>
+</html>
+
+<script>
+    //store resources for using of javascript
+    var langText = JSON.parse('{!! json_encode(Lang::get('message')) !!}');
+    var lang = "{{Helpers::getLang()}}";
+
+</script>
 
 

@@ -27,7 +27,7 @@ class  W76F2140Controller extends Controller
 //                $currentUrl = $request->url();
 //                Helper::setSession('prevUrlNews', $currentUrl);
 
-                \Debugbar::info($newsCollection);
+                //\Debugbar::info($newsCollection);
                 return view("modules/W83/W76F2140/W76F2140")->with("newsCollection", json_encode($newsCollection));
                 break;
             case 'filter':
@@ -67,7 +67,7 @@ class  W76F2140Controller extends Controller
         $sql = '--Do nguon cho luoi'.PHP_EOL;
         $sql .= "EXEC W76P2140 '$userID'";
         $collection = DB::select($sql);
-        \Debugbar::info($collection);
+        //\Debugbar::info($collection);
         foreach ($collection as &$item) {
             //unset($item->Image);
             $item->Image = htmlentities($item->Image);

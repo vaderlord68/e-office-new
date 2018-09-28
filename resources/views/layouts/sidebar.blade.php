@@ -1,4 +1,4 @@
-<div class="sidebar {{Helpers::getDevice() == 'DESKTOP' ? 'hide' : ''}}">
+<div class="sidebar {{Helpers::getDevice() != 'DESKTOP' ? 'hide' : ''}}">
     <nav class="sidebar-nav">
         <ul class="nav">
             <li class="nav-item hide">

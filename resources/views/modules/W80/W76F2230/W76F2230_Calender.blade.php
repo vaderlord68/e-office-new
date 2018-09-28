@@ -1,3 +1,23 @@
+<div id="template">
+    <div class="form-horizontal hide">
+        <div class="row">
+            <label class="lbl-normal col-sm-12">Sức chứa: <strong>12</strong></label>
+        </div>
+        <div class="row">
+            <label class="lbl-normal col-sm-12">Thiết bị: <strong>12</strong></label>
+        </div>
+        <div class="row">
+            <label class="lbl-normal col-sm-12">Hậu cần : <strong>12</strong></label>
+        </div>
+        <div class="row">
+            <label class="lbl-normal col-sm-12">Vị trí : <strong>12</strong></label>
+        </div>
+        <div class="row">
+            <label class="lbl-normal col-sm-12">Mô tả : <strong>12</strong></label>
+        </div>
+    </div>
+</div>
+
 <div id='calendar'></div>
 
 <script type="text/javascript">
@@ -8,7 +28,7 @@
                 {!! $meetingRoomList !!}
         var events = [
                 {
-                    url: '{{url('w76f2230/loadCalendar')}}',
+                    url: '{{url('/W76F2230/loadCalendar')}}',
                     cache: false,
                     method: 'post',
                     data: function () { // a function that returns an object
@@ -26,7 +46,7 @@
             //editable: false,
             title: "HELLO BUM",
             defaultView: 'timeline',
-            defaultDate: '2018-09-17',
+            defaultDate: '{{date('Y-m-d')}}',
             editable: true,
             //contentHeight: 'auto',
             duration: {days: 1},
@@ -80,30 +100,31 @@
                 $('#calendar').fullCalendar('unselect');
             },
             eventClick: function (calEvent, resource) {
-                if (!btnClickDel) {
-                    var start = calEvent.start.format("HH:mm");
-                    var end = calEvent.end.format("HH:mm");
-                    var roomID = calEvent.id;
-                    var date = calEvent.start.format("DD/MM/YYYY");
-                    //console.log(roomID);
-                    var data = {
-                        start: start,
-                        end: end,
-                        roomID: roomID,
-                        ID: calEvent.ID,
-                        date: date,
-                        _token: '{{ csrf_token() }}'
+                if (calEvent.IsEdit == 1) {
+                    if (!btnClickDel) {
+                        var start = calEvent.start.format("HH:mm");
+                        var end = calEvent.end.format("HH:mm");
+                        var roomID = calEvent.id;
+                        var date = calEvent.start.format("DD/MM/YYYY");
+                        //console.log(roomID);
+                        var data = {
+                            start: start,
+                            end: end,
+                            roomID: roomID,
+                            ID: calEvent.ID,
+                            date: date,
+                            _token: '{{ csrf_token() }}'
+                        }
+                        showFormDialogPost("{{url('/W76F2231/edit')}}", 'myModal', data);
+                        $('#calendar').fullCalendar('renderEvent', event, true); // stick? = true
+                        $('#calendar').fullCalendar('unselect');
                     }
-                    showFormDialogPost("{{url('/W76F2231/edit')}}", 'myModal', data);
-                    $('#calendar').fullCalendar('renderEvent', event, true); // stick? = true
-                    $('#calendar').fullCalendar('unselect');
                 }
             },
             eventDrag: function (event) {
                 //event.preventDefault();
             },
             eventDrop: function (event) {
-                console.log("HELLO BUM");
                 //Điều chỉnh booking drag & drop
                 var timefrom = event.start.format("HH:mm");
                 var timeto = event.end.format("HH:mm");
@@ -136,70 +157,131 @@
                 }, data)
             },
             eventRender: function (event, element) {
-                element.append('<span class="pull-right spanDelW76F2230"><a id="deleteW76F2230" title="{{Helpers::getRS("Xoa")}}"><i class="fas fa-trash-alt text-danger cursor-pointer"></i></a></span>');
-                element.find("#deleteW76F2230").on("click", function (event) {
-                    console.log(btnClickDel);
-                    btnClickDel = true;
-                    ask_delete(function () {
-                        $.ajax({
-                            method: "POST",
-                            url: '{{url('/W76F2230/delete')}}',
-                            data: {ID: event.ID, _token: '{{ csrf_token() }}'},
-                            success: function (res) {
-                                var data = JSON.parse(res);
-                                switch (data.status) {
-                                    case "SUCC":
-                                        var $calender = $("#calendar");
-                                        delete_ok(function () {
-                                            update4ParamGrid($calender, null, 'delete');
-                                        });
-                                        break;
-                                    case "ERROR":
-                                        alertError(data.message);
-                                        break;
-                                }
-                            }
-                        })
-                    });
-//                    $('#calendar').fullCalendar('removeEvents', event._roomID);
+                console.log(event);
+                btnClickDel = false;
+                element.popover({
+                    title: event.title,
+                    content: function () {
+                        return showPopOverRender(event);
+                    },
+                    //content: event.HostPersonName,
+                    trigger: 'hover',
+                    placement: 'right',
+                    container: 'body',
+                    html: true,
                 });
+                var d = new Date();
+                var id = "deleteW76F2230_" + d.getTime();
+
+                if (event.IsEdit == 1) {
+                    element.append('<span class="pull-right spanDelW76F2230"><a id="' + id + '" title="{{Helpers::getRS("Xoa")}}"><i class="fas fa-trash-alt text-danger cursor-pointer"></i></a></span>');
+                    element.find("#" + id).on("click", function (evt) {
+                        //console.log(btnClickDel);
+                        btnClickDel = true;
+                        ask_delete(function () {
+                            $.ajax({
+                                method: "POST",
+                                url: '{{url('/W76F2230/delete')}}',
+                                data: {ID: event.ID, _token: '{{ csrf_token() }}'},
+                                success: function (res) {
+                                    var data = JSON.parse(res);
+                                    switch (data.status) {
+                                        case "SUCC":
+                                            var $calender = $("#calendar");
+                                            delete_ok(function () {
+                                                window.location.reload();
+                                            });
+                                            break;
+                                        case "ERROR":
+                                            alertError(data.message);
+                                            break;
+                                    }
+                                }
+                            })
+                        });
+//                    $('#calendar').fullCalendar('removeEvents', event._roomID);
+                    });
+                }
+
+
             },
             eventMouseover: function (data, event, events, view) {
-                btnClickDel = false;
-                tooltip = '<div class="tooltiptopicevent" style="width:auto;height:auto;background:#ECE0BB;position:absolute;z-index:10001;' +
-                    'padding:5px 5px 5px 5px ;  line-height: 200%;">Title: ' + data.title + '</br>Time: ' + moment(data.start).format('HH:mm') + '</div>';
-                $("body").append(tooltip);
-                $(this).mouseover(function (e) {
-                    $(this).css('z-index', 10000);
-                    $('.tooltiptopicevent').fadeIn('500');
-                    $('.tooltiptopicevent').fadeTo('10', 1.9);
-                }).mousemove(function (e) {
-                    $('.tooltiptopicevent').css('top', e.pageY + 10);
-                    $('.tooltiptopicevent').css('left', e.pageX + 20);
-                });
             },
             eventMouseout: function (data, event, view) {
-                $(this).css('z-index', 8);
-                $('.tooltiptopicevent').remove();
             },
             resourceRender: function (resourceObj, $td) {
-                console.log(resourceObj);
+                // console.log(resourceObj);
                 $td.eq(0).find('.fc-cell-content').popover({ //
                     placement: 'left',
                     title: resourceObj.title,
-                    content: resourceObj.display,
+                    //trigger: "click",
+                    content: function () {
+                        return showPopOver(resourceObj);
+                    },
                     trigger: 'hover',
                     container: "body",
+                    html: true,
                 });
-                $td.eq(0).find('.fc-cell-content').on('shown.bs.popover', function () {
-                    var pop = $(this).attr('aria-describedby');
-                    var left = $('#' + pop).offset().left;
-                    var width = $('#' + pop).width();
-                    $('#' + pop).offset({left: left + width + 15});
-                    //console.log($('#'+pop).offset().left);
+                $td.eq(0).find('.fc-cell-content').on('show.bs.popover', function (e, i) {
+                    var pop = $(e.target).data("bs.popover").tip;
+                    $(pop).css('display', 'none');
+//                    var left = $(pop).offset().left;
+//                    var width = $(pop).width();
+//                    console.log($(pop));
+//                    $(pop).offset({left: left + width + 15});
+                });
+                $td.eq(0).find('.fc-cell-content').on('shown.bs.popover', function (e, i) {
+                    var pop = $(e.target).data("bs.popover").tip;
+                    var top = $(pop).offset().top;
+                    var left = $(pop).offset().left;
+                    $(pop).offset({left: left + 12, top: top - 12});
+                    $(pop).css('display', 'block');
                 });
             }
         });
-
     });
+
+    function deleteEvent(id) {
+
+    }
+
+    function showPopOver(resourceObj) {
+        var str = '';
+        str += '<div id="template">';
+        str += '<div class="form-horizontal">';
+        str += '<div class="row">';
+        str += '<label class="lbl-normal col-sm-12">Sức chứa: <strong>' + resourceObj.Capacity + '</strong></label>';
+        str += '</div>';
+        str += '<div class="row">';
+        str += '<label class="lbl-normal col-sm-12">Thiết bị: <strong>' + resourceObj.IsBlackboardName + ',' + ' ' + resourceObj.IsProjectorName + ',' + ' ' + resourceObj.IsEthernetName + ',' + ' ' + resourceObj.IsPCName + ',' + ' ' + resourceObj.IsMicrophoneName + ',' + ' ' + resourceObj.IsTeleConName + ',' + ' ' + resourceObj.IsWifiName + '</strong></label>';
+        str += '</div>';
+        str += '<div class="row">';
+        str += '<label class="lbl-normal col-sm-12">Hậu cần : <strong>' + resourceObj.LogisticsName + '</strong></label>';
+        str += '</div>';
+        str += '<div class="row">';
+        str += '<label class="lbl-normal col-sm-12">Vị trí : <strong>' + resourceObj.Location + '2</strong></label>';
+        str += '</div>';
+        str += '<div class="row">';
+        str += '<label class="lbl-normal col-sm-12">Mô tả : <strong>' + resourceObj.Description + '</strong></label>';
+        str += '</div>';
+        str += '</div>';
+        str += '</div>';
+        return str;
+    }
+
+    function showPopOverRender(event) {
+        var str = '';
+        str += '<div id="popover">';
+        str += '<div class="form-horizontal">';
+        str += '<div class="row">';
+        str += '<label class="lbl-normal col-sm-12">Người chủ trì: <strong>' + event.HostPersonName + '</strong></label>';
+        str += '</div>';
+        str += '<div class="row">';
+        str += '<label class="lbl-normal col-sm-12">Nội dung: <strong>' + event.Description + '</strong></label>';
+        str += '</div>';
+        str += '</div>';
+        str += '</div>';
+        return str;
+    }
+
 </script>

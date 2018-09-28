@@ -168,7 +168,7 @@
                         dataType: "string",
                         editor: false,
                         hidden: false,
-                        align: "center",
+                        align: "left",
                         dataIndx: "FacilityName",
                         filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']},
                     }
@@ -194,7 +194,7 @@
                         title: "{{Helpers::getRS('Ghi_chu')}}",
                         width: 280,
                         dataType: "string",
-                        align: "center",
+                        align: "left",
                         editor: false,
                         dataIndx: "Description",
                         filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']}
