@@ -419,7 +419,7 @@
                     {
                         ID: "btnBack",
                         icon: "fas fa-arrow-left",
-                        title: '{{Helpers::getRS("Quay_lai")}}',
+                        title: '{{Helpers::getRS("Dong_U")}}',
                         enable: true,
                         hidden: false,
                         type: "button",

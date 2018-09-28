@@ -188,7 +188,7 @@
                         </div>
                     </div>
                     <div class="row mgb5">
-                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div id="gridW76F2141"></div>
                         </div>
                     </div>
@@ -240,13 +240,31 @@
             });
 
             $("#addNewsW76F2141").click(function () {
-                showFormDialogPost('{{url('/W76F2141/load-selectnews')}}', 'popW76F2141SelectNews', {_token: '{{csrf_token()}}'}, null, null, function (res) {
+                showFormDialogPost('{{url('/W76F2141/load-selectnews')}}', 'popW76F2141SelectNews', {_token: '{{csrf_token()}}', 'newsID': '{{$newsID}}'}, null, null, function (res) {
                     //merge
+                    console.log("dsfsdf");
                     var selectedData = window.selectedNews;
                     var data = $("#gridW76F2141").pqGrid('option', 'dataModel.data');
-                    var mergedData = data.concat(selectedData);
 
-                    $("#gridW76F2141").pqGrid('option', 'dataModel.data', mergedData);
+                    data.mergeWithCondition(selectedData, 'RelatedNewsID', 'NewsID');
+
+
+//                    $.each(selectedData ,function(index , row){
+//                        var newsID = row.NewsID;
+//                        var arrTemp = $.grep(data, function(item){
+//                            return item.RelatedNewsID == newsID;
+//                        });
+//                        if (arrTemp.length == 0){
+//                            data.push(row);
+//                        }
+//                    });
+
+
+
+
+                    //var mergedData = data.concat(selectedData);
+
+                    $("#gridW76F2141").pqGrid('option', 'dataModel.data', data);
                     $("#gridW76F2141").pqGrid('refreshDataAndView');
                 });
             });
@@ -270,7 +288,7 @@
                 removeButtons: 'Source',
                 removePlugins: 'save,print,preview,find,about,maximize,showblocks,elementspath,spellchecker',
                 resize_enabled: false,
-                height:400
+                height: 400
             });
             $("#submitCreateNewsW76F2141").click(function () {
                 $("#smForm").click();
@@ -323,16 +341,16 @@
 
         function createGridW76F2141() {
             var obj = {
-                width: 450,
+                width: "100%",
                 //height: 200,
                 flexHeight: true,
                 //freezeCols: 1,
                 numberCell: {show: false},
                 selectionModel: {type: 'row', mode: 'single'},
                 scrollModel: {horizontal: false, autoFit: false, lastColumn: 'none'},
-                showTitle: false,
-                showBottom: false,
-                showHeader: false,
+                showTitle: true,
+                showBottom: true,
+                showHeader: true,
                 showTop: false,
                 dataType: "JSON",
                 wrap: true,
@@ -343,6 +361,36 @@
                     data: {!! $detail !!},
                 },
                 colModel: [
+                    {
+                        title: "ID",
+                        width: 399,
+                        align: "left",
+                        dataIndx: "ID",
+                        dataType: "string",
+                        editor: false,
+                        hidden: false,
+                        filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']},
+                    },
+                    {
+                        title: "NewsID",
+                        width: 399,
+                        align: "left",
+                        dataIndx: "NewsID",
+                        dataType: "string",
+                        editor: false,
+                        hidden: false,
+                        filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']},
+                    },
+                    {
+                        title: "RelatedNewsID",
+                        width: 399,
+                        align: "left",
+                        dataIndx: "RelatedNewsID",
+                        dataType: "string",
+                        editor: false,
+                        hidden: false,
+                        filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']},
+                    },
                     {
                         title: "{{Helpers::getRS('Tieu_de')}}",
                         width: 399,
@@ -361,7 +409,7 @@
                         dataIndx: "View",
                         align: "center",
                         render: function (ui) {
-                            var str = '<a id="btnDeleteW76F2141" title="{{Helpers::getRS("Xoa")}}"><i class="fa fa-remove text-red cursor-pointer"></i></a>';
+                            var str = '<a id="btnDeleteW76F2141" title="{{Helpers::getRS("Xoa")}}"><i class="fas fa-trash-alt text-red cursor-pointer"></i></a>';
                             return str;
                         },
                         postRender: function (ui) {
@@ -432,13 +480,7 @@
                             alertError(result.message);
                             break;
                         case 'SUCC':
-                            //window.location.href = '{{url('/W76F2140')}}';
-                            //alert();
-                            //window.history.back();
-                            //console.log(document.referrer);
                             window.location.href = document.referrer.toString();
-//                         //   window.location.href = $('<div/>').html(url).text();
-                            // window.location.href = result.redirectTo;
                             break;
                     }
                 }

@@ -1028,6 +1028,23 @@ function toggleSidebar(){
     $("body").toggleClass('sidebar-lg-show');
 }
 
+Array.prototype.mergeWithCondition = function (arrRight, leftKey, rightKey) {
+    var arraySource = this;
+    console.log("test function");
+    $.each(arrRight ,function(index  , row){
+        var val = row[rightKey];
+
+        var arrTemp = $.grep(arraySource, function(item){
+            return item[leftKey] == val;
+        });
+        if (arrTemp.length == 0){
+            arraySource.push(row);
+        }
+
+        return arraySource;
+    });
+}
+
 
 
 

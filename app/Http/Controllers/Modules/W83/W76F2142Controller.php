@@ -31,7 +31,7 @@ class  W76F2142Controller extends Controller
         $channelIDList = $this->getChannelList();
         //Do nguon cho lastestNews
         $lastestNewsList = $this->getLastestNewsList();
-
+        $title = 'Tin tức nội bộ';
 
         switch ($component) {
             case '':
@@ -49,7 +49,7 @@ class  W76F2142Controller extends Controller
                             }
                         }
                         $newsList = $this->getNewsOfChannel($channelID);
-                        return view("modules/W83/W76F2142/W76F2142_NewsList", compact('task', 'component', 'lastestNewsList', 'channelIDList', 'newsList'));
+                        return view("modules/W83/W76F2142/W76F2142_NewsList", compact('title','task', 'component', 'lastestNewsList', 'channelIDList', 'newsList'));
                         break;
                     case 'detail':
                         $newsID = $request->input('newsID', '');
