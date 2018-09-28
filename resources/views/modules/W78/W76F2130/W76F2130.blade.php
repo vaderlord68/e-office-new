@@ -166,7 +166,7 @@
                         dataIndx: "ContractNo",
                         dataType: "string",
                         editor: false,
-                        sortable: false,
+                        //sortable: false,
                         filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']},
                     }
                     , {
