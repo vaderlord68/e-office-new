@@ -728,3 +728,6 @@ a:hover {
 .text-bold{
     font-weight: bold;
 }
+.form-control {
+    border: 1px solid #a0aab5 !important;
+}

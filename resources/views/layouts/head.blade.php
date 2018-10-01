@@ -19,12 +19,15 @@
 <link href="{{ asset('plugins/datepicker/datepicker3.css') }}" rel="stylesheet" type="text/css"/>
 <!-- Select2 -->
 <link href="{{ asset('plugins/select2-4.0.5/dist/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
+
 <!-- Paramquery -->
 <link href="{{ asset('plugins/paramquery-3.3.4/pqgrid.dev.css') }}" media="all" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('plugins/paramquery-3.3.4/pqgrid.bootstrap.min.css') }}" media="all" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('plugins/paramquery-3.3.4/themes/bootstrap/pqgrid.css') }}" media="all" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('plugins/paramquery-3.3.4/pqgrid.ui.min.css') }}" media="all" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('plugins/paramquery-3.3.4/themes/office/pqgrid.css') }}" media="all" rel="stylesheet" type="text/css"/>
+
+
 <!-- JS Tree -->
 <link href="{{ asset('plugins/jstree/dist/themes/default/style.css') }}" rel="stylesheet" />
 <!-- JS Context for content menu-->
@@ -83,6 +86,8 @@
 <script type="text/javascript" src="{!! asset('plugins/paramquery-3.3.4/pqgrid.dev.js') !!}"></script>
 <script type="text/javascript" src="{!! asset('plugins/paramquery-3.3.4/touch-punch/touch-punch.min.js') !!}"></script>
 <script src="{{asset("plugins/paramquery-3.3.4/localize/pq-localize-$locale.js")}}" type="text/javascript"></script>
+
+
 <!-- JS Tree -->
 <script src="{{ asset('plugins/jstree/dist/jstree.js') }}"></script>
 <!-- JS Context for content menu-->
