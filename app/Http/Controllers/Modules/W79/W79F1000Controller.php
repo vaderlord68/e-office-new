@@ -96,7 +96,7 @@ class  W79F1000Controller extends Controller
                 $data['TimeStart'] = Input::get('start', '00:00');
                 $data['TimeEnd'] = Input::get('end', '00:00');
                 switch($mode) {
-                    case "0":
+                    case "0": //add new
                         try {
                             $listWorks = D76T2270::where('AppDate', $data['AppDate'])
                                 ->where('EmployeeID', $data['EmployeeID'])
@@ -129,7 +129,7 @@ class  W79F1000Controller extends Controller
                             return 1;
                         }
                         break;
-                    case "1":
+                    case "1": //edit
                         try {
                             $id = Input::get('id', -1);
                             $data['AppComment'] = Input::get('title', '');
