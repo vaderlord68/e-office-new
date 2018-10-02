@@ -27,6 +27,9 @@
 <link href="{{ asset('plugins/paramquery-3.3.4/pqgrid.ui.min.css') }}" media="all" rel="stylesheet" type="text/css"/>
 <link href="{{ asset('plugins/paramquery-3.3.4/themes/office/pqgrid.css') }}" media="all" rel="stylesheet" type="text/css"/>
 
+<!-- DevExtreme 18.1 -->
+<link href="{{ asset('plugins/devextreme-18.1/css/dx.common.css') }}" media="all" rel="stylesheet" type="text/css"/>
+<link href="{{ asset('plugins/devextreme-18.1/css/dx.carmine.css') }}" media="all" rel="stylesheet" type="text/css"/>
 
 <!-- JS Tree -->
 <link href="{{ asset('plugins/jstree/dist/themes/default/style.css') }}" rel="stylesheet" />
@@ -86,6 +89,9 @@
 <script type="text/javascript" src="{!! asset('plugins/paramquery-3.3.4/pqgrid.dev.js') !!}"></script>
 <script type="text/javascript" src="{!! asset('plugins/paramquery-3.3.4/touch-punch/touch-punch.min.js') !!}"></script>
 <script src="{{asset("plugins/paramquery-3.3.4/localize/pq-localize-$locale.js")}}" type="text/javascript"></script>
+
+<!-- DevExtreme 18.1 -->
+<script src="{{asset("plugins/devextreme-18.1/js/dx.all.js")}}" type="text/javascript"></script>
 
 
 <!-- JS Tree -->
