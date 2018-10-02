@@ -111,9 +111,6 @@ class  W76F2150Controller extends Controller
 
     private function getTreeView($folderId){
         $json = [];
-//        $d76T1010List = $this->d76T1010->get()->toArray();
-//        $currentNode = $this->d76T1010->where('FolderParentID', '=', '')->first();
-//        $json = $this->createTreeViewData($currentNode, $d76T1010List, $json, $folderId);
 
         $d76T1020List = $this->d76T1020->get()->toArray();
         $currentNode = $this->d76T1020->where('FolderParentID', '=','')->first();
