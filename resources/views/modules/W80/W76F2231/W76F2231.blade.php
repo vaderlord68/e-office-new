@@ -10,7 +10,7 @@
             <!-- Modal body -->
             <div class="modal-body">
                 <?php
-                if ($task == "view" || $task == "edit") {//Edit
+                if ($task == "edit") {//Edit
                     $master = $rowData;
                     //\Debugbar::info($master);
                     $ID = $rowData["ID"];
@@ -32,9 +32,7 @@
                     $isEthernetW76F2231 = $rowData["IsEthernet"] == 1 ? "checked" : "";
                     $isPCW76F2231 = $rowData["IsPC"] == 1 ? "checked" : "";
                     $isMicrophoneW76F2231 = $rowData["IsMicrophone"] == 1 ? "checked" : "";
-
                     $isTeleConW76F2231 = intval($rowData["IsTeleCon"]) == 1 ? "checked" : "";
-
                     $isWifiW76F2231 = $rowData["IsWifi"] == 1 ? "checked" : "";
                     // = $rowData["IsVideoCons"] == 1 ? "checked" : "";
                 } else {
@@ -92,7 +90,7 @@
                                         </div>
                                         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                                             <select name="cbFacilityIDW76F2231" id="cbFacilityIDW76F2231"
-                                                    class="form-control" required>
+                                                    class="form-control" maxlength="50" required>
                                                 <option value="">--</option>
                                                 @foreach($facilityList as  $facilityListItem)
                                                     <option value="{{$facilityListItem->FacilityNo}}" {{$facilityListItem->FacilityNo == $cbFacilityIDW76F2231 ? 'selected': ''}}>{{$facilityListItem->FacilityName}}</option>
@@ -143,7 +141,7 @@
                                             <label class="lbl-normal">{{Helpers::getRS("Co_cau_to_chuc")}}</label>
                                         </div>
                                         <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                                            <input name="orgunitNameW76F2231" id="orgunitNameW76F2231"
+                                            <input name="orgunitNameW76F2231" id="orgunitNameW76F2231" maxlength="50"
                                                    class="form-control"
                                                    readonly="" value="{{$orgunitNameW76F2231}}">
                                             </input>
@@ -155,6 +153,7 @@
                                         </div>
                                         <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
                                             <textarea type="text" style="height: 60px" class="form-control"
+                                                      maxlength="1000"
                                                       autocomplete="off" required
                                                       class="form-control" id="descriptionW76F2231"
                                                       name="descriptionW76F2231">{{$descriptionW76F2231}}
@@ -167,7 +166,7 @@
                                         </div>
                                         <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
                                             <select name="cbHostPersonW76F2231" id="cbHostPersonW76F2231"
-                                                    class="form-control" required>
+                                                    class="form-control" maxlength="50" required>
                                                 <option value="">--</option>
                                                 @foreach($hostPersonList as  $hostPersonListItem)
                                                     <option value="{{$hostPersonListItem->EmployeeCode}}" {{$hostPersonListItem->EmployeeCode == $cbHostPersonW76F2231 ? 'selected': ''}}>{{$hostPersonListItem->Fullname}}</option>
@@ -180,7 +179,8 @@
                                             <label class="lbl-normal">{{Helpers::getRS("Nguoi_tham_du")}}</label>
                                         </div>
                                         <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                                            <select name="cbParticipantsW76F2231[]" id="cbParticipantsW76F2231"
+                                            <select name="cbParticipantsW76F2231[]" maxlength="500"
+                                                    id="cbParticipantsW76F2231"
                                                     class="form-control" multiple>
                                                 @foreach($participantsList as  $participantsListItem)
                                                     <option value="{{$participantsListItem->EmployeeCode}}"
@@ -316,7 +316,7 @@
                                                                 <div class="checkbox mgr10">
                                                                     <div class="form-check">
                                                                         <label class="form-check-label pdl0" {{$logisticsItem->CodeID}}>
-                                                                            <input type="checkbox"
+                                                                            <input type="checkbox" maxlength="500"
                                                                                    class="form-check-input" id=""
                                                                                    name="logisticsW76F2231[]"
                                                                                    value="{{$logisticsItem->CodeID or ''}}"
@@ -339,8 +339,9 @@
                                         </div>
                                         <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
                                             <input type="text" class="form-control"
-                                                      autocomplete="off" class="form-control" id="approvalNotesW76F2231"
-                                                      name="approvalNotesW76F2231" value="{{$approvalNotesW76F2231}}">
+                                                   autocomplete="off" class="form-control" id="approvalNotesW76F2231"
+                                                   name="approvalNotesW76F2231" maxlength="500"
+                                                   value="{{$approvalNotesW76F2231}}">
                                             </input>
                                         </div>
                                     </div>
@@ -351,7 +352,6 @@
                     </div>
                 </section>
             </div>
-
             <!-- Modal footer -->
             <div class="modal-footer">
                 <div id="toolbarW76F2231">
@@ -419,7 +419,7 @@
                     {
                         ID: "btnBack",
                         icon: "fas fa-arrow-left",
-                        title: '{{Helpers::getRS("Quay_lai")}}',
+                        title: '{{Helpers::getRS("Dong_U")}}',
                         enable: true,
                         hidden: false,
                         type: "button",
@@ -498,11 +498,17 @@
         }
 
         function updateApproveStatus(status) {
+            var notes = $('#approvalNotesW76F2231').val();
             $.ajax({
                 //enctype: 'multipart/form-data',
                 method: "POST",
                 url: '{{ url('/W76F2231/updateStatus') }}',
-                data: {status: status, id: '{{$ID}}', _token: '{{ csrf_token() }}'},
+                data: {
+                    status: status,
+                    notes: notes,
+                    id: '{{$ID}}',
+                    _token: '{{ csrf_token() }}'
+                },
                 success: function (res) {
                     var result = JSON.parse(res);
                     console.log("luu");

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Modules\W80;
 
 use App\Eoffice\Helper;
 use App\Http\Controllers\Controller;
+use App\Models\D76T0000;
 use App\Models\D76T2200;
 use App\Models\D76T2230;
 use App\Models\D76T9000;
@@ -25,17 +26,28 @@ class  W76F2230Controller extends Controller
         $this->newsHelper = new \App\Module\News\Helper();
     }
 
-    public function index($task = "", Request $request)
+    public function index($task = "", $DivisionID = "", Request $request)
     {
         switch ($task) {
             case '':
-                $divisionIDList = $this->d76T9000->where('DISABLED', '=', 0)->select('OrgunitID', 'OrgunitName')->get();
-                $isblackBoardName = 'Bảng ghi';
-                $isProjectorName = 'Máy chiếu';
-                $isEthernetName = 'Ethernet';
-                $isPCName = 'PC';
-                $isMicrophoneName = 'Microphone';
-                $isTeleConName = 'TeleCon';
+            case 'listRoom':
+                $userID = Auth::user()->UserID;
+                $divisionID = $DivisionID == "" ? session('W76P0000')->DivisionID : $DivisionID;
+                $orgUnitID = session('W76P0000')->OrgUnitID;
+
+                //$divisionIDList = $this->d76T9000->where('DISABLED', '=', 0)->select('OrgunitID', 'OrgunitName')->get();
+                $sql = '--Do nguon cho combo don vi' . PHP_EOL;
+                $sql .= "EXEC D76P9000 '$userID', '$orgUnitID','$divisionID'";
+                $divisionIDList = DB::select($sql);
+                //Lay danh sach news cho channel
+//                $newsList = $this->getCalender($divisionIDList);
+                //\Debugbar::info($divisionIDList);
+                $isblackBoardName = 'Bảng ghi,';
+                $isProjectorName = 'Máy chiếu,';
+                $isEthernetName = 'Ethernet,';
+                $isPCName = 'PC,';
+                $isMicrophoneName = 'Microphone,';
+                $isTeleConName = 'TeleCon,';
                 $isWifiName = 'Wifi';
 
                 $meetingRoomList = $this->d76T2200
@@ -49,7 +61,7 @@ class  W76F2230Controller extends Controller
                         DB::raw("(CASE WHEN IsTeleCon = 1 THEN N'$isTeleConName' ELSE '' END) AS IsTeleConName"),
                         DB::raw("(CASE WHEN IsWifi = 1 THEN N'$isWifiName' ELSE '' END) AS IsWifiName")
                     )
-                    ->where("DivisionID", '=', session('W76P0000')->DivisionID)->get();
+                    ->where("DivisionID", '=', session('W76P0000')->DivisionID)->orderBy('DisplayOrder', 'FacilityNo')->get();
                 $Logistics = DB::table('D76T1556')
                     ->where('ListTypeID', 'D76T2200_Logistics')
                     ->select('CodeID', 'CodeName')
@@ -70,23 +82,37 @@ class  W76F2230Controller extends Controller
                     }
                     $item->LogisticsName = $rs;
                 }
+
+                //$hostPersonDetail = $this->d76T2230->select('EmployeeCode', 'Fullname')->get();
+                //\Debubar::info($hostPersonDetail);
                 //var_dump($meetingRoomList);die();
                 $meetingRoomList = json_encode($meetingRoomList);
+                //\Debugbar::info($meetingRoomList);
                 $divisionIDList = json_encode($divisionIDList);
-                $meetingRoomDetail = $this->d76T2200->where("DivisionID", '=', session('W76P0000')->DivisionID)->get();
-                //\Debugbar::info($meetingRoomDetail)
+
+                //$meetingRoomDetail = $this->d76T2200->where("DivisionID", '=', session('W76P0000')->DivisionID)->get();
+                //\Debugbar::info($meetingRoomDetail);
                 $newsCollection = $this->getCalender();
                 $newsCollection = ($newsCollection);
+                \Debugbar::info($newsCollection);
 
-                return view("modules/W80/W76F2230/W76F2230", compact('hostPersonDetail', 'meetingRoomDetail', 'newsCollection', 'rowData', 'divisionIDList', 'meetingRoomList', 'task'));
+                $limitTime = D76T0000::first();
+                if (isset($limitTime) && !empty($limitTime)) {
+                    $limitTime->BookingTimeFrom = date('H:i:s', strtotime($limitTime->BookingTimeFrom));
+                    $limitTime->BookingTimeTo = date('H:i:s', strtotime($limitTime->BookingTimeTo));
+                }
+
+                return view("modules/W80/W76F2230/W76F2230", compact('newsList','hostPersonDetail', 'meetingRoomDetail', 'newsCollection', 'rowData', 'divisionIDList', 'meetingRoomList', 'task', 'limitTime', 'divisionID'));
                 break;
             case 'loadCalender':
                 $newsCollection = $this->getCalender();
+
+
                 //\Debugbar::info($newsCollection);
                 return $newsCollection();
                 break;
             case 'delete':
-                $ID = $request->input('ID', '');
+                $ID = $request->input('id', '');
                 //\Debugbar::info($ID);
                 $sql = "--Xoa hop dong" . PHP_EOL;
                 $sql .= "delete from D76T2230 where ID = '$ID'" . PHP_EOL;

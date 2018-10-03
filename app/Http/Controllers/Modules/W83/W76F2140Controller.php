@@ -19,22 +19,18 @@ class  W76F2140Controller extends Controller
 
     public function index(Request $request, $task = "")
     {
+        $title = 'Quản lý bản tin';
         switch ($task) {
             case '':
                 $newsCollection = $this->getList();
-
-//                //get route current...
-//                $currentUrl = $request->url();
-//                Helper::setSession('prevUrlNews', $currentUrl);
-
-                //\Debugbar::info($newsCollection);
-                return view("modules/W83/W76F2140/W76F2140")->with("newsCollection", json_encode($newsCollection));
+                $newsCollection = json_encode($newsCollection);
+                return view("modules/W83/W76F2140/W76F2140", compact('title', 'newsCollection'));
                 break;
             case 'filter':
                 $dataPost = $request->input();
-                $title = $dataPost["searchTitle"];
-                $newsCollection = $this->getFilterList($title);
-                return view("modules/W83/W76F2140/W76F2140")->with("newsCollection", $newsCollection);
+                $titleSearch = $dataPost["searchTitle"];
+                $newsCollection = $this->getFilterList($titleSearch);
+                return view("modules/W83/W76F2140/W76F2140" , compact('title','newsCollection'));
                 break;
             case "delete":
                 try {

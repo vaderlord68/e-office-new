@@ -20,7 +20,7 @@ Route::group(['namespace' => 'Modules\W80', 'middleware' => 'auth'], function ()
     Route::any('/W76F2201/{task?}', 'W76F2201Controller@index');
 
     //Quan lý phong hop
-    Route::any('/W76F2230/{task?}', 'W76F2230Controller@index'); //Đang làm
+    Route::any('/W76F2230/{task?}/{id?}', 'W76F2230Controller@index'); //Đang làm
     Route::any('/W76F2231/{task?}', 'W76F2231Controller@index'); //Đang làm
 });
 

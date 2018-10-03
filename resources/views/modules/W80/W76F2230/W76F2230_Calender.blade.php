@@ -23,6 +23,7 @@
 <script type="text/javascript">
     var viewmodeW76F4050 = "";
     var btnClickDel = false;
+    var showAll = 0;
     $(document).ready(function () {
         var rooms =
                 {!! $meetingRoomList !!}
@@ -40,6 +41,31 @@
             ];
         var events = {!! $newsCollection !!};
         $('#calendar').fullCalendar({
+            customButtons: {
+                showAll: {
+                    text: '{{ Helpers::getRS('Hien_thi_ca_ngay') }}',
+                    click: function (event) {
+                        var customButtons = $('#calendar').fullCalendar('option', 'customButtons');
+                        if (showAll == 0) {
+                            customButtons.showAll.text = '{{ Helpers::getRS('Gio_hanh_chinh_U') }}';
+                            $('#calendar').fullCalendar('option', {
+                                minTime: '00:00',
+                                maxTime: '23:59',
+                                customButtons: customButtons
+                            });
+                            showAll = 1;
+                        } else {
+                            customButtons.showAll.text = '{{ Helpers::getRS('Hien_thi_ca_ngay') }}';
+                            $('#calendar').fullCalendar('option', {
+                                minTime: '{{ $limitTime->BookingTimeFrom or '00:00:00' }}',
+                                maxTime: '{{ $limitTime->BookingTimeTo or '23:59:00' }}',
+                                customButtons: customButtons
+                            });
+                            showAll = 0;
+                        }
+                    }
+                }
+            },
             //disableDragging: true,
             selectOverlap: false,
             eventOverlap: false,
@@ -61,10 +87,10 @@
             eventLimit: false,
             dayOfMonthFormat: 'ddd DD/MM',
             theme: true,
-            //minTime: '07:00',
-            //maxTime: '10:30',
+            minTime: '{{ $limitTime->BookingTimeFrom or '00:00:00' }}',
+            maxTime: '{{ $limitTime->BookingTimeTo or '23:59:00' }}',
             header: {
-                left: 'prev,next',
+                left: 'prev,next showAll',
                 center: 'title',
                 right: 'timelineDay'
             },
@@ -86,7 +112,7 @@
                 var end = event.end.format("HH:mm");
                 var roomID = resource.id;
                 var date = event.start.format("DD/MM/YYYY");
-                console.log(momentStart);
+                // console.log(momentStart);
 
                 var data = {
                     start: start,
@@ -100,7 +126,9 @@
                 $('#calendar').fullCalendar('unselect');
             },
             eventClick: function (calEvent, resource) {
-                if (calEvent.IsEdit == 1) {
+                var createUserID = calEvent.CreateUserID;
+                console.log(createUserID);
+                if (calEvent.IsEdit == 1 && calEvent.CreateUserID == createUserID) {
                     if (!btnClickDel) {
                         var start = calEvent.start.format("HH:mm");
                         var end = calEvent.end.format("HH:mm");
@@ -126,38 +154,47 @@
             },
             eventDrop: function (event) {
                 //Điều chỉnh booking drag & drop
-                var timefrom = event.start.format("HH:mm");
-                var timeto = event.end.format("HH:mm");
-                var date = event.start.format("DD/MM/YYYY");
+                var createUserID = event.CreateUserID;
+                if (event.IsEdit == 1 && event.CreateUserID == createUserID) {
+                    var timefrom = event.start.format("HH:mm");
+                    var timeto = event.end.format("HH:mm");
+                    var date = event.start.format("DD/MM/YYYY");
 
-                var data = {
-                    start: timefrom,
-                    end: timeto,
-                    date: date,
-                    roomID: event.resourceId,
-                    ID: event.ID,
-                    _token: '{{ csrf_token() }}'
-                }
-                hideAlert();
-                postMethod("{{url('/W76F2231/updatedrag')}}", function (res) {
-                    var result = JSON.parse(res);
-                    console.log("luu");
-                    switch (result.status) {
-                        case 'ERROR':
-                            alertError(result.message, $("#modalW76F2231"))
-                            break;
-                        case 'EXIST':
-                            alertError(result.message, $("#modalW76F2231"))
-                            break;
-                        case 'SUCC':
-                            alertSuccess("Dữ liệu đã được lưu thành công.")
-                            window.location.reload();
-                            break;
+                    var data = {
+                        start: timefrom,
+                        end: timeto,
+                        date: date,
+                        roomID: event.resourceId,
+                        ID: event.ID,
+                        _token: '{{ csrf_token() }}'
                     }
-                }, data)
+                    hideAlert();
+                    postMethod("{{url('/W76F2231/updatedrag')}}", function (res) {
+                        var result = JSON.parse(res);
+                        //console.log("luu");
+                        switch (result.status) {
+                            case 'ERROR':
+                                alertError(result.message, $("#modalW76F2231"))
+                                break;
+                            case 'EXIST':
+                                alertError(result.message, $("#modalW76F2231"))
+                                break;
+                            case 'SUCC':
+                                alertSuccess("Dữ liệu đã được lưu thành công.")
+                                window.location.reload();
+                                break;
+                        }
+                    }, data)
+                }
             },
             eventRender: function (event, element) {
                 console.log(event);
+                if (event.ApproveStatus == 1) {
+                    element.css('background', '#9fddf2').css('border-color', '#9fddf2');
+                }
+
+                //console.log(event);
+                // console.log(event);
                 btnClickDel = false;
                 element.popover({
                     title: event.title,
@@ -172,8 +209,10 @@
                 });
                 var d = new Date();
                 var id = "deleteW76F2230_" + d.getTime();
+                var createUserID = event.CreateUserID;
 
-                if (event.IsEdit == 1) {
+                if (event.IsEdit == 1 && event.CreateUserID == createUserID) {
+                    //console.log(createUserID);
                     element.append('<span class="pull-right spanDelW76F2230"><a id="' + id + '" title="{{Helpers::getRS("Xoa")}}"><i class="fas fa-trash-alt text-danger cursor-pointer"></i></a></span>');
                     element.find("#" + id).on("click", function (evt) {
                         //console.log(btnClickDel);
@@ -253,7 +292,7 @@
         str += '<label class="lbl-normal col-sm-12">Sức chứa: <strong>' + resourceObj.Capacity + '</strong></label>';
         str += '</div>';
         str += '<div class="row">';
-        str += '<label class="lbl-normal col-sm-12">Thiết bị: <strong>' + resourceObj.IsBlackboardName + ',' + ' ' + resourceObj.IsProjectorName + ',' + ' ' + resourceObj.IsEthernetName + ',' + ' ' + resourceObj.IsPCName + ',' + ' ' + resourceObj.IsMicrophoneName + ',' + ' ' + resourceObj.IsTeleConName + ',' + ' ' + resourceObj.IsWifiName + '</strong></label>';
+        str += '<label class="lbl-normal col-sm-12">Thiết bị: <strong>' + resourceObj.IsBlackboardName + ' ' + resourceObj.IsProjectorName + ' ' + resourceObj.IsEthernetName + ' ' + resourceObj.IsPCName + ' ' + resourceObj.IsMicrophoneName + ' ' + resourceObj.IsTeleConName + ' ' + resourceObj.IsWifiName + '</strong></label>';
         str += '</div>';
         str += '<div class="row">';
         str += '<label class="lbl-normal col-sm-12">Hậu cần : <strong>' + resourceObj.LogisticsName + '</strong></label>';

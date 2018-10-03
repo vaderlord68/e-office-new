@@ -30,7 +30,7 @@ class  W76F2141Controller extends Controller
 
     public function index(Request $request, $task = "")
     {
-
+        $title = 'Thêm mới bản tin';
         switch ($task) {
             case 'add':
                 $d76T1556 = new D76T1556();
@@ -40,7 +40,7 @@ class  W76F2141Controller extends Controller
                 $rowData = json_encode(array());
                 $rowDataDetail = json_encode(array());
 
-                return view("modules/W83/W76F2141/W76F2141", compact('rowData', 'rowDataDetail', 'channelIDList', 'CreateUserID', 'task'));
+                return view("modules/W83/W76F2141/W76F2141", compact('title', 'rowData', 'rowDataDetail', 'channelIDList', 'CreateUserID', 'task'));
                 break;
             case 'edit':
                 $newsID = $request->input('newsID', '');
@@ -59,9 +59,10 @@ class  W76F2141Controller extends Controller
                 return view("modules/W83/W76F2141/W76F2141_SelectNews", compact('task', 'newsCollection', 'channelIDList'));
                 break;
             case 'filter-selectnews':
+                $newsID = $request->input('newsID', '');
                 $cboChannelIDSelectNews = $request->input('cboChannelIDSelectNews', '');
                 $cboChannelIDSelectNews = ($cboChannelIDSelectNews == null ? '' : $cboChannelIDSelectNews);
-                $newsCollection = $this->getNewsFilter($cboChannelIDSelectNews);
+                $newsCollection = $this->getNewsFilter($cboChannelIDSelectNews, $newsID);
                 return json_encode($newsCollection);
                 break;
             case 'save':
@@ -136,12 +137,9 @@ class  W76F2141Controller extends Controller
                             \Debugbar::info($detail);
                         }
                     }
-
-
                     \Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'));
                     \Helpers::setSession('lastNewsModified', $newsID);
-                    \Debugbar::info($detail);
-                    //return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong')]);
+                    return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong')]);
                 } catch (\Exception $ex) {
                     \Helpers::log($ex->getMessage());
                     return json_encode(['status' => 'ERROR', 'message' => $ex->getMessage()]);
@@ -218,8 +216,6 @@ class  W76F2141Controller extends Controller
                             $this->d76T2141->insert($detail);
                         }
                     }
-
-
                     \Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'));
                     \Helpers::setSession('lastNewsModified', $newsID);
                     //return Redirect::intended()->getTargetUrl();
@@ -249,11 +245,14 @@ class  W76F2141Controller extends Controller
             ->leftJoin("D76T2140", 'D76T2140.NewsID', '=', 'D76T2141.RelatedNewsID')
             ->select("D76T2140.Title", "D76T2141.NewsID", "D76T2141.RelatedNewsID")
             ->where("D76T2141.NewsID", "=", $newsID)->get();
+        // return $this->d76T2140->select('NewsID', 'Title')->where('ChannelID', '=', 'NEWS_BLD')->orderBy('CreateDate', 'desc')->get();
     }
 
-    private function getNewsFilter($cboChannelIDSelectNews)
+    private function getNewsFilter($cboChannelIDSelectNews, $currentNewsID)
     {
-        $result = $this->d76T2140->where('ChannelID', '=', $cboChannelIDSelectNews)->get();
+        $result = $this->d76T2140
+            ->where('ChannelID', '=', $cboChannelIDSelectNews)
+            ->where('NewsID', '<>', $currentNewsID)->get();
         foreach ($result as &$item) {
             if (!empty($item->Image)) {
                 $item->Image = base64_encode($item->Image);
