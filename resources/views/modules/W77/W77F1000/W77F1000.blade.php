@@ -171,7 +171,7 @@
                         filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']},
                     }
                     , {
-                        title: "{{Helpers::getRS('Nhan_xe')}}",
+                        title: "{{Helpers::getRS('Hang_xe')}}",
                         width: 150,
                         dataType: "string",
                         editor: false,
@@ -208,7 +208,7 @@
                         filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']}
                     }
                     , {
-                        title: "{{Helpers::getRS('Hoat_dong')}}",
+                        title: "{{Helpers::getRS('Hoat_dong_U')}}",
                         width: 100,
                         dataType: "string",
                         align: "center",
