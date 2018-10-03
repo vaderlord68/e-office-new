@@ -129,5 +129,10 @@ class  EditController extends Controller
         return $collection;
     }
 
-
+    public function getFolderTree()
+    {
+        $helper = new \App\Models\Helper();
+        $tree = $helper->viewTree();
+        return $tree;
+    }
 }

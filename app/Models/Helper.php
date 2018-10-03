@@ -42,7 +42,6 @@ class Helper extends \Illuminate\Database\Eloquent\Model
                 }
                 $output .= "</ul></li>";
 
-
             }
         }
         $output .= "</ul>";
@@ -61,7 +60,7 @@ class Helper extends \Illuminate\Database\Eloquent\Model
                 $output .= $this->getAllChildren($this->folders[$i]->ID);
                 $documentsCollection = $this->getAllChildDocument($this->folders[$i]->ID);
                 foreach ($documentsCollection as $document) {
-                    $output .= "<li class='node-type-document' type='document' document_id='$document->ID'>". $document->Name ."</li>";
+                    $output .= "<li class='node-type-document' type='document' data-jstree='{\"icon\": \"fa fa-file text-primary\"}' document_id='$document->ID'>". $document->Name ."</li>";
                 }
                 $output .= "</ul></li>";
 

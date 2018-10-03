@@ -9,7 +9,7 @@
         @show
         <div class="card-body">
             <div id="bootstrap-data-table_wrapper"
-                 class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer table-documentary">
+                 class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer table-documentary pd0">
                 <div class="row">
                     <div class="col-sm-12">
                         <form id="processDocument" action="/bi/document/edit/execute" method="post"
@@ -130,8 +130,8 @@
                 </div>
             </div>
         </div>
-        @include("system.module.bi.relatedDocumentPopup", ["AllDocuments" => $AllDocuments, "AllRelatedDocuments" => $AllRelatedDocuments])
-        @include("system.module.bi.script.documentCreateScript")
+        @include("modules.W82.relatedDocumentPopup", ["AllDocuments" => $AllDocuments, "AllRelatedDocuments" => $AllRelatedDocuments])
+        @include("modules.W82.script.documentCreateScript")
     </div>
 @stop
 

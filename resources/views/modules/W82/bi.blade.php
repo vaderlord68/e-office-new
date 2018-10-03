@@ -3,7 +3,7 @@
     @parent
     <div class="module-bi">
         <div class="row">
-            <div class="folder-sidebar col-sm-3">
+            <div class="folder-sidebar col-sm-3 {{Helpers::getDevice() == 'DESKTOP' ? 'pdr0':''}}">
                 @section("folderTree")
                     @include("modules.W82.folderTree", ["folderTree" => $folderTree])
                 @show

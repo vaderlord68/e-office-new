@@ -64,7 +64,7 @@
                             <?php
                             ?>
                             <tr role="row" class="odd bi-table-item type-folder" folder_id="<?php  echo $folder->ID?>">
-                                <td><span class="folder-icon"><img src="{{ asset("/media/default_folder_icon.png") }}"
+                                <td><span class="folder-icon"><img src="{{ asset("/media/default_folder_icon.png") }}" class="icon-24"
                                                                    alt=""></span><?php echo isset($folder->FolderName) ? $folder->FolderName : ""?>
                                 </td>
                                 <td><?php echo isset($folder->FolderDescription) ? $folder->FolderDescription : ""?></td>
@@ -88,7 +88,7 @@
                             <?php
                             ?>
                             <tr role="row" class="odd bi-table-item type-document" document_id="<?php  echo $document->ID?>">
-                                <td><span class="folder-icon"><img src="{{ asset("/media/default_document_icon.png") }}"
+                                <td><span class="folder-icon"><img src="{{ asset("/media/default_document_icon.png") }}" class="icon-24"
                                                                    alt=""></span><?php echo isset($document->ID) ? $document->Name : ""?>
                                 </td>
                                 <td><?php ?></td>
