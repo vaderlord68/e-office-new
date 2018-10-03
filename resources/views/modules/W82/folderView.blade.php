@@ -6,9 +6,8 @@
             @include("modules.W82.rightToolbar")
         @show
         <div class="card-body">
-
             <div id="bootstrap-data-table_wrapper"
-                 class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer table-documentary">
+                 class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer table-documentary pd0">
                 <div class="row">
                     <div class="col-sm-12">
                         <table id="bootstrap-data-table"
@@ -19,6 +18,7 @@
                                 <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table"
                                     rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending"
                                     style="width: 5%">
+
                                 </th>
                                 <th class="sorting" tabindex="0" aria-controls="bootstrap-data-table"
                                     rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending"
@@ -59,8 +59,8 @@
                             <?php
                             ?>
                             <tr role="row" class="odd bi-table-item type-folder" folder_id="<?php  echo $folder->ID?>">
-                                <td></td>
-                                <td><span class="folder-icon"><img src="{{ asset("/media/default_folder_icon.png") }}"
+                                <td class="text-center"></td>
+                                <td><span class="folder-icon"><img src="{{ asset("/media/default_folder_icon.png") }}" class="icon-24"
                                                                    alt=""></span><?php echo isset($folder->FolderName) ? $folder->FolderName : ""?>
                                 </td>
                                 <td><?php echo isset($folder->FolderDescription) ? $folder->FolderDescription : ""?></td>
@@ -85,9 +85,9 @@
                             ?>
                             <tr role="row" class="odd bi-table-item type-document" document_id="<?php  echo $document->ID?>">
                                 <td style="text-align: center; vertical-align: middle">
-                                    <span class="shareDocument" data-id="{{isset($document->ID) ? $document->ID : ''}}"><i class="far fa-share"></i></span>
+                                    <span class="shareDocument" data-id="{{isset($document->ID) ? $document->ID : ''}}"><i class="far fa-share text-primary cursor-pointer"></i></span>
                                 </td>
-                                <td><span class="folder-icon"><img src="{{ asset("/media/default_document_icon.png") }}"
+                                <td><span class="folder-icon"><img src="{{ asset("/media/default_document_icon.png") }}" class="icon-24"
                                                                    alt=""></span><?php echo isset($document->Name) ? $document->Name : ""?>
                                 </td>
                                 <td><?php ?></td>

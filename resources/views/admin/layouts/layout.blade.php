@@ -96,7 +96,7 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
 <!-- CKeditor for editor -->
 <script src="{{ asset('plugins/ckeditor5-build-classic/ckeditor.js') }}"></script>
 <!-- CoreUI and necessary plugins-->
-<script src="{{url('plugins/pace-progress/pace.js')}}"></script>
+{{--<script src="{{url('plugins/pace-progress/pace.js')}}"></script>--}}
 <script src="{{url('plugins/perfect-scrollbar/dist/perfect-scrollbar.js')}}"></script>
 <script src="{{url('themes/@coreui/coreui/dist/js/coreui.js')}}"></script>
 <!-- Plugins and scripts required by this view-->

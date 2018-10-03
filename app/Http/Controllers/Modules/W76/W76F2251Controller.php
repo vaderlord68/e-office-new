@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Node;
 use State;
-
+use Illuminate\Http\Request;
 
 class  W76F2251Controller extends Controller
 {
@@ -20,7 +20,7 @@ class  W76F2251Controller extends Controller
         $this->d76T1556 = $d76T1556;
     }
 
-    public function index($task = '')
+    public function index(Request $request, $task = '')
     {
         $lang = \Helpers::getLang();
         $userID = Auth::user()->UserID;
@@ -34,7 +34,7 @@ class  W76F2251Controller extends Controller
                 $sql = '--Do nguon cho treeview' . PHP_EOL;
                 $sql .= "EXEC W76P9000 '$userID', '$divisonID','$orgUnitID' " . PHP_EOL;
                 $rsTreeView = DB::connection()->select($sql);
-                $processUserList = array_filter($rsTreeView, function($row){
+                $processUserList = array_filter($rsTreeView, function ($row) {
                     return $row->IsEmployee == 1;
                 });
                 $cboDocGroupID = $this->d76T1556->where('ListTypeID', '=', 'D76T2250_DocGroup')->get();
@@ -55,9 +55,68 @@ class  W76F2251Controller extends Controller
                 //$treeViewData = $this->getTreeView($rsTreeView);
 
 
-                return View("modules.W76.W76f2251.W76f2251", compact('processUserList','cboSecurity','cboEmergency','cboDocGroupID', 'treeViewData', 'task', 'title', 'rsTreeView'));
+                return View("modules.W76.W76f2251.W76f2251", compact('processUserList', 'cboSecurity', 'cboEmergency', 'cboDocGroupID', 'treeViewData', 'task', 'title', 'rsTreeView'));
                 break;
+            case 'save':
+                $txtDocNo = $request->input('txtDocNo', '');
+                $txtDivisionID = $request->input('txtDivisionID', '');
+                $cboDocGroupID = $request->input('cboDocGroupID', '');
+                $txtRefDocNo = $request->input('txtRefDocNo', '');
+                $txtOrganization = $request->input('txtOrganization', '');
+                $dtpReceiverDate = \Helpers::convertDate($request->input('dtpReceiverDate', ''));
+                $cboEmergency = $request->input('cboEmergency', '');
+                $cboSecurity = $request->input('cboSecurity', '');
+                $txtContent = $request->input('txtContent', '');
+                $txtProcessUser = implode(",", $request->input('txtProcessUser', '')) ; //array
+                $data = json_encode($request->input('data', '[]'));
+                $StatusID = 0;
 
+                $DocType = "";
+                $SentDate = null;
+                $Signer = "";
+                $Deleted = 0;
+                $CreateUserID = Auth::user()->UserID;
+                $LastModifyUserID = Auth::user()->UserID;
+
+                $sql ="--Them moi van ban den".PHP_EOL;
+                $sql .="Insert Into D76T2250(".PHP_EOL;
+                $sql .="DocType, DocNo, DocGroupID, DivisionID, ".PHP_EOL;
+                $sql .="Organization, SentDate, Signer, ReceiverDate, Content, ".PHP_EOL;
+                $sql .="StatusID, RefDocNo, Emergency, Security, Deleted, ".PHP_EOL;
+                $sql .="CreateUserID, CreateDate, LastModifyUserID, LastModifyDate".PHP_EOL;
+                $sql .=") Values(".PHP_EOL;
+                $sql .="'$DocType', '$txtDocNo', '$cboDocGroupID', '$txtDivisionID', ".PHP_EOL;
+                $sql .=" N'$txtOrganization', $SentDate,  N'$Signer', '$dtpReceiverDate',  N'$txtContent', ".PHP_EOL;
+                $sql .="$StatusID, '$txtRefDocNo', '$cboEmergency', '$cboSecurity', $Deleted, ".PHP_EOL;
+                $sql .="'$CreateUserID', getdate(), '$LastModifyUserID', getdate()".PHP_EOL;
+                $sql .=")";
+
+                $sql ="--Them moi van ban den chi tiet".PHP_EOL;
+                $sql .="Insert Into D76T2251(".PHP_EOL;
+                $sql .="DocType, DocNo, DocGroupID, DivisionID, ".PHP_EOL;
+                $sql .="Organization, SentDate, Signer, ReceiverDate, Content, ".PHP_EOL;
+                $sql .="StatusID, RefDocNo, Emergency, Security, Deleted, ".PHP_EOL;
+                $sql .="CreateUserID, CreateDate, LastModifyUserID, LastModifyDate, ID, ".PHP_EOL;
+                $sql .="DocType, DocNo, DocGroupID, DivisionID, Organization, ".PHP_EOL;
+                $sql .="SentDate, Signer, ReceiverDate, Content, StatusID, ".PHP_EOL;
+                $sql .="RefDocNo, Emergency, Security, Deleted, CreateUserID, ".PHP_EOL;
+                $sql .="CreateDate, LastModifyUserID, LastModifyDate".PHP_EOL;
+                $sql .=") Values(".PHP_EOL;
+                $sql .="'$DocType', '$DocNo', '$DocGroupID', '$DivisionID', ".PHP_EOL;
+                $sql .=" N'$Organization', '$SentDate',  N'$Signer', '$ReceiverDate',  N'$Content', ".PHP_EOL;
+                $sql .="$StatusID, '$RefDocNo', '$Emergency', '$Security', $Deleted, ".PHP_EOL;
+                $sql .="'$CreateUserID', '$CreateDate', '$LastModifyUserID', '$LastModifyDate', $ID, ".PHP_EOL;
+                $sql .="'$DocType', '$DocNo', '$DocGroupID', '$DivisionID',  N'$Organization', ".PHP_EOL;
+                $sql .="'$SentDate',  N'$Signer', '$ReceiverDate',  N'$Content', $StatusID, ".PHP_EOL;
+                $sql .="'$RefDocNo', '$Emergency', '$Security', $Deleted, '$CreateUserID', ".PHP_EOL;
+                $sql .="'$CreateDate', '$LastModifyUserID', '$LastModifyDate'".PHP_EOL;
+                $sql .=")";
+
+
+                \Debugbar::info($txtProcessUser);
+                \Debugbar::info($data);
+
+                break;
         }
     }
 

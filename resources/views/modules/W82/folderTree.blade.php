@@ -2,7 +2,8 @@
     <div class="card-header">
         <i class="custom-jtree-icon"></i>
         <strong class="card-title">Quản lý thư mục</strong>
-        <div class="tree-tool-bar">
+        <button id="bi-createFolder"  class="btn btn-outline-info pull-right" type="button"><i class="fa fa-plus-circle mgr5"></i>Thêm mới</button>
+        <div class="tree-tool-bar hide">
             <a id="bi-createFolder" class="toolbar-btn action-on-header" href="">
                 <i class="fa fa-plus-circle"></i> Thêm mới</a>
             <a id="bi-renameFolder" class="toolbar-btn action-on-header" href="">

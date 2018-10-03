@@ -724,9 +724,27 @@ a:hover {
 }
 
 .breadcrumb {
-    margin-bottom: 10px;
+    margin-bottom: 10px !important;
 }
 
 .text-bold{
     font-weight: bold;
 }
+
+.select2-hidden-accessible{
+    width: 100% !important;
+    line-height: 32px;
+    height: 32px !important;
+}
+.pdr0{
+    padding-right: 0px !important;
+}
+.pd0{
+    padding: 0px !important;
+}
+.icon-24{
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+}
+
