@@ -109,7 +109,7 @@
                         click: function(event) {
                             var customButtons =  $('#calendarW79F1000').fullCalendar('option', 'customButtons');
                             if (showAll == 0) {
-                                customButtons.showAll.text = '{{ Helpers::getRS('Gio_hanh_chinh') }}';
+                                customButtons.showAll.text = '{{ Helpers::getRS('Gio_hanh_chinh_U') }}';
                                 $('#calendarW79F1000').fullCalendar('option', {
                                     minTime: '00:00',
                                     maxTime: '23:59',
@@ -161,7 +161,7 @@
                         setTimeout(function(){
                             $('#frmAddScheduleW79F1000').find('#txtTitleW79F1001').focus();
                         },1000);
-                        $('#modalAddScheduleW79F1000').find('.modal-title').html('{{ Helpers::getRS('Them_moi') }}');
+{{--                        $('#modalAddScheduleW79F1000').find('.modal-title').html('{{ Helpers::getRS('Them_moi') }}');--}}
                         $('#frmAddScheduleW79F1000').find('#txtDateW79F1001').val(date);
                         $('#frmAddScheduleW79F1000').find('#txtDateW79F1001').datepicker( "setDate" , date );
                         $('#frmAddScheduleW79F1000').find('#slWorkW79F1001').prop('selectedIndex', 0);
@@ -278,7 +278,7 @@
                         currentObj = calEvent;
                         var date = moment(calEvent.start).format("DD/MM/YYYY");
                         console.log(calEvent.title);
-                        $('#modalAddScheduleW79F1000').find('.modal-title').html('{{ Helpers::getRS('Chinh_sua') }}');
+                        {{--$('#modalAddScheduleW79F1000').find('.modal-title').html('{{ Helpers::getRS('Chinh_sua') }}');--}}
                         $('#frmAddScheduleW79F1000').find('#hdID').val(calEvent.id);
                         $('#frmAddScheduleW79F1000').find('#txtDateW79F1001').val(date);
                         $('#frmAddScheduleW79F1000').find('#txtDateW79F1001').datepicker( "setDate" , date );
