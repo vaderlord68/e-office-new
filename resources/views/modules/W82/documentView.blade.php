@@ -7,7 +7,7 @@
         @show
         <div class="card-body">
             <div id="bootstrap-data-table_wrapper"
-                 class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer table-documentary">
+                 class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer table-documentary pd0">
                 <div class="row">
                     <div class="col-sm-12">
                         <h1><?php echo isset($document->Name) ? $document->Name : ""?></h1>

@@ -7,7 +7,7 @@
         @show
         <div class="card-body">
             <div id="bootstrap-data-table_wrapper"
-                 class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer table-documentary">
+                 class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer table-documentary pd0">
                 <div class="row">
                     <div class="col-sm-12">
                         <form id="processDocument" action="/bi/document/create/execute" method="post" enctype="multipart/form-data">

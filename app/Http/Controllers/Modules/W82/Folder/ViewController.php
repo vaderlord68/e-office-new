@@ -124,7 +124,9 @@ class  ViewController extends Controller
         $UserID = Auth::id();
 //        $documentFactory = new Document();
 //        $childDocuments = $documentFactory->getDocumentsWithFolderId($folderId);
-        $childDocuments = \DB::select("EXEC W76P2000 '$UserID', '$folderId'");
+        $sql = "--Do nguon cho tai lieu".PHP_EOL;
+        $sql .= "EXEC W76P2000 '$UserID', '$folderId'".PHP_EOL;
+        $childDocuments = \DB::select($sql);
 
         return $childDocuments;
 

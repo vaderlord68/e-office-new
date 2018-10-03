@@ -85,6 +85,7 @@
                                     title: obj.AppComment,
                                     start: obj.TimeStart,
                                     end: obj.TimeEnd,
+                                    TaskID: obj.TaskID,
                                     TaskName: obj.TaskName,
                                 };
                                 $('#calendarW79F1000').fullCalendar('renderEvent', eventData, true); // stick? = true
@@ -92,6 +93,7 @@
                                 currentObj.title = obj.AppComment;
                                 currentObj.start = obj.TimeStart;
                                 currentObj.end = obj.TimeEnd;
+                                currentObj.TaskID = obj.TaskID;
                                 currentObj.TaskName = obj.TaskName;
                                 $('#calendarW79F1000').fullCalendar('updateEvent', currentObj);
                             }
@@ -107,7 +109,7 @@
                         click: function(event) {
                             var customButtons =  $('#calendarW79F1000').fullCalendar('option', 'customButtons');
                             if (showAll == 0) {
-                                customButtons.showAll.text = '{{ Helpers::getRS('An_thong_tin_ca_ngay') }}';
+                                customButtons.showAll.text = '{{ Helpers::getRS('Gio_hanh_chinh') }}';
                                 $('#calendarW79F1000').fullCalendar('option', {
                                     minTime: '00:00',
                                     maxTime: '23:59',
@@ -134,7 +136,7 @@
                 buttonText: {
                     today: "{{ Helpers::getRS('Hom_nay') }}",
                     month: "{{ Helpers::getRS('Thang') }}",
-                    week: "{{ Helpers::getRS('Tuan') }}",
+                    week: "{{ Helpers::getRS('tuan') }}",
                     day: "{{ Helpers::getRS('Ngay') }}",
                 },
                 weekNumbers: true,
@@ -163,7 +165,7 @@
                         $('#frmAddScheduleW79F1000').find('#txtDateW79F1001').val(date);
                         $('#frmAddScheduleW79F1000').find('#txtDateW79F1001').datepicker( "setDate" , date );
                         $('#frmAddScheduleW79F1000').find('#slWorkW79F1001').prop('selectedIndex', 0);
-                        $('#frmAddScheduleW79F1000').find('#txtDescriptionW79F1001').html('');
+                        $('#frmAddScheduleW79F1000').find('#txtDescriptionW79F1001').val('');
                         $('#frmAddScheduleW79F1000').find('#hdMode').val(0);
                         $('#frmAddScheduleW79F1000').find('#txtTimeFromW79F1001').val(moment(start).format("HH:mm"));
                         $('#frmAddScheduleW79F1000').find('#txtTimeToW79F1001').val(moment(end).format("HH:mm"));
@@ -189,9 +191,8 @@
                             });
 
                 },
-                eventDrop: function (event, delta, revertFunc) {
+                eventDrop: function (event, delta, revertFunc, jsEvent, ui, view) {
                     var id = event.id;
-                    console.log(event);
                     var d = moment(event.start).format("DD/MM/YYYY");
                     var s = moment(event.start).format("HH:mm");
                     var e = moment(event.end).format("HH:mm");
@@ -200,9 +201,15 @@
                                 title: event.title, works: event.TaskID,
                                 '_token': "{{csrf_token()}}"},
                             function (data, status) {
-
+//                                $(el).popover('enable');
                             });
 
+                },
+                eventDragStart: function( event, jsEvent, ui, view ) {
+                    window.eventScrolling = true;
+                },
+                eventDragStop: function( event, jsEvent, ui, view ) {
+                    window.eventScrolling = false;
                 },
                 eventMouseover: function (event, domEvent) {
                     bClickDel = false;
@@ -249,7 +256,7 @@
                                 if (i + 2 < 8) {
                                     dayOfWeek = 'T' + (i + 2);
                                 }
-                                day = dayOfWeek + day.substring(3);
+                                day = dayOfWeek+ ' ' + day.substring(3);
                                 $(item).find('a').text(day);
                             });
                             break;
@@ -270,12 +277,13 @@
                     if (bClickDel == false && !$(this).hasClass("fc-day-grid-event")) {
                         currentObj = calEvent;
                         var date = moment(calEvent.start).format("DD/MM/YYYY");
+                        console.log(calEvent.title);
                         $('#modalAddScheduleW79F1000').find('.modal-title').html('{{ Helpers::getRS('Chinh_sua') }}');
                         $('#frmAddScheduleW79F1000').find('#hdID').val(calEvent.id);
                         $('#frmAddScheduleW79F1000').find('#txtDateW79F1001').val(date);
                         $('#frmAddScheduleW79F1000').find('#txtDateW79F1001').datepicker( "setDate" , date );
                         $('#frmAddScheduleW79F1000').find('#slWorkW79F1001').val(calEvent.TaskID);
-                        $('#frmAddScheduleW79F1000').find('#txtDescriptionW79F1001').html(calEvent.title);
+                        $('#frmAddScheduleW79F1000').find('#txtDescriptionW79F1001').val(calEvent.title);
                         $('#frmAddScheduleW79F1000').find('#hdMode').val(1);
                         $('#frmAddScheduleW79F1000').find('#txtTimeFromW79F1001').val(moment(calEvent.start).format("HH:mm"));
                         $('#frmAddScheduleW79F1000').find('#txtTimeToW79F1001').val(moment(calEvent.end).format("HH:mm"));
@@ -315,11 +323,18 @@
                 eventRender: function (event, element, view) {
                     var start = moment(event.start).format("HH:mm");
                     var end = moment(event.end).format("HH:mm");
+                    if (view.name == 'month') {
+                        var html = getEventMonth(event, start, end);
+                        element.find('.fc-content').html(html);
+                    } else {
+                        element.find('.fc-title').html('<span style="font-weight: bold">' + event.TaskName + '</span><br><span style="font-size: 11px; font-style: italic;">' + event.title + '</span>');
+                    }
+                    if(window.eventScrolling) return;
                     if (typeof event.title != 'undefined') {
                         element.popover({
                             title: start + " - " + end,
                             content: function () {
-                                return '<span><i style="font-size: 7px;padding-right: 5px;" class="fas fa-circle"></i>'+event.TaskName +'</span><br><span><i style="font-size: 7px;padding-right: 5px;" class="fas fa-circle"></i>'+ event.title +'</span>';
+                                return '<span style="font-weight: bold;"><i style="font-size: 7px;padding-right: 5px;" class="fas fa-circle"></i>'+event.TaskName +'</span><br><span>'+ event.title +'</span>';
                             },
                             trigger: 'hover',
                             placement: 'right',
@@ -327,7 +342,6 @@
                             html: true
                         });
                     }
-                    element.find('.fc-title').html('<span><i style="font-size: 7px;padding-right: 5px;" class="fas fa-circle"></i>'+event.TaskName +'</span><br><span><i style="font-size: 7px;padding-right: 5px;" class="fas fa-circle"></i>'+ event.title +'</span>');
                 },
                 loading: function (isLoading, view) {
                     if (isLoading) {
@@ -371,6 +385,12 @@
                         return "{{ Helpers::getRS('Chu_nhat') }}";
                         break;
                 }
+            }
+
+            function getEventMonth(event, start, end) {
+                var str = '<div class="fc-time">' + start + ' - ' + end + '</div>';
+                str +=    '<div class="fc-title"><i style="font-size: 7px;padding-right: 5px;" class="fas fa-circle"></i>' + event.title + '</div>';
+                return str;
             }
 
         });

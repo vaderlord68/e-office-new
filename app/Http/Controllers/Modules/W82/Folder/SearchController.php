@@ -14,7 +14,7 @@ class  SearchController extends Controller
     protected $biHelper;
     public function __construct()
     {
-        $this->biHelper = new Helper();
+        $this->biHelper = new \App\Models\Helper();
         Helper::setSession("dashboardMenus",IndexController::dashboardMenus);
     }
 
