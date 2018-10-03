@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-class D76T2261 extends \Eloquent
+class D76T2262 extends \Eloquent
 {
-    protected $table = 'D76T2261';
+    protected $table = 'D76T2262';
     protected $primaryKey = 'ID';
     protected $connection = 'sqlsrv';
     public $timestamps = false;

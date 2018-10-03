@@ -9,4 +9,10 @@ class D76T2260 extends \Eloquent
     protected $connection = 'sqlsrv';
     public $timestamps = false;
     public $incrementing = false;
+
+    public function getList()
+    {
+        $result = DB::table($this->table)->get();
+        return $result;
+    }
 }

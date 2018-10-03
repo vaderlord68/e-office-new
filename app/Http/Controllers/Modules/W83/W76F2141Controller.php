@@ -62,7 +62,7 @@ class  W76F2141Controller extends Controller
                 $newsID = $request->input('newsID', '');
                 $cboChannelIDSelectNews = $request->input('cboChannelIDSelectNews', '');
                 $cboChannelIDSelectNews = ($cboChannelIDSelectNews == null ? '' : $cboChannelIDSelectNews);
-                $newsCollection = $this->getNewsFilter($cboChannelIDSelectNews,$newsID);
+                $newsCollection = $this->getNewsFilter($cboChannelIDSelectNews, $newsID);
                 return json_encode($newsCollection);
                 break;
             case 'save':
@@ -137,8 +137,6 @@ class  W76F2141Controller extends Controller
                             \Debugbar::info($detail);
                         }
                     }
-
-
                     \Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'));
                     \Helpers::setSession('lastNewsModified', $newsID);
                     return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong')]);
@@ -218,8 +216,6 @@ class  W76F2141Controller extends Controller
                             $this->d76T2141->insert($detail);
                         }
                     }
-
-
                     \Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'));
                     \Helpers::setSession('lastNewsModified', $newsID);
                     //return Redirect::intended()->getTargetUrl();
@@ -256,7 +252,7 @@ class  W76F2141Controller extends Controller
     {
         $result = $this->d76T2140
             ->where('ChannelID', '=', $cboChannelIDSelectNews)
-            ->where('NewsID', '<>',$currentNewsID) ->get();
+            ->where('NewsID', '<>', $currentNewsID)->get();
         foreach ($result as &$item) {
             if (!empty($item->Image)) {
                 $item->Image = base64_encode($item->Image);

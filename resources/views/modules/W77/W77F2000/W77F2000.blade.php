@@ -3,13 +3,13 @@
     @parent
     <?php
     $divisionIDList = json_decode($divisionIDList);
-    $divisionIDW76F2231 = $divisionIDList[0]->OrgunitName;
+    $divisionIDW76F2000 = $divisionIDList[0]->OrgunitName;
     ?>
     <section>
         <div class="row">
             <div class="col-md-12">
                 <div id="divFullCalendar">
-                    @include('modules.W80.W76F2230.W76F2230_Calender')
+                    @include('modules.W77.W77F2000.W77F2000_Calender')
                 </div>
             </div>
         </div>
@@ -33,7 +33,7 @@
                         class="form-control" required>
                     {{--<option value="">--</option>--}}
                     @foreach($divisionIDList as  $divisionIDItem)
-                        <option value="{{$divisionIDItem->OrgunitID}}" {{ isset($divisionID)&& $divisionID == $divisionIDItem->OrgunitID ? 'selected' : '' }}>{{$divisionIDItem->OrgunitName}}</option>
+                        <option value="{{$divisionIDItem->OrgunitID}}" {{ isset($divisionIDW76F2000)&& $divisionIDW76F2000 == $divisionIDItem->OrgunitID ? 'selected' : '' }}>{{$divisionIDItem->OrgunitName}}</option>
                     @endforeach
                 </select>
             </div>
@@ -41,12 +41,12 @@
     </section>
 
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#divisionIDW76F2231').on('change', function() {
-                var division = $(this).val();
-                window.location.href = '{{ url('/W76F2230/listRoom') }}/' + division;
-            });
-        });
+        {{--$(document).ready(function () {--}}
+            {{--$('#divisionIDW76F2231').on('change', function() {--}}
+                {{--var division = $(this).val();--}}
+                {{--window.location.href = '{{ url('/W76F2230/listRoom') }}/' + division;--}}
+            {{--});--}}
+        {{--});--}}
 
     </script>
 @stop
