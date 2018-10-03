@@ -109,7 +109,7 @@
                         click: function(event) {
                             var customButtons =  $('#calendarW79F1000').fullCalendar('option', 'customButtons');
                             if (showAll == 0) {
-                                customButtons.showAll.text = '{{ Helpers::getRS('An_thong_tin_ca_ngay') }}';
+                                customButtons.showAll.text = '{{ Helpers::getRS('Gio_hanh_chinh') }}';
                                 $('#calendarW79F1000').fullCalendar('option', {
                                     minTime: '00:00',
                                     maxTime: '23:59',
@@ -136,7 +136,7 @@
                 buttonText: {
                     today: "{{ Helpers::getRS('Hom_nay') }}",
                     month: "{{ Helpers::getRS('Thang') }}",
-                    week: "{{ Helpers::getRS('Tuan') }}",
+                    week: "{{ Helpers::getRS('tuan') }}",
                     day: "{{ Helpers::getRS('Ngay') }}",
                 },
                 weekNumbers: true,
@@ -327,14 +327,14 @@
                         var html = getEventMonth(event, start, end);
                         element.find('.fc-content').html(html);
                     } else {
-                        element.find('.fc-title').html('<span><i style="font-size: 7px;padding-right: 5px;" class="fas fa-circle"></i>' + event.TaskName + '</span><br><span><i style="font-size: 7px;padding-right: 5px;" class="fas fa-circle"></i>' + event.title + '</span>');
+                        element.find('.fc-title').html('<span style="font-weight: bold">' + event.TaskName + '</span><br><span style="font-size: 11px; font-style: italic;">' + event.title + '</span>');
                     }
                     if(window.eventScrolling) return;
                     if (typeof event.title != 'undefined') {
                         element.popover({
                             title: start + " - " + end,
                             content: function () {
-                                return '<span><i style="font-size: 7px;padding-right: 5px;" class="fas fa-circle"></i>'+event.TaskName +'</span><br><span><i style="font-size: 7px;padding-right: 5px;" class="fas fa-circle"></i>'+ event.title +'</span>';
+                                return '<span style="font-weight: bold;"><i style="font-size: 7px;padding-right: 5px;" class="fas fa-circle"></i>'+event.TaskName +'</span><br><span>'+ event.title +'</span>';
                             },
                             trigger: 'hover',
                             placement: 'right',
