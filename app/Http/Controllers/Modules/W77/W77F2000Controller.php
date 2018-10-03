@@ -46,7 +46,7 @@ class  W77F2000Controller extends Controller
 
                 $newsCollection = $this->getCalender();
                 $newsCollection = ($newsCollection);
-                \Debugbar::info($newsCollection);
+                //\Debugbar::info($newsCollection);
 
                 break;
             case'loadCalender':

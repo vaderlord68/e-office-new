@@ -47,10 +47,11 @@ class  W77F2001Controller extends Controller
                 // \Debugbar::info($carNoList);
                 $CreateUserID = Auth::user()->UserID;
                 $rowData = json_encode(array());
-                return view("modules/W77/W77F2001/W77F2001", compact('carNoList', 'carTypeList', 'participantsList', 'hostPersonList', 'facilityList', 'meetingRoomList', 'all', 'rowData', 'CreateUserID', 'logisticsList', 'task'));
+                return view("modules/W77/W77F2001/W77F2001", compact('carNoList', 'carTypeList', 'participantsList', 'all', 'rowData', 'CreateUserID', 'task'));
                 break;
             case 'edit':
                 $all = $request->input();
+                \Debugbar::info($all);
                 $CarBookingID = $request->input('CarBookingID', '');
                 $participantsList = $this->d76T9020->select('EmployeeCode', 'Fullname')->orderBy('Fullname', 'desc')->get();
                 $carTypeList = $this->d76T2260->select('CarTypeID', 'Description AS CarTypeName')->where('Disabled', '=', 0)->orderBy('DisplayOrder', 'desc')->get();
@@ -58,13 +59,13 @@ class  W77F2001Controller extends Controller
                 //\Debugbar::info($carNoList);
                 $CreateUserID = Auth::user()->UserID;
                 $rowData = $this->getMasterData($CarBookingID);
-                \Debugbar::info($rowData);
+
                 return view("modules/W77/W77F2001/W77F2001", compact('carNoList', 'carTypeList', 'participantsList', 'all', 'rowData', 'CreateUserID', 'task'));
                 break;
             case 'save':
                 try {
                     $cbCarNoIDW77F2001 = \Helpers::sqlstring($request->input('cbCarNoW77F2001', ''));
-                    $cbCarTypeIDW77F2001 = \Helpers::sqlstring($request->input('cbCarTypeIDW77F2001', ''));
+                    //$cbCarTypeIDW77F2001 = \Helpers::sqlstring($request->input('cbCarTypeIDW77F2001', ''));
                     $descriptionW77F2001 = \Helpers::sqlstring($request->input('descriptionW77F2001', ''));
                     $orgunitIDW77F2001 = \Helpers::sqlstring($request->input('orgunitIDW77F2001', ''));
                     $cbParticipantsW77F2001 = $request->input('cbParticipantsW77F2001', []);
@@ -129,7 +130,7 @@ class  W77F2001Controller extends Controller
                     $sql .= "$Dat05" . PHP_EOL; //Dat05, datetime, NOT NULL
 
                     $rsCheck = DB::selectOne($sql);
-                    \Debugbar::info($rsCheck);
+                    // \Debugbar::info($rsCheck);
 
                     if ($rsCheck->Status == 0) {
                         $data = [
@@ -146,7 +147,7 @@ class  W77F2001Controller extends Controller
                             "LastModifyDate" => $lastModifyDateW77F2001,
                             "LastModifyUserID" => $lastModifyUserIDW77F2001,
                         ];
-                        \Debugbar::info($data);
+                        //\Debugbar::info($data);
                         $this->d76T2262->insert($data);
                         \Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'));
                         ////\Debugbar::info($data);
@@ -166,7 +167,8 @@ class  W77F2001Controller extends Controller
     private function getMasterData($CarBookingID)
     {
         $result = $this->d76T2262->where("CarBookingID", "=", $CarBookingID)->first();
-        //  $result->Participants = explode(';', $result->Participants);
+        \Debugbar::info($result);
+        //$result->Participants = explode(';', $result->Participants);
         return $result;
     }
 }

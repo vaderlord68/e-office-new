@@ -13,7 +13,7 @@
                 if ($task == "edit") {//Edit
                     $master = $rowData;
                     \Debugbar::info($master);
-                    $ID = $rowData["ID"];
+                    $CarBookingID = $rowData["CarBookingID"];
                     $cbCarTypeIDW77F2001 = $rowData["CarNo"];
                     $cbCarNoIDW77F2001 = $rowData["CarNo"];
                     $descriptionW77F2001 = $rowData["Description"];
@@ -29,7 +29,7 @@
                     $approvalNotesW77F2001 = $rowData["ApprovalNotes"];
 
                 } else {
-                    $ID = "";
+                    $CarBookingID = "";
                     $cbCarTypeIDW77F2001 = "";
                     $descriptionW77F2001 = "";
                     $orgunitIDW77F2001 = session('W76P0000')->OrgUnitID;
@@ -61,7 +61,6 @@
                                  class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer table-documentary">
                                 <form id="formW77F2001" method="POST" enctype="multipart/form-data" action="">
                                     {{csrf_field()}}
-
                                     <div class="row mgb5">
                                         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                                             <label class="lbl-normal">{{Helpers::getRS("Nguoi_tao")}}</label>
@@ -193,7 +192,7 @@
                                                             {{ isset($cbParticipantsW77F2001) && !empty($cbParticipantsW76F2231) && isset($participantsListItem->EmployeeCode)
                                                             && in_array($participantsListItem->EmployeeCode, $cbParticipantsW77F2001) ? 'selected' : '' }}>{{$participantsListItem->Fullname}}
                                                     </option>
-                                                    {{$participantsListItem->EmployeeCode == $cbParticipantsW77F2001 ? 'selected': ''}}
+                                                    {{--{{$participantsListItem->EmployeeCode == $cbParticipantsW77F2001 ? 'selected': ''}}--}}
                                                 @endforeach
                                             </select>
                                         </div>
@@ -440,7 +439,7 @@
                 //enctype: 'multipart/form-data',
                 method: "POST",
                 url: url,
-                data: formData + "&ID={{$ID}}" + "&orgunitIDW77F2001={{$orgunitIDW77F2001}}",
+                data: formData + "&ID={{$CarBookingID}}" + "&orgunitIDW77F2001={{$orgunitIDW77F2001}}",
                 // processData: false,
                 //contentType: false,
                 success: function (res) {
