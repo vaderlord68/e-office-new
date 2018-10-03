@@ -1,11 +1,11 @@
 @extends('layouts.layout')
 
 @section('toolbar')
-    <a class="btn" href="{{url('/W76F2251/save')}}">
+    <a class="btn" href="#" id="btnSave">
         <i class="fal fa-save text-primary mgr5 text-bold"></i>Lưu
     </a>
 
-    <a class="btn" href="{{url('/W76F2251/savenext')}}">
+    <a class="btn" href="#" id="btnSaveNext">
         <i class="fal fa-arrow-circle-right mgr5 text-bold"></i>Nhập tiếp
     </a>
 
@@ -46,7 +46,8 @@
                     <strong>Cập nhật văn bản đến</strong>
                 </div>
                 <div class="card-body">
-                    <form class="form-horizontal" action="" method="post">
+                    <form class="form-horizontal" id="frmW76F2251" action="" method="post">
+                        <input type="submit" class="hide" name="btnSubmit" id="btnSubmit">
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="input-small">Số</label>
                             <div class="col-sm-2">
@@ -156,14 +157,12 @@
 @stop
 @section('script')
     <script>
+        var data = {!! $treeViewData !!};
         $(document).ready(function () {
             $('#txtProcessUser').select2().on("change", function (e) {
+                console.log(arr);
                 var arr = $(this).val();
-                //var data = $("#employees").dxTreeList("getDataSource");
-                var instance =$("#employees").dxTreeList("instance");
-                var items = instance.getDataSource().items();
-                data[0].TypeHandle = 1;
-                instance.refresh();
+                setValueOnGrid(arr);
             });
 
             $('#dtpReceiverDate').datepicker({
@@ -174,7 +173,27 @@
             });
         });
 
-        var data = {!! $treeViewData !!};
+        function setValueOnGrid(arr){
+            var instance =$("#employees").dxTreeList("instance");
+            var data = instance.option("dataSource");
+            for(var i=0;i<data.length; i++){
+                for(var j=0;j<arr.length; j++){
+                    if (data[i].OrgunitID == arr[j]){
+                        data[i].TypeHandle = 1;
+                    }else{
+                        data[i].TypeHandle = 0;
+                    }
+                }
+            }
+            if (arr.length == 0){
+                for(var i=0;i<data.length; i++){
+                    data[i].TypeHandle = 0;
+                }
+            }
+            instance.option("dataSource", data);
+            instance.refresh();
+        }
+
         setTimeout(function () {
             console.log(data);
             $("#employees").dxTreeList({
@@ -326,67 +345,24 @@
         }, 10);
 
         function setValue(cellElement) {
-//            if ($(cellElement).find('input').is(":checked")){
-//                $(cellElement).find('input').prop("checked", false);
-//            }else{
-//                $(cellElement).find('input').prop("checked", true);
-//            }
+
         }
 
-        {{--$('#jstree').jstree({--}}
-        {{--//"plugins" : [ "wholerow", "checkbox" ],--}}
-        {{--'core': {--}}
-        {{--'data': {!! $treeViewData !!},--}}
-        {{--"multiple": false,--}}
-        {{--"animation": 0,--}}
-        {{--"themes": {--}}
-        {{--"variant": "large",--}}
-        {{--"icons": false--}}
-        {{--}--}}
+       $("#btnSave").click(function(event){
+           event.preventDefault();
+           validationElements($("#frmW76F2251"), function(evt){
+               $("#btnSubmit").trigger('click');
+           });
+       });
 
-        {{--},--}}
-        {{--node_customize: {--}}
-        {{--default: function (el, node) {--}}
-        {{--console.log("test");--}}
-        {{--$(el).find('a').append("HELLO");--}}
-        {{--}--}}
-        {{--},--}}
-        {{--plugins: ["themes", "html_data", "search", "adv_search", "node_customize"]--}}
+        $("#frmW76F2251").submit(function(event){
+            event.preventDefault();
+            var instance =$("#employees").dxTreeList("instance");
+            var data = instance.option("dataSource")
+            postMethod('{{url("/W76F2251/save")}}', function(res){
 
-        {{--});--}}
-
-        {{--$("#txtSearch").keyup(function (event) {--}}
-        {{--setTimeout(function (evt) {--}}
-        {{--$("#jstree").jstree("search", $("#txtSearch").val());--}}
-        {{--}, 1000);--}}
-        {{--});--}}
-
-        {{--$("#txtSearch").keypress(function (event) {--}}
-        {{--if (event.keyCode == 13) {--}}
-        {{--$("#jstree").jstree("search", $(this).val());--}}
-        {{--}--}}
-        {{--});--}}
-
-        {{--$('#jstree').on('changed.redraw_node', function (node, deep, is_callback) {--}}
-        {{--console.log(node);--}}
-        {{--})--}}
-
-
-        {{--$('#jstree').on('changed.jstree', function (e, data) {--}}
-        {{--console.log(data);--}}
-        {{--var i, j, r = [];--}}
-        {{--for (i = 0, j = data.selected.length; i < j; i++) {--}}
-        {{--var id = data.instance.get_node(data.selected[i]).id;--}}
-        {{--console.log(id);--}}
-        {{--}--}}
-
-        {{--})--}}
-
-        {{--$('#jstree').on('click.jstree', function (e, data) {--}}
-        {{--var instance = $('#jstree').jstree(true);--}}
-        {{--var selectedNode = instance.get_selected();--}}
-
-        {{--})--}}
+            }, $("#frmW76F2251").serialize() + '&data=' + JSON.stringify(data)+ "&_token={{csrf_token()}}");
+        });
     </script>
     <style>
         #employees {

@@ -58,7 +58,7 @@
 <!-- jQuery -->
 <script type="text/javascript" src="{!! asset('js/jquery-3.3.1.min.js') !!}"></script>
 <!-- CoreUI and necessary plugins-->
-<script type="text/javascript" src="{{asset('plugins/pace-progress/pace.js')}}"></script>
+{{--<script type="text/javascript" src="{{asset('plugins/pace-progress/pace.js')}}"></script>--}}
 <script type="text/javascript" src="{{asset('plugins/perfect-scrollbar/dist/perfect-scrollbar.js')}}"></script>
 <script type="text/javascript" src="{{asset('themes/@coreui/coreui/dist/js/coreui.js')}}"></script>
 <!-- Jquery UI -->

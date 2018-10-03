@@ -730,3 +730,9 @@ a:hover {
 .text-bold{
     font-weight: bold;
 }
+
+.select2-hidden-accessible{
+    width: 100% !important;
+    line-height: 32px;
+    height: 32px !important;
+}
