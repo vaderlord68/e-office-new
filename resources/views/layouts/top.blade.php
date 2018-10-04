@@ -593,7 +593,14 @@
         /*background: -webkit-linear-gradient(45deg, rgba(252,234,187,1) 0%,rgba(252,205,77,1) 65%,rgba(252,205,77,1) 65%,rgba(252,205,77,1) 65%,rgba(252,205,77,1) 65%,rgba(252,205,77,1) 69%,rgba(248,181,0,1) 69%,rgba(251,223,147,1) 100%); !* Chrome10-25,Safari5.1-6 *!*/
         /*background: linear-gradient(45deg, rgba(252,234,187,1) 0%,rgba(252,205,77,1) 65%,rgba(252,205,77,1) 65%,rgba(252,205,77,1) 65%,rgba(252,205,77,1) 65%,rgba(252,205,77,1) 69%,rgba(248,181,0,1) 69%,rgba(251,223,147,1) 100%); !* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ *!*/
         /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fceabb', endColorstr='#fbdf93',GradientType=1 ); !* IE6-9 fallback on horizontal gradient *!*/
-
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e0f3fa+0,d8f0fc+50,b8e2f6+51,b6dffd+100;Shape+2+Style */
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e0f3fa+0,d8f0fc+77,d8f0fc+77,b8e2f6+78,b6dffd+100 */
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e0f3fa+0,b8e2f6+71,b8e2f6+71,b8e2f6+73,d8f0fc+77,d8f0fc+78,d8f0fc+78,d8f0fc+79,d8f0fc+79,b6dffd+100 */
+        background: #e0f3fa; /* Old browsers */
+        background: -moz-linear-gradient(45deg, #e0f3fa 0%, #b8e2f6 71%, #b8e2f6 71%, #b8e2f6 73%, #d8f0fc 77%, #d8f0fc 78%, #d8f0fc 78%, #d8f0fc 79%, #d8f0fc 79%, #b6dffd 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(45deg, #e0f3fa 0%,#b8e2f6 71%,#b8e2f6 71%,#b8e2f6 73%,#d8f0fc 77%,#d8f0fc 78%,#d8f0fc 78%,#d8f0fc 79%,#d8f0fc 79%,#b6dffd 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(45deg, #e0f3fa 0%,#b8e2f6 71%,#b8e2f6 71%,#b8e2f6 73%,#d8f0fc 77%,#d8f0fc 78%,#d8f0fc 78%,#d8f0fc 79%,#d8f0fc 79%,#b6dffd 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0f3fa', endColorstr='#b6dffd',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
     }
 
     .dropdown-item{
