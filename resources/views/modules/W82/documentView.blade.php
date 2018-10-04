@@ -32,17 +32,11 @@
                             <div class="form-group">
                                 <label class="control-label" for="DocumentContent">Những file đã đính kèm</label>
                                 <ul class="document-list list-attached-file">
-                                    <?php
-
-                                    foreach ($attachedFiles as $attachedFile) :
-                                    ?>
-                                    <?php
-                                    $attachedFileArg = explode("/",$attachedFile)
-                                    ?>
+                                    @foreach ($attachedFiles as $attachedFile) :
                                     <li>
-                                        <a href="/storage/users-upload/<?php echo $attachedFile?>"><?php echo $attachedFileArg[1]?></a>
+                                        <a href="/download/{{$attachedFile}}">{{$attachedFile}}</a>
                                     </li>
-                                    <?php endforeach;?>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>

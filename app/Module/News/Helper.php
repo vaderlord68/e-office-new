@@ -21,7 +21,7 @@ class Helper extends \Illuminate\Database\Eloquent\Model
     public function getNewsImagePath($fileName,$userID)
     {
         /** Different path due to symbolic link */
-        return "storage/users-uploads/".$fileName;
+        return "public/users-upload/".$fileName;
     }
 
 }
