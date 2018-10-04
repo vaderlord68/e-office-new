@@ -2576,7 +2576,7 @@ class Helpers
     public static function createMainMenu()
     {
         $menuList = Helpers::getMainMenu();
-        $str = '<div class="top-menu">';
+        $str = '<div class="top-menu" style="width:60%;">';
         $str .= '<ul class="nav navbar-nav d-md-down-none">';
         foreach ($menuList as $row) {
             $str .= Helpers::createMenuItem($row, $str);
@@ -2660,13 +2660,20 @@ class Helpers
         $sql = '--Lay phan quyen' . PHP_EOL;
         $sql .= "EXEC D76P0002  '$userID'" . PHP_EOL;
         $rsRows = DB::connection()->select($sql);
-        $filter = array_filter($rsRows, function ($row) use($formID,$function) {
+        $filter = array_filter($rsRows, function ($row) use ($formID, $function) {
             return $row->FuntionID == $formID && $row->FormID == $function;
         });
-        $result = count($filter) > 0 ? $filter[0]->Permisions: 0;
-        if ($convertToBool){
-            return $result == 1 ? true:false;
+        $result = count($filter) > 0 ? $filter[0]->Permisions : 0;
+        if ($convertToBool) {
+            return $result == 1 ? true : false;
         }
         return $result;
+    }
+
+    public static function suffixName($fileName)
+    {
+        $d = new DateTime();
+        $nameTemp = $d->getTimestamp();
+        return $nameTemp . "-" . $fileName;
     }
 }
