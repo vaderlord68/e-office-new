@@ -23,7 +23,7 @@ class  EditController extends Controller
         $dataPost = $request->input();
         $documentID = $dataPost['documentID'];
         $document = Document::find($documentID);
-
+        \Debugbar::info($document);
         $idArray = $this->getDocumentIdArray($this->getRelatedDocWithDocId($documentID));
         $relatedDocumentsCollection = $this->getDocumentCollectionForIDs($idArray);
 

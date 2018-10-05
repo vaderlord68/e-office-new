@@ -14,11 +14,16 @@
     </div>
     <div class="card-body">
         <h5 class="">Tài liệu ưa thích</h5>
-        <div id="folder-tree-loading">
-            <img src="{{asset("media/loading_icon.gif")}}" alt="" style="">
+        <div id="folder-tree-loading" class="hide">
+            <img src="{{asset("media/loading_icon.gif")}}" class="hide" alt="" style="">
         </div>
         <div id="folderTree" style="display:none">
             {!!html_entity_decode($folderTree)!!}
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+        //$(".folder-tree-loading").removeClass('hide').fadeIn();
+    });
+</script>

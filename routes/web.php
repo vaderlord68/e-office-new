@@ -22,6 +22,7 @@ Route::any('/logout/post', 'User\AuthenticateController@logoutPost');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'Core\IndexController@index');
+    Route::any('/download/{filename?}', 'Modules\WXXController@download');
 });
 
 //Danh muc xe cong tac

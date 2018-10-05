@@ -1,5 +1,5 @@
+"use strict";
 var $ = jQuery.noConflict();
-
 
 $(document).ready(function () {
 
@@ -12,7 +12,6 @@ $(document).ready(function () {
     $(document).on("click", ".bi-table-item.type-folder td:not(:first-child)", function (e) {
         var _this = $(this);
         var selectfolderID = _this.parent().attr('folder_id');
-        console.log(selectfolderID);
         var stateUrl = "/bi/folder/view?FolderId=" + selectfolderID;
         localStorage.setItem("currentSelectedFolderId", selectfolderID);
         var treeElement = $('li[folder_id="'+ selectfolderID + '"]');
@@ -36,7 +35,7 @@ $(document).ready(function () {
         if (attachedFileInputCount >= 5) {
             alert('Tối đa 5 file đính kèm');
         } else {
-            var html = '<div class="attachedFileWrapper"><div class="col-sm-11" style="padding: 0px"><input  class="form-control input-md attachedFileInput" type="file" name="AttachedFiles[]"></div>';
+            var html = '<div class="attachedFileWrapper row"><div class="col-sm-11" style="padding: 0px"><input  class="form-control input-md attachedFileInput" type="file" name="AttachedFiles[]"></div>';
             html = html + '<div class="col-sm-1"><a id="bi-removeAttachedFileInput" class="toolbar-btn action-on-header" href=""><i class="fa fa-times-circle"></i></a></div></div>';
             fileContainer.append(html);
             attachedFileInputCount++;
@@ -83,7 +82,7 @@ $(document).ready(function () {
             type: "get",
             dataType: "text",
             success: function (result) {
-                $(location).attr('href', '/bi')
+                $(location).attr('href', '/bi');
             }
         });
     });
@@ -122,7 +121,55 @@ $(document).ready(function () {
     }).jstree({
         'core': {
             'multiple': false,
+            // "contextmenu":{
+            //     "items": function($node) {
+            //         var tree = $("#tree").jstree(true);
+            //         return {
+            //             "Create": {
+            //                 "separator_before": false,
+            //                 "separator_after": false,
+            //                 "label": "Create",
+            //                 "action": function (obj) {
+            //                     $node = tree.jstree('create_node', $node);
+            //                     tree.jstree('edit', $node);
+            //                 }
+            //             },
+            //             "Rename": {
+            //                 "separator_before": false,
+            //                 "separator_after": false,
+            //                 "label": "Rename",
+            //                 "action": function (obj) {
+            //                     tree.jstree('edit', $node);
+            //                 }
+            //             },
+            //             "Remove": {
+            //                 "separator_before": false,
+            //                 "separator_after": false,
+            //                 "label": "Remove",
+            //                 "action": function (obj) {
+            //                     tree.jstree('delete_node', $node);
+            //                 }
+            //             }
+            //         };
+            //     }
+            // },
         },
+
+        "plugins" : [
+            //"checkbox",
+            "contextmenu",
+            "dnd",
+            //"massload",
+            //"search",
+            "sort",
+            "state",
+            "types",
+            //"unique",
+            "wholerow",
+            "changed",
+            //"conditionalselect"
+        ]
+
     });
 
 

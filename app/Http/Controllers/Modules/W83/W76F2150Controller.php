@@ -5,12 +5,9 @@ namespace App\Http\Controllers\Modules\W83;
 use App\Eoffice\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\D76T1010;
-use App\Models\D76T1020;
 use App\Models\D76T1556;
 use App\Models\D76T2000;
-use App\Models\D76T2080;
 use Carbon\Carbon;
-use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -21,17 +18,13 @@ class  W76F2150Controller extends Controller
     private $d76T1556;
     private $d76T1010;
     private $d76T2000;
-    private $d76T1020;
-    private $d76T2080;
     private $newsHelper;
 
-    public function __construct(D76T1010 $d76T1010, D76T2000 $d76T2000, D76T1020 $d76T1020, D76T2080 $d76T2080, D76T1556 $d76T1556)
+    public function __construct(D76T1010 $d76T1010, D76T2000 $d76T2000, D76T1556 $d76T1556)
     {
         $this->d76T1556 = $d76T1556;
         $this->d76T1010 = $d76T1010;
         $this->d76T2000 = $d76T2000;
-        $this->d76T1020 = $d76T1020;
-        $this->d76T2080 = $d76T2080;
         $this->newsHelper = new \App\Module\News\Helper();
     }
 
@@ -41,80 +34,97 @@ class  W76F2150Controller extends Controller
         $this->createFolderRoot();
         $currentFolderID = $request->input('currentFolderID', '');
         $treeViewData = $this->getTreeView($currentFolderID);
+        $title = 'Quản lý tài liệu chia sẽ';
         switch ($type) {
             case '':
-                $documentList = $this->d76T1020->where('FolderParentID','=',$currentFolderID)->get();
-                return view("modules/W83/W76F2150/W76F2150", compact('treeViewData','currentFolderID','documentList'));
+                $folderList = $this->d76T1010->where('FolderParentID', '=', $currentFolderID)->select("ID", DB::raw("FolderName as Description"),DB::raw("'Folder' as Type"), "CreateUserID", "CreateDate", "LastModifyUserID", "LastModifyDate");
+                $fileList = $this->d76T2000->where('FolderID', '=', $currentFolderID)->select("ID", DB::raw("DocName as Description"),DB::raw("'File' as Type"), "CreateUserID", "CreateDate", "LastModifyUserID", "LastModifyDate");
+
+                $documentList = $folderList->union($fileList)->get();
+
+                return view("modules/W83/W76F2150/W76F2150", compact('title', 'treeViewData', 'currentFolderID', 'documentList'));
                 break;
             case 'create-folder':
-                return view("modules/W83/W76F2150/W76F2150_CreateFolderModal", compact('treeViewData','currentFolderID'));
+                return view("modules/W83/W76F2150/W76F2150_CreateFolderModal", compact('treeViewData', 'currentFolderID', 'type'));
+                break;
+            case 'edit-folder':
+                try {
+                    $rsData = $this->d76T1010->where('ID', '=', $currentFolderID)->first();
+                    return view("modules/W83/W76F2150/W76F2150_CreateFolderModal", compact('treeViewData', 'currentFolderID', 'rsData', 'type'));
+                } catch (\Exception $ex) {
+                    return json_encode(['status' => 'ERROR', 'message' => $ex->getMessage()]);
+                }
+
                 break;
             case 'save-folder':
+            case 'update-folder':
                 $txtFolderName = $request->input('txtFolderName', '');
                 $txtFolderDescription = $request->input('txtFolderDescription', '');
-                $txtFolderID = $request->input('hdFolderID', '');
-                $folderParentID = $request->input('hdParentFolderID', '');
-                \Debugbar::info($request->input);
-                if ($txtFolderID == ''){
+                $ID = $request->input('ID', '');
 
-                    if ($this->d76T1020->where('FolderName', '=',$txtFolderName)->where('FolderParentID', '=',$folderParentID)->first() != null){
-                        return json_encode(['status'=>'ERROR', 'message'=>'Thư mục đã bị trùng tên trong hệ thống']);
+                if ($ID == '') {
+                    $currentFolderID = $request->input('currentFolderID', '');
+                    if ($this->d76T1010->where('FolderName', '=', $txtFolderName)->where('FolderParentID', '=', $currentFolderID)->first() != null) {
+                        return json_encode(['status' => 'ERROR', 'message' => 'Thư mục đã bị trùng tên trong hệ thống']);
                     }
 
                     $rowData = [
                         "ID" => DB::raw('NEWID()'),
-                        "FolderName"=>$txtFolderName,
-                        "FolderParentID"=>$folderParentID,
-                        "CreateUserID"=>Auth::user()->UserID,
-                        "CreateDate"=> Carbon::now(),
-                        "LastModifyUserID"=>Auth::user()->UserID,
-                        "LastModifyDate"=> Carbon::now()
+                        "FolderName" => $txtFolderName,
+                        "FolderDescription" => $txtFolderDescription,
+                        "FolderParentID" => $currentFolderID,
+                        "CreateUserID" => Auth::user()->UserID,
+                        "CreateDate" => Carbon::now(),
+                        "LastModifyUserID" => Auth::user()->UserID,
+                        "LastModifyDate" => Carbon::now()
                     ];
 
-                    try{
-                        $this->d76T1020->insert($rowData);
-                        Helper::setSession('successMessage','Thư mục đã được tạo thành công');
-                        return json_encode(['status'=>'OKAY', 'message'=>'']);
-                    }catch (\Exception $ex){
-                        return json_encode(['status'=>'ERROR', 'message'=>$ex->getMessage()]);
+                    try {
+                        $this->d76T1010->insert($rowData);
+                        Helper::setSession('successMessage', 'Thư mục đã được tạo thành công');
+                        return json_encode(['status' => 'OKAY', 'message' => '']);
+                    } catch (\Exception $ex) {
+                        return json_encode(['status' => 'ERROR', 'message' => $ex->getMessage()]);
                     }
-                }else{
+                } else {
                     $rowData = [
-                        "FolderName"=>$txtFolderName,
-                        "FolderParentID"=>$folderParentID,
-                        "CreateUserID"=>Auth::user()->UserID,
-                        "CreateDate"=> Carbon::now(),
-                        "LastModifyUserID"=>Auth::user()->UserID,
-                        "LastModifyDate"=> Carbon::now()
+                        "FolderName" => $txtFolderName,
+                        "FolderDescription" => $txtFolderDescription,
+                        "LastModifyUserID" => Auth::user()->UserID,
+                        "LastModifyDate" => Carbon::now()
                     ];
 
-                    try{
-                        $this->d76T1020->update($rowData);
-                        Helper::setSession('successMessage','Thư mục đã cập nhật thành công');
-                        return json_encode(['status'=>'OKAY', 'message'=>'']);
-                    }catch (\Exception $ex){
-                        return json_encode(['status'=>'ERROR', 'message'=>$ex->getMessage()]);
+                    try {
+                        $this->d76T1010->where('ID', '=', $ID)->update($rowData);
+                        Helper::setSession('successMessage', 'Thư mục đã cập nhật thành công');
+                        return json_encode(['status' => 'OKAY', 'message' => '']);
+                    } catch (\Exception $ex) {
+                        return json_encode(['status' => 'ERROR', 'message' => $ex->getMessage()]);
                     }
                 }
             case 'delete-folder':
-                $idList = $request->input('idList', []);
-                \Debugbar::info($idList);
+                try {
+                    $this->d76T1010->where('ID', '=', $currentFolderID)->delete();
+                } catch (\Exception $ex) {
+
+                }
                 break;
             case 'create-document':
-                $docTypeList = $this->d76T1556->where('ListTypeID', '=','D76T2010_DocType')->get();
-                $docFieldList = $this->d76T1556->where('ListTypeID', '=','D76T2010_DocField')->get();
-                $docOrgList = $this->d76T1556->where('ListTypeID', '=','D76T2010_DocField')->get();
+                $docTypeList = $this->d76T1556->where('ListTypeID', '=', 'D76T2010_DocType')->get();
+                $docFieldList = $this->d76T1556->where('ListTypeID', '=', 'D76T2010_DocField')->get();
+                $docOrgList = $this->d76T1556->where('ListTypeID', '=', 'D76T2010_DocField')->get();
                 //return "dfs";
-                return view("modules/W83/W76F2150/W76F2150_CreateDocumentModal", compact('docOrgList','docFieldList','docTypeList','treeViewData','currentFolderID'));
+                return view("modules/W83/W76F2150/W76F2150_CreateDocumentModal", compact('docOrgList', 'docFieldList', 'docTypeList', 'treeViewData', 'currentFolderID'));
         }
     }
 
-    private function getTreeView($folderId){
+    private function getTreeView($folderId)
+    {
         $json = [];
 
-        $d76T1020List = $this->d76T1020->get()->toArray();
-        $currentNode = $this->d76T1020->where('FolderParentID', '=','')->first();
-        $json = $this->createTreeViewData($currentNode, $d76T1020List, $json, $folderId);
+        $d76T1010List = $this->d76T1010->get()->toArray();
+        $currentNode = $this->d76T1010->where('FolderParentID', '=', '')->first();
+        $json = $this->createTreeViewData($currentNode, $d76T1010List, $json, $folderId);
         \Debugbar::info($json);
         $json = json_encode($json);
         return $json;
@@ -128,18 +138,18 @@ class  W76F2150Controller extends Controller
             $node->text = $currentNode["FolderName"];
             $node->parent = $currentNode["FolderParentID"] == "" ? "#" : $currentNode["FolderParentID"];
             //if ($currentNode["FolderParentID"] == ""){
-                $state = new State();
-                $state->opened = ($node->id == $folderId ? true : false) ;
-                $state->selected = ($node->id == $folderId ? true : false) ;
-                $state->disabled = false;
-                $node->state = $state;
+            $state = new State();
+            $state->opened = ($node->id == $folderId ? true : false);
+            $state->selected = ($node->id == $folderId ? true : false);
+            $state->disabled = false;
+            $node->state = $state;
             //}
-            array_push($arrayOut,$node);
+            array_push($arrayOut, $node);
             $arrTemp = array_filter($arrayIn, function ($row) use ($currentNode) {
                 return $row["FolderParentID"] == $currentNode["ID"];
             });
-            foreach ($arrTemp as $row){
-                $this->createTreeViewData($row,$arrayIn,$arrayOut, $folderId);
+            foreach ($arrTemp as $row) {
+                $this->createTreeViewData($row, $arrayIn, $arrayOut, $folderId);
             }
 
         }
@@ -194,7 +204,7 @@ class  W76F2150Controller extends Controller
         }
 
 
-        if ($this->d76T1020->where('FolderParentID', '=', '')->first() == null) {
+        if ($this->d76T1010->where('FolderParentID', '=', '')->first() == null) {
             $rowData = [
                 "ID" => DB::raw('NEWID()'),
                 "FolderName" => 'Văn bản pháp luật',
@@ -206,7 +216,7 @@ class  W76F2150Controller extends Controller
                 "LastModifyDate" => Carbon::now(),
                 //"FolderDescription" => 'Tài liệu chia sẽ',
             ];
-            $this->d76T1020->insert($rowData);
+            $this->d76T1010->insert($rowData);
 
         }
     }
@@ -224,7 +234,8 @@ class Node
     public $a_attr = '';
 }
 
-class State{
+class State
+{
     public $opened;
     public $disabled;
     public $selected;

@@ -1,4 +1,4 @@
-@extends('system.module.W76.W76F2150.components.layout')
+@extends('modules.W83.W76F2150.components.layout')
 @section('document-header')
    <h4>Thêm mới thư mục</h4>
 @stop
@@ -50,7 +50,7 @@
                     var data = JSON.parse(res);
                     switch (data.status){
                         case 'OKAY':
-                            window.location.href = document.referrer;
+                            //window.location.href = document.referrer;
                             break;
                         case 'ERROR':
                             break;

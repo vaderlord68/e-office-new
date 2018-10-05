@@ -56,7 +56,7 @@ class Helper extends \Illuminate\Database\Eloquent\Model
             /** For others level 1+ folder */
             if ($this->folders[$i]->FolderParentID == $folderParentId)
             {
-                $output .= "<li class='tree-node-folder' folder_id=\"" .$this->folders[$i]->ID ."\">".$this->folders[$i]->FolderName."<ul>";
+                $output .= "<li class='tree-node-folder'  folder_id=\"" .$this->folders[$i]->ID ."\">".$this->folders[$i]->FolderName."<ul>";
                 $output .= $this->getAllChildren($this->folders[$i]->ID);
                 $documentsCollection = $this->getAllChildDocument($this->folders[$i]->ID);
                 foreach ($documentsCollection as $document) {
@@ -121,15 +121,22 @@ class Helper extends \Illuminate\Database\Eloquent\Model
          * Upload user image and get the path then save it into database
          */
         $userId = session("current_user");
-        $fileName = $file->getClientOriginalName();
-        $filePath = 'public/users-upload/'.$userId."/";
+        $fileName = \Helpers::suffixName($file->getClientOriginalName()) ;
+
+
+        if (!file_exists(public_path() . "\users-upload\\")) {
+            mkdir(public_path() . "\users-upload\\");
+        }
+
+        $filePath = public_path() . "\users-upload\\";
+
         try{
-            $file->storeAs($filePath, $fileName);
+            $file->move($filePath, $fileName);
 
         }catch (\Exception $ex){
             \Debugbar::info($ex->getMessage());
         }
-        return $userId."/".$fileName;
+        return $fileName;
     }
 
 }

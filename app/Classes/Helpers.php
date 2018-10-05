@@ -2565,8 +2565,10 @@ class Helpers
         $menu->menuIcon = $node["MenuIcon"];
         $menu->parentMenuID = $node["ParentMenuID"];
         $childrend = [];
+        $index = 0;
         foreach ($arrayFilter as $child) {
             Helpers::createMenuNode($child, $array, $childrend);
+
         }
         $menu->childrend = $childrend;
         array_push($outputArray, $menu);
@@ -2576,43 +2578,81 @@ class Helpers
     public static function createMainMenu()
     {
         $menuList = Helpers::getMainMenu();
-        $str = '<div class="top-menu">';
+        $str = '<div class="top-menu" style="width:60%;">';
         $str .= '<ul class="nav navbar-nav d-md-down-none">';
+        $index = 0;
         foreach ($menuList as $row) {
-            $str .= Helpers::createMenuItem($row, $str);
+            $str .= Helpers::createMenuItem($row, $str, 0, $index);
+            $index++;
         }
+//        $str .= '<li class="nav-item dropdown no-submenu">';
+//        $str .= '<a class="nav-link " href="http://eoffice.local/W84F1000" id="navbardrop">';
+//        $str .= '<i class="far fa-list-alt text-yellow mgr5"></i>test';
+//        $str .= '</a>';
+//        $str .= '</li>';
         $str .= '</ul>';
         $str .= '</div>';
         return $str;
     }
 
-    public static function createMenuItem($row, &$str, &$level = 0)
+    public static function createMenuItem($row, &$str, $level = 0,$index)
     {
         $childrend = $row->childrend;
-        $hasChild = count($childrend) > 1 && $level > 0 ? 'has-child' : '';
-        $str .= '<li class="nav-item dropdown ' . ($hasChild == "has-child" ? "dropdown-submenu" : "no-submenu") . '">';
-        if (count($childrend) > 0) {
-            $str .= '<a class="nav-link ' . ($level > 0 ? 'dropdown-item' : '') . '  dropdown-toggle ' . $hasChild . '" href="' . url("/" . $row->formID) . '" id="navbardrop" data-toggle="dropdown">';
-        } else {
-            $str .= '<a class="nav-link ' . ($level > 0 ? 'dropdown-item' : '') . '' . $hasChild . '" href="' . url("/" . $row->formID) . '" id="navbardrop" >';
-        }
+        if ($index > 20){
+//            $hasChild = count($childrend) > 1 && $level > 0 ? 'has-child' : '';
+//            $str .= '<li class="nav-item dropdown ' . ($hasChild == "has-child" ? "dropdown-submenu" : "no-submenu") . '">';
+//            if (count($childrend) > 0) {
+//                $str .= '<a class="nav-link ' . ($level > 0 ? 'dropdown-item' : '') . '  dropdown-toggle ' . $hasChild . '" href="' . url("/" . $row->formID) . '" id="navbardrop" data-toggle="dropdown">';
+//            } else {
+//                $str .= '<a class="nav-link ' . ($level > 0 ? 'dropdown-item' : '') . '' . $hasChild . '" href="' . url("/" . $row->formID) . '" id="navbardrop" >';
+//            }
+//
+//            $str .= '<i class="' . $row->menuIcon . ' mgr5"></i>';
+//            $str .= $row->menuName;
+//            if ($level == 0 && count($childrend) > 0) {
+//                $str .= '<i class="fas fa-caret-down mgl5"></i>';
+//            }
+//            $str .= '</a>';
+//            if (count($childrend) > 0) {
+//                $str .= '<ul class="dropdown-menu " >';
+//                foreach ($childrend as $rowChild) {
+//                    $level .= $level + 1;
+//
+//                    Helpers::createMenuItem($rowChild, $str, $level,$index);
+//                }
+//                $str .= '</ul >';
+//            }
+//            $str .= '</li>';
+        }else{
+            if ($row->menuID != 'ITEM_News'){
+                $hasChild = count($childrend) > 1 && $level > 0 ? 'has-child' : '';
+                $str .= '<li class="nav-item dropdown ' . ($hasChild == "has-child" ? "dropdown-submenu" : "no-submenu") . '">';
+                if (count($childrend) > 0) {
+                    $str .= '<a class="nav-link ' . ($level > 0 ? 'dropdown-item' : '') . '  dropdown-toggle ' . $hasChild . '" href="' . url("/" . $row->formID) . '" id="navbardrop" data-toggle="dropdown">';
+                } else {
+                    $str .= '<a class="nav-link ' . ($level > 0 ? 'dropdown-item' : '') . '' . $hasChild . '" href="' . url("/" . $row->formID) . '" id="navbardrop" >';
+                }
 
-        $str .= '<i class="' . $row->menuIcon . ' mgr5"></i>';
-        $str .= $row->menuName;
-        if ($level == 0 && count($childrend) > 0) {
-            $str .= '<i class="fas fa-caret-down mgl5"></i>';
-        }
-        $str .= '</a>';
-        if (count($childrend) > 0) {
-            $str .= '<ul class="dropdown-menu " >';
-            foreach ($childrend as $rowChild) {
-                $level .= $level + 1;
+                $str .= '<i class="' . $row->menuIcon . ' mgr5"></i>';
+                $str .= $row->menuName;
+                if ($level == 0 && count($childrend) > 0) {
+                    $str .= '<i class="fas fa-caret-down mgl5"></i>';
+                }
+                $str .= '</a>';
+                if (count($childrend) > 0) {
+                    $str .= '<ul class="dropdown-menu " >';
+                    foreach ($childrend as $rowChild) {
+                        $level .= $level + 1;
 
-                Helpers::createMenuItem($rowChild, $str, $level);
+                        Helpers::createMenuItem($rowChild, $str, $level,$index);
+                    }
+                    $str .= '</ul >';
+                }
+                $str .= '</li>';
             }
-            $str .= '</ul >';
+
         }
-        $str .= '</li>';
+
     }
 
 //    public static function createMainMenu()
@@ -2660,13 +2700,20 @@ class Helpers
         $sql = '--Lay phan quyen' . PHP_EOL;
         $sql .= "EXEC D76P0002  '$userID'" . PHP_EOL;
         $rsRows = DB::connection()->select($sql);
-        $filter = array_filter($rsRows, function ($row) use($formID,$function) {
+        $filter = array_filter($rsRows, function ($row) use ($formID, $function) {
             return $row->FuntionID == $formID && $row->FormID == $function;
         });
-        $result = count($filter) > 0 ? $filter[0]->Permisions: 0;
-        if ($convertToBool){
-            return $result == 1 ? true:false;
+        $result = count($filter) > 0 ? $filter[0]->Permisions : 0;
+        if ($convertToBool) {
+            return $result == 1 ? true : false;
         }
         return $result;
+    }
+
+    public static function suffixName($fileName)
+    {
+        $d = new DateTime();
+        $nameTemp = $d->getTimestamp();
+        return $nameTemp . "-" . $fileName;
     }
 }
