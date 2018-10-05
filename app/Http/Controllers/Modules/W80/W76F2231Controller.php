@@ -237,7 +237,6 @@ class  W76F2231Controller extends Controller
                 break;
             case 'updatedrag':
                 $all = $request->input();
-
                 $dateFromW76F2231 = $request->input('date', '');
                 $dateFromW76F2231 = \Helpers::convertDateWithFormat($dateFromW76F2231, 'Y-m-d');
                 $timeFromW76F2231 = $request->input('start', '');

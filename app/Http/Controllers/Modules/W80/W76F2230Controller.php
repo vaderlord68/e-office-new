@@ -106,15 +106,13 @@ class  W76F2230Controller extends Controller
                 break;
             case 'loadCalender':
                 $newsCollection = $this->getCalender();
-
-
                 //\Debugbar::info($newsCollection);
                 return $newsCollection();
                 break;
             case 'delete':
-                $ID = $request->input('id', '');
+                $ID = $request->input('ID', '');
                 //\Debugbar::info($ID);
-                $sql = "--Xoa hop dong" . PHP_EOL;
+                $sql = "--Xoa phong hop" . PHP_EOL;
                 $sql .= "delete from D76T2230 where ID = '$ID'" . PHP_EOL;
                 //\Debugbar::info($sql);
                 try {

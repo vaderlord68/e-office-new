@@ -8,6 +8,7 @@ use App\Models\D76T0000;
 use App\Models\D76T2200;
 use App\Models\D76T2230;
 use App\Models\D76T2261;
+use App\Models\D76T2262;
 use App\Models\D76T9000;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,21 +17,26 @@ use Illuminate\Support\Facades\DB;
 class  W77F2000Controller extends Controller
 {
     private $d76T2261;
+    private $d76T2262;
+    private $d76T0000;
 
     /**
      * @param string $task
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
 
-    public function __construct(D76T2261 $d76T2261)
+    public function __construct(D76T2261 $d76T2261, D76T2262 $d76T2262, D76T0000 $d76T0000)
     {
         $this->d76T2261 = $d76T2261;
+        $this->d76T2262 = $d76T2262;
+        $this->d76T0000 = $d76T0000;
     }
 
-    public function index($task = "")
+    public function index($task = "", Request $request)
     {
         switch ($task) {
             case'':
+            case 'listCar':
                 $userID = Auth::user()->UserID;
                 $divisionID = session('W76P0000')->DivisionID;
                 $orgUnitID = session('W76P0000')->OrgUnitID;
@@ -40,22 +46,56 @@ class  W77F2000Controller extends Controller
                 $divisionIDList = DB::select($sql);
                 $divisionIDList = json_encode($divisionIDList);
 
-                $carDList = $this->d76T2261->select('CarNo as id', 'CarBranch as title')->orderBy('DisplayOrder', 'desc')->get();
+                $sql = '--Do nguon cho xe' . PHP_EOL;
+                $sql .= "EXEC W77P2001 '$userID', '$orgUnitID','$divisionID'";
+
+                $carDList = DB::select($sql);
+
+                foreach ($carDList as $row){
+                    $row->id = $row->CarNo;
+                    $row->title = $row->CarBranch;
+                }
+
+            \Debugbar::info($carDList);
                 $carDList = json_encode($carDList);
+
+//                $carDList = $this->d76T2261->select('CarNo as id', 'CarBranch as title')->orderBy('DisplayOrder', 'desc')->get();
+//                $carDList = json_encode($carDList);
                 //\Debugbar::info($carDList);
 
                 $newsCollection = $this->getCalender();
                 $newsCollection = ($newsCollection);
-                \Debugbar::info($newsCollection);
+                //\Debugbar::info($newsCollection);
 
+                $limitTime = $this->d76T0000->first();
+                if (isset($limitTime) && !empty($limitTime)) {
+                    $limitTime->BookingTimeFrom = date('H:i:s', strtotime($limitTime->BookingTimeFrom));
+                    $limitTime->BookingTimeTo = date('H:i:s', strtotime($limitTime->BookingTimeTo));
+                }
+
+                return view("modules/W77/W77F2000/W77F2000", compact('limitTime', 'carDList', 'newsCollection', 'divisionIDList', 'task'));
                 break;
             case'loadCalender':
                 $newsCollection = $this->getCalender();
                 //\Debugbar::info($newsCollection);
                 return $newsCollection();
                 break;
+            case 'delete':
+                $CarBookingID = $request->input('carBookingID', '');
+                \Debugbar::info($CarBookingID);
+                $sql = "--Xoa phong hop" . PHP_EOL;
+                $sql .= "delete from D76T2262 where CarBookingID = '$CarBookingID'" . PHP_EOL;
+                //\Debugbar::info($sql);
+                try {
+                    DB::statement($sql);
+                    \Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_xoa_thanh_cong'));
+                    return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_xoa_thanh_cong')]);
+                } catch (\Exception $ex) {
+                    \Helpers::log($ex->getMessage());
+                    return json_encode(['status' => 'ERROR', 'message' => $ex->getMessage()]);
+                }
+                break;
         }
-        return view("modules/W77/W77F2000/W77F2000", compact('carDList', 'newsCollection', 'divisionIDList', 'task'));
     }
 
     private function getCalender()

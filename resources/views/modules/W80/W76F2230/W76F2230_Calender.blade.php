@@ -78,10 +78,10 @@
             duration: {days: 1},
             slotLabelFormat: "HH:mm",
             buttonText: {
-                today: 'Today',
-                month: 'Month',
-                week: 'Week',
-                day: 'Day',
+                today: '{{ Helpers::getRS('Today') }}',
+                month: '{{ Helpers::getRS('Thang') }}',
+                week: '{{ Helpers::getRS('tuan') }}',
+                day: '{{ Helpers::getRS('Ngay') }}',
                 list: 'List'
             },
             eventLimit: false,
@@ -95,7 +95,7 @@
                 right: 'timelineDay'
             },
             height: 450,
-            resourceLabelText: 'Danh sách phòng hợp',
+            resourceLabelText: '{{ Helpers::getRS('Danh_sach_phong_hop') }}',
             resources: rooms,
             events: events,
             selectable: true,
@@ -152,10 +152,12 @@
             eventDrag: function (event) {
                 //event.preventDefault();
             },
-            eventDrop: function (event) {
+            eventDrop: function (event, delta, revertFunc) {
                 //Điều chỉnh booking drag & drop
-                var createUserID = event.CreateUserID;
-                if (event.IsEdit == 1 && event.CreateUserID == createUserID) {
+                if (event.ApproveStatus == 1) {
+                    revertFunc();
+                    window.location.reload();
+                } else {
                     var timefrom = event.start.format("HH:mm");
                     var timeto = event.end.format("HH:mm");
                     var date = event.start.format("DD/MM/YYYY");

@@ -12,9 +12,8 @@
                 <?php
                 if ($task == "edit") {//Edit
                     $master = $rowData;
-                    \Debugbar::info($master);
-                    $ID = $rowData["ID"];
-                    $cbCarTypeIDW77F2001 = $rowData["CarNo"];
+                    $CarBookingID = $rowData["CarBookingID"];
+                    $cbCarTypeIDW77F2001 = $rowData["CarTypeID"];
                     $cbCarNoIDW77F2001 = $rowData["CarNo"];
                     $descriptionW77F2001 = $rowData["Description"];
                     $orgunitNameW77F2001 = session('W76P0000')->OrgUnitName;
@@ -29,7 +28,7 @@
                     $approvalNotesW77F2001 = $rowData["ApprovalNotes"];
 
                 } else {
-                    $ID = "";
+                    $CarBookingID = "";
                     $cbCarTypeIDW77F2001 = "";
                     $descriptionW77F2001 = "";
                     $orgunitIDW77F2001 = session('W76P0000')->OrgUnitID;
@@ -61,7 +60,6 @@
                                  class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer table-documentary">
                                 <form id="formW77F2001" method="POST" enctype="multipart/form-data" action="">
                                     {{csrf_field()}}
-
                                     <div class="row mgb5">
                                         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                                             <label class="lbl-normal">{{Helpers::getRS("Nguoi_tao")}}</label>
@@ -83,8 +81,12 @@
                                             <select name="cbCarTypeIDW77F2001" id="cbCarTypeIDW77F2001"
                                                     class="form-control" maxlength="50" required>
                                                 <option value="">--</option>
-                                                @foreach($carTypeList as  $carTypeListItem)
-                                                    <option value="{{$carTypeListItem->CarTypeID}}" {{$carTypeListItem->CarTypeID == $cbCarTypeIDW77F2001 ? 'selected': ''}}>{{$carTypeListItem->CarTypeName}}</option>
+                                                <?php $term = []; ?>
+                                                @foreach($carDList as  $type)
+                                                    @if (!in_array($type->CarTypeID, $term))
+                                                        <option value="{{$type->CarTypeID}}" {{$type->CarTypeID == $cbCarTypeIDW77F2001 ? 'selected': ''}}>{{$type->CarTypeName}}</option>
+                                                        <?php  $term[] = $type->CarTypeID; ?>
+                                                    @endif
                                                 @endforeach
                                             </select>
                                         </div>
@@ -190,10 +192,9 @@
                                                     class="form-control" multiple>
                                                 @foreach($participantsList as  $participantsListItem)
                                                     <option value="{{$participantsListItem->EmployeeCode}}"
-                                                            {{ isset($cbParticipantsW77F2001) && !empty($cbParticipantsW76F2231) && isset($participantsListItem->EmployeeCode)
-                                                            && in_array($participantsListItem->EmployeeCode, $cbParticipantsW77F2001) ? 'selected' : '' }}>{{$participantsListItem->Fullname}}
-                                                    </option>
-                                                    {{$participantsListItem->EmployeeCode == $cbParticipantsW77F2001 ? 'selected': ''}}
+                                                            {{ isset($cbParticipantsW77F2001) && !empty($cbParticipantsW77F2001) && isset($participantsListItem->EmployeeCode)
+                                                            && in_array($participantsListItem->EmployeeCode, $cbParticipantsW77F2001) ? 'selected' : '' }}>{{$participantsListItem->Fullname}}</option>
+                                                    {{--{{$participantsListItem->EmployeeCode == $cbParticipantsW77F2001 ? 'selected': ''}}--}}
                                                 @endforeach
                                             </select>
                                         </div>
@@ -261,6 +262,8 @@
     //        $("input, select").attr('disabled', true);
     @endif
 
+    var listCarType = {!! json_encode($carDList) !!};
+
 
     $(document).ready(function () {
 
@@ -271,6 +274,27 @@
                 }
                 return $('<span>' + state.text + ' (' + state.id + ')</span><br><small>' + $(state.element).data('desc') + '</small>');
             }
+        });
+
+        $('#cbCarTypeIDW77F2001').on('change', function() {
+            var carTypeCurrent = $(this).val();
+            var listCar = $.grep(listCarType, function(val) {
+                return val.CarTypeID == carTypeCurrent;
+            });
+            var options = '';
+            console.log(listCarType);
+            $.each(listCar, function(key, val) {
+                options += '<option value="'+ val.CarNo +'" data-desc="'+ val.Description +'">'+ val.CarBranch +'</option>';
+            });
+            $('#cbCarNoW77F2001').html(options);
+            $('#cbCarNoW77F2001').select2({
+                templateResult: function (state) {
+                    if (!state.id) {
+                        return state.text;
+                    }
+                    return $('<span>' + state.text + ' (' + state.id + ')</span><br><small>' + $(state.element).data('desc') + '</small>');
+                }
+            });
         });
 
         $('#cbParticipantsW77F2001').select2({});
@@ -354,9 +378,9 @@
                         render: function (ui) {
                         },
                         postRender: function (ui) {
-//                            ui.$btn.click(function () {
-//                                updateApproveStatus(2);
-//                            });
+                            ui.$btn.click(function () {
+                                updateApproveStatus(2);
+                            });
                         }
                     }
                     , {
@@ -372,9 +396,9 @@
                         render: function (ui) {
                         },
                         postRender: function (ui) {
-//                            ui.$btn.click(function () {
-//                                updateApproveStatus(1);
-//                            });
+                            ui.$btn.click(function () {
+                                updateApproveStatus(1);
+                            });
                         }
                     }
 
@@ -391,35 +415,35 @@
             });
         }
 
-        {{--function updateApproveStatus(status) {--}}
-        {{--var notes = $('#approvalNotesW77F2001').val();--}}
-        {{--$.ajax({--}}
-        {{--//enctype: 'multipart/form-data',--}}
-        {{--method: "POST",--}}
-        {{--url: '{{ url('/W77F2001/updateStatus') }}',--}}
-        {{--data: {--}}
-        {{--status: status,--}}
-        {{--notes: notes,--}}
-        {{--id: '{{$ID}}',--}}
-        {{--_token: '{{ csrf_token() }}'--}}
-        {{--},--}}
-        {{--success: function (res) {--}}
-        {{--var result = JSON.parse(res);--}}
-        {{--console.log("luu");--}}
-        {{--switch (result.status) {--}}
-        {{--case 'ERROR':--}}
-        {{--alertError(result.message, $("#modalW77F2001"))--}}
-        {{--break;--}}
-        {{--case 'INVAILD':--}}
-        {{--alertError(result.message, $("#modalW77F2001"))--}}
-        {{--break;--}}
-        {{--case 'SUCC':--}}
-        {{--window.location.reload();--}}
-        {{--break;--}}
-        {{--}--}}
-        {{--}--}}
-        {{--});--}}
-        {{--}--}}
+        function updateApproveStatus(status) {
+            var notes = $('#approvalNotesW77F2001').val();
+            $.ajax({
+                //enctype: 'multipart/form-data',
+                method: "POST",
+                url: '{{ url('/W77F2001/updateStatus') }}',
+                data: {
+                    status: status,
+                    notes: notes,
+                    carBookingID: '{{$CarBookingID}}',
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function (res) {
+                    var result = JSON.parse(res);
+                    console.log("luu");
+                    switch (result.status) {
+                        case 'ERROR':
+                            alertError(result.message, $("#modalW77F2001"))
+                            break;
+                        case 'INVAILD':
+                            alertError(result.message, $("#modalW77F2001"))
+                            break;
+                        case 'SUCC':
+                            window.location.reload();
+                            break;
+                    }
+                }
+            });
+        }
 
         $('#formW77F2001').submit(function (e) {
             e.preventDefault();
@@ -440,7 +464,7 @@
                 //enctype: 'multipart/form-data',
                 method: "POST",
                 url: url,
-                data: formData + "&ID={{$ID}}" + "&orgunitIDW77F2001={{$orgunitIDW77F2001}}",
+                data: formData + "&CarBookingID={{$CarBookingID}}" + "&orgunitIDW77F2001={{$orgunitIDW77F2001}}",
                 // processData: false,
                 //contentType: false,
                 success: function (res) {

@@ -156,8 +156,7 @@
                                                       maxlength="1000"
                                                       autocomplete="off" required
                                                       class="form-control" id="descriptionW76F2231"
-                                                      name="descriptionW76F2231">{{$descriptionW76F2231}}
-                                            </textarea>
+                                                      name="descriptionW76F2231">{{$descriptionW76F2231}}</textarea>
                                         </div>
                                     </div>
                                     <div class="row mgb5">
