@@ -1,5 +1,17 @@
 <div class="modal fade" id="popCreateFolder">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
+        @php
+            if ($type == 'create-folder'){
+                $txtFolderName = '';
+                $txtFolderDescription = '';
+                $ID = '';
+            }else{
+                $txtFolderName = $rsData->FolderName;
+                $txtFolderDescription = $rsData->FolderDescription;
+                $ID = $rsData->ID;
+            }
+
+        @endphp
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
@@ -15,21 +27,21 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                        <div class="col-sm-2">
-                            <label for="txtFolderName">Tên thư mục</label>
+                        <div class="col-sm-3">
+                            <label class="lbl-normal" for="txtFolderName">Tên thư mục</label>
                         </div>
-                        <div class="col-sm-10">
-                            <input type="text" name="txtFolderName" class="form-control" id="txtFolderName" autofocus
-                                   required>
+                        <div class="col-sm-9">
+                            <input type="text" name="txtFolderName" class="form-control" id="txtFolderName"
+                                   value="{{$txtFolderName}}" {{$type == 'edit-folder' ? '': 'autofocus'}} required>
                         </div>
                     </div>
                     <div class="row form-group">
-                        <div class="col-sm-2">
-                            <label for="txtFolderDescription">Mô tả</label>
+                        <div class="col-sm-3">
+                            <label class="lbl-normal" for="txtFolderDescription">Mô tả</label>
                         </div>
-                        <div class="col-sm-10">
+                        <div class="col-sm-9">
                             <textarea type="text" name="txtFolderDescription" class="form-control "
-                                      id="txtFolderDescription" required></textarea>
+                                      id="txtFolderDescription" {{$type == 'edit-folder' ? 'autofocus': ''}} required>{{$txtFolderDescription}}</textarea>
                         </div>
                     </div>
 
@@ -42,8 +54,6 @@
                     </button>
                     <button id="hdBtnSaveFolder" class="hide"></button>
 
-                    <input type="hidden" name="hdParentFolderID" value="{{$currentFolderID}}">
-                    <input type="hidden" name="hdFolderID" value="">
                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                 </div>
             </form>
@@ -58,19 +68,33 @@
         });
         $("#frmCreateFolder").submit(function (evt) {
             evt.preventDefault();
-            postMethod("{{url('/W76F2150/save-folder')}}", function (res) {
+            hideAlert($("#popCreateFolder"));
+            var task = '{{$type}}';
+            var url = '';
+            if (task == 'create-folder'){
+                url = "{{url('/W76F2150/save-folder')}}"
+            }
+            if (task == 'edit-folder'){
+                url = "{{url('/W76F2150/update-folder')}}"
+            }
+            postMethod(url, function (res) {
                 var data = JSON.parse(res);
                 switch (data.status) {
                     case 'OKAY':
-                        //hideAlert($("#popCreateFolder"));
+                        ///hideAlert($("#popCreateFolder"));
                         //window.location.href = document.referrer;
-                        window.location.reload();
+                       // window.location.reload();
+                        $("#popCreateFolder").modal('hide');
                         break;
                     case 'ERROR':
                         alertError(data.message, $("#popCreateFolder"));
                         break;
                 }
-            }, $("#frmCreateFolder").serialize())
+            }, $("#frmCreateFolder").serialize() + "&ID={{$ID}}" + "&currentFolderID={{$currentFolderID}}")
         });
     });
 </script>
+
+<style>
+
+</style>

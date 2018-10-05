@@ -19,71 +19,87 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
 @else
     <body class="app sidebar-fixed">
 @endif
-@include('layouts.top')
-<div class="app-body">
-    @include('layouts.sidebar')
-    <main class="main">
-        @include('layouts.breadcrumb')
-        @include('layouts.container')
-    </main>
-    @include('layouts.aside-menu')
-</div>
-<footer class="app-footer hide">
-    @include('layouts.footer')
-</footer>
-</body>
-<style>
-    .app-body{
-        -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
-        -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
-        animation-name: example;
-        animation-duration: 1s;
-    }
+        @include('layouts.top')
+        <div class="app-body">
+            @include('layouts.sidebar')
+            <main class="main">
+                @include('layouts.breadcrumb')
+                @include('layouts.container')
+            </main>
+            @include('layouts.aside-menu')
+        </div>
+        <footer class="app-footer hide">
+            @include('layouts.footer')
+        </footer>
+        </body>
+        <style>
+            .app-body {
+                /*-webkit-animation-name: example; !* Safari 4.0 - 8.0 *!*/
+                /*-webkit-animation-duration: 4s; !* Safari 4.0 - 8.0 *!*/
+                /*animation-name: example;*/
+                /*animation-duration: 1s;*/
+            }
 
-    /* Safari 4.0 - 8.0 */
-    @-webkit-keyframes example {
-        0%   {opacity: 0}
-        25%  {opacity: 0.25}
-        50%  {opacity: 0.5}
-        100% {opacity: 1}
-    }
+            /* Safari 4.0 - 8.0 */
+            @-webkit-keyframes example {
+                0% {
+                    opacity: 0
+                }
+                25% {
+                    opacity: 0.25
+                }
+                50% {
+                    opacity: 0.5
+                }
+                100% {
+                    opacity: 1
+                }
+            }
 
-    /* Standard syntax */
-    @keyframes example {
-        0%   {opacity: 0}
-        25%  {opacity: 0.25}
-        50%  {opacity: 0.5}
-        100% {opacity: 1}
-    }
-</style>
-<script>
-    //store resources for using of javascript
-    var langText = JSON.parse('{!! json_encode(\Lang::get('message')) !!}');
-    var lang = "{{\Helpers::getLang()}}";
+            /* Standard syntax */
+            @keyframes example {
+                0% {
+                    opacity: 0
+                }
+                25% {
+                    opacity: 0.25
+                }
+                50% {
+                    opacity: 0.5
+                }
+                100% {
+                    opacity: 1
+                }
+            }
+        </style>
+        <script>
+            //store resources for using of javascript
+            var langText = JSON.parse('{!! json_encode(\Lang::get('message')) !!}');
+            var lang = "{{\Helpers::getLang()}}";
 
-    $(".nav-item").click(function (evt) {
-        $(".dropdown").removeClass('show');
-    });
+            $(".nav-item").click(function (evt) {
+                $(".dropdown").removeClass('show');
+            });
 
-    $(document).ready(function(){
-        setTimeout(function() {
+            $(document).ready(function () {
+                setTimeout(function () {
 //            $(".app-body").removeClass("opacity").fadeIn(function(){
 //                resizePqGrid();
 //            });
-        }, 500 );
+                }, 500);
 
-    });
+            });
 
-    $(window).resize(function(){
-        setTimeout(function() {
-            resizePqGrid();
-        }, 200 );
-    });
+            $(window).resize(function () {
+                setTimeout(function () {
+                    resizePqGrid();
+                }, 200);
+            });
 
 
-</script>
-@yield('script')
-<div id="spinLoading" class="loading hide">Loading&#8230;</div>
+        </script>
+        @yield('script')
+        <div id="spinLoading" class="loading hide">Loading&#8230;</div>
 </html>
 <div id="divModalContainer"></div>
 </html>

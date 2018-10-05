@@ -1,4 +1,4 @@
-@extends('system.module.W76.W76F2150.components.layout')
+@extends('modules.W83.W76F2150.components.layout')
 @section('document-header')
    <h4>Đăng tập tin</h4>
 @stop

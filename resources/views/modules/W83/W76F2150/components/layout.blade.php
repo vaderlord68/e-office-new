@@ -1,17 +1,15 @@
 @extends('layouts.layout')
 @section('content')
     @parent
-    <div class="document">
-        <div class="rơw">
-            <div class="col-sm-3 pdl5 pdr5">
-                @include('system.module.W76.W76F2150.components.Sidebar')
-            </div>
-            <div class="col-sm-9  pdl5 pdr5">
-                @include('system.module.W76.W76F2150.components.Wrapper')
-            </div>
-
+    <div class="row">
+        <div class="col-md-3">
+            @include('modules.W83..W76F2150.components.Sidebar')
+        </div>
+        <div class="col-md-9">
+            @include('modules.W83..W76F2150.components.Wrapper')
         </div>
     </div>
+
 @stop
 <style>
     /*.document .document-sidebar{*/

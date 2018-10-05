@@ -1,5 +1,6 @@
 <div class="sidebar {{Helpers::getDevice() != 'DESKTOP' ? 'hide' : ''}}">
     <nav class="sidebar-nav">
+        @yield('sidebar')
         <ul class="nav">
             <li class="nav-item hide">
                 <a class="nav-link" href="{{url('/adminlogin')}}">
