@@ -601,6 +601,9 @@ a:hover {
     top: 2px;
     right: 2px;
 }
+.fc-time-grid-container {
+    height: auto !important;
+}
 
 
 

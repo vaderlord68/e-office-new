@@ -31,7 +31,6 @@
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <select name="divisionIDW76F2231" id="divisionIDW76F2231"
                         class="form-control" required>
-                    {{--<option value="">--</option>--}}
                     @foreach($divisionIDList as  $divisionIDItem)
                         <option value="{{$divisionIDItem->OrgunitID}}" {{ isset($divisionID)&& $divisionID == $divisionIDItem->OrgunitID ? 'selected' : '' }}>{{$divisionIDItem->OrgunitName}}</option>
                     @endforeach
@@ -42,7 +41,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#divisionIDW76F2231').on('change', function() {
+            $('#divisionIDW76F2231').on('change', function () {
                 var division = $(this).val();
                 window.location.href = '{{ url('/W76F2230/listRoom') }}/' + division;
             });
