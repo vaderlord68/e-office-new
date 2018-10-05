@@ -29,7 +29,7 @@
 
 <!-- DevExtreme 18.1 -->
 <link href="{{ asset('plugins/devextreme-18.1/css/dx.common.css') }}" media="all" rel="stylesheet" type="text/css"/>
-<link href="{{ asset('plugins/devextreme-18.1/css/dx.carmine.css') }}" media="all" rel="stylesheet" type="text/css"/>
+<link href="{{ asset('plugins/devextreme-18.1/css/dx.material.blue.light.css') }}" media="all" rel="stylesheet" type="text/css"/>
 
 <!-- JS Tree -->
 <link href="{{ asset('plugins/jstree/dist/themes/default/style.css') }}" rel="stylesheet" />
@@ -117,7 +117,7 @@
 <!-- Diginet Plugins -->
 <script src="{{asset("plugins/digi-menu/digi-menu.js")}}"></script>
 <script src="{{asset("plugins/digi-contextmenu/digi-contextmenu.js")}}"></script>
-<script src="{{ asset('js/module/bi/folder-manage.js') }}"></script>
+
 <script src="{{asset("js/common.js")}}"></script>
 
 

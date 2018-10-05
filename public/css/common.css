@@ -750,4 +750,13 @@ a:hover {
     height: 24px;
     margin-right: 8px;
 }
+.vakata-context, .vakata-context ul {
+    margin: 0;
+    padding: 2px;
+    position: absolute;
+    background: #fffbfb !important;
+    border: 1px solid #eee !important;
+    box-shadow: 1px 1px 1px 1px #ddd !important;
+    border-radius: 5px !important;
+}
 

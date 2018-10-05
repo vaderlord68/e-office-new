@@ -18,3 +18,7 @@
     @include("modules.W82.deletePopup")
 @show
 @stop
+
+@section('script')
+    <script src="{{ asset('js/module/bi/folder-manage.js') }}"></script>
+@stop

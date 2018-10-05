@@ -1,5 +1,5 @@
+"use strict";
 var $ = jQuery.noConflict();
-
 
 $(document).ready(function () {
 
@@ -82,7 +82,7 @@ $(document).ready(function () {
             type: "get",
             dataType: "text",
             success: function (result) {
-                $(location).attr('href', '/bi')
+                $(location).attr('href', '/bi');
             }
         });
     });
@@ -121,38 +121,38 @@ $(document).ready(function () {
     }).jstree({
         'core': {
             'multiple': false,
-            "contextmenu":{
-                "items": function($node) {
-                    var tree = $("#tree").jstree(true);
-                    return {
-                        "Create": {
-                            "separator_before": false,
-                            "separator_after": false,
-                            "label": "Create",
-                            "action": function (obj) {
-                                $node = tree.jstree('create_node', $node);
-                                tree.jstree('edit', $node);
-                            }
-                        },
-                        "Rename": {
-                            "separator_before": false,
-                            "separator_after": false,
-                            "label": "Rename",
-                            "action": function (obj) {
-                                tree.jstree('edit', $node);
-                            }
-                        },
-                        "Remove": {
-                            "separator_before": false,
-                            "separator_after": false,
-                            "label": "Remove",
-                            "action": function (obj) {
-                                tree.jstree('delete_node', $node);
-                            }
-                        }
-                    };
-                }
-            },
+            // "contextmenu":{
+            //     "items": function($node) {
+            //         var tree = $("#tree").jstree(true);
+            //         return {
+            //             "Create": {
+            //                 "separator_before": false,
+            //                 "separator_after": false,
+            //                 "label": "Create",
+            //                 "action": function (obj) {
+            //                     $node = tree.jstree('create_node', $node);
+            //                     tree.jstree('edit', $node);
+            //                 }
+            //             },
+            //             "Rename": {
+            //                 "separator_before": false,
+            //                 "separator_after": false,
+            //                 "label": "Rename",
+            //                 "action": function (obj) {
+            //                     tree.jstree('edit', $node);
+            //                 }
+            //             },
+            //             "Remove": {
+            //                 "separator_before": false,
+            //                 "separator_after": false,
+            //                 "label": "Remove",
+            //                 "action": function (obj) {
+            //                     tree.jstree('delete_node', $node);
+            //                 }
+            //             }
+            //         };
+            //     }
+            // },
         },
 
         "plugins" : [
@@ -166,7 +166,7 @@ $(document).ready(function () {
             "types",
             //"unique",
             "wholerow",
-            //"changed",
+            "changed",
             //"conditionalselect"
         ]
 
