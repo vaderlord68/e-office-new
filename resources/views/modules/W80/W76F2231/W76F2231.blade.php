@@ -410,6 +410,9 @@
             mask: "h:s",
             placeholder: "__:__"
         });
+
+        var permission = '{{Helpers::getPermission('W76F2231','')}}'
+
         $("#toolbarW76F2231").digiMenu({
                 showText: true,
                 cls: 'none-border none-background',
@@ -435,9 +438,7 @@
                         ID: "btnSaveW76F22231",
                         icon: "fas fa-save",
                         title: "{{Helpers::getRS('Gui_duyet')}}",
-                        enable: function () {
-                            return true;
-                        },
+                        enable: true,
                         hidden: false,
                         type: "button",
                         cls: "btn btn-info pull-right",
@@ -454,7 +455,9 @@
                         icon: "fas fa-ban",
                         title: '{{Helpers::getRS("Tu_choi")}}',
                         enable: true,
-                        hidden: false,
+                        hidden: function () {
+                            return permission != 1;
+                        },
                         type: "button",
                         cls: "btn btn-info pull-right",
                         render: function (ui) {
@@ -469,10 +472,10 @@
                         ID: "btnApprove",
                         icon: "fas fa-save",
                         title: "{{Helpers::getRS('Duyet')}}",
-                        enable: function () {
-                            return true;
+                        enable: true,
+                        hidden: function () {
+                            return permission != 1;
                         },
-                        hidden: false,
                         type: "button",
                         cls: "btn  btn-info pull-right",
                         render: function (ui) {

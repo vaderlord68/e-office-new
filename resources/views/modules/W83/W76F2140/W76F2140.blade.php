@@ -34,6 +34,9 @@
 
     <script>
         $(document).ready(function () {
+
+            var permission = '{{$permission}}';
+
             $("#toolbarW76F2140").digiMenu({
                     showText: true,
                     buttonList: [
@@ -83,8 +86,10 @@
                         isExport: false,
                         editor: false,
                         render: function (ui) {
-                            var str = '<a id="btnEditW76F2140" title="{{Helpers::getRS("Sua")}}"><i class="fa fa-edit mgr10 text-yellow cursor-pointer"></i></a>';
-                            str += '<a id="btnDeleteW76F2140" title="{{Helpers::getRS("Xoa")}}"><i class="fa fa-trash text-danger cursor-pointer"></i></a>';
+                            if (permission = 0) {
+                                var str = '<a id="btnEditW76F2140" title="{{Helpers::getRS("Sua")}}"><i class="fa fa-edit mgr10 text-yellow cursor-pointer"></i></a>';
+                                str += '<a id="btnDeleteW76F2140" title="{{Helpers::getRS("Xoa")}}"><i class="fa fa-trash text-danger cursor-pointer"></i></a>';
+                            }
                             return str;
                         },
                         postRender: function (ui) {

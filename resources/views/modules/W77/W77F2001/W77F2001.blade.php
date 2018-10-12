@@ -260,7 +260,7 @@
     @else
     //$(".cls-logistics").attr('disabled',true);
     //        $("input, select").attr('disabled', true);
-    @endif
+            @endif
 
     var listCarType = {!! json_encode($carDList) !!};
 
@@ -276,15 +276,15 @@
             }
         });
 
-        $('#cbCarTypeIDW77F2001').on('change', function() {
+        $('#cbCarTypeIDW77F2001').on('change', function () {
             var carTypeCurrent = $(this).val();
-            var listCar = $.grep(listCarType, function(val) {
+            var listCar = $.grep(listCarType, function (val) {
                 return val.CarTypeID == carTypeCurrent;
             });
             var options = '';
             console.log(listCarType);
-            $.each(listCar, function(key, val) {
-                options += '<option value="'+ val.CarNo +'" data-desc="'+ val.Description +'">'+ val.CarBranch +'</option>';
+            $.each(listCar, function (key, val) {
+                options += '<option value="' + val.CarNo + '" data-desc="' + val.Description + '">' + val.CarBranch + '</option>';
             });
             $('#cbCarNoW77F2001').html(options);
             $('#cbCarNoW77F2001').select2({
@@ -328,6 +328,9 @@
             mask: "h:s",
             placeholder: "__:__"
         });
+
+        var permission = '{{Helpers::getPermission('W77F20001','')}}'
+
         $("#toolbarW77F2001").digiMenu({
                 showText: true,
                 cls: 'none-border none-background',
@@ -372,7 +375,9 @@
                         icon: "fas fa-ban",
                         title: '{{Helpers::getRS("Tu_choi")}}',
                         enable: true,
-                        hidden: false,
+                        hidden: function (ui) {
+                            return permission != 1;
+                        },
                         type: "button",
                         cls: "btn btn-info pull-right",
                         render: function (ui) {
@@ -390,7 +395,9 @@
                         enable: function () {
                             return true;
                         },
-                        hidden: false,
+                        hidden: function (ui) {
+                            return permission != 1;
+                        },
                         type: "button",
                         cls: "btn  btn-info pull-right",
                         render: function (ui) {

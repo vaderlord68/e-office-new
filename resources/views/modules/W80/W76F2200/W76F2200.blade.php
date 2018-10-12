@@ -36,6 +36,9 @@
 
     <script>
         $(document).ready(function () {
+
+            var permission = '{{$permission}}';
+
             $("#toolbarW76F2200").digiMenu({
                     showText: true,
                     buttonList: [
@@ -60,7 +63,7 @@
                         }
                         , {
                             ID: "txtSearchValueW76F2200",
-                            icon: "fa  fa-search text-yellow",
+                            icon: "fa fa-search text-yellow",
                             title: "{{Helpers::getRS('Tim_kiem')}}",
                             enable: true,
                             hidden: function () {
@@ -105,9 +108,11 @@
                         isExport: false,
                         editor: false,
                         render: function (ui) {
-                            var str = '<a id="btnViewW76F2200" title="{{Helpers::getRS("Xem")}}"><i class="fas fa-eye mgr10 text-primary cursor-pointer"></i></a>';
-                            str += '<a id="btnEditW76F2200" title="{{Helpers::getRS("Sua")}}"><i class="fas fa-edit mgr10 text-yellow cursor-pointer"></i></a>';
-                            str += '<a id="btnDeleteW76F2200" title="{{Helpers::getRS("Xoa")}}"><i class="fas fa-trash-alt text-danger cursor-pointer"></i></a>';
+                            if (permission = 1) {
+                                var str = '<a id="btnViewW76F2200" title="{{Helpers::getRS("Xem")}}"><i class="fas fa-eye mgr10 text-primary cursor-pointer"></i></a>';
+                                str += '<a id="btnEditW76F2200" title="{{Helpers::getRS("Sua")}}"><i class="fas fa-edit mgr10 text-yellow cursor-pointer"></i></a>';
+                                str += '<a id="btnDeleteW76F2200" title="{{Helpers::getRS("Xoa")}}"><i class="fas fa-trash-alt text-danger cursor-pointer"></i></a>';
+                            }
                             return str;
                         },
                         postRender: function (ui) {
@@ -242,11 +247,11 @@
 
 
         function loadDataW76F2200() {
-           $("#gridW76F2200").pqGrid("showLoading");
+            $("#gridW76F2200").pqGrid("showLoading");
             $.ajax({
                 method: "POST",
                 url: '{{url("/W76F2200/filter")}}',
-                data: $("#frmW76F2200").serialize()+  "&_token={{ csrf_token() }}",
+                data: $("#frmW76F2200").serialize() + "&_token={{ csrf_token() }}",
                 success: function (data) {
                     $("#gridW76F2200").pqGrid("hideLoading");
                     var temp = reformatData(JSON.parse(data), $("#gridW76F2200"));
