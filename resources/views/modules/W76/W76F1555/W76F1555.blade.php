@@ -4,7 +4,7 @@
     <?php
     //Helpers::setLang('vi');
     $lang = Helpers::getLang();
-    $ListTypeName = "ListTypeName".$lang;
+    $ListTypeName = "ListTypeName" . $lang;
     ?>
     <section id="sectionW76F1555">
         <div class="row form-group">
@@ -35,7 +35,8 @@
             <div class="col-md-5 checkbox pull-left ">
                 <div class="form-check">
                     <label class="form-check-label">
-                        <input type="checkbox" id="chkAllW76F1555" name="chkAllW76F1555" class="form-check-input" checked="" value="0">{{Helpers::getRS('Hien_thi_danh_muc_khong_su_dung')}}
+                        <input type="checkbox" id="chkAllW76F1555" name="chkAllW76F1555" class="form-check-input"
+                               checked="" value="0">{{Helpers::getRS('Hien_thi_danh_muc_khong_su_dung')}}
                     </label>
                 </div>
             </div>
@@ -48,6 +49,9 @@
     </section>
     <script type="text/javascript">
         $(document).ready(function () {
+
+            var permisson = '{{$permission}}';
+
             //define common ajax object for addition, update and delete.
             var ajaxObj = {
                 dataType: "JSON",
@@ -377,8 +381,10 @@
                         align: "center",
                         sortable: false,
                         render: function (ui) {
-                            return "<a  class='edit_btn'><i class='fa fa-edit text-yellow' style='padding-right: 10px'></i></a>\
+                            if (permisson = 1) {
+                                return "<a  class='edit_btn'><i class='fa fa-edit text-yellow' style='padding-right: 10px'></i></a>\
                             <a  class='delete_btn'><i class='fa fa-trash text-danger'></i></a>";
+                            }
                         },
                         postRender: function (ui) {
                             var rowIndx = ui.rowIndx,

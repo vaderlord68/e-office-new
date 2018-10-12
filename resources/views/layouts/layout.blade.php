@@ -86,7 +86,7 @@ $locale = Helpers::getLocale(); //return vi, en, zh, ja
 //            $(".app-body").removeClass("opacity").fadeIn(function(){
 //                resizePqGrid();
 //            });
-                }, 500);
+                }, 100);
 
             });
 

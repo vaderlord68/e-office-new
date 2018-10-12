@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Modules\W76;
 use App\Http\Controllers\Controller;
 use App\Models\D76T1555;
 use App\Models\D76T1556;
+use Helpers;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Input;
@@ -15,15 +16,17 @@ class  W76F1555Controller extends Controller
     protected $newsHelper;
     public function index($task = '')
     {
-        $lang = \Helpers::getLang();
-        $userID = \Helpers::getSession('current_user');
+        $permission = Helpers::getPermission('W76F1555','');
+
+        $lang = Helpers::getLang();
+        $userID = Helpers::getSession('current_user');
         \Debugbar::info($lang);
 
         switch ($task) {
             case '':
                 $d76T1555 = new D76T1555();
                 $listTypeID = $d76T1555->getList();
-                 return View("modules.W76.W76f1555.W76f1555", compact( 'listTypeID','lang'));
+                 return View("modules.W76.W76f1555.W76f1555", compact( 'listTypeID','lang','permission'));
                 break;
             case 'load':
                 $type = Input::get('listTypeID', '');
@@ -65,7 +68,7 @@ class  W76F1555Controller extends Controller
                 $CodeName = $rowData->CodeName;
                 $Remark = $rowData->Remark;
                 $DisplayOrder = $rowData->DisplayOrder;
-                $Inactive = \Helpers::sqlNumber($rowData->Inactive);
+                $Inactive = Helpers::sqlNumber($rowData->Inactive);
                 $CreateUserID = $rowData->CreateUserID;
                 $CreateDate = $rowData->CreateDate;
                 if ($CreateUserID == "")

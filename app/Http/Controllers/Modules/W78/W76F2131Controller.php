@@ -11,14 +11,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use SplFileInfo;
 
+
 class  W76F2131Controller extends Controller
 {
-    public function __construct()
-    {
-
-    }
 
     public function index(Request $request, $task = '')
+
     {
 
         $sql = "--Combo Phân loại:" . PHP_EOL;

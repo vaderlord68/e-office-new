@@ -15,13 +15,14 @@
                         </div>
                         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                             <div class="form-group">
-                            <input type="text" class="form-control" id="txtDocNo" name="txtSearchValueW76F2200"
-                                   id="txtSearchValueW76F2200" placeholder="{{ Helpers::getRS('Tim_kiem_xe') }}"
-                                   autocomplete="off" required>
+                                <input type="text" class="form-control" id="txtDocNo" name="txtSearchValueW76F2200"
+                                       id="txtSearchValueW76F2200" placeholder="{{ Helpers::getRS('Tim_kiem_xe') }}"
+                                       autocomplete="off" required>
                             </div>
                         </div>
                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                            <button type="submit" id="btnSearchW77F1000" title="Thêm mới" class="btn btn-default smallbtn pull-right">
+                            <button type="submit" id="btnSearchW77F1000" title="Thêm mới"
+                                    class="btn btn-default smallbtn pull-right">
                                 <span class="fa fa-search text-yellow mgr5"></span>{{ Helpers::getRS('Tim_kiem') }}
                             </button>
                         </div>
@@ -49,7 +50,9 @@
     <script>
         $(document).ready(function () {
 
-            setTimeout(function() {
+            permission = '{{$permission}}';
+
+            setTimeout(function () {
                 resizePqGrid();
             }, 300);
 
@@ -80,7 +83,7 @@
                 }
             );
 
-            $('#frmSearchW77F1000').on('submit', function(e) {
+            $('#frmSearchW77F1000').on('submit', function (e) {
                 e.preventDefault();
                 $("#gridW77F1000").pqGrid("showLoading");
                 $.ajax({
@@ -107,7 +110,7 @@
                 filterModel: {on: true, mode: "AND", header: true},
                 scrollModel: {autoFit: true},
                 postRenderInterval: -1,
-                cur_pos:1,
+                cur_pos: 1,
                 numberCell: {show: false},
                 freezeCols: 1,
                 pageModel: {type: "local", rPP: 20},
@@ -121,18 +124,20 @@
                         isExport: false,
                         editor: false,
                         render: function (ui) {
-                            var str = '';
-                            str += '<a id="btnEditW77F1000" title="{{Helpers::getRS("Sua")}}"><i class="fas fa-edit mgr10 text-yellow cursor-pointer"></i></a>';
-                            str += '<a id="btnDeleteW77F1000" title="{{Helpers::getRS("Xoa")}}"><i class="fas fa-trash-alt text-danger cursor-pointer"></i></a>';
+                            if (permission = 1) {
+                                var str = '';
+                                str += '<a id="btnEditW77F1000" title="{{Helpers::getRS("Sua")}}"><i class="fas fa-edit mgr10 text-yellow cursor-pointer"></i></a>';
+                                str += '<a id="btnDeleteW77F1000" title="{{Helpers::getRS("Xoa")}}"><i class="fas fa-trash-alt text-danger cursor-pointer"></i></a>';
+                            }
                             return str;
                         },
                         postRender: function (ui) {
                             var rowIndx = ui.rowIndx,
-                                    grid = this,
-                                    $cell = grid.getCell(ui);
+                                grid = this,
+                                $cell = grid.getCell(ui);
                             var rowData = ui.rowData;
                             $cell.find("#btnEditW77F1000").bind("click", function (evt) {
-                                var data = { carNo: rowData.CarNo };
+                                var data = {carNo: rowData.CarNo};
                                 window.location.href = "{{url('/W77F1001/edit')}}" + "?" + $.param(data);
                             });
                             $cell.find("#btnDeleteW77F1000").bind("click", function (evt) {
@@ -140,7 +145,7 @@
                                     $.ajax({
                                         method: "POST",
                                         url: '{{url('/W77F1001/delete')}}',
-                                        data: { carNo: rowData.CarNo, _token: '{{ csrf_token() }}'},
+                                        data: {carNo: rowData.CarNo, _token: '{{ csrf_token() }}'},
                                         success: function (res) {
                                             var data = JSON.parse(res);
                                             switch (data.status) {
