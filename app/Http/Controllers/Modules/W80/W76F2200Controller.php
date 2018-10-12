@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Modules\W80;
 
 use App\Http\Controllers\Controller;
 use App\Models\D76T2200;
+use Helpers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -19,11 +20,13 @@ class  W76F2200Controller extends Controller
     }
     public function index(Request $request, $task = "")
     {
+        $permission = Helpers::getPermission('W76F2200','');
+
         switch ($task) {
             case '':
                 $newsCollection = $this->getFilterList('');
 
-                return view("modules/W80/W76F2200/W76F2200", compact('rsData','newsCollection'));
+                return view("modules/W80/W76F2200/W76F2200", compact('rsData','newsCollection','permission'));
                 break;
             case 'filter':
                 $txtFacilityNameW76F2201 = $request->input("txtSearchValueW76F2200",'');

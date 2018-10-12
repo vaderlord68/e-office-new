@@ -2698,7 +2698,7 @@ class Helpers
     {
         $userID = Auth::user()->UserID;
         $sql = '--Lay phan quyen' . PHP_EOL;
-        $sql .= "EXEC D76P0002  '$userID'" . PHP_EOL;
+        $sql .= "EXEC W76P0002  '$userID'" . PHP_EOL;
         $rsRows = DB::connection()->select($sql);
         $filter = array_filter($rsRows, function ($row) use ($formID, $function) {
             return $row->FuntionID == $formID && $row->FormID == $function;

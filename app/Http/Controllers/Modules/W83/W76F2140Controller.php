@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Modules\W83;
 use App\Http\Controllers\Controller;
 use App\Models\D76T2140;
 use App\Models\D76T2141;
+use Helpers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -20,11 +21,14 @@ class  W76F2140Controller extends Controller
     public function index(Request $request, $task = "")
     {
         $title = 'Quản lý bản tin';
+
+        $permission = Helpers::getPermission('W76F2140','');
+
         switch ($task) {
             case '':
                 $newsCollection = $this->getList();
                 $newsCollection = json_encode($newsCollection);
-                return view("modules/W83/W76F2140/W76F2140", compact('title', 'newsCollection'));
+                return view("modules/W83/W76F2140/W76F2140", compact('title', 'newsCollection','permission'));
                 break;
             case 'filter':
                 $dataPost = $request->input();
