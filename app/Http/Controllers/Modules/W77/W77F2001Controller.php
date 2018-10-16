@@ -288,7 +288,6 @@ class  W77F2001Controller extends Controller
         }
     }
 
-    private
     function getMasterData($CarBookingID)
     {
         $result = $this->d76T2262->where("CarBookingID", "=", $CarBookingID)->first();
