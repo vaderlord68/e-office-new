@@ -5,13 +5,14 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 
 class User extends Authenticatable
 {
     use Notifiable;
-    protected $connection = 'sqlsrv';
+    protected $connection = 'sqlsrvLMS';
     protected $table = 'D00T0030';
     protected $primaryKey = "UserID";
     public $timestamps = false;
@@ -66,14 +67,23 @@ class User extends Authenticatable
 
     public function authenticate($userData)
     {
+
         $username = $userData['UserName'];
         $remember = $userData['remember'];
         $user = User::where("UserID", $username)->first();
-        if ($user != null && $userData['UserName'] == $user->UserID && $userData['UserPassword'] == $user->UserPassword) {
+        if ($user != null && strtoupper($username) == strtoupper($user->UserID) && $userData['UserPassword'] == $user->UserPassword) {
             Auth::login($user, $remember);
+
             return true;
         }
         return false;
 
+    }
+
+    public function getAllUsers() {
+        $users = DB::table($this->table)
+            ->select('UserID', 'UserNameU as UserName', 'Email')
+            ->get();
+        return $users;
     }
 }

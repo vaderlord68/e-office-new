@@ -1,5 +1,5 @@
+"use strict";
 var $ = jQuery.noConflict();
-
 
 $(document).ready(function () {
 
@@ -8,22 +8,24 @@ $(document).ready(function () {
     /** Clear selected folder id in local storage **/
     // localStorage.removeItem("currentSelectedFolderId");
 
-    /** Double click to open folder on grid **/
-    $(document).on("dblclick", ".bi-table-item.type-folder", function (e) {
+    /** click to open folder on grid **/
+    $(document).on("click", ".bi-table-item.type-folder td:not(:first-child)", function (e) {
         var _this = $(this);
-        var stateUrl = "/bi/folder/view?FolderId=" + _this.attr("folder_id");
-        localStorage.setItem("currentSelectedFolderId", _this.attr("folder_id"));
-        var treeElement = $('li[folder_id="'+ _this.attr("folder_id") + '"]');
+        var selectfolderID = _this.parent().attr('folder_id');
+        var stateUrl = "/bi/folder/view?FolderId=" + selectfolderID;
+        localStorage.setItem("currentSelectedFolderId", selectfolderID);
+        var treeElement = $('li[folder_id="'+ selectfolderID + '"]');
         $("#folderTree").jstree("open_all");
         $("#folderTree").jstree("deselect_all",true);
         $('#folderTree').jstree('select_node', treeElement.attr("id"));
         window.location.href = stateUrl;
     });
-    /** Double click to open document on grid **/
-    $(document).on("dblclick", ".bi-table-item.type-document", function (e) {
+    /** click to open document on grid **/
+    $(document).on("click", ".bi-table-item.type-document td:not(:first-child)", function (e) {
         var _this = $(this);
-        var url = "/bi/document/view?DocumentId=" + _this.attr("document_id");
+        var url = "/bi/document/view?DocumentId=" + _this.parent().attr("document_id");
         window.location.href = url;
+
     });
     /** Add new attached file **/
     var attachedFileInputCount = 0;
@@ -33,7 +35,7 @@ $(document).ready(function () {
         if (attachedFileInputCount >= 5) {
             alert('Tối đa 5 file đính kèm');
         } else {
-            var html = '<div class="attachedFileWrapper"><div class="col-sm-11" style="padding: 0px"><input  class="form-control input-md attachedFileInput" type="file" name="AttachedFiles[]"></div>';
+            var html = '<div class="attachedFileWrapper row"><div class="col-sm-11" style="padding: 0px"><input  class="form-control input-md attachedFileInput" type="file" name="AttachedFiles[]"></div>';
             html = html + '<div class="col-sm-1"><a id="bi-removeAttachedFileInput" class="toolbar-btn action-on-header" href=""><i class="fa fa-times-circle"></i></a></div></div>';
             fileContainer.append(html);
             attachedFileInputCount++;
@@ -80,7 +82,7 @@ $(document).ready(function () {
             type: "get",
             dataType: "text",
             success: function (result) {
-                $(location).attr('href', '/bi')
+                $(location).attr('href', '/bi');
             }
         });
     });
@@ -96,23 +98,78 @@ $(document).ready(function () {
     $(document).on("click", "#bi-selectRelatedDocument", function (e) {
         e.preventDefault();
         var allInputs = $(".relatedDocumentIds input:checked");
-        var createDocumentForm = $("#processDocument");
+        var processDocumentForm = $("#processDocument");
 
         $(".hidden-relatedDocumentId").each(function () {
             $(this).remove();
         });
 
         allInputs.each(function () {
-            createDocumentForm.append("<input class='hidden-relatedDocumentId' name='relatedDocumentIds[]' type='hidden' value='"+ $(this).val() +"'>");
+            processDocumentForm.append("<input class='hidden-relatedDocumentId' name='relatedDocumentIds[]' type='hidden' value='"+ $(this).val() +"'>");
         });
     });
 
 
     /** Init Folder Tree **/
-    $('#folderTree').jstree({
+    $('#folderTree').bind('loaded.jstree',function (e, data) {
+        setTimeout(function () {
+            $('#folderTree').css("display","block");
+            $('#folder-tree-loading').css("display","none");
+            var nodeSelector = "#" + localStorage.getItem("currentSelectedNodeId") + "_anchor";
+            $(nodeSelector).css("background-color","#FFC107");
+        },500);
+    }).jstree({
         'core': {
             'multiple': false,
-        }
+            // "contextmenu":{
+            //     "items": function($node) {
+            //         var tree = $("#tree").jstree(true);
+            //         return {
+            //             "Create": {
+            //                 "separator_before": false,
+            //                 "separator_after": false,
+            //                 "label": "Create",
+            //                 "action": function (obj) {
+            //                     $node = tree.jstree('create_node', $node);
+            //                     tree.jstree('edit', $node);
+            //                 }
+            //             },
+            //             "Rename": {
+            //                 "separator_before": false,
+            //                 "separator_after": false,
+            //                 "label": "Rename",
+            //                 "action": function (obj) {
+            //                     tree.jstree('edit', $node);
+            //                 }
+            //             },
+            //             "Remove": {
+            //                 "separator_before": false,
+            //                 "separator_after": false,
+            //                 "label": "Remove",
+            //                 "action": function (obj) {
+            //                     tree.jstree('delete_node', $node);
+            //                 }
+            //             }
+            //         };
+            //     }
+            // },
+        },
+
+        "plugins" : [
+            //"checkbox",
+            "contextmenu",
+            "dnd",
+            //"massload",
+            //"search",
+            "sort",
+            "state",
+            "types",
+            //"unique",
+            "wholerow",
+            "changed",
+            //"conditionalselect"
+        ]
+
     });
 
 
@@ -124,8 +181,10 @@ $(document).ready(function () {
     // listen for event
         .on('changed.jstree', function (e, data) {
             var selectedFolderId = data.node.li_attr.folder_id;
+            var nodeId = data.node.id;
             if (typeof selectedFolderId != 'undefined') {
                 localStorage.setItem("currentSelectedFolderId", selectedFolderId);
+                localStorage.setItem("currentSelectedNodeId", nodeId);
                 var url = "/bi/folder/view?FolderId=" + selectedFolderId;
                 window.location.href = url;
             } else {
@@ -133,6 +192,8 @@ $(document).ready(function () {
                 var url = "/bi/document/view?DocumentId=" + selectedDocumentId;
                 window.location.href = url;
             }
+
         })
         .jstree();
+
 });

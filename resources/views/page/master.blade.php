@@ -16,7 +16,9 @@
     @show
     @section('footer')
     @show
+
     </body>
 @show
+
 <div id="divModalContainer"></div>
 </html>

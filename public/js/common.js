@@ -919,33 +919,69 @@ function checkFileType(filename, extListJson) {
     return true;
 }
 
-function alertError($str){
-    $(".alert-message").removeClass('hide');
-    //hide success
-    $("#divSuccessMessage").addClass('hide');
-    //show error
-    $("#divErrorMessage").removeClass("hide");
-    //set the value of error message
-    $("#divErrorMessage").find("#msgErrorMessage").html($str);
+function alertError($str, $parent){
+    var $parent = typeof $parent !== 'undefined' ? $parent : null;
+    if($parent == null){
+        $(".alert-message").removeClass('hide');
+        //hide success
+        $("#divSuccessMessage").addClass('hide');
+        //show error
+        $("#divErrorMessage").removeClass("hide");
+        //set the value of error message
+        $("#divErrorMessage").find("#msgErrorMessage").html($str);
+    }else{
+        $parent.find(".alert-message").removeClass('hide');
+        //hide success
+        $parent.find("#divSuccessMessage").addClass('hide');
+        //show error
+        $parent.find("#divErrorMessage").removeClass("hide");
+        //set the value of error message
+        $parent.find("#divErrorMessage").find("#msgErrorMessage").html($str);
+    }
+
 
 }
 
-function alertSuccess($str){
-    //hide error
-    $("#divErrorMessage").addClass('hide');
-    //show success
-    $("#divSuccessMessage").removeClass("hide");
-    //set the value of error message
-    $("#divSuccessMessage").find("#msgSuccessMessage").html($str);
-    $(".alert-message").removeClass('hide');
+function alertSuccess($str, $parent){
+    var $parent = typeof $parent !== 'undefined' ? $parent : null;
+    if($parent == null){
+        //hide error
+        $("#divErrorMessage").addClass('hide');
+        //show success
+        $("#divSuccessMessage").removeClass("hide");
+        //set the value of error message
+        $("#divSuccessMessage").find("#msgSuccessMessage").html($str);
+        $(".alert-message").removeClass('hide');
+    }else{
+        //hide error
+        $parent.find("#divErrorMessage").addClass('hide');
+        //show success
+        $parent.find("#divSuccessMessage").removeClass("hide");
+        //set the value of error message
+        $parent.find$("#divSuccessMessage").find("#msgSuccessMessage").html($str);
+        $parent.find(".alert-message").removeClass('hide');
+    }
+
+
 
 }
 
-function hideAlert(){
-    $("#divSuccessMessage").addClass('hide');
-    $("#divErrorMessage").addClass('hide');
-    $("#divSuccessMessage").val('');
-    $("#divErrorMessage").val('');
+function hideAlert($parent){
+    var $parent = typeof $parent !== 'undefined' ? $parent : null;
+
+
+    if($parent == null){
+        $("#divSuccessMessage").addClass('hide');
+        $("#divErrorMessage").addClass('hide');
+        $("#divSuccessMessage").val('');
+        $("#divErrorMessage").val('');
+    }else{
+        $parent.find("#divSuccessMessage").addClass('hide');
+        $parent.find("#divErrorMessage").addClass('hide');
+        $parent.find("#divSuccessMessage").val('');
+        $parent.find("#divErrorMessage").val('');
+    }
+
 }
 
 function check_file_type(filename) {
@@ -966,6 +1002,47 @@ function blob_to_data_URL(blob, callback) {
         callback(e.target.result);
     }
     a.readAsDataURL(blob);
+}
+
+
+//THANH TRAM//
+jQuery.each([ "toggle", "show", "hide" ], function( i, name ) {
+    var cssFn = jQuery.fn[ name ];
+    jQuery.fn[ name ] = function( speed, easing, callback ) {
+        return speed == null || typeof speed === "boolean" ?
+            cssFn.apply( this, arguments ) :
+            this.animate( genFx( name, true ), speed, easing, callback );
+    };
+});
+///THANH TRAM _END//
+
+function showLoading(){
+    $("#spinLoading").removeClass('hide');
+}
+
+function hideLoading(){
+    $("#spinLoading").addClass('hide');
+}
+
+function toggleSidebar(){
+    $("body").toggleClass('sidebar-lg-show');
+}
+
+Array.prototype.mergeWithCondition = function (arrRight, leftKey, rightKey) {
+    var arraySource = this;
+    console.log("test function");
+    $.each(arrRight ,function(index  , row){
+        var val = row[rightKey];
+
+        var arrTemp = $.grep(arraySource, function(item){
+            return item[leftKey] == val;
+        });
+        if (arrTemp.length == 0){
+            arraySource.push(row);
+        }
+
+        return arraySource;
+    });
 }
 
 

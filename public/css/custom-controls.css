@@ -1,0 +1,96 @@
+body,textarea{
+    font-family: Source Serif Pro, PT Sans, Trebuchet MS, Helvetica, Arial !important;
+    font-size: 12px !important;
+}
+
+input.form-control, select.form-control, table{
+    line-height: 28px !important;
+    font-family: Source Serif Pro, PT Sans, Trebuchet MS, Helvetica, Arial !important;
+    height: 28px !important;
+    font-size: 12px !important;
+}
+.btn{
+    line-height: 28px !important;
+    height: 28px !important;
+    padding: 0px 10px !important;
+    font-family: Source Serif Pro, PT Sans, Trebuchet MS, Helvetica, Arial !important;
+    font-size: 12px !important;
+
+}
+input[type='file']{
+    height: 100px !important;
+}
+
+.pq-grid-title-row{
+    vertical-align: middle;
+    font-weight: bold;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f9efa4+2,e8e1bb+54,eadd93+100 */
+    background: #f9efa4; /* Old browsers */
+    background: -moz-linear-gradient(top, #f9efa4 2%, #e8e1bb 54%, #eadd93 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #f9efa4 2%,#e8e1bb 54%,#eadd93 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #f9efa4 2%,#e8e1bb 54%,#eadd93 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9efa4', endColorstr='#eadd93',GradientType=0 ); /* IE6-9 */
+}
+
+.pq-state-select.ui-state-highlight {
+    background: #efefce;
+}
+tr.pq-grid-oddRow > td.pq-state-select, tr.pq-grid-oddRow.pq-state-select, tr.pq-grid-oddRow > .pq-grid-cell-hover, tr.pq-grid-oddRow.pq-grid-row-hover {
+    background: #efefce;
+}
+
+/*begin css for popup modal*/
+#divModalContainer .modal-content{
+    border-radius: 10px;
+}
+#divModalContainer .modal-header{
+    background-color: #EAC151;
+    border-radius: 10px 10px 0px 0px !important;
+    padding: 5px 10px 5px 15px;
+    height: 38px;
+    line-height: 38px;
+}
+#divModalContainer .modal-footer {
+    background-color: #ffffff;
+    border-radius: 0px 0px 10px 10px !important;
+    padding: 5px 10px 5px 15px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#divModalContainer .modal-header .modal-title {
+    line-height: 28px;
+}
+#divModalContainer .modal-header .close {
+    line-height: 28px;
+}
+#divModalContainer .modal-header  h4{
+    color: white;
+    font-size: 14px;
+}
+/*end css for popup modal*/
+
+/* start css for confirmation bootbox*/
+#divConfirm .modal-header {
+    background-color: #EAC151;
+    border-radius: 10px 10px 0px 0px !important;
+}
+#divConfirm .modal-header .panel-heading .modal-title{
+    color: white;
+    font-size: 14px;
+}
+#divConfirm .modal-footer{
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 0px 0px 10px 10px !important;
+}
+
+#divConfirm .modal-dialog {
+    min-width: 200px;
+    width: auto;
+    max-width: 600px;
+    pointer-events: auto;
+}
+/*end css for confirmation bootbox*/

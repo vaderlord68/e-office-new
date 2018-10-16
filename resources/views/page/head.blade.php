@@ -34,6 +34,15 @@ $locale = Helpers::getLocale();
 <!-- Moment -->
 <script type="text/javascript" src="{!! asset('plugins/moment/moment.js') !!}"></script>
 
+<!-- full calendar-->
+
+<link rel="stylesheet" href="{{ asset('plugins/fullcalendar-3.9.0/fullcalendar.css') }}">
+<link rel="stylesheet" href="{{ asset('/plugins/fullcalendar-3.9.0/scheduler.min.css') }}">
+<script src="{{asset("plugins/fullcalendar-3.9.0/fullcalendar.js")}}"></script>
+<script src="{{asset("plugins/fullcalendar-3.9.0/locale-all.js")}}"></script>
+<script src="{{asset("plugins/fullcalendar-3.9.0/scheduler.min.js")}}"></script>
+
+
 <!-- DatePicker -->
 <link href="{{ asset('plugins/datepicker/datepicker3.css') }}" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="{!! asset('plugins/datepicker/bootstrap-datepicker.js') !!}"></script>
@@ -47,7 +56,6 @@ $locale = Helpers::getLocale();
 
 <!-- Inputmask -->
 <script type="text/javascript" src="{!! asset('plugins/input-mask/jquery.inputmask.bundle.js') !!}"></script>
-
 
 <!-- Paramquery -->
 <link href="{{ asset('plugins/paramquery-3.3.4/pqgrid.dev.css') }}" media="all" rel="stylesheet" type="text/css"/>
@@ -70,6 +78,10 @@ $locale = Helpers::getLocale();
 <!-- CKeditor for editor -->
 <script src="{{ asset('plugins/ckeditor/ckeditor.js') }}"></script>
 
+<script src="{{ asset('plugins/ckeditor5-build-classic/ckeditor.js') }}"></script>
+
+<!-- Validation JS-->
+<script src="{{ asset('plugins/validation-js/validate.min.js') }}"></script>
 
 <!-- Bootbox support confirmation dialog -->
 <script type="text/javascript" src="{!! asset('plugins/bootstrap-bootbox/bootbox.js') !!}"></script>
@@ -77,7 +89,7 @@ $locale = Helpers::getLocale();
 <!--start Theme -->
 <link rel="stylesheet" href="{{ asset('css/dashboard/normalize.css') }}">
 <link rel="stylesheet" href="{{ asset('css/dashboard/bootstrap.min.css') }}">
-<link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+<link rel="stylesheet" href="{{ asset('plugins/fontawesome-pro-5.0.13/web-fonts-with-css/css/fontawesome-all.css') }}">
 <link rel="stylesheet" href="{{ asset('css/dashboard/themify-icons.css') }}">
 <link rel="stylesheet" href="{{ asset('css/dashboard/flag-icon.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/dashboard/cs-skin-elastic.css') }}">
@@ -106,13 +118,11 @@ $locale = Helpers::getLocale();
 <script src="{{asset("plugins/digi-contextmenu/digi-contextmenu.js")}}"></script>
 
 
-
-
-
 <!-- Diginet common -->
+{{--<link rel="stylesheet" href="{{ asset('css/custom-controls.css') }}">--}}
 <link rel="stylesheet" href="{{ asset('css/common.css') }}">
 <script src="{{asset("js/common.js")}}"></script>
-
+@yield('script')
 
 <script>
     //store resources for using of javascript

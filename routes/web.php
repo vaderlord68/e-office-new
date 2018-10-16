@@ -12,6 +12,7 @@
 */
 
 
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
 
@@ -21,36 +22,51 @@ Route::any('/logout/post', 'User\AuthenticateController@logoutPost');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'Core\IndexController@index');
-    Route::get('/bi', 'Module\Bi\IndexController@index');
-    Route::get('/bi/folder/view', 'Module\Bi\Folder\ViewController@index');
-    Route::get('/bi/folder/create/index', 'Module\Bi\Folder\CreateController@index');
-    Route::post('/bi/folder/create/execute', 'Module\Bi\Folder\CreateController@execute');
-    Route::get('/bi/folder/rename/index', 'Module\Bi\Folder\RenameController@index');
-    Route::post('/bi/folder/rename/execute', 'Module\Bi\Folder\RenameController@execute');
-    Route::get('/bi/folder/delete/execute', 'Module\Bi\Folder\DeleteController@execute');
-
-    Route::get('/bi/document/create/index', 'Module\Bi\Document\CreateController@index');
-    Route::post('/bi/document/create/execute', 'Module\Bi\Document\CreateController@execute');
-    Route::get('/bi/document/view', 'Module\Bi\Document\ViewController@index');
-    Route::get('/bi/document/edit', 'Module\Bi\Document\EditController@index');
-    Route::post('/bi/document/edit/execute', 'Module\Bi\Document\EditController@execute');
-
-    Route::get('/news', 'Module\News\NewsController@index');
-    Route::get('/news/manage', 'Module\News\ManageNewsController@index');
-    Route::get('/news/manage/filter', 'Module\News\ManageNewsController@filter');
-    Route::get('/news/create', 'Module\News\CreateNewsController@index');
-    Route::post('/news/create/save', 'Module\News\CreateNewsController@execute');
-    Route::get('/news/edit/{newsid}', 'Module\News\EditNewsController@index');
-    Route::post('/news/edit/save', 'Module\News\EditNewsController@execute');
-    Route::get('/news/delete', 'Module\News\DeleteNewsController@execute');
-    Route::get('/news/search/title', 'Module\News\SearchNewsController@searchTitle');
-
-    //Category
-    Route::get('/w76f1555/{task?}', 'Module\W76\W76F1555\W76F1555Controller@index');
+    Route::any('/download/{filename?}', 'Modules\WXXController@download');
 });
 
-Route::group(['namespace' => 'Module\W76', 'middleware' => 'auth'], function () {
-    Route::any('/w76f2140/{task?}', 'W76F2140Controller@index');
-    Route::any('/w76f2141/{task?}', 'W76F2141Controller@index');
+//Danh muc xe cong tac
+Route::group(['namespace' => 'Module\W77','middleware' => 'auth'], function () {
+    Route::any('/W77F1000/{task?}', 'W77F1000Controller@index');
+    Route::any('/W77F1001/{task?}', 'W77F1001Controller@index');
 });
+//end-Danh muc xe cong tac
+//Back pages
+Route::group(['namespace' => 'Admin'], function() {
+    Route::any('/administrator', function(){
+        return Redirect::to('/admin/home');
+    });
+    Route::any('/adminlogin', function(){
+        return Redirect::to('/admin/home');
+    });
+});
+Route::group(['namespace' => 'Admin'], function() {
+    Route::any('/admin/home', 'AuthController@home');
+    Route::any('/admin/login/{task?}', 'AuthController@login');
+    Route::any('/admin/logout', 'AuthController@logout');
+    Route::any('/admin/W00F0001/{task?}', 'W00F0001Controller@index');
+    Route::any('/admin/W00F0002/{task?}', 'W00F0002Controller@index');
+    Route::any('/admin/W00F0003/{task?}', 'W00F0003Controller@index');
+});
+
+$routePartials = ['W76','W77', 'W78', 'W79', 'W80', 'W81', 'W82', 'W83', 'W84', 'W85', 'W86', 'W87', 'W88', 'W89','W90'];
+foreach ($routePartials as $route) {
+    $file = __DIR__.'/modules/'.$route.'.php';
+    if ( ! file_exists($file))
+    {
+        $msg = "Route partial [{$route}] not found.";
+        throw new \Illuminate\Filesystem\FileNotFoundException($msg);
+    }
+    require_once $file;
+}
+
+
+
+
+
+
+
+
+
+
 
