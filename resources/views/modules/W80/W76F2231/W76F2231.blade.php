@@ -332,7 +332,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row mgb5">
+                                    <?php
+                                    \Debugbar::info($permission);
+                                    ?>
+                                    <div class="row mgb5 {{$permission == 1 ? '' : 'hide'}}">
                                         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                                             <label class="lbl-normal">{{Helpers::getRS("Ghi_chu_duyet")}}</label>
                                         </div>
@@ -411,7 +414,7 @@
             placeholder: "__:__"
         });
 
-        var permission = '{{Helpers::getPermission('W76F2231','')}}'
+        var permission = '{{$permission}}';
 
         $("#toolbarW76F2231").digiMenu({
                 showText: true,

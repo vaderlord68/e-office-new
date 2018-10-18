@@ -37,8 +37,6 @@
     <script>
         $(document).ready(function () {
 
-            var permission = '{{$permission}}';
-
             $("#toolbarW76F2200").digiMenu({
                     showText: true,
                     buttonList: [
@@ -108,10 +106,16 @@
                         isExport: false,
                         editor: false,
                         render: function (ui) {
-                            if (permission = 1) {
+                            var $permission = "{{$permission->W76F2200_FULL}}";
+                            //$permission = 0;
+                            if ($permission == 1) {
                                 var str = '<a id="btnViewW76F2200" title="{{Helpers::getRS("Xem")}}"><i class="fas fa-eye mgr10 text-primary cursor-pointer"></i></a>';
                                 str += '<a id="btnEditW76F2200" title="{{Helpers::getRS("Sua")}}"><i class="fas fa-edit mgr10 text-yellow cursor-pointer"></i></a>';
                                 str += '<a id="btnDeleteW76F2200" title="{{Helpers::getRS("Xoa")}}"><i class="fas fa-trash-alt text-danger cursor-pointer"></i></a>';
+                            } else {
+                                var str = '<a id="btnViewW76F2200" title="{{Helpers::getRS("Xem")}}"><i class="fas fa-eye mgr10 text-primary cursor-pointer"></i></a>';
+                                str += '<i class="fas fa-edit mgr10 text-gray"></i>';
+                                str += '<i class="fas fa-trash-alt text-gray"></i>';
                             }
                             return str;
                         },
