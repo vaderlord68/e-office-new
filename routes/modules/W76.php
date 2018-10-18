@@ -23,3 +23,4 @@ Route::group(['namespace' => 'Modules\W76', 'middleware' => 'auth'], function ()
     Route::any('/W76F2251/{task?}', 'W76F2251Controller@index');
 });
 
+
