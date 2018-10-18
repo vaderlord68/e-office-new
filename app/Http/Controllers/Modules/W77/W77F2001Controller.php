@@ -38,7 +38,8 @@ class  W77F2001Controller extends Controller
 
     public function index(Request $request, $task = "")
     {
-        $permission = Helpers::getPermission('W77F2001', 'W77F2001_APP');
+        $permission = Helpers::getPermission('W77F2001');
+        \Debugbar::info($permission);
         switch ($task) {
             case 'add':
                 $all = $request->input();

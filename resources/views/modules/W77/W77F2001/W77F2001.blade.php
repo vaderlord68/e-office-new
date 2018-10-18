@@ -208,33 +208,28 @@
                                                    id="txtNumParticipantsW77F2001"
                                                    name="txtNumParticipantsW77F2001"
                                                    class="form-control" maxlength="4"
-                                                   onkeypress="return inputNumber(event);" min="1" step="1"
+                                                   min="1" step="1"
                                                    value="{{$txtNumParticipantsW77F2001}}"
                                                    placeholder="" autocomplete="off" required>
                                         </div>
                                         <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                                         </div>
                                     </div>
-                                    <?php
-                                        \Debugbar::info($permission);
-                                    ?>
-
-                                        <div class="row mgb5 {{$permission == 1 ? '' : 'hide'}}">
-                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                                <label class="lbl-normal">{{Helpers::getRS("Ghi_chu_duyet")}}</label>
-                                            </div>
-                                            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-
-                                                <input type="text" class="form-control"
-                                                       autocomplete="off" class="form-control"
-                                                       id="approvalNotesW77F2001"
-                                                       name="approvalNotesW77F2001" maxlength="500"
-                                                       value="{{$approvalNotesW77F2001}}">
-                                                </input>
-
-                                            </div>
+                                    {{--@if($permission = 1)--}}
+                                    <div class="row mgb5 {{$permission->W77F2001_APP == 1 ? '': 'hide'}}">
+                                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                            <label class="lbl-normal">{{Helpers::getRS("Ghi_chu_duyet")}}</label>
                                         </div>
-
+                                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                                            <input type="text" class="form-control"
+                                                   autocomplete="off" class="form-control"
+                                                   id="approvalNotesW77F2001"
+                                                   name="approvalNotesW77F2001" maxlength="500"
+                                                   value="{{$approvalNotesW77F2001}}">
+                                            </input>
+                                        </div>
+                                    </div>
+                                    {{--@endif--}}
                                     <button id="btnSubmitW77F2001" class="hide"></button>
                                 </form>
                             </div>
@@ -335,7 +330,10 @@
             placeholder: "__:__"
         });
 
-        var permission = '{{$permission}}';
+        var permission = "{{$permission->W77F2001_APP}}";
+        <?php
+        \Debugbar::info($permission);
+        ?>
 
         $("#toolbarW77F2001").digiMenu({
                 showText: true,
