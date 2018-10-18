@@ -335,7 +335,7 @@
                                     <?php
                                     \Debugbar::info($permission);
                                     ?>
-                                    <div class="row mgb5 {{$permission == 1 ? '' : 'hide'}}">
+                                    <div class="row mgb5 {{$permission->W76F2231_APP == 1 ? '': 'hide'}}">
                                         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                                             <label class="lbl-normal">{{Helpers::getRS("Ghi_chu_duyet")}}</label>
                                         </div>
@@ -414,7 +414,7 @@
             placeholder: "__:__"
         });
 
-        var permission = '{{$permission}}';
+        var permission = '{{$permission->W76F2231_APP}}';
 
         $("#toolbarW76F2231").digiMenu({
                 showText: true,
@@ -507,7 +507,7 @@
             $.ajax({
                 //enctype: 'multipart/form-data',
                 method: "POST",
-                url: '{{ url('/W76F2231/updateStatus') }}',
+                url: '{{ url(' / W76F2231 / updateStatus') }}',
                 data: {
                     status: status,
                     notes: notes,
