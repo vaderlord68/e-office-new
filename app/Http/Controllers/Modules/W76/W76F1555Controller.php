@@ -16,7 +16,7 @@ class  W76F1555Controller extends Controller
     protected $newsHelper;
     public function index($task = '')
     {
-        $permission = Helpers::getPermission('W76F1555','');
+        $permission = Helpers::getPermission('W76F1555');
 
         $lang = Helpers::getLang();
         $userID = Helpers::getSession('current_user');

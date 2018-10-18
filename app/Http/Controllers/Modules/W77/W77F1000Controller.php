@@ -29,18 +29,18 @@ class  W77F1000Controller extends Controller
 
         $title = "Danh mục xe công tác";
 
-        $permission= Helpers::getPermission('W77F1000','');
+        $permission= Helpers::getPermission('W77F1000'); //W77F1000_FULL, W77F1000_VIEW
 
         switch($task) {
             case "":
                 $rsData = $this->getLists('');
-                \Debugbar::info($rsData);
+                //\Debugbar::info($rsData);
                 return view("modules/W77/W77F1000/W77F1000", compact('title', 'rsData','permission'));
                 break;
             case "search":
                 $strSearch = $request->input('txtSearchValueW76F2200', '');
                 $rsData = $this->getLists($strSearch);
-                \Debugbar::info($rsData);
+                //\Debugbar::info($rsData);
                 return json_encode($rsData);
                 break;
         }

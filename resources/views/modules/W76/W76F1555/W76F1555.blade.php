@@ -50,8 +50,6 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-            var permisson = '{{$permission}}';
-
             //define common ajax object for addition, update and delete.
             var ajaxObj = {
                 dataType: "JSON",
@@ -381,9 +379,14 @@
                         align: "center",
                         sortable: false,
                         render: function (ui) {
-                            if (permisson = 1) {
+                            var $permission = "{{$permission->W76F1555_FULL}}";
+                            //$permission = 0;
+                            if ($permission == 1) {
                                 return "<a  class='edit_btn'><i class='fa fa-edit text-yellow' style='padding-right: 10px'></i></a>\
                             <a  class='delete_btn'><i class='fa fa-trash text-danger'></i></a>";
+                            } else {
+                                return "<a><i class='fas fa-edit mgr10 text-gray' style='padding-right: 10px'></i></a>\
+                            <a><i class='fas fa-trash-alt text-gray'></i></a>";
                             }
                         },
                         postRender: function (ui) {

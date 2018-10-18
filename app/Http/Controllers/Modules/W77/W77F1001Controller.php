@@ -17,18 +17,19 @@ class  W77F1001Controller extends Controller
      * @Author: TRIHAO
      * @Date: 26/09/2018
      */
-    public function __construct() {
+    public function __construct()
+    {
 
     }
 
-    public function index(Request $request, $task = '') {
-
+    public function index(Request $request, $task = '')
+    {
         switch ($task) {
             case 'add':
                 $divisionID = session('W76P0000')->DivisionID;
                 $carTypes = D76T2260::select('CarTypeID', 'Description')->orderBy('DisplayOrder')->get();
 
-                $sql = "-- Do nguon tai xe".PHP_EOL;
+                $sql = "-- Do nguon tai xe" . PHP_EOL;
                 $sql .= "EXEC W76P9020 '$divisionID', 'DRIVER'";
                 $carDrivers = DB::select($sql);
 
@@ -41,7 +42,7 @@ class  W77F1001Controller extends Controller
                 $divisionID = session('W76P0000')->DivisionID;
                 $carTypes = D76T2260::select('CarTypeID', 'Description')->orderBy('DisplayOrder')->get();
 
-                $sql = "-- Do nguon tai xe".PHP_EOL;
+                $sql = "-- Do nguon tai xe" . PHP_EOL;
                 $sql .= "EXEC W76P9020 '$divisionID', 'DRIVER'";
                 $carDrivers = DB::select($sql);
 

@@ -13,7 +13,9 @@
         $deadlineW84F1001 = $rowData["Deadline"];
         $empFollowW84F1001 = "";
         $descriptionW84F1001 = $rowData["Remark"];
+
     } else {
+        $master = json_decode($rowData);
         $TaskID = "";
         $taskNameW84F1000 = "";
         $employeeW84F1001 = "";
@@ -110,14 +112,14 @@
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                         <input name="startDateW84F1001" id="startDateW84F1001" class="form-control"
-                               value="{{$startDateW84F1001}}">
+                               value="{{$startDateW84F1001}}" autocomplete="off">
                     </div>
                     <div class="col-sm-2 col-md-2 col-lg-2 col-lg-2">
                         <label class="lbl-normal" for="">{{Helpers::getRS("Han_xu_ly")}}</label>
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                         <input name="deadlineW84F1001" id="deadlineW84F1001" class="form-control"
-                               value="{{$deadlineW84F1001}}">
+                               value="{{$deadlineW84F1001}}" autocomplete="off">
                     </div>
                 </div>
                 <div class="row mgb5">
@@ -145,7 +147,7 @@
                     <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
                     <textarea type="text" name="descriptionW84F1001" id="descriptionW84F1001" class="form-control"
                               maxlength="250"
-                              autocomplete="off" value="{{$descriptionW84F1001}}" style="height: 60px"></textarea>
+                              autocomplete="off" style="height: 60px">{{$descriptionW84F1001}}</textarea>
                     </div>
                 </div>
                 <div class="row mgt10">
@@ -291,7 +293,7 @@
                             postRender: function (ui) {
                                 console.log(ui);
                                 ui.$btn.click(function () {
-                                    showFormDialogPost('{{url('/W84F1000/UpdateProcess')}}', 'myModalW84', {_token: '{{csrf_token()}}'});
+                                    showFormDialogPost('{{url('/W84F1000/Process')}}', 'myModalW84', {_token: '{{csrf_token()}}'});
                                     console.log("jsahdjsdhshdjk");
                                 });
                             }
@@ -309,10 +311,31 @@
                             render: function (ui) {
                             },
                             postRender: function (ui) {
-                                {{--console.log(ui);--}}
-                                {{--ui.$btn.click(function () {--}}
-                                {{--window.location.href = "{{url('/W76F2141/add')}}";--}}
-                                {{--});--}}
+                                console.log(ui);
+                                ui.$btn.click(function () {
+                                    var formData = $('#frm_TasDetail').serialize();
+                                    ask_delete(function (ui) {
+                                        $.ajax({
+                                            method: "POST",
+                                            url: '{{url('/W84F1000/delete')}}',
+                                            data: formData + "&TaskID={{$TaskID}}&_token={{ csrf_token() }}",
+                                            success: function (res) {
+                                                var data = JSON.parse(res);
+                                                switch (data.status) {
+                                                    case "SUCC":
+                                                        var $frm = $("#frm_TasDetail");
+                                                        delete_ok(function () {
+                                                            window.location.reload();
+                                                        });
+                                                        break;
+                                                    case "ERROR":
+                                                        alertError(data.message);
+                                                        break;
+                                                }
+                                            }
+                                        })
+                                    });
+                                });
                             }
                         }
                     ]
@@ -329,6 +352,7 @@
             });
         }
 
+
         $('#frm_TasDetail').on('submit', function (e) {
 
             e.preventDefault();
@@ -341,8 +365,12 @@
                 url = '{{url("/W84F1000/save")}}';
             }
             if (task == "edit") {
-                url = '{{url("/W784F1001/update")}}';
+                url = '{{url("/W84F1000/update")}}';
             }
+            if (task == "delete") {
+                url = '{{url("/W84F1000/delete")}}';
+            }
+
             $.ajax({
                 method: "POST",
                 url: url,
@@ -361,6 +389,40 @@
             });
         });
 
+        {{--function frmW84F1000Delete() {--}}
+        {{--validationElements($("#frm_TasDetail"), function () {--}}
+        {{--//Kiem tra nhung truong hop khac--}}
+        {{--//                checkID($("#txtContractNo"));--}}
+        {{--console.log($("#frm_TasDetail").find("#btnSubmitW84F1000"));--}}
+        {{--$("#frm_TasDetail").find("#btnSubmitW84F1000").click();--}}
+        {{--});--}}
+        {{--}--}}
+
+        {{--$('#frm_TasDetail').on('submit', function (e) {--}}
+        {{--e.preventDefault();--}}
+        {{--var formData = $('#frm_TasDetail').serialize();--}}
+        {{--ask_delete(function () {--}}
+        {{--$.ajax({--}}
+        {{--method: "POST",--}}
+        {{--url: '{{url('/W76F2200/delete')}}',--}}
+        {{--data: {TaskID: rowData.TaskID, _token: '{{ csrf_token() }}'},--}}
+        {{--success: function (res) {--}}
+        {{--var data = JSON.parse(res);--}}
+        {{--switch (data.status) {--}}
+        {{--case "SUCC":--}}
+        {{--var $grid = $("#gridW76F2200");--}}
+        {{--delete_ok(function () {--}}
+        {{--update4ParamGrid($grid, null, 'delete');--}}
+        {{--});--}}
+        {{--break;--}}
+        {{--case "ERROR":--}}
+        {{--alertError(data.message);--}}
+        {{--break;--}}
+        {{--}--}}
+        {{--}--}}
+        {{--})--}}
+        {{--});--}}
+        {{--});--}}
 
     </script>
 

@@ -16,7 +16,7 @@
             @foreach($taskList as $taskRow)
                 <?php
                 $TaskID = $taskRow->TaskID;
-                $detailURL = url('/W84F1000/edit') . '&TaskID=' . $TaskID;
+                $detailURL = url('/W84F1000/edit') . '?TaskID=' . $TaskID;
                 ?>
                 <div class="well-employee pdl15 pdt10">
                     <div class="row">
