@@ -22,7 +22,7 @@ class  W76F2140Controller extends Controller
     {
         $title = 'Quản lý bản tin';
 
-        $permission = Helpers::getPermission('W76F2140','');
+        $permission = Helpers::getPermission('W76F2140');
 
         switch ($task) {
             case '':

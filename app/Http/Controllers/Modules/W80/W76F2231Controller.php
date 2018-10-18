@@ -9,6 +9,7 @@ use App\Models\D76T2230;
 use App\Models\D76T9020;
 use Carbon\Carbon;
 use DateTime;
+use Helpers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -31,6 +32,7 @@ class  W76F2231Controller extends Controller
 
     public function index(Request $request, $task = "")
     {
+        $permission = Helpers::getPermission('W76F2231');
         switch ($task) {
             //case 'edit':
             case 'add':
@@ -42,7 +44,7 @@ class  W76F2231Controller extends Controller
                 $logisticsList = $this->d76T1556->where('ListTypeID', '=', 'D76T2200_Logistics')->select('CodeID', 'CodeName')->get();
                 $CreateUserID = Auth::user()->UserID;
                 $rowData = json_encode(array());
-                return view("modules/W80/W76F2231/W76F2231", compact('participantsList', 'hostPersonList', 'facilityList', 'meetingRoomList', 'all', 'rowData', 'CreateUserID', 'logisticsList', 'task'));
+                return view("modules/W80/W76F2231/W76F2231", compact('permission','participantsList', 'hostPersonList', 'facilityList', 'meetingRoomList', 'all', 'rowData', 'CreateUserID', 'logisticsList', 'task'));
                 break;
             case 'edit':
                 $all = $request->input();
@@ -55,7 +57,7 @@ class  W76F2231Controller extends Controller
                 $CreateUserID = Auth::user()->UserID;
                 $rowData = $this->getMasterData($ID);
                 //\Debugbar::info($rowData);
-                return view("modules/W80/W76F2231/W76F2231", compact('participantsList', 'hostPersonList', 'facilityList', 'meetingRoomList', 'all', 'rowData', 'CreateUserID', 'logisticsList', 'task'));
+                return view("modules/W80/W76F2231/W76F2231", compact('permission','participantsList', 'hostPersonList', 'facilityList', 'meetingRoomList', 'all', 'rowData', 'CreateUserID', 'logisticsList', 'task'));
                 break;
             case 'save':
                 try {

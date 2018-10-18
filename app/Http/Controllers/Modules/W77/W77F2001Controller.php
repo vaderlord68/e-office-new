@@ -12,6 +12,7 @@ use App\Models\D76T2262;
 use App\Models\D76T9020;
 use Carbon\Carbon;
 use DateTime;
+use Helpers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -37,8 +38,8 @@ class  W77F2001Controller extends Controller
 
     public function index(Request $request, $task = "")
     {
+        $permission = Helpers::getPermission('W77F2001', 'W77F2001_APP');
         switch ($task) {
-            //case 'edit':
             case 'add':
                 $all = $request->input();
                 $participantsList = $this->d76T9020->select('EmployeeCode', 'Fullname')->orderBy('Fullname', 'desc')->get();
@@ -57,7 +58,7 @@ class  W77F2001Controller extends Controller
                 // \Debugbar::info($carNoList);
                 $CreateUserID = Auth::user()->UserID;
                 $rowData = json_encode(array());
-                return view("modules/W77/W77F2001/W77F2001", compact('carDList', 'carNoList', 'carTypeList', 'participantsList', 'all', 'rowData', 'CreateUserID', 'task'));
+                return view("modules/W77/W77F2001/W77F2001", compact('permission','carDList', 'carNoList', 'carTypeList', 'participantsList', 'all', 'rowData', 'CreateUserID', 'task'));
                 break;
             case 'edit':
                 $all = $request->input();
@@ -80,8 +81,7 @@ class  W77F2001Controller extends Controller
 
                 $carDList = DB::select($sql);
 
-
-                return view("modules/W77/W77F2001/W77F2001", compact('carDList' ,'carNoList', 'carTypeList', 'participantsList', 'all', 'rowData', 'CreateUserID', 'task'));
+                return view("modules/W77/W77F2001/W77F2001", compact('permission','carDList', 'carNoList', 'carTypeList', 'participantsList', 'all', 'rowData', 'CreateUserID', 'task'));
                 break;
             case 'save':
                 try {
@@ -223,7 +223,6 @@ class  W77F2001Controller extends Controller
                     //\Debugbar::info($data);
                     $this->d76T2262->where('CarBookingID', '=', $request->input('CarBookingID', ''))->update($data);
 
-
                     \Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'));
                     ////\Debugbar::info($data);
                     return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'), 'redirectTo' => $_SERVER["HTTP_REFERER"]]);
@@ -288,7 +287,6 @@ class  W77F2001Controller extends Controller
         }
     }
 
-    private
     function getMasterData($CarBookingID)
     {
         $result = $this->d76T2262->where("CarBookingID", "=", $CarBookingID)->first();

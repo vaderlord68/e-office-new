@@ -54,7 +54,7 @@
 
                                 <div class="row form-group">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <label class="lbl-normal">{{Helpers::getRS("Nhan_xe")}}</label>
+                                        <label class="lbl-normal">{{Helpers::getRS("Hang_xe")}}</label>
                                     </div>
                                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                                         <input type="text" id="txtCarBranchW77F1001" maxlength="100" name="txtCarBranchW77F1001"
@@ -125,7 +125,7 @@
                                 </div>
                                 <div class="row form-group">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <label class="form-check-label mgt10">{{Helpers::getRS("Hoat_dong")}}
+                                        <label class="form-check-label mgt10">{{Helpers::getRS("Hoat_dong_U")}}
                                         </label>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">

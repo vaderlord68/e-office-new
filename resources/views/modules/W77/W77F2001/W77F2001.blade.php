@@ -215,19 +215,25 @@
                                         <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                                         </div>
                                     </div>
+                                    <?php
+                                        \Debugbar::info($permission);
+                                    ?>
 
-                                    <div class="row mgb5">
-                                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                                            <label class="lbl-normal">{{Helpers::getRS("Ghi_chu_duyet")}}</label>
+                                        <div class="row mgb5 {{$permission == 1 ? '' : 'hide'}}">
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <label class="lbl-normal">{{Helpers::getRS("Ghi_chu_duyet")}}</label>
+                                            </div>
+                                            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+
+                                                <input type="text" class="form-control"
+                                                       autocomplete="off" class="form-control"
+                                                       id="approvalNotesW77F2001"
+                                                       name="approvalNotesW77F2001" maxlength="500"
+                                                       value="{{$approvalNotesW77F2001}}">
+                                                </input>
+
+                                            </div>
                                         </div>
-                                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                                            <input type="text" class="form-control"
-                                                   autocomplete="off" class="form-control" id="approvalNotesW77F2001"
-                                                   name="approvalNotesW77F2001" maxlength="500"
-                                                   value="{{$approvalNotesW77F2001}}">
-                                            </input>
-                                        </div>
-                                    </div>
 
                                     <button id="btnSubmitW77F2001" class="hide"></button>
                                 </form>
@@ -329,7 +335,7 @@
             placeholder: "__:__"
         });
 
-        var permission = '{{Helpers::getPermission('W77F20001','')}}'
+        var permission = '{{$permission}}';
 
         $("#toolbarW77F2001").digiMenu({
                 showText: true,

@@ -2694,20 +2694,21 @@ class Helpers
         return $rsRow;
     }
 
-    public static function getPermission($formID = '', $function = '', $convertToBool = false)
+    public static function getPermission($formID = '')
     {
         $userID = Auth::user()->UserID;
         $sql = '--Lay phan quyen' . PHP_EOL;
         $sql .= "EXEC W76P0002  '$userID'" . PHP_EOL;
         $rsRows = DB::connection()->select($sql);
-        $filter = array_filter($rsRows, function ($row) use ($formID, $function) {
-            return $row->FuntionID == $formID && $row->FormID == $function;
+        $result = [];
+
+        array_filter($rsRows, function ($row) use ($formID , &$result) {
+            if ($row->FormID == $formID){
+                $result[$row->FuntionID] = $row->Permisions;
+            }
+            return $row->FormID == $formID;
         });
-        $result = count($filter) > 0 ? $filter[0]->Permisions : 0;
-        if ($convertToBool) {
-            return $result == 1 ? true : false;
-        }
-        return $result;
+        return (object) $result;
     }
 
     public static function suffixName($fileName)

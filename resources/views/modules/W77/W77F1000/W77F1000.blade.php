@@ -50,7 +50,6 @@
     <script>
         $(document).ready(function () {
 
-            permission = '{{$permission}}';
 
             setTimeout(function () {
                 resizePqGrid();
@@ -118,17 +117,21 @@
                 colModel: [
                     {
                         title: "{{Helpers::getRS('Xu_ly')}}",
-                        width: 100,
+                        width: 50,
                         align: "center",
                         dataIndx: "View",
                         isExport: false,
                         editor: false,
                         render: function (ui) {
-                            if (permission = 1) {
-                                var str = '';
-                                str += '<a id="btnEditW77F1000" title="{{Helpers::getRS("Sua")}}"><i class="fas fa-edit mgr10 text-yellow cursor-pointer"></i></a>';
+                            var $perFull = "{{$permission->W77F1000_FULL}}";
+                            if ($perFull) {
+                                var str = '<a id="btnEditW77F1000" title="{{Helpers::getRS("Sua")}}"><i class="fas fa-edit mgr10 text-yellow cursor-pointer"></i></a>';
                                 str += '<a id="btnDeleteW77F1000" title="{{Helpers::getRS("Xoa")}}"><i class="fas fa-trash-alt text-danger cursor-pointer"></i></a>';
+                            } else {
+                                var str = '<i class="fas fa-edit mgr10 text-gray"></i>';
+                                str += '<i class="fas fa-trash-alt text-gray"></i>';
                             }
+
                             return str;
                         },
                         postRender: function (ui) {
