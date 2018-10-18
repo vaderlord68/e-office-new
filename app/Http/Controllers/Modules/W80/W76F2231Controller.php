@@ -33,6 +33,7 @@ class  W76F2231Controller extends Controller
     public function index(Request $request, $task = "")
     {
         $permission = Helpers::getPermission('W76F2231');
+        \Debugbar::info("cbscghsdc",$permission);
         switch ($task) {
             //case 'edit':
             case 'add':
