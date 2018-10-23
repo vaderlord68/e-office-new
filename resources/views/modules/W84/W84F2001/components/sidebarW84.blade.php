@@ -1,7 +1,12 @@
 <!-- A vertical navbar -->
-<div class="">
-    <nav class="navbar bg-light">
+<div class="card">
+    <div class="card-header">
         <a class="nav-link" href="#">{{Helpers::getRS("Ho_so_cong_viec")}}</a>
+    </div>
+
+    <div class="card-body">
+    <nav class="navbar ">
+
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link " href="{{url('/W84F2000/')}}" id="navbardrop" >
@@ -21,6 +26,7 @@
             </li>
         </ul>
     </nav>
+    </div>
 </div>
 
 <script>

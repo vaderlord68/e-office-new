@@ -658,7 +658,7 @@ a:hover {
 .select2-container .select2-selection {
     /*min-height: 62px;*/
     min-height: 28px;
-    height: 32px;
+    /*height: 32px;*/
 }
 
 .loading {
@@ -806,3 +806,28 @@ a:hover {
     border-radius: 5px !important;
 }
 
+.box-contain{
+    padding: 15px;
+    background: #fff;
+    margin-left: 10px;
+    margin-right: 10px;
+    box-shadow: 1px 1px 25px 0px #dddddd;
+    border-radius: 6px;
+
+}
+.sub-desc{
+    font-size: 10px;
+}
+.height24{
+    height: 24px;
+    line-height: 24px;
+}
+
+@media (max-width: 576px) {
+    .col-12{
+        margin-top: 5px;
+    }
+    /*.col-sm-1, .col-sm-2, .col-sm-3,.col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7,.col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11,.col-sm-12{*/
+        /*margin-top: 10px;*/
+    /*}*/
+}
