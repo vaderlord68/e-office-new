@@ -29,7 +29,9 @@ function showFormDialogPost(url, id, data ,callbackAfterShowModal,param, callbac
     var divParent = "divModalChild_" + suffix.toString();
     var parentNode = document.createElement("div");
     parentNode.id = divParent;
+    console.log($('#divModalContainer'));
     $("#divModalContainer").append(parentNode);
+
     /*if (popupLevel == undefined || popupLevel == null || popupLevel == "") {
         divParent = $("#myModal");
     }
