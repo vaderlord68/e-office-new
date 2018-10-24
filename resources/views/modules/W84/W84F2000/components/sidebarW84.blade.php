@@ -1,7 +1,7 @@
 <!-- A vertical navbar -->
 <div class="">
     <nav class="navbar bg-light">
-        <a class="nav-link" href="#" style="margin-left: -15px !important">{{Helpers::getRS("Ho_so_cong_viec")}}</a>
+        <a class="nav-link" href="#">{{Helpers::getRS("Ho_so_cong_viec")}}</a>
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link " href="{{url('/W84F2000/')}}" id="navbardrop" >

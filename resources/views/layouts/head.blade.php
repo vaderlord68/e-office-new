@@ -29,7 +29,7 @@
 
 <!-- DevExtreme 18.1 -->
 <link href="{{ asset('plugins/devextreme-18.1/css/dx.common.css') }}" media="all" rel="stylesheet" type="text/css"/>
-<link href="{{ asset('plugins/devextreme-18.1/css/dx.material.blue.light.css') }}" media="all" rel="stylesheet" type="text/css"/>
+<link href="{{ asset('plugins/devextreme-18.1/css/dx.material.orange.light.css') }}" media="all" rel="stylesheet" type="text/css"/>
 
 <!-- JS Tree -->
 <link href="{{ asset('plugins/jstree/dist/themes/default/style.css') }}" rel="stylesheet" />
@@ -43,6 +43,7 @@
 <link href="{{asset('plugins/spinkit/spinkit.css')}}" rel="stylesheet">
 <!-- customize-->
 <link href="{{asset('css/common.css')}}" rel="stylesheet">
+<link href="{{asset('css/custom-devextreme.css')}}" rel="stylesheet">
 <link href="{{asset('css/affects.css')}}" rel="stylesheet">
 <link href="{{url('css/style.css')}}" rel="stylesheet">
 
