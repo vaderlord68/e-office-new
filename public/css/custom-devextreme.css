@@ -1,0 +1,21 @@
+.dx-header-row td {
+    text-align: center!important;
+    font-weight: bold!important;
+    font-size: 15px!important;
+    /*color: white!important;*/
+}
+
+.dx-link-delete {
+    font-size: 300%!important;
+}
+
+/*.dx-datagrid-headers{*/
+    /*background-color: #de6832!important;*/
+/*}*/
+
+/*.dx-row td{*/
+    /*border-right: solid 1px #e0e0e0;*/
+/*}*/
+.dx-toolbar-items-container {
+    height:37px;
+}

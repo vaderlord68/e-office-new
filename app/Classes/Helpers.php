@@ -2578,7 +2578,7 @@ class Helpers
     public static function createMainMenu()
     {
         $menuList = Helpers::getMainMenu();
-        $str = '<div class="top-menu" style="width:60%;">';
+        $str = '<div class="top-menu" style="">';
         $str .= '<ul class="nav navbar-nav d-md-down-none">';
         $index = 0;
         foreach ($menuList as $row) {

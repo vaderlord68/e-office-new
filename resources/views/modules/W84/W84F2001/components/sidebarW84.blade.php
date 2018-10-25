@@ -1,7 +1,12 @@
 <!-- A vertical navbar -->
-<div class="">
-    <nav class="navbar bg-light">
-        <a class="nav-link" href="#" style="margin-left: -15px !important">{{Helpers::getRS("Ho_so_cong_viec")}}</a>
+<div class="card">
+    <div class="card-header">
+        <a class="nav-link" href="#">{{Helpers::getRS("Ho_so_cong_viec")}}</a>
+    </div>
+
+    <div class="card-body">
+    <nav class="navbar ">
+
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link " href="{{url('/W84F2000/')}}" id="navbardrop" >
@@ -13,14 +18,15 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                     <i class="fas fa-tasks pdr10"></i>{{Helpers::getRS("Cong_viec")}}
                 </a>
-                {{--<div class="dropdown-menu">--}}
+                <div class="dropdown-menu">
                     <a class="dropdown-item" href="{{url('/W84F1000/TaskList')}}"><i
                                 class="fas fa-cog"></i>{{Helpers::getRS("Xu_ly")}}</a>
                     <a class="dropdown-item" href="#"><i class="fas fa-eye"></i>{{Helpers::getRS("Theo_doi")}}</a>
-                {{--</div>--}}
+                </div>
             </li>
         </ul>
     </nav>
+    </div>
 </div>
 
 <script>
