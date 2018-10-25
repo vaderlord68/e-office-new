@@ -2,9 +2,9 @@
 @section('content')
     @parent
     <div class="card document-sidebar">
-        <div class="card-header">
-            <h4>{{ $title or '' }}</h4>
-        </div>
+        {{--<div class="card-header">--}}
+        {{--<h4>{{ $title or '' }}</h4>--}}
+        {{--</div>--}}
         <div class="card-body" style="padding: 15px">
             <section>
                 <form id="frmSearchW77F1000" name="frmSearchW77F1000" method="post">
@@ -17,13 +17,13 @@
                             <div class="form-group">
                                 <input type="text" class="form-control" id="txtDocNo" name="txtSearchValueW76F2200"
                                        id="txtSearchValueW76F2200" placeholder="{{ Helpers::getRS('Tim_kiem_xe') }}"
-                                       autocomplete="off" required>
+                                       autocomplete="off">
                             </div>
                         </div>
                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                             <button type="submit" id="btnSearchW77F1000" title="Thêm mới"
-                                    class="btn btn-default smallbtn pull-right">
-                                <span class="fa fa-search text-yellow mgr5"></span>{{ Helpers::getRS('Tim_kiem') }}
+                                    class="btn btn-info smallbtn pull-left mrgbtt">
+                                <span class="fa fa-search text-yellow mgr5"></span>
                             </button>
                         </div>
                     </div>
@@ -124,14 +124,14 @@
                         editor: false,
                         render: function (ui) {
                             var $perFull = "{{$permission->W77F1000_FULL}}";
-                            if ($perFull) {
+//                            $perFull = 0;
+                            if ($perFull == 1) {
                                 var str = '<a id="btnEditW77F1000" title="{{Helpers::getRS("Sua")}}"><i class="fas fa-edit mgr10 text-yellow cursor-pointer"></i></a>';
                                 str += '<a id="btnDeleteW77F1000" title="{{Helpers::getRS("Xoa")}}"><i class="fas fa-trash-alt text-danger cursor-pointer"></i></a>';
                             } else {
                                 var str = '<i class="fas fa-edit mgr10 text-gray"></i>';
                                 str += '<i class="fas fa-trash-alt text-gray"></i>';
                             }
-
                             return str;
                         },
                         postRender: function (ui) {
@@ -216,7 +216,7 @@
                         filter: {type: 'textbox', condition: 'contain', listeners: ['keyup']}
                     }
                     , {
-                        title: "{{Helpers::getRS('Hoat_dong_U')}}",
+                        title: "{{Helpers::getRS('Ngung_hoat_dong')}}",
                         width: 100,
                         dataType: "string",
                         align: "center",

@@ -48,9 +48,9 @@
 
     <section>
         <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">{{Helpers::getRS('Cap_nhat_phong_hop')}}</h4>
-            </div>
+            {{--<div class="card-header">--}}
+                {{--<h4 class="card-title">{{Helpers::getRS('Cap_nhat_phong_hop')}}</h4>--}}
+            {{--</div>--}}
             <div class="card-body" id="modalW76F2201">
                 <div id="bootstrap-data-table_wrapper"
                      class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer table-documentary">
@@ -186,7 +186,7 @@
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                         <input class="form-control" type="text" class="form-control"
                                                name="displayOrderW76F2201"
-                                               maxlength="4" onkeypress="return inputNumber(event);" min="1" step="1"
+                                               maxlength="4" min="1" step="1"
                                                id="displayOrderW76F2201" value="{{$displayOrderW76F2201}}"
                                                placeholder="" autocomplete="off">
                                     </div>

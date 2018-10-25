@@ -9,9 +9,9 @@
             <!-- Modal body -->
             <div class="modal-body" style="margin-bottom: -20px;">
                 <?php
-                if ($task == "Process") {//Edit
+                if ($task == "process") {//Edit
                     $master = $rowData;
-                    var_dump($rowData);die();
+                    // var_dump($rowData);die();
                     $TaskID = $rowData["TaskID"];
                     $statusID_UpdateProcess = $rowData["StatusID"];
                     $percentComplete = $rowData["PercentComplete"];
@@ -42,7 +42,7 @@
                                                     class="form-control">
                                                 {{--<option value="">--</option>--}}
                                                 @foreach($statusList as  $statusItem)
-                                                    <option value="{{$statusItem->CodeID}}" {{$statusItem->StageID == $statusID_UpdateProcess ? 'selected': ''}}>{{$statusItem->CodeName}}</option>
+                                                    <option value="{{$statusItem->CodeID}}" {{$statusItem->CodeID == $statusID_UpdateProcess ? 'selected': ''}}>{{$statusItem->CodeName}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -55,11 +55,9 @@
                                             <label class="lbl-normal">{{Helpers::getRS("Tien_do")}}</label>
                                         </div>
                                         <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                                            <select name="percentComplete" id="percentComplete" class="form-control">
-                                                <option value="">--</option>
-                                                {{--@foreach($channelIDList as  $channelIDItem)--}}
-                                                {{--<option value="{{$channelIDItem->CodeID}}" {{$channelIDItem->CodeID == $channelIDW76F2141 ? 'selected': ''}}>{{$channelIDItem->CodeName}}</option>--}}
-                                                {{--@endforeach--}}
+                                            {{--<select name="percentComplete" id="percentComplete" class="form-control">--}}
+                                            <input type="text" id="percentComplete" name="percentComplete" min="5" maxlength="3"
+                                                   step="1" class="form-control" value="{{$percentComplete}}" placeholder="" autocomplete="off">
                                             </select>
                                         </div>
                                         <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
@@ -72,13 +70,11 @@
                                             <label class="lbl-normal">{{Helpers::getRS("Thoi_gian_xu_ly")}}</label>
                                         </div>
                                         <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                                            <select name="manHours_UpdateProcess" id="manHours_UpdateProcess"
-                                                    class="form-control">
-                                                <option value="">--</option>
-                                                {{--@foreach($channelIDList as  $channelIDItem)--}}
-                                                {{--<option value="{{$channelIDItem->CodeID}}" {{$channelIDItem->CodeID == $channelIDW76F2141 ? 'selected': ''}}>{{$channelIDItem->CodeName}}</option>--}}
-                                                {{--@endforeach--}}
-                                            </select>
+                                            <input class="form-control" type="text" class="form-control"
+                                                   name="manHours_UpdateProcess"
+                                                   maxlength="4" min="1" step="1"
+                                                   id="manHours_UpdateProcess" value="{{$manHours_UpdateProcess}}"
+                                                   placeholder="" autocomplete="off">
                                         </div>
                                         <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
                                             <label class="label-process">{{Helpers::getRS("Gio")}}</label>
@@ -114,6 +110,55 @@
 
 <script>
     $(document).ready(function () {
+        $('#manHours_UpdateProcess').inputmask("numeric", {
+//            radixPoint: ".",
+//            groupSeparator: ",",
+            digits: 0,
+            autoGroup: true,
+            rightAlign: true
+        });
+
+        $('#percentComplete').inputmask("numeric", {
+//            radixPoint: ".",
+//            groupSeparator: ",",
+            digits: 0,
+            max: 100,
+            min: 5,
+            autoGroup: true,
+            rightAlign: true,
+            greedy: false,
+//            mask: function (opts) {
+//                var baseMask = Inputmask.prototype.defaults.aliases["numeric"].mask.call(this, opts);
+//                return baseMask;
+//            },
+//            onBeforeWrite: function (e, buffer, caretPos, opts) {
+//                var manipulatedBuffer = buffer,
+//                    newCaretPosition = 5;
+//                //do some stuff
+//
+//                return {
+//                    "refreshFromBuffer": true,
+//                    "buffer": manipulatedBuffer,
+//                    "caretPos": newCaretPosition
+//                }
+//            }
+//            onBeforeWrite: function (e, buffer, caretPos, opts) {
+//                console.log(buffer);
+//                var dot = buffer[buffer.length - 2]; //get dot
+//                var val = buffer[buffer.length - 1];//get decimal
+//                if (dot == "." && val != 0 && val != 5) { //invalid
+//                    buffer.splice(buffer.length - 1, 1);
+//                    return {
+//                        refreshFromBuffer: true,
+//                        buffer: buffer.join('')
+//                    }
+//                } else {//valid
+//                    return Inputmask.prototype.defaults.aliases["numeric"].onBeforeWrite.call(this, e, buffer, caretPos, opts);
+//                }
+//            }
+
+        });
+
         $("#toolbarUpdateProcess").digiMenu({
                 showText: true,
                 buttonList: [
@@ -132,6 +177,7 @@
                         postRender: function (ui) {
                             console.log(ui);
                             ui.$btn.click(function () {
+                                console.log("vo update");
                                 frmProcessSave();
                             });
                         }
@@ -149,10 +195,10 @@
                         render: function (ui) {
                         },
                         postRender: function (ui) {
-                            {{--console.log(ui);--}}
-                            {{--ui.$btn.click(function () {--}}
-                            {{--window.location.href = "{{url('/W76F2141/add')}}";--}}
-                            {{--});--}}
+                            console.log(ui);
+                            ui.$btn.click(function () {
+                                window.location.reload();
+                            });
                         }
                     }
                 ]
@@ -177,13 +223,13 @@
         var url = "";
         var task = "{{$task}}";
         console.log(task);
-        if (task == "Process") {
+        if (task == "process") {
             url = '{{url("/W84F1000/update_Process")}}';
         }
         $.ajax({
             method: "POST",
             url: url,
-            data: formData,
+            data: formData + "&TaskID={{$TaskID}}&_token={{csrf_token()}}",
             success: function (res) {
                 var result = JSON.parse(res);
                 switch (result.status) {
@@ -191,7 +237,7 @@
                         alertError(result.message);
                         break;
                     case 'SUCC':
-                        //window.location.href = document.referrer.toString();
+                        window.location.href = document.referrer.toString();
                         break;
                 }
             }
@@ -199,27 +245,27 @@
     });
 
     {{--function updateProcess(TaskID) {--}}
-        {{--$.ajax({--}}
-            {{--//enctype: 'multipart/form-data',--}}
-            {{--method: "POST",--}}
-            {{--url: '{{ url('/W84F1000/update_Process') }}',--}}
-            {{--data: {TaskID: '{{$TaskID}}', _token: '{{ csrf_token()}}'},--}}
-            {{--success: function (res) {--}}
-                {{--var result = JSON.parse(res);--}}
-                {{--//console.log("luu");--}}
-                {{--switch (result.status) {--}}
-                    {{--case 'ERROR':--}}
-                        {{--alertError(result.message, $("#modalW84F1000_UpdateProcess"))--}}
-                        {{--break;--}}
-{{--//                    case 'INVAILD':--}}
-{{--//                        alertError(result.message, $("#modalW84F1000_UpdateProcess"))--}}
-{{--//                        break;--}}
-                    {{--case 'SUCC':--}}
-                        {{--//window.location.reload();--}}
-                        {{--break;--}}
-                {{--}--}}
-            {{--}--}}
-        {{--});--}}
+    {{--$.ajax({--}}
+    {{--//enctype: 'multipart/form-data',--}}
+    {{--method: "POST",--}}
+    {{--url: '{{ url('/W84F1000/update_Process') }}',--}}
+    {{--data: {TaskID: '{{$TaskID}}', _token: '{{ csrf_token()}}'},--}}
+    {{--success: function (res) {--}}
+    {{--var result = JSON.parse(res);--}}
+    {{--//console.log("luu");--}}
+    {{--switch (result.status) {--}}
+    {{--case 'ERROR':--}}
+    {{--alertError(result.message, $("#modalW84F1000_UpdateProcess"))--}}
+    {{--break;--}}
+    {{--//                    case 'INVAILD':--}}
+    {{--//                        alertError(result.message, $("#modalW84F1000_UpdateProcess"))--}}
+    {{--//                        break;--}}
+    {{--case 'SUCC':--}}
+    {{--//window.location.reload();--}}
+    {{--break;--}}
+    {{--}--}}
+    {{--}--}}
+    {{--});--}}
     {{--}--}}
 
 

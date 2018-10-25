@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\D76T2260;
 use App\Models\D76T2261;
 use Carbon\Carbon;
+use Helpers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -24,6 +25,8 @@ class  W77F1001Controller extends Controller
 
     public function index(Request $request, $task = '')
     {
+        $title = Helpers::getRS("Cap_nhat_xe_cong_tac");
+
         switch ($task) {
             case 'add':
                 $divisionID = session('W76P0000')->DivisionID;
@@ -33,7 +36,7 @@ class  W77F1001Controller extends Controller
                 $sql .= "EXEC W76P9020 '$divisionID', 'DRIVER'";
                 $carDrivers = DB::select($sql);
 
-                return view("modules/W77/W77F1001/W77F1001", compact('carTypes', 'carDrivers', 'task'));
+                return view("modules/W77/W77F1001/W77F1001", compact('title', 'carTypes', 'carDrivers', 'task'));
                 break;
             case 'edit':
                 $carNo = $request->input('carNo', '');
@@ -46,7 +49,7 @@ class  W77F1001Controller extends Controller
                 $sql .= "EXEC W76P9020 '$divisionID', 'DRIVER'";
                 $carDrivers = DB::select($sql);
 
-                return view("modules/W77/W77F1001/W77F1001", compact('carTypes', 'carDrivers', 'rowData', 'task'));
+                return view("modules/W77/W77F1001/W77F1001", compact('title', 'carTypes', 'carDrivers', 'rowData', 'task'));
                 break;
             case 'save':
                 try {

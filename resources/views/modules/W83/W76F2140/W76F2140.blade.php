@@ -15,7 +15,7 @@
                     <label class="lbl-normal">{{Helpers::getRS("Tim_kiem")}}</label>
                 </div>
                 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                    <input type="text" class="form-control" id="txtDocNo" name="txtDocNo" autocomplete="off">
+                    <input type="text" class="form-control" id="searchTitle" name="searchTitle" autocomplete="off">
                 </div>
             </div>
         </form>
@@ -53,6 +53,25 @@
                                 console.log(ui);
                                 ui.$btn.click(function () {
                                     window.location.href = "{{url('/W76F2141/add')}}";
+                                });
+                            }
+                        }
+                        , {
+                            ID: "searchTitle",
+                            icon: "fa fa-search text-yellow",
+                            title: "{{Helpers::getRS('Tim_kiem')}}",
+                            enable: true,
+                            hidden: function () {
+                                return false;
+                            },
+                            cls: "",
+                            type: "button",
+                            render: function (ui) {
+                            },
+                            postRender: function (ui) {
+                                ui.$btn.click(function () {
+                                    loadDataW76F2140();
+
                                 });
                             }
                         }
@@ -253,6 +272,31 @@
             $("#gridW76F2140").pqGrid("refreshDataAndView");
 
         });
+        setTimeout(function () {
+            //loadDataW76F2200();
+            resizePqGrid();
+        }, 600);
+
+        $("#frmW76F2140").on('submit', function (e) {
+            e.preventDefault();
+            loadDataW76F2140();
+        });
+
+
+        function loadDataW76F2140() {
+            $("#gridW76F2140").pqGrid("showLoading");
+            $.ajax({
+                method: "POST",
+                url: '{{url("/W76F2140/filter")}}',
+                data: $("#frmW76F2140").serialize() + "&_token={{ csrf_token() }}",
+                success: function (data) {
+                    $("#gridW76F2140").pqGrid("hideLoading");
+                    var temp = reformatData(JSON.parse(data), $("#gridW76F2140"));
+                    $("#gridW76F2140").pqGrid("option", "dataModel.data", temp);
+                    $("#gridW76F2140").pqGrid("refreshDataAndView");
+                }
+            });
+        }
     </script>
 @stop
 {{--@section("deletePopup")--}}

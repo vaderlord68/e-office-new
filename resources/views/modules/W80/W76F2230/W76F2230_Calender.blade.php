@@ -94,6 +94,17 @@
                 center: 'title',
                 right: 'timelineDay'
             },
+            views: {
+                {{--month: {--}}
+                    {{--titleFormat: '[{{ Helpers::getRS('Thang') }}] M YYYY',--}}
+                {{--},--}}
+                {{--week: {--}}
+                    {{--titleFormat: 'DD/MM/YYYY',--}}
+                {{--},--}}
+                day: {
+                    titleFormat: 'DD/MM/YYYY',
+                }
+            },
             height: 450,
             resourceLabelText: '{{ Helpers::getRS('Danh_sach_phong_hop') }}',
             resources: rooms,

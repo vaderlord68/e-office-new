@@ -20,9 +20,9 @@
                 <input type="text" class="form-control" id="txtSearchValue" name="txtSearchValue">
             </div>
             <div class="col-md-2">
-                <button id="btnSearch" class="btn btn-default smallbtn" style="padding-top: 4px"><span
-                            class="digi digi-filter text-yellow"></span>
-                    &nbsp;{{Helpers::getRS("Tim_kiem")}}</button>
+                <button id="btnSearch" class="btn btn-info mrgbtt"><span
+                            class="fa fa-search text-yellow"></span>
+                    &nbsp;</button>
             </div>
         </div>
         <div class="row form-group">
@@ -412,7 +412,6 @@
                             }
                         }
                     }
-
                 ],
                 postRenderInterval: -1, //synchronous post rendering.
                 dataModel: {

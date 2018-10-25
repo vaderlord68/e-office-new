@@ -73,9 +73,20 @@
             header: {
                 left: 'prev,next showAll',
                 center: 'title',
-                right:   'timelineDay,agendaWeek,month'
+                right: 'timelineDay,agendaWeek,month'
             },
             height: 450,
+            views: {
+                month: {
+                    titleFormat: '[{{ Helpers::getRS('Thang') }}] M YYYY',
+                },
+                week: {
+                    titleFormat: 'DD/MM/YYYY',
+                },
+                day: {
+                    titleFormat: 'DD/MM/YYYY',
+                }
+            },
             resourceLabelText: '{{ Helpers::getRS('Danh_sach_xe') }}',
             resources: cars,
             events: events,
@@ -136,7 +147,7 @@
                 if (event.ApproveStatus == 1) {
                     revertFunc();
                     window.location.reload();
-                }else{
+                } else {
                     console.log(event);
                     var timefrom = event.start.format("HH:mm");
                     var timeto = event.end.format("HH:mm");
@@ -171,8 +182,6 @@
                         }
                     }, data)
                 }
-
-
 
 
             },

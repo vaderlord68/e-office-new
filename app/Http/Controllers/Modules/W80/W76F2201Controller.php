@@ -7,6 +7,7 @@ use App\Models\D76T1556;
 use App\Models\D76T2200;
 use App\Models\D76T9000;
 use Carbon\Carbon;
+use Helpers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -27,6 +28,7 @@ class  W76F2201Controller extends Controller
 
     public function index(Request $request, $task = "")
     {
+        $title = Helpers::getRS("Cap_nhat_phong_hop");
         switch ($task) {
             case 'add':
                 $d76T9000 = new D76T9000();
@@ -36,7 +38,7 @@ class  W76F2201Controller extends Controller
                 $CreateUserID = session("current_user");
                 $rowData = json_encode(array());
                 \Debugbar::info($divisionIDList);
-                return view("modules/W80/W76F2201/W76F2201", compact('logisticsList', 'coordinatorList', 'rowData', 'CreateUserID', 'divisionIDList', 'task'));
+                return view("modules/W80/W76F2201/W76F2201", compact('title','logisticsList', 'coordinatorList', 'rowData', 'CreateUserID', 'divisionIDList', 'task'));
                 break;
             case 'view':
             case 'edit':
@@ -46,7 +48,7 @@ class  W76F2201Controller extends Controller
                 $logisticsList = $this->d76T1556->where('ListTypeID', '=', 'D76T2200_Logistics')->select('CodeID', 'CodeName')->get();
                 $rowData = $this->getMasterData($facilityID);
 
-                return view("modules/W80/W76F2201/W76F2201", compact('rowData', 'task', 'channelIDList', 'divisionIDList', 'coordinatorList', 'logisticsList'));
+                return view("modules/W80/W76F2201/W76F2201", compact('title','rowData', 'task', 'channelIDList', 'divisionIDList', 'coordinatorList', 'logisticsList'));
                 break;
             case 'save':
                 try {
@@ -83,7 +85,7 @@ class  W76F2201Controller extends Controller
 
                     //\Debugbar::info($check_store->check_exist);
                     $exist = "";
-                    if ($check_store != null){
+                    if ($check_store != null) {
                         $exist = intval($check_store->check_exist);
                     }
                     if ($exist == 1) {

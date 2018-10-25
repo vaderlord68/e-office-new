@@ -27,7 +27,7 @@ class  W77F1000Controller extends Controller
 
     public function index(Request $request, $task = '') {
 
-        $title = "Danh mục xe công tác";
+        $title = Helpers::getRS("Danh_muc_xe_cong_tac");
 
         $permission= Helpers::getPermission('W77F1000'); //W77F1000_FULL, W77F1000_VIEW
 
@@ -51,7 +51,7 @@ class  W77F1000Controller extends Controller
         $divisionID = session('W76P0000')->DivisionID;
         $orgUnitID = session('W76P0000')->OrgUnitID;
         $sql = '--Do nguon cho luoi'.PHP_EOL;
-        $sql .= "EXEC W77P1000 '$userID', '$divisionID', '$orgUnitID', '$strSearch'";
+        $sql .= "EXEC W77P1000 '$userID', '$divisionID', '$orgUnitID', N'$strSearch'";
         $collection = DB::select($sql);
 
         return $collection ;

@@ -31,9 +31,9 @@
 
     <section>
         <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">{{Helpers::getRS('Cap_nhat_xe_cong_tac')}}</h4>
-            </div>
+            {{--<div class="card-header">--}}
+                {{--<h4 class="card-title">{{Helpers::getRS('Cap_nhat_xe_cong_tac')}}</h4>--}}
+            {{--</div>--}}
             <div class="card-body" id="modalW77F1001" style="padding: 15px">
                     <form id="formW77F1001" method="POST" enctype="multipart/form-data" action="">
                         {{csrf_field()}}
@@ -125,7 +125,7 @@
                                 </div>
                                 <div class="row form-group">
                                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                        <label class="form-check-label mgt10">{{Helpers::getRS("Hoat_dong_U")}}
+                                        <label class="form-check-label mgt10">{{Helpers::getRS("Ngung_hoat_dong")}}
                                         </label>
                                     </div>
                                     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">

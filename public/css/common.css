@@ -68,6 +68,10 @@ body, textarea {
     color: #dc3545;
 }
 
+.text-black {
+    color: black !important;
+}
+
 .text-red {
     color: #dc3545;
 }
@@ -121,8 +125,13 @@ body, textarea {
 .pdl15 {
     padding-left: 15px !important;
 }
+
 .pdl25 {
     padding-left: 25px !important;
+}
+
+.pdl44 {
+    padding-left: 44px !important;
 }
 
 .pdr5 {
@@ -219,6 +228,10 @@ body, textarea {
 
 .mgt10 {
     margin-top: 10px;
+}
+
+.mgt17 {
+    margin-top: 17px;
 }
 
 .mgt15 {
@@ -333,6 +346,7 @@ img {
 }
 
 .task-list {
+    background-color: #FFFFFF;
     min-height: 8px;
     padding: 10px;
     margin-bottom: 20px;
@@ -579,6 +593,20 @@ a:hover {
     max-height: 100px;
     border-radius: 50%;
 }
+
+.cmmt-img {
+    display: block;
+    width: 50px;
+    max-height: 100px;
+    border-radius: 50%;
+}
+
+.like-img {
+    display: block;
+    width: 50px;
+    max-height: 100px;
+}
+
 .well-employee {
     margin-top: 10px !important;
     margin-bottom: 5px;
@@ -639,7 +667,8 @@ a:hover {
 .fc-time-grid-container {
     height: auto !important;
 }
-.label-process{
+
+.label-process {
     float: left;
     margin-left: -20px;
     margin-top: 8px;
@@ -806,7 +835,12 @@ a:hover {
     box-shadow: 1px 1px 1px 1px #ddd !important;
     border-radius: 5px !important;
 }
-.text-gray{
+
+.text-gray {
     color: #ccc;
+}
+
+.mrgbtt {
+    margin-left: -28px !important;
 }
 
