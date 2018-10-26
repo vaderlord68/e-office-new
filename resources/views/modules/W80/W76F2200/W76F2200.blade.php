@@ -11,12 +11,17 @@
     <section>
         <form id="frmW76F2200" name="frmW76F2200" method="post">
             <div class="row form-group">
-                <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1">
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
                     <label class="lbl-normal">{{Helpers::getRS("Tim_kiem")}}</label>
                 </div>
-                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                    <input type="text" class="form-control" id="txtDocNo" name="txtSearchValueW76F2200"
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <input type="text" class="form-control" name="txtSearchValueW76F2200"
                            id="txtSearchValueW76F2200" autocomplete="off">
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                    <button class="btn btn-info mrgbtt" id="searchW76F2200"><span
+                                class="fa fa-search text-yellow"></span>
+                    </button>
                 </div>
             </div>
         </form>
@@ -59,25 +64,26 @@
                                 });
                             }
                         }
-                        , {
-                            ID: "txtSearchValueW76F2200",
-                            icon: "fa fa-search text-yellow",
-                            title: "{{Helpers::getRS('Tim_kiem')}}",
-                            enable: true,
-                            hidden: function () {
-                                return false;
-                            },
-                            cls: "",
-                            type: "button",
-                            render: function (ui) {
-                            },
-                            postRender: function (ui) {
-                                ui.$btn.click(function () {
-                                    loadDataW76F2200();
+                        {{--, {--}}
+                        {{--ID: "txtSearchValueW76F2200",--}}
+                        {{--icon: "fa fa-search text-yellow",--}}
+                        {{--title: "{{Helpers::getRS('Tim_kiem')}}",--}}
+                        {{--enable: true,--}}
+                        {{--hidden: function () {--}}
+                        {{--return false;--}}
+                        {{--},--}}
+                        {{--cls: "",--}}
+                        {{--type: "button",--}}
+                        {{--render: function (ui) {--}}
+                        {{--},--}}
+                        {{--postRender: function (ui) {--}}
+                        {{--ui.$btn.click(function () {--}}
+                        {{--loadDataW76F2200();--}}
 
-                                });
-                            }
-                        }
+                        {{--});--}}
+                        {{--}--}}
+                        {{--}--}}
+
                     ]
                 }
             );

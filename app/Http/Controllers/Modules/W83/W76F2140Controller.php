@@ -20,7 +20,7 @@ class  W76F2140Controller extends Controller
 
     public function index(Request $request, $task = "")
     {
-        $title = 'Quản lý bản tin';
+        $title = Helpers::getRS('Quan_ly_ban_tin');
 
         $permission = Helpers::getPermission('W76F2140');
 

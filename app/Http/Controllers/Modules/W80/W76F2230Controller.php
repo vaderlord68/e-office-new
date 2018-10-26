@@ -8,6 +8,7 @@ use App\Models\D76T0000;
 use App\Models\D76T2200;
 use App\Models\D76T2230;
 use App\Models\D76T9000;
+use Helpers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -28,6 +29,7 @@ class  W76F2230Controller extends Controller
 
     public function index($task = "", $DivisionID = "", Request $request)
     {
+        $title= Helpers::getRS('Quan_ly_phong_hop');
         switch ($task) {
             case '':
             case 'listRoom':
@@ -102,7 +104,7 @@ class  W76F2230Controller extends Controller
                     $limitTime->BookingTimeTo = date('H:i:s', strtotime($limitTime->BookingTimeTo));
                 }
 
-                return view("modules/W80/W76F2230/W76F2230", compact('newsList','hostPersonDetail', 'meetingRoomDetail', 'newsCollection', 'rowData', 'divisionIDList', 'meetingRoomList', 'task', 'limitTime', 'divisionID'));
+                return view("modules/W80/W76F2230/W76F2230", compact('title','newsList','hostPersonDetail', 'meetingRoomDetail', 'newsCollection', 'rowData', 'divisionIDList', 'meetingRoomList', 'task', 'limitTime', 'divisionID'));
                 break;
             case 'loadCalender':
                 $newsCollection = $this->getCalender();
@@ -117,10 +119,10 @@ class  W76F2230Controller extends Controller
                 //\Debugbar::info($sql);
                 try {
                     DB::statement($sql);
-                    \Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_xoa_thanh_cong'));
-                    return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_xoa_thanh_cong')]);
+                    Helpers::setSession('successMessage', Helpers::getRS('Du_lieu_da_duoc_xoa_thanh_cong'));
+                    return json_encode(['status' => 'SUCC', 'message' => Helpers::getRS('Du_lieu_da_duoc_xoa_thanh_cong')]);
                 } catch (\Exception $ex) {
-                    \Helpers::log($ex->getMessage());
+                    Helpers::log($ex->getMessage());
                     return json_encode(['status' => 'ERROR', 'message' => $ex->getMessage()]);
                 }
                 break;

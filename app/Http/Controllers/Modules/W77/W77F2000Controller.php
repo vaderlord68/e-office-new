@@ -10,6 +10,7 @@ use App\Models\D76T2230;
 use App\Models\D76T2261;
 use App\Models\D76T2262;
 use App\Models\D76T9000;
+use Helpers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -34,6 +35,7 @@ class  W77F2000Controller extends Controller
 
     public function index($task = "", Request $request)
     {
+        $title= Helpers::getRS('Quan_ly_xe_cong_tac');
         switch ($task) {
             case'':
             case 'listCar':
@@ -73,7 +75,7 @@ class  W77F2000Controller extends Controller
                     $limitTime->BookingTimeTo = date('H:i:s', strtotime($limitTime->BookingTimeTo));
                 }
 
-                return view("modules/W77/W77F2000/W77F2000", compact('limitTime', 'carDList', 'newsCollection', 'divisionIDList', 'task'));
+                return view("modules/W77/W77F2000/W77F2000", compact('title','limitTime', 'carDList', 'newsCollection', 'divisionIDList', 'task'));
                 break;
             case'loadCalender':
                 $newsCollection = $this->getCalender();
@@ -88,10 +90,10 @@ class  W77F2000Controller extends Controller
                 //\Debugbar::info($sql);
                 try {
                     DB::statement($sql);
-                    \Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_xoa_thanh_cong'));
-                    return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_xoa_thanh_cong')]);
+                    Helpers::setSession('successMessage', Helpers::getRS('Du_lieu_da_duoc_xoa_thanh_cong'));
+                    return json_encode(['status' => 'SUCC', 'message' => Helpers::getRS('Du_lieu_da_duoc_xoa_thanh_cong')]);
                 } catch (\Exception $ex) {
-                    \Helpers::log($ex->getMessage());
+                    Helpers::log($ex->getMessage());
                     return json_encode(['status' => 'ERROR', 'message' => $ex->getMessage()]);
                 }
                 break;

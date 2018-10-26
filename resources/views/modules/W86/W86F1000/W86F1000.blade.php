@@ -8,7 +8,7 @@
             </div>
             <input type="hidden" name="orgunitID" value="{{ $orgunitID or ''}}"/>
             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 pull-left">
-                <button  class="btn btn-default smallbtn mgr5 fa fa-search text-yellow" id="searchW86F1000">
+                <button  class="btn btn-info mrgbtt" id="searchW86F1000"><span class="fa fa-search text-yellow"></span>
                 </button>
             </div>
         </div>

@@ -18,18 +18,20 @@ class  W76F2200Controller extends Controller
         $this->d76T2200 = $d76T2200;
         $this->newsHelper = new \App\Module\News\Helper();
     }
+
     public function index(Request $request, $task = "")
     {
+        $title = Helpers::getRS("Danh_muc_phong_hop");
         $permission = Helpers::getPermission('W76F2200');
 
         switch ($task) {
             case '':
                 $newsCollection = $this->getFilterList('');
 
-                return view("modules/W80/W76F2200/W76F2200", compact('rsData','newsCollection','permission'));
+                return view("modules/W80/W76F2200/W76F2200", compact('title', 'rsData', 'newsCollection', 'permission'));
                 break;
             case 'filter':
-                $txtFacilityNameW76F2201 = $request->input("txtSearchValueW76F2200",'');
+                $txtFacilityNameW76F2201 = $request->input("txtSearchValueW76F2200", '');
                 $filterCollection = $this->getFilterList($txtFacilityNameW76F2201);
                 return $filterCollection;
                 break;
@@ -53,11 +55,11 @@ class  W76F2200Controller extends Controller
     public function getFilterList($txtFacilityNameW76F2201)
     {
         $userID = Auth::user()->UserID;
-        $sql = '--Do nguon cho luoi'.PHP_EOL;
+        $sql = '--Do nguon cho luoi' . PHP_EOL;
         $sql .= "EXEC W76P2200 '$userID', '$txtFacilityNameW76F2201'";
         $collection = DB::select($sql);
         \Debugbar::info($collection);
-        return json_encode($collection) ;
+        return json_encode($collection);
     }
 
     public function delete($facilityID)
