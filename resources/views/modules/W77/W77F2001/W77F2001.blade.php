@@ -30,6 +30,7 @@
                 } else {
                     $CarBookingID = "";
                     $cbCarTypeIDW77F2001 = "";
+                    $cbCarNoIDW77F2001="";
                     $descriptionW77F2001 = "";
                     $orgunitIDW77F2001 = session('W76P0000')->OrgUnitID;
                     $orgunitNameW77F2001 = session('W76P0000')->OrgUnitName;

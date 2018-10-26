@@ -7,6 +7,7 @@ use App\Models\D76T1556;
 use App\Models\D76T2140;
 use App\Models\D76T2141;
 use Carbon\Carbon;
+use Helpers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -30,7 +31,7 @@ class  W76F2141Controller extends Controller
 
     public function index(Request $request, $task = "")
     {
-        $title = 'Thêm mới bản tin';
+        $title = Helpers::getRS('Cap_nhat_ban_tin');
         switch ($task) {
             case 'add':
                 $d76T1556 = new D76T1556();
@@ -75,16 +76,16 @@ class  W76F2141Controller extends Controller
                     //get input
                     $newsID = DB::selectOne('select NEWID() as NewsID')->NewsID;
 
-                    $channelIDW76F2141 = \Helpers::sqlstring($request->input('channelIDW76F2141', ''));
-                    $titleW76F2141 = \Helpers::sqlstring($request->input('titleW76F2141', ''));
-                    $contentW76F2141 = \Helpers::sqlstring($request->input('contentW76F2141', ''));
-                    $remarkW76F2141 = \Helpers::sqlstring($request->input('remarkW76F2141', ''));
-                    $keywordW76F2141 = \Helpers::sqlstring($request->input('keywordW76F2141', ''));
-                    $orderNoW76F2141 = \Helpers::sqlNumber($request->input('orderNoW76F2141', 1));
-                    $is_hotnewsW76F2141 = \Helpers::sqlNumber($request->input('is_hotnewsW76F2141', 0));
-                    $is_ShowBestNewsW76F2141 = \Helpers::sqlNumber($request->input('is_ShowBestNewsW76F2141', 0));
-                    $releaseDateW76F2141 = \Helpers::createDateTime($request->input('releaseDateW76F2141', ''));
-                    $status_idW76F2141 = \Helpers::sqlNumber($request->input('status_idW76F2141', 0));
+                    $channelIDW76F2141 = Helpers::sqlstring($request->input('channelIDW76F2141', ''));
+                    $titleW76F2141 = Helpers::sqlstring($request->input('titleW76F2141', ''));
+                    $contentW76F2141 = Helpers::sqlstring($request->input('contentW76F2141', ''));
+                    $remarkW76F2141 = Helpers::sqlstring($request->input('remarkW76F2141', ''));
+                    $keywordW76F2141 = Helpers::sqlstring($request->input('keywordW76F2141', ''));
+                    $orderNoW76F2141 = Helpers::sqlNumber($request->input('orderNoW76F2141', 1));
+                    $is_hotnewsW76F2141 = Helpers::sqlNumber($request->input('is_hotnewsW76F2141', 0));
+                    $is_ShowBestNewsW76F2141 = Helpers::sqlNumber($request->input('is_ShowBestNewsW76F2141', 0));
+                    $releaseDateW76F2141 = Helpers::createDateTime($request->input('releaseDateW76F2141', ''));
+                    $status_idW76F2141 = Helpers::sqlNumber($request->input('status_idW76F2141', 0));
                     $relativeNews = ($request->input('relativeNews', "[]"));
                     $userID = Auth::user()->UserID;
                     $dateNow = Carbon::now();
@@ -93,7 +94,7 @@ class  W76F2141Controller extends Controller
                     ///Receive file
                     if ($request->hasFile('image')) {
                         $file = $request->file('image');
-                        $fileName = \Helpers::sqlstring($file->getClientOriginalName());
+                        $fileName = Helpers::sqlstring($file->getClientOriginalName());
                         $fileSize = $file->getSize();
                         $fileExtension = $file->getClientOriginalExtension();
                         $byteArray = ("0x" . bin2hex(file_get_contents($file->getRealPath())));
@@ -137,11 +138,11 @@ class  W76F2141Controller extends Controller
                             \Debugbar::info($detail);
                         }
                     }
-                    \Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'));
-                    \Helpers::setSession('lastNewsModified', $newsID);
-                    return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong')]);
+                    Helpers::setSession('successMessage', Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'));
+                    Helpers::setSession('lastNewsModified', $newsID);
+                    return json_encode(['status' => 'SUCC', 'message' => Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong')]);
                 } catch (\Exception $ex) {
-                    \Helpers::log($ex->getMessage());
+                    Helpers::log($ex->getMessage());
                     return json_encode(['status' => 'ERROR', 'message' => $ex->getMessage()]);
                 }
                 break;
@@ -149,16 +150,16 @@ class  W76F2141Controller extends Controller
                 try {
 
                     $newsID = $request->input('newsID', '');
-                    $channelIDW76F2141 = \Helpers::sqlstring($request->input('channelIDW76F2141', ''));
-                    $titleW76F2141 = \Helpers::sqlstring($request->input('titleW76F2141', ''));
-                    $contentW76F2141 = \Helpers::sqlstring($request->input('contentW76F2141', ''));
-                    $remarkW76F2141 = \Helpers::sqlstring($request->input('remarkW76F2141', ''));
-                    $keywordW76F2141 = \Helpers::sqlstring($request->input('keywordW76F2141', ''));
-                    $orderNoW76F2141 = \Helpers::sqlNumber($request->input('orderNoW76F2141', 1));
-                    $is_hotnewsW76F2141 = \Helpers::sqlNumber($request->input('is_hotnewsW76F2141', 0));
-                    $is_ShowBestNewsW76F2141 = \Helpers::sqlNumber($request->input('is_ShowBestNewsW76F2141', 0));
-                    $releaseDateW76F2141 = \Helpers::createDateTime($request->input('releaseDateW76F2141', ''));
-                    $status_idW76F2141 = \Helpers::sqlNumber($request->input('status_idW76F2141', 0));
+                    $channelIDW76F2141 = Helpers::sqlstring($request->input('channelIDW76F2141', ''));
+                    $titleW76F2141 = Helpers::sqlstring($request->input('titleW76F2141', ''));
+                    $contentW76F2141 = Helpers::sqlstring($request->input('contentW76F2141', ''));
+                    $remarkW76F2141 = Helpers::sqlstring($request->input('remarkW76F2141', ''));
+                    $keywordW76F2141 = Helpers::sqlstring($request->input('keywordW76F2141', ''));
+                    $orderNoW76F2141 = Helpers::sqlNumber($request->input('orderNoW76F2141', 1));
+                    $is_hotnewsW76F2141 = Helpers::sqlNumber($request->input('is_hotnewsW76F2141', 0));
+                    $is_ShowBestNewsW76F2141 = Helpers::sqlNumber($request->input('is_ShowBestNewsW76F2141', 0));
+                    $releaseDateW76F2141 = Helpers::createDateTime($request->input('releaseDateW76F2141', ''));
+                    $status_idW76F2141 = Helpers::sqlNumber($request->input('status_idW76F2141', 0));
                     $relativeNews = ($request->input('relativeNews', "[]"));
                     $userID = Auth::user()->UserID;
                     $dateNow = Carbon::now();
@@ -168,7 +169,7 @@ class  W76F2141Controller extends Controller
 
                     if ($request->hasFile('image')) {
                         $file = $request->file('image');
-                        $fileName = \Helpers::sqlstring($file->getClientOriginalName());
+                        $fileName = Helpers::sqlstring($file->getClientOriginalName());
                         $fileSize = $file->getSize();
                         $fileExtension = $file->getClientOriginalExtension();
                         $byteArray = ("0x" . bin2hex(file_get_contents($file->getRealPath())));
@@ -216,14 +217,14 @@ class  W76F2141Controller extends Controller
                             $this->d76T2141->insert($detail);
                         }
                     }
-                    \Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'));
-                    \Helpers::setSession('lastNewsModified', $newsID);
+                    Helpers::setSession('successMessage', Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'));
+                    Helpers::setSession('lastNewsModified', $newsID);
                     //return Redirect::intended()->getTargetUrl();
                     //return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'), 'redirectTo'=>URL::previous()]);
 
-                    return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'), 'redirectTo' => $_SERVER["HTTP_REFERER"]]);
+                    return json_encode(['status' => 'SUCC', 'message' => Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'), 'redirectTo' => $_SERVER["HTTP_REFERER"]]);
                 } catch (\Exception $ex) {
-                    \Helpers::log($ex->getMessage());
+                    Helpers::log($ex->getMessage());
                     return json_encode(['status' => 'ERROR', 'message' => $ex->getMessage()]);
                 }
                 break;
