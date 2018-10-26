@@ -7,11 +7,11 @@
                 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                     <i class="fas fa-users pdr10"></i>{{Helpers::getRS("Quan_ly_tai_khoan")}}
                 </a>
-                <div class="dropdown-menu">
+                {{--<div class="dropdown-menu">--}}
                     <a class="dropdown-item" href="{{url('/W76F3000/TaskList')}}"><i
                                 class="fas fa-user"></i>{{Helpers::getRS("Tai_khoan")}}</a>
                     <a class="dropdown-item" href="#"><i class="fas fa-suitcase"></i>{{Helpers::getRS("Vai_tro")}}</a>
-                </div>
+                {{--</div>--}}
             </li>
         </ul>
     </nav>

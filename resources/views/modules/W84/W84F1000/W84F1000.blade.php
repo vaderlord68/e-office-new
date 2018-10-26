@@ -460,7 +460,9 @@
                         postRender: function (ui) {
                             console.log(ui);
                             ui.$btn.click(function () {
-
+                                $("#collapseExample").toggleClass('show');
+                                $("#txtCommentW84F1000").toggleClass('collapsed');
+                                $("#txtCommentW84F1000").attr("aria-expanded", $("#collapseExample").hasClass('show'));
                             });
                         }
                     }
@@ -567,7 +569,9 @@
             });
         }
 
+        $("#btnClose_Comment").click(function () {
 
+        });
 
     </script>
 

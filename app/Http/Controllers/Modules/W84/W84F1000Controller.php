@@ -44,6 +44,7 @@ class  W84F1000Controller extends Controller
 
         switch ($task) {
             case'':
+                $TaskID = $request->input('TaskID', '');
                 $userID = Auth::user()->UserID;
                 $divisionID = session('W76P0000')->DivisionID;
                 $orgUnitID = session('W76P0000')->OrgUnitID;
@@ -73,8 +74,9 @@ class  W84F1000Controller extends Controller
                 }
                 $rowData = (array)$taskList[0];
                 $rowData['EmpFollow'] = explode(';', $rowData['EmpFollow']);
+                $commentList = $this->getComment($TaskID);
 
-                return view("modules/W84/W84F1000/W84F1000", compact('title', 'rowData', 'empFollowList', 'stageList', 'projectList', 'priorityList', 'detail', 'taskList', 'task'));
+                return view("modules/W84/W84F1000/W84F1000", compact('commentList','title', 'rowData', 'empFollowList', 'stageList', 'projectList', 'priorityList', 'detail', 'taskList', 'task'));
                 break;
             case'add':
                 $userID = Auth::user()->UserID;
@@ -110,6 +112,7 @@ class  W84F1000Controller extends Controller
                 return view("modules/W84/W84F1000/W84F1000", compact('title', 'rowData', 'empFollowList', 'stageList', 'projectList', 'priorityList', 'detail', 'taskList', 'task'));
                 break;
             case 'TaskList':
+                $TaskID = $request->input('TaskID', '');
                 $userID = Auth::user()->UserID;
                 $divisionID = session('W76P0000')->DivisionID;
                 $orgUnitID = session('W76P0000')->OrgUnitID;
@@ -140,8 +143,9 @@ class  W84F1000Controller extends Controller
                 }
                 $rowData = (array)$taskList[0];
                 $rowData['EmpFollow'] = explode(';', $rowData['EmpFollow']);
+                $commentList = $this->getComment($TaskID);
 
-                return view("modules/W84/W84F1000/W84F1000", compact('title', 'rowData', 'newsList', 'empFollowList', 'stageList', 'projectList', 'priorityList', 'detail', 'taskList', 'task'));
+                return view("modules/W84/W84F1000/W84F1000", compact('commentList','title', 'rowData', 'newsList', 'empFollowList', 'stageList', 'projectList', 'priorityList', 'detail', 'taskList', 'task'));
                 break;
             case 'getdetail':
             case'edit':
