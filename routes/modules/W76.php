@@ -24,5 +24,7 @@ Route::group(['namespace' => 'Modules\W76', 'middleware' => 'auth'], function ()
 
     //Quan tri he thong
     Route::any('/W76F3000/{task?}', 'W76F3000Controller@index');
+    Route::any('/W76F3001/{task?}', 'W76F3001Controller@index');
+    Route::any('/W76F3002/{task?}', 'W76F3002Controller@index');
 });
 
