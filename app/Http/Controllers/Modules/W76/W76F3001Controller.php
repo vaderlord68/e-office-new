@@ -164,59 +164,59 @@ class  W76F3001Controller extends Controller
                 }
                 break;
 
-            case 'update':
-                try {
-                    $EmployeeCode = $request->input('EmployeeCode', '');
-                    //$employeeCodeW76F3001 = \Helpers::sqlstring($request->input('employeeCodeW76F3001', ''));
-                    $familyNameW76F3001 = \Helpers::sqlstring($request->input('familyNameW76F3001', ''));
-                    $middleNameW76F3001 = \Helpers::sqlstring($request->input('middleNameW76F3001', ''));
-                    $firstNameW76F3001 = \Helpers::sqlstring($request->input('firstNameW76F3001', ''));
-                    $birthDate1W76F3001 = \Helpers::createDateTime($request->input('birthDate1W76F3001', ''));
-                    $addressW76F3001 = \Helpers::sqlstring($request->input('addressW76F3001', ''));
-                    $userIDW76F3001 = \Helpers::sqlstring($request->input('userIDW76F3001', ''));
-                    $genderW76F3001 = \Helpers::sqlNumber($request->input('genderW76F3001', 0));
-                    $emailW76F3001 = \Helpers::sqlstring($request->input('emailW76F3001', ''));
-                    $email2W76F3001 = \Helpers::sqlstring($request->input('email2W76F3001', ''));
-                    $workPhoneW76F3001 = \Helpers::sqlstring($request->input('workPhoneW76F3001', ''));
-                    $mobilePhoneW76F3001 = \Helpers::sqlstring($request->input('mobilePhoneW76F3001', ''));
-                    $startDateW76F3001 = \Helpers::createDateTime($request->input('startDateW76F3001', ''));
-
-                    $positionIDW76F3001 = \Helpers::sqlstring($request->input('positionIDW76F3001', ''));
-                    $orgunitIDW76F3001 = \Helpers::sqlstring($request->input('orgunitIDW76F3001', ''));
-                    $highExecutiveIDW76F3001 = \Helpers::sqlstring($request->input('highExecutiveIDW76F3001', ''));
-                    $supervisorIDW76F3001 = \Helpers::sqlstring($request->input('supervisorIDW76F3001', ''));
-
-                    $lastModifyDateW76F3001 = Carbon::now();
-                    $lastModifyUserIDW76F3001 = Auth::user()->UserID;
-                    $data = [
-                        //"EmployeeCode" => $employeeCodeW76F3001,
-                        "HighExecutiveID" => $highExecutiveIDW76F3001,
-                        "SupervisorID" => $supervisorIDW76F3001,
-                        "OrgunitID" => $orgunitIDW76F3001,
-                        "PositionID" => $positionIDW76F3001,
-                        "Gender" => $genderW76F3001,
-                        "FamilyName" => $familyNameW76F3001,
-                        "MiddleName" => $middleNameW76F3001,
-                        "FirstName" => $firstNameW76F3001,
-                        "StartDate" => $startDateW76F3001,
-                        "Email" => $emailW76F3001,
-                        "BirthDate" => $birthDate1W76F3001,
-                        "Address" => $addressW76F3001,
-                        "Email2" => $email2W76F3001,
-                        "WorkPhone" => $workPhoneW76F3001,
-                        "MobilePhone" => $mobilePhoneW76F3001,
-                        "LastModifyDate" => $lastModifyDateW76F3001,
-                        "LastModifyUserID" => $lastModifyUserIDW76F3001,
-                    ];
-                    $this->d76T9020->where('EmployeeCode', '=', $EmployeeCode)->update($data);
-                    \Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'));
-                    ////\Debugbar::info($data);
-                    return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'), 'redirectTo' => $_SERVER["HTTP_REFERER"]]);
-                } catch (\Exception $ex) {
-                    \Helpers::log($ex->getMessage());
-                    return json_encode(['status' => 'ERROR', 'message' => $ex->getMessage()]);
-                }
-                break;
+//            case 'update':
+//                try {
+//                    $EmployeeCode = $request->input('EmployeeCode', '');
+//                    //$employeeCodeW76F3001 = \Helpers::sqlstring($request->input('employeeCodeW76F3001', ''));
+//                    $familyNameW76F3001 = \Helpers::sqlstring($request->input('familyNameW76F3001', ''));
+//                    $middleNameW76F3001 = \Helpers::sqlstring($request->input('middleNameW76F3001', ''));
+//                    $firstNameW76F3001 = \Helpers::sqlstring($request->input('firstNameW76F3001', ''));
+//                    $birthDate1W76F3001 = \Helpers::createDateTime($request->input('birthDate1W76F3001', ''));
+//                    $addressW76F3001 = \Helpers::sqlstring($request->input('addressW76F3001', ''));
+//                    $userIDW76F3001 = \Helpers::sqlstring($request->input('userIDW76F3001', ''));
+//                    $genderW76F3001 = \Helpers::sqlNumber($request->input('genderW76F3001', 0));
+//                    $emailW76F3001 = \Helpers::sqlstring($request->input('emailW76F3001', ''));
+//                    $email2W76F3001 = \Helpers::sqlstring($request->input('email2W76F3001', ''));
+//                    $workPhoneW76F3001 = \Helpers::sqlstring($request->input('workPhoneW76F3001', ''));
+//                    $mobilePhoneW76F3001 = \Helpers::sqlstring($request->input('mobilePhoneW76F3001', ''));
+//                    $startDateW76F3001 = \Helpers::createDateTime($request->input('startDateW76F3001', ''));
+//
+//                    $positionIDW76F3001 = \Helpers::sqlstring($request->input('positionIDW76F3001', ''));
+//                    $orgunitIDW76F3001 = \Helpers::sqlstring($request->input('orgunitIDW76F3001', ''));
+//                    $highExecutiveIDW76F3001 = \Helpers::sqlstring($request->input('highExecutiveIDW76F3001', ''));
+//                    $supervisorIDW76F3001 = \Helpers::sqlstring($request->input('supervisorIDW76F3001', ''));
+//
+//                    $lastModifyDateW76F3001 = Carbon::now();
+//                    $lastModifyUserIDW76F3001 = Auth::user()->UserID;
+//                    $data = [
+//                        //"EmployeeCode" => $employeeCodeW76F3001,
+//                        "HighExecutiveID" => $highExecutiveIDW76F3001,
+//                        "SupervisorID" => $supervisorIDW76F3001,
+//                        "OrgunitID" => $orgunitIDW76F3001,
+//                        "PositionID" => $positionIDW76F3001,
+//                        "Gender" => $genderW76F3001,
+//                        "FamilyName" => $familyNameW76F3001,
+//                        "MiddleName" => $middleNameW76F3001,
+//                        "FirstName" => $firstNameW76F3001,
+//                        "StartDate" => $startDateW76F3001,
+//                        "Email" => $emailW76F3001,
+//                        "BirthDate" => $birthDate1W76F3001,
+//                        "Address" => $addressW76F3001,
+//                        "Email2" => $email2W76F3001,
+//                        "WorkPhone" => $workPhoneW76F3001,
+//                        "MobilePhone" => $mobilePhoneW76F3001,
+//                        "LastModifyDate" => $lastModifyDateW76F3001,
+//                        "LastModifyUserID" => $lastModifyUserIDW76F3001,
+//                    ];
+//                    $this->d76T9020->where('EmployeeCode', '=', $EmployeeCode)->update($data);
+//                    \Helpers::setSession('successMessage', \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'));
+//                    ////\Debugbar::info($data);
+//                    return json_encode(['status' => 'SUCC', 'message' => \Helpers::getRS('Du_lieu_da_duoc_luu_thanh_cong'), 'redirectTo' => $_SERVER["HTTP_REFERER"]]);
+//                } catch (\Exception $ex) {
+//                    \Helpers::log($ex->getMessage());
+//                    return json_encode(['status' => 'ERROR', 'message' => $ex->getMessage()]);
+//                }
+//                break;
         }
     }
     function getMasterData()
