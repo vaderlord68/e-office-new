@@ -360,8 +360,19 @@
                     ]
                 }
             );
-
+            enableControls('{{$task}}');
         });
+
+        function enableControls(task) {
+            switch (task) {
+                case "add":
+                    $('#employeeCodeW76F3001').prop('disabled', false);
+                    break;
+                case "edit":
+                    $('#employeeCodeW76F3001').prop('disabled', true);
+                    break;
+            }
+        }
 
         function frmW84F1000Save() {
             validationElements($("#frm_TasDetail"), function () {
@@ -393,7 +404,7 @@
             $.ajax({
                 method: "POST",
                 url: url,
-                data: formData +"$employeeID={{$employeeID}}",
+                data: formData + "$employeeID={{$employeeID}}",
                 success: function (res) {
                     var result = JSON.parse(res);
                     switch (result.status) {

@@ -219,7 +219,6 @@ class  W76F3001Controller extends Controller
                 break;
         }
     }
-
     function getMasterData()
     {
         $userID = Auth::user()->UserID;
