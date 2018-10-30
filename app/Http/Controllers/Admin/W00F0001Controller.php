@@ -30,6 +30,13 @@ class W00F0001Controller extends Controller
                 return view('admin.W00F0001', compact('connection', 'title'));
                 break;
             case 'update':
+                \Debugbar::info("server: ". \Helpers::encrypt_userpass("192.168.2.106"));
+                \Debugbar::info("user database: ". \Helpers::encrypt_userpass("sa"));
+                \Debugbar::info("password: ". \Helpers::encrypt_userpass("@abc123@"));
+                \Debugbar::info("database name: ". \Helpers::encrypt_userpass("DAOTAO"));
+                \Debugbar::info("database ATT: ". \Helpers::encrypt_userpass("DAOTAO_ATT"));
+
+
                 $txtServerName = $request->input('txtServerName');
                 $txtUserName = $request->input('txtUserName');
                 $txtPassword = $request->input('txtPassword');
