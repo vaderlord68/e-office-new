@@ -4,7 +4,7 @@
         <?php
         $imageW76 = asset('/media/no-photo.jpg');
         ?>
-        <div class="task-list">
+        <div class="task-list" style="opacity: 0">
             <div class="row mgr5">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div id="toolbar_account">
@@ -24,66 +24,31 @@
                         </button>
                     </div>
                     <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+
+                        <ul class="pagination pull-right">
+                            <li class="page-item {{$currentPage == 1 ? 'hide' : ''}}">
+                                <a class="page-link" href="{{url('/W76F3000?page='.($currentPage - 1))}}">Trước</a>
+                            </li>
+
+                            @for ($i = 0; $i < $total; $i++)
+
+                                <li class="page-item {{($i + 1) > 4 ? 'hide': ''}} {{$currentPage == ($i +1) ? 'active' : ''}}">
+                                    <a class="page-link " href="{{url('/W76F3000?page='.($i+1))}}">{{$i + 1}}</a>
+                                </li>
+
+                            @endfor
+
+
+
+                            <li class="page-item {{$currentPage == $total ? 'hide' : ''}}">
+                                <a class="page-link" href="{{url('/W76F3000?page='.($currentPage + 1))}}">Sau</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
                 <div class="row pdt5">
-
-                    <div class="col-sm-4 col-md-4 col-lg-4 col-sx-4" style="padding-bottom: 5px">
-                        <div class="card-account">
-                            <div class="">
-                                <div class="row mgb5">
-                                    <div class="col-10 col-sm-10 col-md-10">
-                                        <label style="font-weight: bold;font-size: 14px">
-                                            TRAN HU?NH ANH B?O
-                                        </label>
-                                    </div>
-                                    <div class="col-2 col-sm-2 col-md-2">
-                                        <a class="fas fa-trash-alt text-danger">
-
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                        <div class="row mgb5">
-                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                                <a><img src="{{$imageW76}}" class="account-img"/>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 pdl15">
-                                        {{--<div class="row">--}}
-                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                            <a id="employeeNameW86F1000" class="pd0 ">
-                                                fdfdfdf
-                                            </a>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                            <a id="positionNameW86F1000" class="pd0">
-                                                dfdfdf
-                                            </a>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                            <a id="orgUnitNameW86F1000" class="pd0 ">
-                                                dfdfd
-                                            </a>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                            <a id="employeeNameW86F1000" class="pd0">
-                                                fdfdfdf
-                                            </a>
-                                        </div>
-
-                                        {{--</div>--}}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
+                    @include('modules.W76.W76F3000.W76F3000_List')
                 </div>
             </form>
         </div>
@@ -109,7 +74,7 @@
                             postRender: function (ui) {
                                 console.log(ui);
                                 ui.$btn.click(function () {
-                                    {{--window.location.href = "{{url('/W84F1000/edit')}}";--}}
+                                    window.location.href = "{{url('/W76F3001/add')}}";
                                 });
                             }
                         }
@@ -119,15 +84,26 @@
 
         });
 
+        setTimeout(function(){
+            $(".task-list").css("opacity", 1);
+        }, 1000);
+
     </script>
 
     <style>
         .card-account {
             border: 1px solid #20a8d8;
             padding: 10px;
-            border-width: 2px;
+            border-width: 3px;
         }
+        /*.task-list{*/
+            /*height: auto;*/
+            /*-webkit-animation-name: digi-opacity;*/
+            /*-webkit-animation-duration: 2s;*/
+            /*animation-name: digi-opacity;*/
+        /*}*/
 
+        /*animation-duration: 1s;*/
         /*.card-accent-primary {*/
         /*border: 1px solid #c8ced3;*/
         /*border-top-width: 2px;*/
