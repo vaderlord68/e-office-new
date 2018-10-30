@@ -13,7 +13,7 @@ class  IndexController extends Controller
     public function index()
     {
         //return view('system/landing');
-        //return Redirect::to('/W76F2142');
-        return view('modules.index');
+        return Redirect::to('/W76F2142');
+        //return view('modules.index');
     }
 }

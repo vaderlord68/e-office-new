@@ -26,3 +26,4 @@ Route::group(['namespace' => 'Modules\W76', 'middleware' => 'auth'], function ()
     Route::any('/W76F3000/{task?}', 'W76F3000Controller@index');
 });
 
+

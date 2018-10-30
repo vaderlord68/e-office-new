@@ -2624,7 +2624,7 @@ class Helpers
 //            }
 //            $str .= '</li>';
         }else{
-            if ($row->menuID != 'ITEM_News'){
+            //if ($row->menuID != 'ITEM_News'){
                 $hasChild = count($childrend) > 1 && $level > 0 ? 'has-child' : '';
                 $str .= '<li class="nav-item dropdown ' . ($hasChild == "has-child" ? "dropdown-submenu" : "no-submenu") . '">';
                 if (count($childrend) > 0) {
@@ -2649,7 +2649,7 @@ class Helpers
                     $str .= '</ul >';
                 }
                 $str .= '</li>';
-            }
+            //}
 
         }
 
